@@ -1,0 +1,66 @@
+﻿[
+  {
+    "bulk": 1,
+    "name": "A Blade or Two"
+  },
+  {
+    "bulk": 1,
+    "name": "Throwing Knives"
+  },
+  {
+    "bulk": 1,
+    "name": "A Pistol"
+  },
+  {
+    "bulk": 1,
+    "name": "A 2nd Pistol"
+  },
+  {
+    "bulk": 2,
+    "name": "A Large Weapon"
+  },
+  {
+    "bulk": 1,
+    "name": "An Unusual Weapon"
+  },
+  {
+    "bulk": 2,
+    "name": "Armor"
+  },
+  {
+    "bulk": 3,
+    "name": "+Heavy"
+  },
+  {
+    "bulk": 1,
+    "name": "Burglary Gear"
+  },
+  {
+    "bulk": 2,
+    "name": "Climbing Gear"
+  },
+  {
+    "bulk": 1,
+    "name": "Arcane Implements"
+  },
+  {
+    "bulk": 1,
+    "name": "Documents"
+  },
+  {
+    "bulk": 1,
+    "name": "Subterfuge Supplies"
+  },
+  {
+    "bulk": 2,
+    "name": "Demolition Tools"
+  },
+  {
+    "bulk": 1,
+    "name": "Tinkering Tools"
+  },
+  {
+    "bulk": 1,
+    "name": "Lantern"
+  }
+]

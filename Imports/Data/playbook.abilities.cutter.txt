@@ -1,0 +1,20 @@
+﻿ Battleborn: You may expend your special armor to reduce harm 
+from an attack in combat or to push yourself during a fight.
+ Bodyguard: When you protect a teammate, take +1d to your resistance 
+roll. When you gather info to anticipate possible threats in the current 
+situation, you get +1 effect.
+ Ghost Fighter: You may imbue your hands, melee weapons, or tools 
+with spirit energy. You gain potency in combat vs. the supernatural. 
+You may grapple with spirits to restrain and capture them.
+ Leader: When you Command a cohort in combat, they continue 
+to fight when they would otherwise break (they're not taken out 
+when they suffer level 3 harm). They gain +1 effect and 1 armor.
+ Mule: Your load limits are higher. Light: 5. Normal: 7. Heavy: 8.
+ Not to be Trifled With: You can push yourself to do one of 
+the following: perform a feat of physical force that verges on the 
+superhuman—engage a small gang on equal footing in close combat.
+ Savage: When you unleash physical violence, it's especially 
+frightening. When you Command a frightened target, take +1d.
+ Vigorous: You recover from harm faster. Permanently fill in one of 
+your healing clock segments. Take +1d to healing treatment rolls.
+   Veteran: Choose a special ability from another source.

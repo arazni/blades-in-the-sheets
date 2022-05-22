@@ -1,0 +1,26 @@
+﻿[
+  {
+    "bulk": 1,
+    "name": "Fine hand weapon"
+  },
+  {
+    "bulk": 2,
+    "name": "Fine heavy weapon"
+  },
+  {
+    "bulk": 1,
+    "name": "Scary weapon or tool"
+  },
+  {
+    "bulk": 0,
+    "name": "Manacles & chain"
+  },
+  {
+    "bulk": 0,
+    "name": "Rage essence vial"
+  },
+  {
+    "bulk": 0,
+    "name": "Spiritbane charm"
+  }
+]

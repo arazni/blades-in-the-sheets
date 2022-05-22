@@ -1,0 +1,47 @@
+[
+  {
+    "TimesTakeable": 2,
+    "Name": "Alchemist",
+    "Description": "When you invent or craft a creation with alchemical features, take +1 result level to your roll. You begin with one special formula already known."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Analyst",
+    "Description": "During downtime, you get two ticks to distribute among any long term project clocks that involve investigation or learning a new formula or design plan."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Artificer",
+    "Description": "When you invent or craft a creation with spark-craft features, take +1 result level to your roll. You begin with one special design already known."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Fortitude",
+    "Description": "You may expend your special armor to resist a consequence of fatigue, weakness, or chemical effects, or to push yourself when working with technical skill or handling alchemicals."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Ghost Ward",
+    "Description": "You know how to Wreck an area with arcane substances and methods so it is either anathema or enticing to spirits (your choice)."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Physicker",
+    "Description": "You can Tinker with bones, blood, and bodily humours to treat wounds or stabilize the dying. You may study a malady or corpse. Everyone in your crew gets +1d to their healing treatment rolls."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Saboteur",
+    "Description": "When you Wreck, the work is much quieter than it should be and the damage is hidden from casual inspection."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Venomous",
+    "Description": "Choose a drug or poison (from your bandolier stock) to which you have become immune. You can push yourself to secrete it through your skin or saliva or exhale it as a vapor."
+  },
+  {
+    "TimesTakeable": 3,
+    "Name": "Veteran",
+    "Description": "Choose a special ability from another source"
+  }
+]

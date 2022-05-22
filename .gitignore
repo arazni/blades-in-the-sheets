@@ -1,0 +1,4 @@
+.vs/*
+.editorconfig
+*/bin/*
+*/obj/*
