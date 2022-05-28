@@ -1,0 +1,29 @@
+﻿@using Domain.Characters
+
+<MudCard Outlined="true" Class="mx-4 my-1 mud-theme-primary">
+	<MudCardHeader >
+		<MudText Typo="Typo.h4">@Playbook</MudText>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudText Typo="Typo.body1">@Hook[..(Hook.IndexOf(".")+1)]</MudText>
+		<MudText Typo="Typo.body1">@Hook[(Hook.IndexOf(".")+1)..]</MudText>
+
+	</MudCardContent>
+	<MudCardActions>
+		<MudButton Color="Color.Secondary" FullWidth="true">Create @Playbook</MudButton>
+	</MudCardActions>
+</MudCard>
+
+@code
+{
+	[Parameter]
+	public PlaybookOption Playbook { get; set; }
+
+	[Parameter]
+	public string Hook { get; set; } = string.Empty;
+
+	public void CreateCharacter()
+	{
+		var character = new Character(Playbook);
+	}
+}

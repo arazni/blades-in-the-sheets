@@ -2,12 +2,12 @@
 
 public class Character
 {
-	public Character(GearItem[] gearItems, PlaybookSpecialAbility[] abilities, RolodexFriend[] friends)
+	public Character(PlaybookOption option)
 	{
-		Gear = new(gearItems);
-		Playbook = new(abilities);
-		Rolodex = new(friends);
+		Playbook = new Playbook(option);
 	}
+
+	public Guid Id { get; } = Guid.NewGuid();
 
 	public Dossier Dossier { get; private set; } = new();
 
@@ -17,11 +17,11 @@ public class Character
 
 	public Playbook Playbook { get; private set; }
 
-	public Gear Gear { get; private set; }
+	public Gear Gear { get; private set; } = new();
 
 	public Fund Fund { get; private set; } = new();
 
-	public Rolodex Rolodex { get; private set; }
+	public Rolodex Rolodex { get; private set; } = new();
 
 	public bool IsRetired => Monitor.Trauma.IsRetired;
 

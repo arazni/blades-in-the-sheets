@@ -1,20 +1,20 @@
 ﻿using Domain.Characters;
-using Persistence.Json.DataModels;
 using Newtonsoft.Json;
+using Persistence.Json.DataModels;
 
 namespace Persistence.Json;
 
 public class Loader : ILoader
 {
-	private readonly string directoryPath;
 	private const string FriendsFilePrefix = "friends";
 	private const string PlaybookAbilitiesFilePrefix = "playbook.abilities";
 	private const string GearLoadFilePrefix = "gear.load";
 	private const string StandardGearLoadFileSuffix = "standard";
+	private readonly IFileReader fileReader;
 
-	public Loader()
+	public Loader(IFileReader fileReader)
 	{
-		this.directoryPath = GetDataDirectoryPath();
+		this.fileReader = fileReader;
 	}
 
 	public async Task<RolodexFriend[]> LoadAvailableFriendsAsync(string identifierOrPlaybook)
@@ -64,27 +64,11 @@ public class Loader : ILoader
 			.ToArray();
 	}
 
-	private static string GetDataDirectoryPath()
-	{
-		DirectoryInfo directory = new(Directory.GetCurrentDirectory());
-
-		//while(directory.Parent?.Name != nameof(Persistence))
-		//	directory = directory.Parent ?? throw new DirectoryNotFoundException("Persistence is not in the path");
-
-		directory = directory.EnumerateDirectories()
-			.FirstOrDefault(d => d.Name == "Data")
-			?? throw new DirectoryNotFoundException($"Data is not a subdirectory of {directory.FullName}");
-
-		return directory.FullName;
-	}
-
 	private async Task<string> ReadFile(string prefix, string identifierOrPlaybook)
 	{
-		var path = Path.Combine(this.directoryPath, $"{prefix}.{identifierOrPlaybook.ToLower()}.json");
-
-		var text = await File.ReadAllTextAsync(path);
-			//?? throw new FileNotFoundException($"Could not find {path}");
-
-		return text;
+		var fileName = ToFileName(prefix, identifierOrPlaybook);
+		return await this.fileReader.ReadFile(fileName);
 	}
+
+	private static string ToFileName(string prefix, string identifierOrPlaybook) => $"{prefix}.{identifierOrPlaybook}.json".ToLower();
 }

@@ -2,12 +2,7 @@
 
 public class Rolodex
 {
-	private readonly RolodexFriend[] friends;
-
-	public Rolodex(RolodexFriend[] friends)
-	{
-		this.friends = friends;
-	}
+	private readonly List<RolodexFriend> friends = new(5);
 
 	public IReadOnlyCollection<RolodexFriend> Friends => this.friends;
 

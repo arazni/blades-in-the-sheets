@@ -1,59 +1,44 @@
-﻿using System.Collections.Immutable;
-
-namespace Domain.Characters;
+﻿namespace Domain.Characters;
 
 public class Gear
 {
-	private readonly List<GearItem> loadout = new();
-
-	public Gear(GearItem[] availableItems)
-	{
-		AvailableItems = availableItems.ToImmutableDictionary(gi => gi.Name, StringComparer.InvariantCultureIgnoreCase);
-	}
-
-	public IReadOnlyDictionary<string, GearItem> AvailableItems { get; }
+	private readonly Dictionary<string, GearItem> loadoutByName = new(StringComparer.InvariantCultureIgnoreCase);
 
 	public GearCommitment Commitment { get; } = new();
 
-	public IReadOnlyCollection<GearItem> Loadout => this.loadout;
+	public IReadOnlyCollection<GearItem> Loadout => this.loadoutByName.Values;
 
 	public int MaxBulk => Commitment.MaxBulk;
 
 	public int AvailableBulk => Commitment.MaxBulk - Loadout.Sum(i => i.Bulk);
 
-	public bool AddGear(string name)
+	public bool AddGear(GearItem item)
 	{
-		AvailableItems.TryGetValue(name, out GearItem? item);
-
-		if (item == null)
-			return false;
-
 		if (item.Bulk > AvailableBulk)
 			return false;
 
-		this.loadout.Add(item);
+		if (this.loadoutByName.ContainsKey(item.Name))
+			return false;
 
+		this.loadoutByName.Add(item.Name, item);
 		return true;
 	}
 
-	public bool RemoveGear(string name)
+	public bool RemoveGear(GearItem item)
 	{
-		AvailableItems.TryGetValue(name, out GearItem? item);
-
-		if (item == null)
+		if (!this.loadoutByName.ContainsKey(item.Name))
 			return false;
 
-		this.loadout.Remove(item);
-
+		this.loadoutByName.Remove(item.Name);
 		return true;
 	}
 
 	public bool ClearGear()
 	{
-		if (!this.loadout.Any())
+		if (!this.loadoutByName.Any())
 			return false;
 
-		this.loadout.Clear();
+		this.loadoutByName.Clear();
 
 		return true;
 	}

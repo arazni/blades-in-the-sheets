@@ -1,59 +1,52 @@
-﻿using System.Collections.Immutable;
-
-namespace Domain.Characters;
+﻿namespace Domain.Characters;
 
 public class Playbook
 {
-	private readonly List<PlaybookSpecialAbility> abilities = new();
+	private readonly Dictionary<string, PlaybookSpecialAbility> abilitiesByName = new();
 
-	public Playbook(PlaybookSpecialAbility[] abilities)
+	public Playbook(PlaybookOption option)
 	{
-		AvailableAbilities = abilities.ToImmutableDictionary(a => a.Name, StringComparer.InvariantCultureIgnoreCase);
+		Option = option;
 	}
 
-	public IReadOnlyDictionary<string, PlaybookSpecialAbility> AvailableAbilities { get; }
-
-	public IReadOnlyCollection<PlaybookSpecialAbility> Abilities => this.abilities;
+	public IReadOnlyCollection<PlaybookSpecialAbility> Abilities => this.abilitiesByName.Values;
 
 	public ExperienceTracker Experience { get; } = new(8);
 
-	public bool TakeAbility(string name)
-	{
-		AvailableAbilities.TryGetValue(name, out PlaybookSpecialAbility? ability);
+	public PlaybookOption Option { get; }
 
-		if (ability == null)
+	public bool TakeAbility(PlaybookSpecialAbility ability)
+	{
+		if (this.abilitiesByName.ContainsKey(ability.Name))
 			return false;
 
-		this.abilities.Add(ability);
-
+		this.abilitiesByName.Add(ability.Name, ability);
 		return true;
 	}
 
-	public bool RemoveAbility(string name)
+	public bool RemoveAbility(PlaybookSpecialAbility ability)
 	{
-		AvailableAbilities.TryGetValue(name, out PlaybookSpecialAbility? ability);
-
-		if (ability == null)
+		if (!this.abilitiesByName.ContainsKey(ability.Name))
 			return false;
 
-		this.abilities.Remove(ability);
-
+		this.abilitiesByName.Remove(ability.Name);
 		return true;
 	}
 
 	public bool ClearAbilities()
 	{
-		if (!this.abilities.Any())
+		if (!this.abilitiesByName.Any())
 			return false;
 
-		this.abilities.Clear();
+		this.abilitiesByName.Clear();
 
 		return true;
 	}
 }
 
-public enum Playbooks
+public enum PlaybookOption
 {
+	Custom = 0,
 	Cutter = 1,
 	Hound,
 	Leech,

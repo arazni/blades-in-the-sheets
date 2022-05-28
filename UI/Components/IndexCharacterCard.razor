@@ -1,0 +1,23 @@
+﻿@using UI.ViewModels
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudLink Href="@character.Link" Typo="Typo.h2" Underline="Underline.Always">@character.Alias</MudLink>
+		</CardHeaderContent>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudText Typo="Typo.h4">@character.Playbook</MudText>
+		<MudText Typo="Typo.body1">@character.Blurb</MudText>
+	</MudCardContent>
+</MudCard>
+
+@code 
+{
+	private readonly VIndexCharacter character;
+
+	public IndexCharacterCard(VIndexCharacter character)
+	{
+		this.character = character;
+	}
+}

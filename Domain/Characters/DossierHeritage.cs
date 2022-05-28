@@ -4,12 +4,12 @@ namespace Domain.Characters;
 
 public class DossierHeritage
 {
-	public Heritages Heritage { get; set; } = Heritages.Unknown;
+	public HeritageOption Heritage { get; set; } = HeritageOption.Unknown;
 
 	public string Description { get; set; } = string.Empty;
 }
 
-public enum Heritages
+public enum HeritageOption
 {
 	Unknown = 0,
 	Akoros,

@@ -2,12 +2,12 @@
 
 public class DossierBackground
 {
-	public Backgrounds Background { get; set; } = Backgrounds.Unknown;
+	public BackgroundOption Background { get; set; } = BackgroundOption.Unknown;
 
 	public string Description { get; set; } = string.Empty;
 }
 
-public enum Backgrounds
+public enum BackgroundOption
 {
 	Unknown,
 	Academic,

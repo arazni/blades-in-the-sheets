@@ -15,14 +15,14 @@ public class LoaderTests
 	}
 
 	[Theory]
-	[InlineData(Playbooks.Cutter)]
-	[InlineData(Playbooks.Hound)]
-	[InlineData(Playbooks.Leech)]
-	[InlineData(Playbooks.Lurk)]
-	[InlineData(Playbooks.Slide)]
-	[InlineData(Playbooks.Spider)]
-	[InlineData(Playbooks.Whisper)]
-	public async Task LoadsAvailableFriends(Playbooks playbook)
+	[InlineData(PlaybookOption.Cutter)]
+	[InlineData(PlaybookOption.Hound)]
+	[InlineData(PlaybookOption.Leech)]
+	[InlineData(PlaybookOption.Lurk)]
+	[InlineData(PlaybookOption.Slide)]
+	[InlineData(PlaybookOption.Spider)]
+	[InlineData(PlaybookOption.Whisper)]
+	public async Task LoadsAvailableFriends(PlaybookOption playbook)
 	{
 		var result = await this.loader.LoadAvailableFriendsAsync(playbook.ToString());
 
@@ -30,14 +30,14 @@ public class LoaderTests
 	}
 
 	[Theory]
-	[InlineData(Playbooks.Cutter)]
-	[InlineData(Playbooks.Hound)]
-	[InlineData(Playbooks.Leech)]
-	[InlineData(Playbooks.Lurk)]
-	[InlineData(Playbooks.Slide)]
-	[InlineData(Playbooks.Spider)]
-	[InlineData(Playbooks.Whisper)]
-	public async Task LoadsAvailableAbilities(Playbooks playbook)
+	[InlineData(PlaybookOption.Cutter)]
+	[InlineData(PlaybookOption.Hound)]
+	[InlineData(PlaybookOption.Leech)]
+	[InlineData(PlaybookOption.Lurk)]
+	[InlineData(PlaybookOption.Slide)]
+	[InlineData(PlaybookOption.Spider)]
+	[InlineData(PlaybookOption.Whisper)]
+	public async Task LoadsAvailableAbilities(PlaybookOption playbook)
 	{
 		var result = await this.loader.LoadAvailableAbilitiesAsync(playbook.ToString());
 
@@ -47,14 +47,14 @@ public class LoaderTests
 	}
 
 	[Theory]
-	[InlineData(Playbooks.Cutter)]
-	[InlineData(Playbooks.Hound)]
-	[InlineData(Playbooks.Leech)]
-	[InlineData(Playbooks.Lurk)]
-	[InlineData(Playbooks.Slide)]
-	[InlineData(Playbooks.Spider)]
-	[InlineData(Playbooks.Whisper)]
-	public async Task LoadsAvailableItems(Playbooks playbook)
+	[InlineData(PlaybookOption.Cutter)]
+	[InlineData(PlaybookOption.Hound)]
+	[InlineData(PlaybookOption.Leech)]
+	[InlineData(PlaybookOption.Lurk)]
+	[InlineData(PlaybookOption.Slide)]
+	[InlineData(PlaybookOption.Spider)]
+	[InlineData(PlaybookOption.Whisper)]
+	public async Task LoadsAvailableItems(PlaybookOption playbook)
 	{
 		var result = await this.loader.LoadAvailableItemsAsync(playbook.ToString());
 
