@@ -25,30 +25,30 @@ public class V4ActionDots
 			(
 				this.talent.Insight, AttributeName.Insight, new VTalentAction[]
 				{
-					new(this.talent.Hunt, ActionName.Hunt, this),
-					new(this.talent.Study, ActionName.Study, this),
-					new(this.talent.Survey, ActionName.Survey, this),
-					new(this.talent.Tinker, ActionName.Tinker, this)
+					new(this.talent.Hunt, ActionName.Hunt),
+					new(this.talent.Study, ActionName.Study),
+					new(this.talent.Survey, ActionName.Survey),
+					new(this.talent.Tinker, ActionName.Tinker)
 				}
 			),
 			new
 			(
 				this.talent.Prowess, AttributeName.Prowess, new VTalentAction[]
 				{
-					new(this.talent.Finesse, ActionName.Finesse, this),
-					new(this.talent.Prowl, ActionName.Prowl, this),
-					new(this.talent.Skirmish, ActionName.Skirmish, this),
-					new(this.talent.Wreck, ActionName.Wreck, this)
+					new(this.talent.Finesse, ActionName.Finesse),
+					new(this.talent.Prowl, ActionName.Prowl),
+					new(this.talent.Skirmish, ActionName.Skirmish),
+					new(this.talent.Wreck, ActionName.Wreck)
 				}
 			),
 			new
 			(
 				this.talent.Resolve, AttributeName.Resolve, new VTalentAction[]
 				{
-					new(this.talent.Attune, ActionName.Attune, this),
-					new(this.talent.Command, ActionName.Command, this),
-					new(this.talent.Consort, ActionName.Consort, this),
-					new(this.talent.Sway, ActionName.Sway, this)
+					new(this.talent.Attune, ActionName.Attune),
+					new(this.talent.Command, ActionName.Command),
+					new(this.talent.Consort, ActionName.Consort),
+					new(this.talent.Sway, ActionName.Sway)
 				}
 			)
 		};
@@ -73,8 +73,8 @@ public class V4ActionDots
 	public bool IsDotOneEnabled(VTalentAction action) =>
 		!action.IsDotOneDefaulted && (action.IsDotOneFilled || RemainingDots > 0);
 
-	//public bool IsDotTwoEnabled(VTalentAction action) =>
-	//	!action.IsDotTwoDefaulted && (action.IsDotTwoFilled || RemainingDots > 0);
+	public bool IsDotTwoEnabled(VTalentAction action) =>
+		!action.IsDotTwoDefaulted && (action.IsDotTwoFilled || (action.IsDotOneFilled && RemainingDots > 0) || (RemainingDots > 1));
 
 	public IReadOnlyCollection<VTalentAttribute> Attributes { get; }
 
@@ -99,15 +99,12 @@ public class VTalentAttribute
 
 public class VTalentAction
 {
-	private readonly V4ActionDots parent;
-
-	public VTalentAction(TalentAction action, ActionName name, V4ActionDots parent)
+	public VTalentAction(TalentAction action, ActionName name)
 	{
 		Action = action;
 		Name = name;
 		ShortDescription = MakeShortDescription(name);
 		LongDescription = MakeLongDescription(name);
-		this.parent = parent;
 	}
 
 	public TalentAction Action { get; }
@@ -119,12 +116,6 @@ public class VTalentAction
 	public bool IsDotOneFilled => Action.Rating > 0;
 
 	public bool IsDotTwoFilled => Action.Rating > 1;
-
-	public bool IsDotOneEnabled =>
-		!IsDotOneDefaulted && (IsDotOneFilled || this.parent.RemainingDots > 0);
-
-	public bool IsDotTwoEnabled =>
-		!IsDotTwoDefaulted && (IsDotTwoFilled || this.parent.RemainingDots > 0);
 
 	public void ToggleDotOne(bool toggledOn)
 	{

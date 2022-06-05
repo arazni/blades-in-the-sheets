@@ -1,31 +1,34 @@
 ﻿@using Domain.Characters
 
 <MudCard Outlined="true">
-	<MudText>@Character.Playbook.Option</MudText>
 	<MudCardHeader>
 		<MudText>Assign 4 action dots</MudText>
 	</MudCardHeader>
 	<MudCardContent>
-		<MudText>Each action dot represents your skill in that action. Mechanically, this translates to one die to roll per action dot when using that action.</MudText>
-		<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's heritage.">
-			<MudText>@ViewModel.Heritage: @ViewModel.HeritageDescription</MudText>
-		</MudExpansionPanel>
-		<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's background.">
-			<MudText>@ViewModel.Background: @ViewModel.BackgroundDescription</MudText>
-		</MudExpansionPanel>
-		<MudText>Assign two more dots as you please. Some are already assigned according to your playbook.</MudText>
+		<MudExpansionPanels>
+			<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's heritage.">
+				<MudText>@ViewModel.Heritage: @ViewModel.HeritageDescription</MudText>
+			</MudExpansionPanel>
+			<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's background.">
+				<MudText>@ViewModel.Background: @ViewModel.BackgroundDescription</MudText>
+			</MudExpansionPanel>
+			<MudExpansionPanel Text="Assign two more dots as you please. Some are already assigned according to your playbook.">
+				<MudText>Each action dot represents your skill in that action. Mechanically, this translates to one die to roll per action dot when using that action.</MudText>
+				<MudText>The first action dot in each skill contributes to your attribute. An attribute is often used in Resistance rolls to resist negative consequences.</MudText>
+			</MudExpansionPanel>
+		</MudExpansionPanels>
 		@foreach (var talentAttribute in ViewModel.Attributes)
 		{
 			<MudText>@talentAttribute.Name: @talentAttribute.Attribute.Rating</MudText>
-			<MudExpansionPanels>
+			@*<MudExpansionPanels>*@
 				@foreach (var action in talentAttribute.Actions)
 				{
 					<MudStack Row="true">
 						<MudToggleIconButton Toggled="@action.IsDotOneFilled" ToggledChanged="@action.ToggleDotOne"
-							Disabled="@(!action.IsDotOneEnabled)"
+							Disabled="@(!ViewModel.IsDotOneEnabled(action))"
 							Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
 						<MudToggleIconButton Toggled="@action.IsDotTwoFilled" ToggledChanged="@action.ToggleDotTwo"
-							Disabled="@(!action.IsDotTwoEnabled)"
+							Disabled="@(!ViewModel.IsDotTwoEnabled(action))"
 							Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
 						<MudExpansionPanel>
 							<TitleContent>
@@ -38,7 +41,7 @@
 						</MudExpansionPanel>
 					</MudStack>
 				}
-			</MudExpansionPanels>
+			@*</MudExpansionPanels>*@
 		}
 	</MudCardContent>
 </MudCard>
