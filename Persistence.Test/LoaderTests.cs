@@ -9,9 +9,11 @@ namespace Persistence.Test;
 public class LoaderTests
 {
 	private readonly ILoader loader;
+	private readonly IFileReader reader;
 	public LoaderTests()
 	{
-		this.loader = new Loader();
+		this.reader = new ServerFileReader();
+		this.loader = new Loader(this.reader);
 	}
 
 	[Theory]

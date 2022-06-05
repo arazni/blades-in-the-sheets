@@ -2,11 +2,11 @@
 
 public class TalentProwess : Bases.TalentAttribute
 {
-	public TalentAction Finesse { get; } = new();
+	public TalentAction Finesse { get; private set; } = new();
 
-	public TalentAction Prowl { get; } = new();
+	public TalentAction Prowl { get; private set; } = new();
 
-	public TalentAction Skirmish { get; } = new();
+	public TalentAction Skirmish { get; private set; } = new();
 
-	public TalentAction Wreck { get; } = new();
+	public TalentAction Wreck { get; private set; } = new();
 }

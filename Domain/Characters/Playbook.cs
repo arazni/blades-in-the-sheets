@@ -46,6 +46,7 @@ public class Playbook
 
 public enum PlaybookOption
 {
+	Unknown = -1,
 	Custom = 0,
 	Cutter = 1,
 	Hound,

@@ -2,18 +2,25 @@
 
 public class Character
 {
-	public Character(PlaybookOption option)
+	private Character()
 	{
-		Playbook = new Playbook(option);
+		Playbook = new(PlaybookOption.Unknown);
+		Talent = new(PlaybookOption.Unknown);
 	}
 
-	public Guid Id { get; } = Guid.NewGuid();
+	public Character(PlaybookOption option)
+	{
+		Playbook = new(option);
+		Talent = new(option);
+	}
+
+	public string Id { get; private set; } = Guid.NewGuid().ToString();
 
 	public Dossier Dossier { get; private set; } = new();
 
 	public Monitor Monitor { get; private set; } = new();
 
-	public Talent Talent { get; private set; } = new();
+	public Talent Talent { get; private set; }
 
 	public Playbook Playbook { get; private set; }
 
@@ -26,4 +33,6 @@ public class Character
 	public bool IsRetired => Monitor.Trauma.IsRetired;
 
 	public bool IsDeadish => Monitor.Harm.IsFatal;
+
+	public static Character Empty() => new();
 }

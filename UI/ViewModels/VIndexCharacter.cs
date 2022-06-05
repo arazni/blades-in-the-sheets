@@ -11,7 +11,7 @@ public class VIndexCharacter
 
 	public VIndexCharacter(Character character)
 	{
-		Id = character.Id.ToString();
+		Id = character.Id;
 		Name = character.Dossier.Name;
 		Alias = character.Dossier.Alias;
 		this.playbook = character.Playbook.Option;

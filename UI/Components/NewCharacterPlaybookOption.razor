@@ -1,16 +1,18 @@
 ﻿@using Domain.Characters
+@using UI.Services
+@inject IStorageService Storage
+@inject NavigationManager Navigator
 
 <MudCard Outlined="true" Class="mx-4 my-1 mud-theme-primary">
 	<MudCardHeader >
 		<MudText Typo="Typo.h4">@Playbook</MudText>
 	</MudCardHeader>
 	<MudCardContent>
-		<MudText Typo="Typo.body1">@Hook[..(Hook.IndexOf(".")+1)]</MudText>
-		<MudText Typo="Typo.body1">@Hook[(Hook.IndexOf(".")+1)..]</MudText>
-
+		<MudText Typo="Typo.body1" Class="my-2">@Hook[..(Hook.IndexOf(".")+1)]</MudText>
+		<MudText Typo="Typo.body1" Class="my-2">@Hook[(Hook.IndexOf(".")+1)..]</MudText>
 	</MudCardContent>
 	<MudCardActions>
-		<MudButton Color="Color.Secondary" FullWidth="true">Create @Playbook</MudButton>
+		<MudButton Color="Color.Secondary" FullWidth="true" OnClick="CreateCharacter">Create @Playbook</MudButton>
 	</MudCardActions>
 </MudCard>
 
@@ -22,8 +24,10 @@
 	[Parameter]
 	public string Hook { get; set; } = string.Empty;
 
-	public void CreateCharacter()
+	public async Task CreateCharacter()
 	{
 		var character = new Character(Playbook);
+		await Storage.Save(character);
+		Navigator.NavigateTo($"/characters/{character.Id}");
 	}
 }

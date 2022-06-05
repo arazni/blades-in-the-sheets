@@ -14,6 +14,6 @@ public class Saver : ISaver
 		await WriteFile(CharacterFileName, character.Id, data);
 	}
 
-	private static async Task WriteFile(string prefix, Guid id, string data) =>
+	private static async Task WriteFile(string prefix, string id, string data) =>
 		await File.WriteAllTextAsync($"{prefix}.{id}.json", data);
 }

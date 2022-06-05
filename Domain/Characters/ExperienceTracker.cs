@@ -6,7 +6,7 @@ public class ExperienceTracker
 {
 	private readonly BoundedInteger experience;
 
-	internal ExperienceTracker(int maxExperience)
+	public ExperienceTracker(int maxExperience)
 	{
 		this.experience = new BoundedInteger(0, maxExperience);
 	}

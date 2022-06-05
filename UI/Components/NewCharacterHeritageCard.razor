@@ -1,0 +1,35 @@
+﻿@using Domain.Characters
+@using UI.ViewModels
+
+<MudCard Outlined="true">
+	<MudCardHeader>
+		<MudText>Choose a heritage</MudText>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudSelect @bind-Value="Heritage.Heritage" Label="Heritage">
+			@foreach (var vOption in Options)
+			{
+				<MudSelectItem T="HeritageOption" Value="vOption.Option">
+					<MudText>@vOption.DisplayName</MudText>
+					<MudText>@vOption.Elaboration</MudText>
+				</MudSelectItem>
+			}
+		</MudSelect>
+		<MudText>@Elaboration()</MudText>
+		<MudTextField @bind-Value="Heritage.Description" HelperText="Share a detail about your family life" Placeholder="Exiled nobility, now maladjusted factory laborers" />
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public DossierHeritage Heritage { get; set; } = new();
+
+	private string Elaboration() =>
+		Elaboration(Heritage.Heritage);
+
+	private string Elaboration(HeritageOption option) =>
+		Options.First(o => o.Option == option).Elaboration;
+
+	private IReadOnlyCollection<VHeritage> Options => VHeritage.Options;
+}

@@ -1,0 +1,59 @@
+﻿@using Domain.Characters
+
+<MudCard Outlined="true">
+	<MudText>@Character.Playbook.Option</MudText>
+	<MudCardHeader>
+		<MudText>Assign 4 action dots</MudText>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudText>Each action dot represents your skill in that action. Mechanically, this translates to one die to roll per action dot when using that action.</MudText>
+		<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's heritage.">
+			<MudText>@ViewModel.Heritage: @ViewModel.HeritageDescription</MudText>
+		</MudExpansionPanel>
+		<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's background.">
+			<MudText>@ViewModel.Background: @ViewModel.BackgroundDescription</MudText>
+		</MudExpansionPanel>
+		<MudText>Assign two more dots as you please. Some are already assigned according to your playbook.</MudText>
+		@foreach (var talentAttribute in ViewModel.Attributes)
+		{
+			<MudText>@talentAttribute.Name: @talentAttribute.Attribute.Rating</MudText>
+			<MudExpansionPanels>
+				@foreach (var action in talentAttribute.Actions)
+				{
+					<MudStack Row="true">
+						<MudToggleIconButton Toggled="@action.IsDotOneFilled" ToggledChanged="@action.ToggleDotOne"
+							Disabled="@(!action.IsDotOneEnabled)"
+							Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
+						<MudToggleIconButton Toggled="@action.IsDotTwoFilled" ToggledChanged="@action.ToggleDotTwo"
+							Disabled="@(!action.IsDotTwoEnabled)"
+							Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
+						<MudExpansionPanel>
+							<TitleContent>
+								<MudText>@action.Name</MudText>
+							</TitleContent>
+							<ChildContent>
+								<MudText>@action.ShortDescription</MudText>
+								<MudText>@action.LongDescription</MudText>
+							</ChildContent>
+						</MudExpansionPanel>
+					</MudStack>
+				}
+			</MudExpansionPanels>
+		}
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public VCharacter Character { get; set; } = VCharacter.Empty();
+
+	private V4ActionDots ViewModel { get; set; } = V4ActionDots.Empty();
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		ViewModel = new(Character);
+	}
+}

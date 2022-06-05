@@ -2,11 +2,11 @@
 
 public class TalentResolve : Bases.TalentAttribute
 {
-	public TalentAction Attune { get; } = new();
+	public TalentAction Attune { get; private set; } = new();
 
-	public TalentAction Command { get; } = new();
+	public TalentAction Command { get; private set; } = new();
 
-	public TalentAction Consort { get; } = new();
+	public TalentAction Consort { get; private set; } = new();
 
-	public TalentAction Sway { get; } = new();
+	public TalentAction Sway { get; private set; } = new();
 }

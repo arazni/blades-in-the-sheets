@@ -1,6 +1,6 @@
 ﻿namespace Persistence.Json;
 
-internal class ServerFileReader : IFileReader
+public class ServerFileReader : IFileReader
 {
 	private readonly string directoryPath = GetDataDirectoryPath();
 

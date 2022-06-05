@@ -2,12 +2,12 @@
 
 public class DossierVice
 {
-	public Vices Vice { get; set; } = Vices.Unknown;
+	public ViceOption Vice { get; set; } = ViceOption.Unknown;
 
 	public string Description { get; set; } = string.Empty;
 }
 
-public enum Vices
+public enum ViceOption
 {
 	Unknown = 0,
 	Faith,

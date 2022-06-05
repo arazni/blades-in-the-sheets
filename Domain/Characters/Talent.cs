@@ -1,12 +1,19 @@
-﻿namespace Domain.Characters;
+﻿using System.Reflection;
+
+namespace Domain.Characters;
 
 public class Talent
 {
-	public TalentInsight Insight { get; } = new();
+	public Talent(PlaybookOption playbook)
+	{
+		AssignDefaultRatings(playbook);
+	}
 
-	public TalentProwess Prowess { get; } = new();
+	public TalentInsight Insight { get; private set; } = new();
 
-	public TalentResolve Resolve { get; } = new();
+	public TalentProwess Prowess { get; private set; } = new();
+
+	public TalentResolve Resolve { get; private set; } = new();
 
 	public TalentAction Hunt => Insight.Hunt;
 
@@ -31,39 +38,52 @@ public class Talent
 	public TalentAction Consort => Resolve.Consort;
 
 	public TalentAction Sway => Resolve.Sway;
+
+	public IReadOnlyCollection<PropertyInfo> GetAttributes() =>
+		GetType()
+			.GetProperties()
+			.Where(p => p.PropertyType.IsAssignableTo(typeof(Bases.TalentAttribute)))
+			.ToArray();
+
+	private void AssignDefaultRatings(PlaybookOption playbook)
+	{
+		switch (playbook)
+		{
+			case PlaybookOption.Cutter:
+				Skirmish.PlaybookDefault = 2;
+				Command.PlaybookDefault = 1;
+				break;
+			case PlaybookOption.Hound:
+				Hunt.PlaybookDefault = 2;
+				Survey.PlaybookDefault = 1;
+				break;
+			case PlaybookOption.Leech:
+				Tinker.PlaybookDefault = 2;
+				Wreck.PlaybookDefault = 1;
+				break;
+			case PlaybookOption.Lurk:
+				Prowl.PlaybookDefault = 2;
+				Finesse.PlaybookDefault = 1;
+				break;
+			case PlaybookOption.Slide:
+				Sway.PlaybookDefault = 2;
+				Consort.PlaybookDefault = 1;
+				break;
+			case PlaybookOption.Spider:
+				Consort.PlaybookDefault = 2;
+				Study.PlaybookDefault = 1;
+				break;
+			case PlaybookOption.Whisper:
+				Attune.PlaybookDefault = 2;
+				Study.PlaybookDefault = 1;
+				break;
+		}
+	}
 }
 
-/*
-public class Talent
+public enum AttributeName
 {
-	public TalentAttribute Insight { get; } = new(Attributes.Insight);
-
-	public TalentAttribute Prowess { get; } = new(Attributes.Prowess);
-
-	public TalentAttribute Resolve { get; } = new(Attributes.Resolve);
-
-	public TalentAction Hunt => Insight.ActionDictionary[Actions.Hunt];
-
-	public TalentAction Study => Insight.ActionDictionary[Actions.Study];
-
-	public TalentAction Survey => Insight.ActionDictionary[Actions.Survey];
-
-	public TalentAction Tinker => Insight.ActionDictionary[Actions.Tinker];
-
-	public TalentAction Finesse => Prowess.ActionDictionary[Actions.Finesse];
-
-	public TalentAction Prowl => Prowess.ActionDictionary[Actions.Prowl];
-
-	public TalentAction Skirmish => Prowess.ActionDictionary[Actions.Skirmish];
-
-	public TalentAction Wreck => Prowess.ActionDictionary[Actions.Wreck];
-
-	public TalentAction Attune => Resolve.ActionDictionary[Actions.Attune];
-
-	public TalentAction Command => Resolve.ActionDictionary[Actions.Command];
-
-	public TalentAction Consort => Resolve.ActionDictionary[Actions.Consort];
-
-	public TalentAction Sway => Resolve.ActionDictionary[Actions.Sway];
+	Insight,
+	Prowess,
+	Resolve
 }
-*/

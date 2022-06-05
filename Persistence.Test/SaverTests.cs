@@ -17,6 +17,6 @@ public class SaverTests
 	[Fact]
 	public async Task SavesEmptyCharacter()
 	{
-		await this.saver.Save(new Character());
+		await this.saver.Save(new Character(PlaybookOption.Unknown));
 	}
 }

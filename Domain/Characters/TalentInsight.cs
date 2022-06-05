@@ -2,11 +2,11 @@
 
 public class TalentInsight : Bases.TalentAttribute
 {
-	public TalentAction Hunt { get; } = new();
+	public TalentAction Hunt { get; private set; } = new();
 
-	public TalentAction Study { get; } = new();
+	public TalentAction Study { get; private set; } = new();
 
-	public TalentAction Survey { get; } = new();
+	public TalentAction Survey { get; private set; } = new();
 
-	public TalentAction Tinker { get; } = new();
+	public TalentAction Tinker { get; private set; } = new();
 }

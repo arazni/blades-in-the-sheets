@@ -1,0 +1,32 @@
+﻿@page "/characters/{Id}"
+@using UI.Components
+@using UI.Services
+@using UI.ViewModels
+@inject IStorageService Storage
+
+<MudText>@Id</MudText>
+<MudTimeline TimelinePosition="@TimelinePosition.Start">
+	<MudTimelineItem>
+		<NewCharacterHeritageCard Heritage="@Character.Dossier.Heritage" />
+	</MudTimelineItem>
+	<MudTimelineItem>
+		<NewCharacterBackgroundCard Background="@Character.Dossier.Background" />
+	</MudTimelineItem>
+	<MudTimelineItem>
+		<NewCharacterActionDotsCard Character="@Character" />
+	</MudTimelineItem>
+</MudTimeline>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public string Id { get; set; } = string.Empty;
+
+	public VCharacter Character { get; private set; } = VCharacter.Empty();
+
+	protected override async Task OnInitializedAsync()
+	{
+		var character = await Storage.Load(Id);
+		Character = new(character);
+	}
+}

@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider IsDarkMode="true" />
+<MudThemeProvider IsDarkMode="true" Theme="BladesTheme"/>
 
 <MudLayout>
 	<MudAppBar Elevation="1">
@@ -19,10 +19,20 @@
 
 @code
 {
-	bool _drawerOpen = true;
+	bool _drawerOpen = false;
 
 	void DrawerToggle()
 	{
 		_drawerOpen = !_drawerOpen;
 	}
+
+	MudTheme BladesTheme { get; } = new MudTheme
+	{
+		//PaletteDark = new Palette
+		//{
+		//	Primary = Colors.DeepPurple.Darken4,
+		//	TextSecondary = Colors.Orange.Darken3,
+		//	TextPrimary = Colors.Amber.Lighten4
+		//}
+	};
 }
