@@ -23,7 +23,7 @@ public class PlaybookSpecialAbility
 
 	public bool Cancel() => TimesTaken != --TimesTaken;
 
-	public string Name 
+	public string Name
 	{
 		get => this.name.Value;
 		private set => this.name.Value = value;

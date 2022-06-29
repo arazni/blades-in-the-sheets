@@ -1,20 +1,54 @@
 ﻿@page "/characters/{Id}"
+@using Domain.Characters
 @using UI.Components
 @using UI.Services
 @using UI.ViewModels
 @inject IStorageService Storage
 
-<MudTimeline TimelinePosition="@TimelinePosition.Start">
-	<MudTimelineItem>
+<MudHidden Breakpoint="Breakpoint.SmAndDown">
+	<MudTimeline TimelinePosition="@TimelinePosition.Start">
+		<MudTimelineItem>
+			<NewCharacterHeritageCard Heritage="@Character.Dossier.Heritage" />
+		</MudTimelineItem>
+		<MudTimelineItem>
+			<NewCharacterBackgroundCard Background="@Character.Dossier.Background" />
+		</MudTimelineItem>
+		<MudTimelineItem>
+			<NewCharacterActionDotsCard Character="@Character" />
+		</MudTimelineItem>
+		<MudTimelineItem>
+			<NewCharacterSpecialAbilityCard Playbook="@Character.Playbook" />
+		</MudTimelineItem>
+		<MudTimelineItem>
+			<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookOption="@Character.Playbook.Option" />
+		</MudTimelineItem>
+		<MudTimelineItem>
+			<NewCharacterViceCard Vice="@Character.Dossier.Vice" />
+		</MudTimelineItem>
+		<MudTimelineItem>
+			<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
+		</MudTimelineItem>
+		<MudTimelineItem>
+			<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true"
+				OnClick="SaveAsync">
+				Save your scoundrel
+			</MudButton>
+		</MudTimelineItem>
+	</MudTimeline>
+</MudHidden>
+
+<MudHidden Breakpoint="Breakpoint.MdAndUp">
+	<MudStack>
 		<NewCharacterHeritageCard Heritage="@Character.Dossier.Heritage" />
-	</MudTimelineItem>
-	<MudTimelineItem>
 		<NewCharacterBackgroundCard Background="@Character.Dossier.Background" />
-	</MudTimelineItem>
-	<MudTimelineItem>
 		<NewCharacterActionDotsCard Character="@Character" />
-	</MudTimelineItem>
-</MudTimeline>
+		<NewCharacterSpecialAbilityCard Playbook="@Character.Playbook" />
+		<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookOption="@Character.Playbook.Option" />
+		<NewCharacterViceCard Vice="@Character.Dossier.Vice" />
+		<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
+		<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true">Save your scoundrel</MudButton>
+	</MudStack>
+</MudHidden>
 
 @code
 {
@@ -23,9 +57,16 @@
 
 	public VCharacter Character { get; private set; } = VCharacter.Empty();
 
+	private Character characterModel = Domain.Characters.Character.Empty();
+
 	protected override async Task OnInitializedAsync()
 	{
-		var character = await Storage.Load(Id);
-		Character = new(character);
+		characterModel = await Storage.Load(Id);
+		Character = new(characterModel);
+	}
+
+	public async Task SaveAsync()
+	{
+		await Storage.Save(characterModel);
 	}
 }

@@ -1,48 +1,52 @@
 ﻿@using Domain.Characters
+@using UI.Conveniences
 
 <MudCard Outlined="true">
 	<MudCardHeader>
-		<MudText>Assign 4 action dots</MudText>
+		<MudText>Assign 4 action dots (@ViewModel.RemainingDots left)</MudText>
 	</MudCardHeader>
 	<MudCardContent>
-		<MudExpansionPanels>
-			<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's heritage.">
-				<MudText>@ViewModel.Heritage: @ViewModel.HeritageDescription</MudText>
-			</MudExpansionPanel>
-			<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's background.">
-				<MudText>@ViewModel.Background: @ViewModel.BackgroundDescription</MudText>
-			</MudExpansionPanel>
-			<MudExpansionPanel Text="Assign two more dots as you please. Some are already assigned according to your playbook.">
-				<MudText>Each action dot represents your skill in that action. Mechanically, this translates to one die to roll per action dot when using that action.</MudText>
-				<MudText>The first action dot in each skill contributes to your attribute. An attribute is often used in Resistance rolls to resist negative consequences.</MudText>
-			</MudExpansionPanel>
-		</MudExpansionPanels>
-		@foreach (var talentAttribute in ViewModel.Attributes)
-		{
-			<MudText>@talentAttribute.Name: @talentAttribute.Attribute.Rating</MudText>
-			@*<MudExpansionPanels>*@
+		<MudStack>
+			<MudExpansionPanels>
+				<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's heritage.">
+					<MudText>@ViewModel.Heritage.DisplayName(): @ViewModel.HeritageDescription</MudText>
+				</MudExpansionPanel>
+				<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's background.">
+					<MudText>@ViewModel.Background: @ViewModel.BackgroundDescription</MudText>
+				</MudExpansionPanel>
+				<MudExpansionPanel Text="Assign two more dots as you please. Some are already assigned according to your playbook.">
+					<MudText>Each action dot represents your skill in that action. Mechanically, this translates to one die to roll per action dot when using that action.</MudText>
+					<MudText>The first action dot in each skill contributes to your attribute. An attribute is often used in Resistance rolls to resist negative consequences.</MudText>
+				</MudExpansionPanel>
+			</MudExpansionPanels>
+			@foreach (var talentAttribute in ViewModel.Attributes)
+			{
+				<MudText>@talentAttribute.Name: @talentAttribute.Attribute.Rating</MudText>
+				<MudExpansionPanels>
 				@foreach (var action in talentAttribute.Actions)
 				{
-					<MudStack Row="true">
-						<MudToggleIconButton Toggled="@action.IsDotOneFilled" ToggledChanged="@action.ToggleDotOne"
-							Disabled="@(!ViewModel.IsDotOneEnabled(action))"
-							Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
-						<MudToggleIconButton Toggled="@action.IsDotTwoFilled" ToggledChanged="@action.ToggleDotTwo"
-							Disabled="@(!ViewModel.IsDotTwoEnabled(action))"
-							Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
-						<MudExpansionPanel>
-							<TitleContent>
+					<MudExpansionPanel>
+						<TitleContent>
+							<MudStack Row="true" AlignItems="AlignItems.Center">
+								<MudToggleIconButton Toggled="@action.IsDotOneFilled" ToggledChanged="@action.ToggleDotOne"
+									Disabled="@(!ViewModel.IsDotOneEnabled(action))"
+									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
+								<MudDivider Vertical="true" FlexItem="true" />
+								<MudToggleIconButton Toggled="@action.IsDotTwoFilled" ToggledChanged="@action.ToggleDotTwo"
+									Disabled="@(!ViewModel.IsDotTwoEnabled(action))"
+									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
 								<MudText>@action.Name</MudText>
-							</TitleContent>
-							<ChildContent>
-								<MudText>@action.ShortDescription</MudText>
-								<MudText>@action.LongDescription</MudText>
-							</ChildContent>
-						</MudExpansionPanel>
-					</MudStack>
+							</MudStack>
+						</TitleContent>
+						<ChildContent>
+							<MudText>@action.ShortDescription</MudText>
+							<MudText>@action.LongDescription</MudText>
+						</ChildContent>
+					</MudExpansionPanel>
 				}
-			@*</MudExpansionPanels>*@
-		}
+				</MudExpansionPanels>
+			}
+		</MudStack>
 	</MudCardContent>
 </MudCard>
 

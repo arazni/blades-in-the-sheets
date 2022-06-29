@@ -1,24 +1,47 @@
 ﻿@page "/"
+@using Domain.Characters
 @using Persistence.Json
+@using UI.Services
+@inject IStorageService Storage
 
-<MudText Typo=Typo.h1>Blades in the Dark Character Sheet App</MudText>
+<MudContainer>
+	<MudText Typo=Typo.h1>Blades in the Dark Character Sheet App</MudText>
 
-@*@foreach(var character in )
-{
-	
-}
-*@
+	<MudStack>
+		@foreach (var character in Characters)
+		{
+			<MudCard>
+				<MudCardHeader>
+					<MudStack>
+						<MudText>@character.Alias the @character.Playbook</MudText>
+					</MudStack>
+				</MudCardHeader>
+				<MudCardContent>
+					<MudStack>
+						<MudText>@character.Blurb</MudText>
+					</MudStack>
+				</MudCardContent>
+			</MudCard>
+		}
 
-<MudCard>
-	<MudLink Href="/new" Typo=Typo.h2>Create a new character!</MudLink>
-</MudCard>
+		<MudCard>
+			<MudCardContent>
+				<MudLink Href="/new" Typo=Typo.h2>Create a new character!</MudLink>
+			</MudCardContent>
+		</MudCard>
+	</MudStack>
+</MudContainer>
 
 @code
 {
-	//private readonly ILoader loader;
+	IReadOnlyCollection<VIndexCharacter> Characters { get; set; } = Array.Empty<VIndexCharacter>();
 
-	//public Index(ILoader loader)
-	//{
-	//	this.loader = loader;
-	//}
+	protected override async Task OnInitializedAsync()
+	{
+		var characters = await Storage.LoadAll();
+		Characters = characters.Select(c => new VIndexCharacter(c))
+			.ToArray();
+
+		await base.OnInitializedAsync();
+	}
 }

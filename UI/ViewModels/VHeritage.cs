@@ -1,4 +1,5 @@
 ﻿using Domain.Characters;
+using UI.Conveniences;
 
 namespace UI.ViewModels;
 
@@ -6,11 +7,7 @@ public class VHeritage
 {
 	public HeritageOption Option { get; set; } = HeritageOption.Unknown;
 
-	public string DisplayName => Option switch
-	{
-		HeritageOption.TheDaggerIsles => "The Dagger Isles",
-		_ => Option.ToString()
-	};
+	public string DisplayName => Option.DisplayName();
 
 	public string Elaboration { get; set; } = string.Empty;
 

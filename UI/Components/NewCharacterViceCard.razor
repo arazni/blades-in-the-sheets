@@ -1,0 +1,58 @@
+@using Domain.Characters
+
+<MudCard Outlined="true">
+	<MudCardHeader>
+		<MudText>Choose a vice and its purveyor</MudText>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudStack>
+			@*<MudContainer>*@
+				<MudSelect @bind-Value="Vice.Vice" Label="Vice">
+					@foreach (var vOption in Options)
+					{
+						<MudSelectItem T="ViceOption" Value="vOption.Option">
+							<MudText>@vOption.DisplayName</MudText>
+							<MudText>@vOption.Elaboration</MudText>
+						</MudSelectItem>
+					}
+				</MudSelect>
+				<MudText>@Elaboration()</MudText>
+			@*</MudContainer>*@
+			@*<MudContainer>*@
+				<MudTextField @bind-Value="Vice.Description" 
+					HelperText="A detail about your purveyor and how you indulge in your vice."
+					Placeholder="@ExamplePlaceholder()" />
+				<MudExpansionPanels>
+					<MudExpansionPanel Text="In world example purveyors">
+						@foreach (var example in Examples())
+						{
+							<MudText>@example</MudText>
+						}
+					</MudExpansionPanel>
+				</MudExpansionPanels>
+			@*</MudContainer>*@
+		</MudStack>
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public DossierVice Vice { get; set; } = new();
+
+	private string Elaboration() =>
+		Elaboration(Vice.Vice);
+
+	private string Elaboration(ViceOption option) =>
+		Options.First(o => o.Option == option).Elaboration;
+
+	private IReadOnlyCollection<string> Examples() =>
+		Options.First(o => o.Option == Vice.Vice).Examples;
+
+	private string ExamplePlaceholder() =>
+		Examples()
+			.First()
+			+ " Here, I...";
+
+	private IReadOnlyCollection<VVice> Options => VVice.Options;
+}

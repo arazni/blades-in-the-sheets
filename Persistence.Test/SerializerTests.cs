@@ -51,6 +51,14 @@ public class SerializerTests
 	}
 
 	[Fact]
+	public void Serializer_Deserializes_RealCharacter()
+	{
+		var character = this.serializer.Deserialize(JsonJunk.SpiderJson);
+		character.Should().NotBeNull();
+		character.Playbook.Option.Should().Be(PlaybookOption.Spider);
+	}
+
+	[Fact]
 	public void Wtf()
 	{
 		var raw = "{\"SomeField\":{\"One\":10,\"Id\":\"SerializedId\",\"NoSetterButInConstructor\":\"JsonValue\",\"PassedInConstructor\":2}}";
@@ -88,4 +96,114 @@ public class FieldClass
 public class ContainerClass
 {
 	public FieldClass SomeField { get; set; } = new FieldClass(0, 100);  // <-- default value here
+}
+
+public class JsonJunk
+{
+	public const string SpiderJson = @"
+{
+	""Id"": ""15bb5abd-09d0-472e-98db-ae65227889c0"",
+	""Dossier"": {
+		""Name"": ""Eleanor"",
+		""CrewId"": """",
+		""Alias"": ""Weave"",
+		""Look"": ""Weathered"",
+		""Notes"": """",
+		""Background"": {
+			""Background"": 2,
+			""Description"": """"
+		},
+		""Heritage"": {
+			""Heritage"": 1,
+			""Description"": """"
+		},
+		""Vice"": {
+			""Vice"": 4,
+			""Description"": """"
+		}
+	},
+	""Monitor"": {
+		""Stress"": {
+			""CurrentStress"": 0
+		},
+		""Trauma"": {},
+		""Harm"": {},
+		""Armor"": {}
+	},
+	""Talent"": {
+		""Insight"": {
+			""Hunt"": {
+				""Rating"": 0,
+				""PlaybookDefault"": 0
+			},
+			""Study"": {
+				""Rating"": 1,
+				""PlaybookDefault"": 1
+			},
+			""Survey"": {
+				""Rating"": 1,
+				""PlaybookDefault"": 0
+			},
+			""Tinker"": {
+				""Rating"": 0,
+				""PlaybookDefault"": 0
+			}
+		},
+		""Prowess"": {
+			""Finesse"": {
+				""Rating"": 1,
+				""PlaybookDefault"": 0
+			},
+			""Prowl"": {
+				""Rating"": 1,
+				""PlaybookDefault"": 0
+			},
+			""Skirmish"": {
+				""Rating"": 0,
+				""PlaybookDefault"": 0
+			},
+			""Wreck"": {
+				""Rating"": 0,
+				""PlaybookDefault"": 0
+			}
+		},
+		""Resolve"": {
+			""Attune"": {
+				""Rating"": 0,
+				""PlaybookDefault"": 0
+			},
+			""Command"": {
+				""Rating"": 0,
+				""PlaybookDefault"": 0
+			},
+			""Consort"": {
+				""Rating"": 2,
+				""PlaybookDefault"": 2
+			},
+			""Sway"": {
+				""Rating"": 1,
+				""PlaybookDefault"": 0
+			}
+		}
+	},
+	""Playbook"": {
+		""Experience"": {
+			""Experience"": 0
+		},
+		""Option"": 6
+	},
+	""Gear"": {
+		""Commitment"": {}
+	},
+	""Fund"": {
+		""Satchel"": {
+			""Coins"": 0
+		},
+		""Stash"": {
+			""Stash"": 0
+		}
+	},
+	""Rolodex"": {}
+}
+";
 }

@@ -14,6 +14,9 @@ public static class Extensions
 	public static bool In(this string source, IEnumerable<string> list) =>
 		list.Any(item => source.Like(item));
 
+	public static bool In<T>(this T source, params T[] list) =>
+		list.Contains(source);
+
 	public static bool Has(this IEnumerable<string> source, string item) =>
 		item.In(source);
 

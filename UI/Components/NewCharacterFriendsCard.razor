@@ -1,0 +1,90 @@
+﻿@using Domain.Characters
+@using Domain.Common
+@using Persistence.Json
+@inject ILoader Loader
+
+<MudCard Outlined="true">
+	<MudCardHeader>
+		<MudText>Choose a close friend and a rival from among your contacts</MudText>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudStack>
+			<MudSelect T="RolodexFriend" Label="Close Friend" Value="CloseFriend" ValueChanged="OnCloseFriendChanged">
+				@foreach (var friend in AvailableCloseFriends)
+				{
+					<MudSelectItem T="RolodexFriend" Value="friend">
+						<MudText>@friend.Entry</MudText>
+					</MudSelectItem>
+				}
+			</MudSelect>
+			<MudSelect T="RolodexFriend" Label="Rival" Value="Rival" ValueChanged="OnRivalChanged">
+				@foreach (var friend in AvailableRivals)
+				{
+					<MudSelectItem T="RolodexFriend" Value="friend">
+						<MudText>@friend.Entry</MudText>
+					</MudSelectItem>
+				}
+			</MudSelect>
+			<MudText>Other friends:</MudText>
+			@foreach (var friend in RemainingFriends)
+			{
+				<MudText>@friend.Entry</MudText>
+			}
+		</MudStack>
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public Rolodex Rolodex { get; set; } = new();
+
+	[Parameter, EditorRequired]
+	public PlaybookOption PlaybookOption { get; set; } = new();
+
+	private RolodexFriend? CloseFriend { get; set; }
+
+	private RolodexFriend? Rival { get; set; }
+
+	private RolodexFriend[] AvailableCloseFriends =>
+		Rolodex.Friends.Where(f => f.Closeness != FriendCloseness.Rival)
+			.ToArray();
+
+	private RolodexFriend[] AvailableRivals =>
+		Rolodex.Friends.Where(f => f.Closeness != FriendCloseness.CloseFriend)
+			.ToArray();
+
+	private RolodexFriend[] RemainingFriends =>
+		Rolodex.Friends.Where(f => !f.Closeness.In(FriendCloseness.Rival, FriendCloseness.CloseFriend))
+			.ToArray();
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if (PlaybookOption == PlaybookOption.Unknown)
+			return;
+
+		if (Rolodex.Friends.Any())
+		{
+			CloseFriend = Rolodex.CloseFriend;
+			Rival = Rolodex.Rival;
+			return;
+		}
+
+		var friends = await Loader.LoadAvailableFriendsAsync(PlaybookOption.ToString());
+		Rolodex.ReplaceFriends(friends);
+	}
+
+	private void OnCloseFriendChanged(RolodexFriend friend)
+	{
+		Rolodex.AssignOnlyCloseFriend(friend);
+		CloseFriend = Rolodex.CloseFriend;
+	}
+
+	private void OnRivalChanged(RolodexFriend rival)
+	{
+		Rolodex.AssignOnlyRival(rival);
+		Rival = Rolodex.Rival;
+	}
+}

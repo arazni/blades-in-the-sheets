@@ -34,10 +34,12 @@ public class StorageService : IStorageService
 	{
 		var all = await this.storageService.KeysAsync();
 
-		var characters = new List<Character>(all.Count());
-		foreach (var key in all)
-			characters.Add(await this.storageService.GetItemAsync<Character>(key));
+		var characterJsons = new List<string>(all.Count());
 
-		return characters;
+		foreach (var key in all)
+			characterJsons.Add(await this.storageService.GetItemAsStringAsync(key));
+
+		return characterJsons.Select(j => this.serializer.Deserialize(j))
+			.ToArray();
 	}
 }

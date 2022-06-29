@@ -42,6 +42,8 @@ public class Playbook
 
 		return true;
 	}
+
+	public static Playbook Empty() => new(PlaybookOption.Unknown);
 }
 
 public enum PlaybookOption
