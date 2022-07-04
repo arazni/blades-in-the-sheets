@@ -1,0 +1,41 @@
+﻿@using Domain.Characters
+@using UI.Conveniences
+
+<MudCard>
+	<MudCardContent>
+		<MudExpansionPanels>
+			<MudExpansionPanel IsInitiallyExpanded="true">
+				<TitleContent>
+					<MudGrid>
+						<MudItem xs="8">
+							<MudTextField @bind-Value="Dossier.Name" HelperText="Name" ReadOnly="true" />
+						</MudItem>
+						<MudItem xs="4">
+							<MudTextField @bind-Value="Dossier.Alias" HelperText="Alias" ReadOnly="true" />
+						</MudItem>
+					</MudGrid>
+				</TitleContent>
+				<ChildContent>
+					<MudStack>
+						<MudTextField Value="@BackgroundText" HelperText="Background" ReadOnly="true" DisableUnderLine="true" />
+						<MudTextField Value="@HeritageText" HelperText="Heritage" ReadOnly="true" DisableUnderLine="true" />
+						<MudTextField Value="@ViceText" HelperText="Vice" ReadOnly="true" DisableUnderLine="true" />
+						<MudTextField @bind-Value="Dossier.Look" HelperText="Look" ReadOnly="true" DisableUnderLine="true" />
+					</MudStack>
+				</ChildContent>
+			</MudExpansionPanel>
+		</MudExpansionPanels>
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public Dossier Dossier { get; set; } = new();
+
+	string BackgroundText => $"{Dossier.Background.Background}. {Dossier.Background.Description}";
+
+	string HeritageText => $"{Dossier.Heritage.Heritage.DisplayName()}. {Dossier.Heritage.Description}";
+
+	string ViceText => $"{Dossier.Vice.Vice}. {Dossier.Vice.Description}";
+}

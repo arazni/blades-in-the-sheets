@@ -29,11 +29,11 @@
 						<TitleContent>
 							<MudStack Row="true" AlignItems="AlignItems.Center">
 								<MudToggleIconButton Toggled="@action.IsDotOneFilled" ToggledChanged="@action.ToggleDotOne"
-									Disabled="@(!ViewModel.IsDotOneEnabled(action))"
+									Disabled="!ViewModel.IsDotOneEnabled(action)"
 									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
 								<MudDivider Vertical="true" FlexItem="true" />
 								<MudToggleIconButton Toggled="@action.IsDotTwoFilled" ToggledChanged="@action.ToggleDotTwo"
-									Disabled="@(!ViewModel.IsDotTwoEnabled(action))"
+									Disabled="!ViewModel.IsDotTwoEnabled(action)"
 									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
 								<MudText>@action.Name</MudText>
 							</MudStack>

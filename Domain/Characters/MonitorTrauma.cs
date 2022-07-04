@@ -2,28 +2,31 @@
 
 public class MonitorTrauma
 {
-	private readonly SortedSet<Traumas> traumas = new();
+	private readonly SortedSet<TraumaOption> traumas = new();
 
 	public static int MaxTraumas => 4;
 
-	public IReadOnlyCollection<Traumas> Traumas => this.traumas;
+	public IReadOnlyCollection<TraumaOption> Traumas => this.traumas;
 
-	public bool Add(Traumas trauma)
+	public bool Add(TraumaOption trauma)
 	{
+		//if (trauma == TraumaOption.None)
+		//	return false;
+
 		if (IsRetired)
 			return false;
 
 		return this.traumas.Add(trauma);
 	}
 
-	public bool Remove(Traumas trauma) => this.traumas.Remove(trauma);
+	public bool Remove(TraumaOption trauma) => this.traumas.Remove(trauma);
 
 	internal bool IsRetired => this.traumas.Count == MaxTraumas;
 }
 
-public enum Traumas
+public enum TraumaOption
 {
-	None,
+	//None,
 	Cold,
 	Haunted,
 	Obsessed,

@@ -15,7 +15,11 @@ public class ProjectClock
 
 	public bool Ding => this.clock.Value == this.clock.Max;
 
-	public int Time => this.clock.Value;
+	public virtual int Time
+	{
+		get => this.clock.Value;
+		set => this.clock.Value = value;
+	}
 
 	public virtual void Progress(int segments)
 	{

@@ -1,0 +1,50 @@
+﻿@using Domain.Characters
+@using Domain.Common
+
+@if (!Harm.HasHarmAtIntensity(Intensity))
+	return;
+
+<MudStack Row="true">
+	<MudText>@PrefixText:</MudText>
+	@if (IsFixMode)
+	{
+		@foreach (var description in HarmDescriptions)
+		{
+			<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" OnClick="@(e => RemoveHarm(description))">@description</MudButton>
+		}
+	}
+	else
+	{
+		<MudText>@HarmDescriptions.Join(", ")</MudText>
+	}
+</MudStack>
+
+
+@code
+{
+	[Parameter, EditorRequired]
+	public bool IsFixMode { get; set; }
+
+	[Parameter, EditorRequired]
+	public MonitorHarm Harm { get; set; } = new();
+
+	[Parameter, EditorRequired]
+	public HarmIntensity Intensity { get; set; }
+
+	string PrefixText => Intensity switch
+	{
+		HarmIntensity.Lesser => "Reduce effect",
+		HarmIntensity.Moderate => "-1 to dice pool",
+		HarmIntensity.Severe => "Incapacitated",
+		HarmIntensity.Fatal => "Catastrophic or fatal:",
+		_ => throw new NotImplementedException()
+	};
+
+	IReadOnlyCollection<string> HarmDescriptions =>
+		Harm.HarmsAtIntensity(Intensity);
+
+	void RemoveHarm(string description)
+	{
+		Harm.RemoveHarm(description, Intensity);
+	}
+}

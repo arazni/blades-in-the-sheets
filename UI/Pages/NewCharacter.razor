@@ -1,6 +1,7 @@
 ﻿@page "/new"
 @using Domain.Characters
 @using UI.Components
+@using UI.Components.NewCharacter
 
 <MudText Typo="Typo.h2">
 	Choose a Playbook.
@@ -10,10 +11,7 @@
 	<MudStack>
 		@foreach (var (book, hook) in options)
 		{
-			<NewCharacterPlaybookOption 
-				Playbook="@book"
-				Hook="@hook"
-			/>
+			<NewCharacterPlaybookOption Playbook="@book" Hook="@hook"/>
 		}
 	</MudStack>
 </MudContainer>

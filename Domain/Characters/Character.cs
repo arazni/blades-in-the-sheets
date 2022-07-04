@@ -1,6 +1,6 @@
 ﻿namespace Domain.Characters;
 
-public class Character
+public partial class Character
 {
 	private Character()
 	{

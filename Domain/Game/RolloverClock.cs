@@ -8,6 +8,16 @@ public class RolloverClock : ProjectClock
 
 	public int Rollover { get; private set; }
 
+	public override int Time
+	{
+		get => base.Time;
+		set
+		{
+			base.Time = value;
+			Rollover = 0;
+		}
+	}
+
 	public override void Progress(int segments)
 	{
 		Rollover = this.clock.ChangeUntilBound(segments);

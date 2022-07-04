@@ -1,0 +1,89 @@
+@using Domain.Characters;
+@using Domain.Game
+
+<MudStack>
+	<MudStack Row="true" AlignItems="AlignItems.Baseline">
+		<MudText Typo="Typo.caption">Healing Project:</MudText>
+		@if (IsFixMode)
+		{
+			<MudRating @bind-SelectedValue="HealingClock.Time" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
+		}
+		else
+		{
+			<MudRating SelectedValue="HealingClock.Time" ReadOnly="true" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
+		}
+		@if (HealingClock.Rollover > 0)
+		{
+			<MudRating SelectedValue="HealingClock.Rollover" ReadOnly="true" MaxValue="HealingClock.Rollover" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" />
+		}
+		<MudButton Disabled="!Harm.CanHeal" OnClick="(() => Harm.Heal())" Variant="Variant.Outlined">Heal</MudButton>
+	</MudStack>
+
+	@if (!IsFixMode)
+	{
+		<MudStack Row="true">
+			<MudSelect @bind-Value="RecoveryAmount">
+				<MudSelectItem Value="1">
+					<MudIcon Icon="@Icons.Material.Filled.Add" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+				</MudSelectItem>
+				<MudSelectItem Value="2">
+					<MudIcon Icon="@Icons.Material.Filled.Add" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+				</MudSelectItem>
+				<MudSelectItem Value="3">
+					<MudIcon Icon="@Icons.Material.Filled.Add" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+				</MudSelectItem>
+				<MudSelectItem Value="5">
+					<MudIcon Icon="@Icons.Material.Filled.Add" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
+				</MudSelectItem>
+			</MudSelect>
+			<MudButton Disabled="Harm.CanHeal" OnClick="(() => HealingClock.Progress(RecoveryAmount))" Variant="Variant.Outlined">Add</MudButton>
+		</MudStack>
+	}
+
+</MudStack>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public Monitor Monitor { get; set; } = new();
+
+	[Parameter, EditorRequired]
+	public bool IsFixMode { get; set; }
+
+	MonitorHarm Harm =>
+		Monitor.Harm;
+
+	RolloverClock HealingClock =>
+		Harm.HealingClock;
+
+	int MaxRecovery =>
+		HealingClock.Size;
+
+	int RecoveryAmount = 1;
+
+	//IReadOnlyCollection<RenderFragment> RecoverySelectIcons(int value)
+	//{
+	//	var hearts = Enumerable.Range(0, value)
+	//		.Select(i => (RenderFragment)(@<MudIcon Icon="@Icons.Material.Filled.Favorite" />))
+	//		.ToArray();
+
+	//	var icons = new List<RenderFragment>
+	//	{
+	//		(@<MudIcon Icon="@Icons.Material.Filled.Add" />)
+	//	};
+
+	//	icons.AddRange(hearts);
+	//	return icons;
+		//}
+}

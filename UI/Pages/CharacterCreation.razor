@@ -1,6 +1,7 @@
 ﻿@page "/characters/{Id}"
 @using Domain.Characters
 @using UI.Components
+@using UI.Components.NewCharacter
 @using UI.Services
 @using UI.ViewModels
 @inject IStorageService Storage
@@ -29,8 +30,7 @@
 			<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
 		</MudTimelineItem>
 		<MudTimelineItem>
-			<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true"
-				OnClick="SaveAsync">
+			<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
 				Save your scoundrel
 			</MudButton>
 		</MudTimelineItem>
@@ -46,7 +46,9 @@
 		<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookOption="@Character.Playbook.Option" />
 		<NewCharacterViceCard Vice="@Character.Dossier.Vice" />
 		<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
-		<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true">Save your scoundrel</MudButton>
+		<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
+			Save your scoundrel
+		</MudButton>
 	</MudStack>
 </MudHidden>
 

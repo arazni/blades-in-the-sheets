@@ -7,6 +7,4 @@ public class Monitor
 	public MonitorTrauma Trauma { get; private set; } = new();
 
 	public MonitorHarm Harm { get; private set; } = new();
-
-	public MonitorArmor Armor { get; private set; } = new();
 }

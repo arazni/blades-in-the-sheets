@@ -29,7 +29,7 @@ public class VIndexCharacter
 
 	public string Blurb => $"{Name}, {BlurbBackground} from {BlurbHeritage}";
 
-	public string Link => Paths.Character(Id);
+	public string Link => Paths.Sheet(Id);
 
 	private string BlurbBackground => this.background switch
 	{

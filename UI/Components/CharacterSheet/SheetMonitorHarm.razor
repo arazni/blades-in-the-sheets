@@ -1,0 +1,61 @@
+﻿@using Domain.Characters
+@using Domain.Common
+
+<MudStack>
+	<MudStack Row="true" Class="flex-grow-1">
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="CanAddHarm" OnClick="AddHarm" Style="min-width: 125px;">Harm</MudButton>
+		<MudSelect @bind-Value="Intensity" Text="@Intensity?.ToString()">
+			@foreach (var intensity in Harm.AvailableIntensities)
+			{
+				<MudSelectItem T="HarmIntensity?" Value="intensity">
+					<MudText>Level @((int)intensity) @intensity</MudText>
+				</MudSelectItem>
+			}
+		</MudSelect>
+	</MudStack>
+	<MudTextField @bind-Value="HarmDescription" Placeholder="@HarmPlaceholder" Clearable="true" Immediate="true" />
+	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Fatal" />
+	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Severe" />
+	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Moderate" />
+	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Lesser" />
+</MudStack>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public bool IsFixMode { get; set; }
+
+	[Parameter, EditorRequired]
+	public MonitorHarm Harm { get; set; } = new();
+
+		string HarmDescription { get; set; } = string.Empty;
+
+	HarmIntensity? Intensity { get; set; } = null; // on init, first available harm
+
+	string HarmPlaceholder => Intensity switch
+	{
+		HarmIntensity.Fatal => "Electrocuted, Drowned, or Stabbed in the Heart.",
+		HarmIntensity.Severe => "Impaled, Broken Leg, Shot in Chest, Badly Burned, or Terrified.",
+		HarmIntensity.Moderate => "Exhausted, Deep Cut to Arm, Concussion, Panicked, or Seduced.",
+		HarmIntensity.Lesser => "Battered, Drained, Distracted, Scared, Confused.",
+		_ => "Choose a harm severity above"
+	};
+
+	bool CanAddHarm =>
+		HarmDescription.HasInk();
+
+	void AddHarm()
+	{
+		var intensity = Intensity ?? throw new InvalidOperationException($"{nameof(AddHarm)}() called without setting {nameof(Intensity)} first");
+
+		Harm.AddHarm(HarmDescription, intensity);
+
+		ResetAddHarm();
+	}
+
+	void ResetAddHarm()
+	{
+		HarmDescription = string.Empty;
+		Intensity = Harm.AvailableIntensities.FirstOrDefault();
+	}
+}

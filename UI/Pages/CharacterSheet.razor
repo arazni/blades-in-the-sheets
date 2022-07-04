@@ -1,0 +1,30 @@
+﻿@page "/sheets/{Id}"
+@using Domain.Characters
+@using UI.Components
+@using UI.Components.CharacterSheet
+@using UI.Services
+@inject IStorageService Storage
+
+<MudContainer>
+	<MudGrid>
+		<MudItem xs="12" md="6">
+			<SheetDossierCard Dossier="Character.Dossier"/>
+		</MudItem>
+		<MudItem xs="12" md="6">
+			<SheetMonitorCard Character="Character"/>
+		</MudItem>
+	</MudGrid>
+</MudContainer>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public string Id { get; set; } = string.Empty;
+
+	public Character Character { get; set; } = Character.Empty();
+
+	protected override async Task OnInitializedAsync()
+	{
+		Character = await Storage.Load(Id);
+	}
+}

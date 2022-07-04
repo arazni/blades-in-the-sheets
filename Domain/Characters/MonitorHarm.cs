@@ -23,8 +23,36 @@ public class MonitorHarm
 	public bool IsFatal =>
 		this.fatalHarms.Any();
 
+	public bool HasHarmAtIntensity(HarmIntensity intensity) => intensity switch
+	{
+		HarmIntensity.Lesser => IsLesserHarmed,
+		HarmIntensity.Moderate => IsModeratelyHarmed,
+		HarmIntensity.Severe => IsIncapacitated,
+		HarmIntensity.Fatal => IsFatal,
+		_ => throw new NotImplementedException()
+	};
+
 	public bool IsHarmed =>
 		IsLesserHarmed || IsModeratelyHarmed || IsIncapacitated || IsFatal;
+
+	public IReadOnlyCollection<HarmIntensity> AvailableIntensities
+	{
+		get
+		{
+			var available = new List<HarmIntensity>(4);
+
+			if (!this.lesserHarms.IsFull)
+				available.Add(HarmIntensity.Lesser);
+			if (!this.moderateHarms.IsFull)
+				available.Add(HarmIntensity.Moderate);
+			if (!this.severeHarms.IsFull)
+				available.Add(HarmIntensity.Severe);
+			if (!this.fatalHarms.IsFull && this.severeHarms.IsFull)
+				available.Add(HarmIntensity.Fatal);
+
+			return available;
+		}
+	}
 
 	public bool CanHeal => HealingClock.Ding;
 
@@ -41,6 +69,15 @@ public class MonitorHarm
 
 	public IReadOnlyCollection<string> FatalHarms =>
 		this.fatalHarms;
+
+	public IReadOnlyCollection<string> HarmsAtIntensity(HarmIntensity intensity) => intensity switch
+	{
+		HarmIntensity.Lesser => LesserHarms,
+		HarmIntensity.Moderate => ModerateHarms,
+		HarmIntensity.Severe => SevereHarms,
+		HarmIntensity.Fatal => FatalHarms,
+		_ => throw new NotImplementedException()
+	};
 
 	public bool AddHarm(string harmDescription, HarmIntensity intensity)
 	{
@@ -82,12 +119,12 @@ public class MonitorHarm
 
 		return true;
 	}
+}
 
-	public enum HarmIntensity
-	{
-		Lesser = 1,
-		Moderate = 2,
-		Severe = 3,
-		Fatal = 4
-	}
+public enum HarmIntensity
+{
+	Lesser = 1,
+	Moderate = 2,
+	Severe = 3,
+	Fatal = 4
 }

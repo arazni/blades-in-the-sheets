@@ -22,4 +22,11 @@ public static class Extensions
 
 	public static bool HasInk(this string source) =>
 		!string.IsNullOrWhiteSpace(source);
+
+	public static string Join(this IEnumerable<string> source, string separator) =>
+		string.Join(separator, source);
+
+	public static string Join<T>(this IEnumerable<T> source, string separator) where T : Enum =>
+		source.Select(s => s.ToString())
+			.Join(separator);
 }

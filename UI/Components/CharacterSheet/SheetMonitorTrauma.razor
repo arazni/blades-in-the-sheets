@@ -1,0 +1,69 @@
+﻿@using Domain.Characters
+<MudStack>
+	<MudStack Row="true">
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="min-width: 125px;">Trauma</MudButton>
+		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableAddTrauma" Required="!DisableAddTrauma">
+			@foreach (var option in TraumaOptions)
+			{
+				<MudSelectItem T="TraumaOption?" Value="option">
+					<MudText>@option</MudText>
+				</MudSelectItem>
+			}
+		</MudSelect>
+	</MudStack>
+	<MudStack Row="true">
+		@foreach (var option in Monitor.Trauma.Traumas)
+		{
+			@if (IsFixMode)
+			{
+				<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" OnClick="(e => RemoveTrauma(option))">@option</MudButton>
+			}
+			else
+			{
+				<MudText>@option</MudText>
+			}
+		}
+	</MudStack>
+</MudStack>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public bool IsFixMode { get; set; }
+
+	[Parameter, EditorRequired]
+	public Monitor Monitor { get; set; } = new();
+
+	bool DisableAddTrauma =>
+		Monitor.Stress.CurrentStress != MonitorStress.MaxStress
+		&& !IsFixMode;
+
+	TraumaOption? SelectedTrauma { get; set; } = null;
+
+	IReadOnlyCollection<TraumaOption?> TraumaOptions =>
+		Enum.GetValues<TraumaOption>()
+			.Except(Monitor.Trauma.Traumas)
+			.Select(t => (TraumaOption?)t)
+			.ToArray();
+
+	void AddTrauma()
+	{
+		if (SelectedTrauma == null)
+			return;
+
+		var success = Monitor.Trauma.Add(SelectedTrauma.Value);
+
+		if (!success)
+			return;
+
+		if (!IsFixMode)
+				Monitor.Stress.CurrentStress = 0;
+
+		SelectedTrauma = null;
+	}
+
+	void RemoveTrauma(TraumaOption trauma)
+	{
+			Monitor.Trauma.Remove(trauma);
+	}
+}

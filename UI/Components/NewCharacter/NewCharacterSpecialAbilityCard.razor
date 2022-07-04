@@ -27,7 +27,7 @@
 @code
 {
 	[Parameter, EditorRequired]
-	public Playbook? Playbook { get; set; }
+	public Playbook Playbook { get; set; } = new(PlaybookOption.Unknown);
 
 	public PlaybookSpecialAbility[] AvailableAbilities { get; private set; } = new PlaybookSpecialAbility[0];
 

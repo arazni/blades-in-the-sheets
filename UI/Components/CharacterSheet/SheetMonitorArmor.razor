@@ -1,0 +1,40 @@
+﻿@using Domain.Characters
+
+<MudStack Row="true">
+	<MudCheckBox Checked="Character.IsStandardArmorUsed" Disabled="!Character.HasArmor" Label="Armor" T="bool" CheckedChanged="@((b) => StandardArmorChecked(b))" />
+	<MudCheckBox Checked="Character.IsHeavyArmorUsed" Disabled="!Character.HasHeavyArmor" Label="Heavy Armor" T="bool" CheckedChanged="@((b) => HeavyArmorChecked(b))" />
+	@if (Character.CanHaveSpecialArmor)
+	{
+		<MudCheckBox Checked="Character.IsSpecialArmorUsed" Label="Special Armor" T="bool" CheckedChanged="@((b) => SpecialArmorChecked(b))" />
+	}
+</MudStack>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public Character Character { get; set; } = Character.Empty();
+
+	void StandardArmorChecked(bool isChecked)
+	{
+		if (isChecked)
+			Character.UseStandardArmor();
+		else
+			Character.RestoreStandardArmor();
+	}
+
+	void HeavyArmorChecked(bool isChecked)
+	{
+		if (isChecked)
+			Character.UseHeavyArmor();
+		else
+			Character.RestoreHeavyArmor();
+	}
+
+	void SpecialArmorChecked(bool isChecked)
+	{
+		if (isChecked)
+			Character.UseSpecialArmor();
+		else
+			Character.RestoreSpecialArmor();
+	}
+}

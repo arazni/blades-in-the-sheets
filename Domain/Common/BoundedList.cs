@@ -40,14 +40,17 @@ public class BoundedList<T> : IReadOnlyCollection<T>
 	public int Capacity { get; }
 
 	public int Room =>
-		Capacity - items.Count;
+		Capacity - this.items.Count;
 
 	public int Count =>
-		items.Count;
+		this.items.Count;
+
+	public bool IsFull =>
+		Room == 0;
 
 	public IEnumerator<T> GetEnumerator() =>
-		items.GetEnumerator();
+		this.items.GetEnumerator();
 
 	IEnumerator IEnumerable.GetEnumerator() =>
-		items.GetEnumerator();
+		this.items.GetEnumerator();
 }
