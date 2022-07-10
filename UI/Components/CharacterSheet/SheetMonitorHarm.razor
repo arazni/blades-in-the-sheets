@@ -32,6 +32,13 @@
 
 	HarmIntensity? Intensity { get; set; } = null; // on init, first available harm
 
+	protected override void OnInitialized()
+	{
+		Intensity = Harm.AvailableIntensities.FirstOrDefault();
+
+		base.OnInitialized();
+	}
+
 	string HarmPlaceholder => Intensity switch
 	{
 		HarmIntensity.Fatal => "Electrocuted, Drowned, or Stabbed in the Heart.",
@@ -42,7 +49,8 @@
 	};
 
 	bool CanAddHarm =>
-		HarmDescription.HasInk();
+		HarmDescription.HasInk() 
+		&& Intensity != null;
 
 	void AddHarm()
 	{
