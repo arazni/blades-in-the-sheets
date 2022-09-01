@@ -3,6 +3,7 @@ using FluentAssertions;
 using Newtonsoft.Json;
 using Persistence.Json;
 using System;
+using System.Linq;
 using Xunit;
 
 namespace Persistence.Test;
@@ -45,6 +46,11 @@ public class SerializerTests
 	{
 		var character = new Character(PlaybookOption.Lurk);
 		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1, PlaybookOption.Lurk));
+
+		character.Rolodex.ReplaceFriends(new[] { new RolodexFriend("Favorite"), new RolodexFriend("Rival"), new RolodexFriend("3") });
+		character.Rolodex.AssignOnlyCloseFriend(character.Rolodex.Friends.First(f => f.Entry == "Favorite"));
+		character.Rolodex.AssignOnlyRival(character.Rolodex.Friends.First(f => f.Entry == "Rival"));
+
 		var id = character.Id;
 		var json = this.serializer.Serialize(character);
 		json.Should().NotBeNullOrWhiteSpace();
@@ -64,6 +70,9 @@ public class SerializerTests
 		character.Playbook.Abilities.Should().HaveCount(1);
 		character.Playbook.Experience.MaxPoints.Should().BeGreaterThan(0);
 		character.Talent.Insight.Experience.MaxPoints.Should().BeGreaterThan(0);
+		character.Rolodex.Friends.Should().HaveCountGreaterThan(0);
+		character.Rolodex.CloseFriend.Should().NotBeNull();
+		character.Rolodex.Rival.Should().NotBeNull();
 	}
 
 	[Fact]

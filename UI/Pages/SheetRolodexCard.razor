@@ -1,0 +1,66 @@
+@using Domain.Characters
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h4">Contacts</MudText>
+		</CardHeaderContent>
+		<CardHeaderActions>
+			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" />
+		</CardHeaderActions>
+	</MudCardHeader>
+	<MudCardContent>
+		@*<MudStack>*@
+			@foreach (var friend in Rolodex.Friends)
+			{
+				<MudStack Row="true">
+					<MudTextField @bind-Value="friend.Entry" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" AdornmentIcon="@GetFriendIcon(friend)" Adornment="Adornment.Start" AdornmentColor="@GetFriendIconColor(friend)" />
+					@if (IsFixMode)
+					{
+						if (friend.Closeness == FriendCloseness.CloseFriend)
+						{
+							<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="Rolodex.DowngradeCloseFriend">Estrange</MudButton>
+						}
+						else if (friend.Closeness == FriendCloseness.Rival)
+						{
+							<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="Rolodex.UpgradeRival">Reconcile</MudButton>
+						}
+						else
+						{
+							if (Rolodex.IsMissingCloseFriend)
+							{
+								<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyCloseFriend(friend))">Bond</MudButton>
+							}
+							if (Rolodex.IsMissingRival)
+							{
+								<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyRival(friend))">Betray</MudButton>
+							}
+						}
+					}
+				</MudStack>
+			}
+		@*</MudStack>*@
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public Rolodex Rolodex { get; set; } = new();
+
+	bool IsFixMode { get; set; } = false;
+
+	static string GetFriendIcon(RolodexFriend friend) => friend.Closeness switch
+	{
+		FriendCloseness.CloseFriend => Icons.Material.Filled.Favorite,
+		FriendCloseness.Rival => Icons.Material.Filled.Dangerous,
+		_ => Icons.Material.Filled.Label
+	};
+
+	static Color GetFriendIconColor(RolodexFriend friend) => friend.Closeness switch
+	{
+		FriendCloseness.CloseFriend => Color.Secondary,
+		FriendCloseness.Rival => Color.Warning,
+		_ => Color.Default
+	};
+}

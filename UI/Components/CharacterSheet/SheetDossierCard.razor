@@ -11,29 +11,30 @@
 		</CardHeaderActions>
 	</MudCardHeader>
 	<MudCardContent>
-@*		<MudExpansionPanels>
-			<MudExpansionPanel IsInitiallyExpanded="true">
-				<TitleContent>*@
-					<MudGrid>
-						<MudItem xs="8">
-							<MudTextField @bind-Value="Dossier.Name" HelperText="Name" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
-						</MudItem>
-						<MudItem xs="4">
-							<MudTextField @bind-Value="Dossier.Alias" HelperText="Alias" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
-						</MudItem>
-					</MudGrid>
-				@*</TitleContent>*@
-				@*<ChildContent>*@
-					<MudStack>
-						<MudTextField Value="@BackgroundText" HelperText="Background" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
-						<MudTextField Value="@HeritageText" HelperText="Heritage" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
-						<MudTextField Value="@ViceText" HelperText="Vice" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
-						<MudTextField @bind-Value="Dossier.Look" HelperText="Look" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
-					</MudStack>
-				@*</ChildContent>*@
-@*			</MudExpansionPanel>
+		@*		<MudExpansionPanels>
+		<MudExpansionPanel IsInitiallyExpanded="true">
+		<TitleContent>*@
+		<MudGrid>
+			<MudItem xs="8">
+				<MudTextField @bind-Value="Dossier.Name" HelperText="Name" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+			</MudItem>
+			<MudItem xs="4">
+				<MudTextField @bind-Value="Dossier.Alias" HelperText="Alias" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+			</MudItem>
+		</MudGrid>
+		@*</TitleContent>*@
+		@*<ChildContent>*@
+		<MudStack>
+			<MudTextField @bind-Value="@Dossier.Background.Description" HelperText="@BackgroundHelperText" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+			<MudTextField @bind-Value="@Dossier.Heritage.Description" HelperText="@HeritageHelperText" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+			<MudTextField @bind-Value="@Dossier.Vice.Description" HelperText="@ViceHelperText" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+			<MudTextField @bind-Value="Dossier.Look" HelperText="Look" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+		</MudStack>
+		@*</ChildContent>*@
+		@*			</MudExpansionPanel>
 		</MudExpansionPanels>
-*@	</MudCardContent>
+		*@
+	</MudCardContent>
 </MudCard>
 
 @code
@@ -43,9 +44,12 @@
 
 	bool IsFixMode { get; set; } = false;
 
-	string BackgroundText => $"{Dossier.Background.Background}. {Dossier.Background.Description}";
+	string BackgroundHelperText =>
+		$"Background: {Dossier.Background.Background}";
 
-	string HeritageText => $"{Dossier.Heritage.Heritage.DisplayName()}. {Dossier.Heritage.Description}";
+	string HeritageHelperText =>
+		$"Heritage: {Dossier.Heritage.Heritage.DisplayName()}";
 
-	string ViceText => $"{Dossier.Vice.Vice}. {Dossier.Vice.Description}";
+	string ViceHelperText =>
+		$"Vice: {Dossier.Vice.Vice}";
 }

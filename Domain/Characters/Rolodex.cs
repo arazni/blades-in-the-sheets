@@ -4,10 +4,11 @@ public class Rolodex
 {
 	private List<RolodexFriend> friends = new(5);
 
-	public IReadOnlyCollection<RolodexFriend> Friends => this.friends;
-
-	//public RolodexFriend Find(string entry) =>
-	//	Friends.Single(f => f.Entry == entry);
+	public IReadOnlyCollection<RolodexFriend> Friends
+	{
+		get => this.friends;
+		private set => ReplaceFriends(value);
+	}
 
 	public RolodexFriend? CloseFriend =>
 		Friends.FirstOrDefault(f => f.Closeness == FriendCloseness.CloseFriend);
@@ -31,6 +32,28 @@ public class Rolodex
 		Friends.Single(f => f == rival).Closeness = FriendCloseness.Rival;
 	}
 
+	public void DowngradeCloseFriend()
+	{
+		if (CloseFriend == null)
+			throw new InvalidOperationException(nameof(IsMissingCloseFriend));
+
+		CloseFriend.Closeness = FriendCloseness.Friend;
+	}
+
+	public void UpgradeRival()
+	{
+		if (Rival == null)
+			throw new InvalidOperationException(nameof(IsMissingRival));
+
+		Rival.Closeness = FriendCloseness.Friend;
+	}
+
 	public void ReplaceFriends(IReadOnlyCollection<RolodexFriend> friends) =>
 		this.friends = friends.ToList();
+
+	public bool IsMissingCloseFriend =>
+		CloseFriend == null;
+
+	public bool IsMissingRival =>
+		Rival == null;
 }
