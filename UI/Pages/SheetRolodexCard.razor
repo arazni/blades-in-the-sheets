@@ -3,7 +3,7 @@
 <MudCard>
 	<MudCardHeader>
 		<CardHeaderContent>
-			<MudText Typo="Typo.h4">Contacts</MudText>
+			<MudText Typo="Typo.h4">@RolodexDisplayName()</MudText>
 		</CardHeaderContent>
 		<CardHeaderActions>
 			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" />
@@ -48,6 +48,9 @@
 	[Parameter, EditorRequired]
 	public Rolodex Rolodex { get; set; } = new();
 
+	[Parameter, EditorRequired]
+	public PlaybookOption Playbook { get; set; }
+
 	bool IsFixMode { get; set; } = false;
 
 	static string GetFriendIcon(RolodexFriend friend) => friend.Closeness switch
@@ -62,5 +65,17 @@
 		FriendCloseness.CloseFriend => Color.Secondary,
 		FriendCloseness.Rival => Color.Warning,
 		_ => Color.Default
+	};
+
+	string RolodexDisplayName() => Playbook switch
+	{
+		PlaybookOption.Cutter => "Dangerous Friends",
+		PlaybookOption.Hound => "Deadly Friends",
+		PlaybookOption.Leech => "Clever Friends",
+		PlaybookOption.Lurk => "Shady Friends",
+		PlaybookOption.Slide => "Sly Friends",
+		PlaybookOption.Spider => "Shrewd Friends",
+		PlaybookOption.Whisper => "Strange Friends",
+		_ => "Remarkable Friends"
 	};
 }
