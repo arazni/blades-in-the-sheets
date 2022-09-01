@@ -14,6 +14,12 @@ public class TalentAction : IRollable
 		set => this.rating.Value = value;
 	}
 
+	public int MaxRating =>
+		this.rating.Max;
+
+	public bool HasMaxRating =>
+		MaxRating == this.rating.Value;
+
 	public int PlaybookDefault
 	{
 		get => this.playbookDefault;
@@ -26,6 +32,9 @@ public class TalentAction : IRollable
 			Rating = Math.Max(Rating, value);
 		}
 	}
+
+	public static AttributeName GetAttributeName(ActionName name) =>
+		(AttributeName)((int)name / 4);
 }
 
 public enum ActionName

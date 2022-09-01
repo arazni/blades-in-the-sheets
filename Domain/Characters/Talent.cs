@@ -79,6 +79,8 @@ public class Talent
 				break;
 		}
 	}
+
+	public static Talent Empty() => new(PlaybookOption.Unknown);
 }
 
 public enum AttributeName

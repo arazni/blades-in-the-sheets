@@ -1,0 +1,113 @@
+@using Domain.Characters
+@using Persistence.Json
+@using UI.Conveniences
+@using UI.Services
+@inject ILoader Loader
+
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h4">@Playbook.Option</MudText>
+		</CardHeaderContent>
+		<CardHeaderActions>
+			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" />
+		</CardHeaderActions>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudStack>
+			<MudRating @bind-SelectedValue="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+			<MudStack Row="true" Class="flex-grow-1">
+				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="CannotAddAbility" OnClick="AddAbility" Style="min-width: 125px;">Ability</MudButton>
+				<MudSelect @bind-Value="SelectedAbility" ToStringFunc="@converter">
+					@foreach (var ability in LearnableAbilities)
+					{
+						<MudSelectItem Value="ability" />
+					}
+				</MudSelect>
+			</MudStack>
+			<MudStack>
+				@foreach (var ability in KnownAbilities)
+				{
+					@if (IsFixMode)
+					{
+						<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" OnClick="(e => RemoveAbility(ability))">@ability.LearnedTimesDisplayName()</MudButton>
+					}
+					else
+					{
+						<MudText Typo="Typo.h6">@ability.LearnedTimesDisplayName()</MudText>
+					}
+					<MudText>@ability.Description</MudText>
+				}
+			</MudStack>
+		</MudStack>
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public Playbook Playbook { get; set; } = Playbook.Empty();
+
+	public bool IsFixMode { get; set; }
+
+	IReadOnlyCollection<PlaybookSpecialAbility> KnownAbilities =>
+		Playbook.Abilities;
+
+	IReadOnlyDictionary<PlaybookOption, PlaybookSpecialAbility[]>? AvailableAbilitiesByOptions { get; set; }
+
+	IReadOnlyCollection<PlaybookSpecialAbility> AvailableAbilities =>
+		AvailableAbilitiesByOptions?[Playbook.Option] ?? Array.Empty<PlaybookSpecialAbility>();
+
+	IReadOnlyCollection<PlaybookSpecialAbility> LearnableAbilities =>
+		AvailableAbilities.Where
+		(
+			ability =>
+			{
+				if (!Playbook.AbilitiesByName.TryGetValue(ability.Name, out var knownAbility))
+					return true;
+
+				return !knownAbility.IsCompletelyLearned;
+			}
+		).ToArray();
+
+	PlaybookSpecialAbility? SelectedAbility { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		AvailableAbilitiesByOptions = await Loader.LoadAvailableAbilitiesByOptionAsync();
+
+		await base.OnInitializedAsync();
+	}
+
+	bool CanAddAbility =>
+		IsFixMode || Playbook.Experience.CanLevelUp;
+
+	bool CannotAddAbility =>
+		!CanAddAbility;
+
+	void AddAbility()
+	{
+		if (SelectedAbility == null)
+			return;
+
+		var success = Playbook.TakeAbility(SelectedAbility);
+
+		if (!success)
+			return;
+
+		if (!IsFixMode)
+			Playbook.Experience.Clear();
+
+		SelectedAbility = null;
+	}
+
+	void RemoveAbility(PlaybookSpecialAbility ability)
+	{
+		Playbook.RemoveAbility(ability);
+	}
+
+	Func<PlaybookSpecialAbility?, string> converter = psa =>
+		psa != null ? $"{psa.Name}: {psa.Description}"
+			: string.Empty;
+}

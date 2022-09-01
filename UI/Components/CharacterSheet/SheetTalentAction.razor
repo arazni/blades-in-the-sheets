@@ -1,0 +1,90 @@
+﻿@using Domain.Characters
+@using Domain.Characters.Bases
+@using System.Diagnostics.CodeAnalysis
+@using UI.Services
+@inject SheetJank SheetJank
+
+<MudStack Row="true">
+	@if (IsFixMode)
+	{
+		<MudRating Size="Size.Small" @bind-SelectedValue="FixModeRating" MaxValue="Action.MaxRating" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+		<MudText>@FixModeText</MudText>
+	}
+	else
+	{
+		if (CanLevelUp)
+		{
+			<MudIconButton Title="@LevelUpTitle" Variant="Variant.Filled" Size="Size.Small" Disabled="Action.HasMaxRating" Icon="@Icons.Material.Filled.Add" OnClick="LevelUp" Color="Color.Primary" />
+		}
+		<MudText>@Text</MudText>
+	}
+</MudStack>
+
+@code
+{
+	[Parameter, EditorRequired, MemberNotNull]
+	public TalentAttribute? Attribute { get; set; }
+
+	[Parameter, EditorRequired]
+	public ActionName Name { get; set; }
+
+	[CascadingParameter(Name = "IsFixMode")]
+	public bool IsFixMode { get; set; }
+
+	TalentAction Action =>
+		Attribute!.ActionFromName(Name);
+
+	string LevelUpTitle =>
+		$"Level up {Name}";
+
+	bool CanLevelUp =>
+		Attribute!.Experience.CanLevelUp
+		|| IsFixMode;
+
+	string Text =>
+		$"{Action.Rating} {Name}";
+
+	string FixModeText =>
+		Name.ToString();
+
+	void LevelUp()
+	{
+		if (!Attribute!.LevelUp(Name))
+			return;
+
+		Notify();
+	}
+
+	int FixModeRating
+	{
+		get => Action.Rating;
+		set
+		{
+			Action.Rating = value;
+			Notify();
+		}
+	}
+
+	void Notify()
+	{
+		var attribute = TalentAction.GetAttributeName(Name);
+
+		if (attribute == AttributeName.Insight)
+		{
+			SheetJank.NotifyInsightChanged();
+			return;
+		}
+
+		if (attribute == AttributeName.Prowess)
+		{
+			SheetJank.NotifyProwessChanged();
+			return;
+		}
+
+		if (attribute == AttributeName.Resolve)
+		{
+			SheetJank.NotifyResolveChanged();
+			return;
+		}
+	}
+}

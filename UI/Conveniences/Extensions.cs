@@ -9,4 +9,9 @@ public static class Extensions
 		HeritageOption.TheDaggerIsles => "The Dagger Isles",
 		_ => option.ToString()
 	};
+
+	public static string LearnedTimesDisplayName(this PlaybookSpecialAbility? ability) =>
+		ability == null ? string.Empty
+		: ability.TimesTakable == 1 ? ability.Name
+		: $"{ability.Name} ({ability.TimesTaken}/{ability.TimesTakable})";
 }

@@ -1,5 +1,7 @@
-@using Domain.Characters;
+@using Domain.Characters
 @using Domain.Game
+@using UI.Services
+@inject SheetJank SheetJank
 
 <MudStack>
 	<MudStack Row="true" AlignItems="AlignItems.Baseline">
@@ -16,7 +18,7 @@
 		{
 			<MudRating SelectedValue="HealingClock.Rollover" ReadOnly="true" MaxValue="HealingClock.Rollover" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" />
 		}
-		<MudButton Disabled="!Harm.CanHeal" OnClick="(() => Harm.Heal())" Variant="Variant.Outlined">Heal</MudButton>
+		<MudButton Disabled="!Harm.CanHeal" OnClick="Heal" Variant="Variant.Outlined">Heal</MudButton>
 	</MudStack>
 
 	@if (!IsFixMode)
@@ -72,18 +74,9 @@
 
 	int RecoveryAmount = 1;
 
-	//IReadOnlyCollection<RenderFragment> RecoverySelectIcons(int value)
-	//{
-	//	var hearts = Enumerable.Range(0, value)
-	//		.Select(i => (RenderFragment)(@<MudIcon Icon="@Icons.Material.Filled.Favorite" />))
-	//		.ToArray();
-
-	//	var icons = new List<RenderFragment>
-	//	{
-	//		(@<MudIcon Icon="@Icons.Material.Filled.Add" />)
-	//	};
-
-	//	icons.AddRange(hearts);
-	//	return icons;
-		//}
+	void Heal()
+	{
+		Harm.Heal();
+		SheetJank.NotifyHarmChanged();
+	}
 }

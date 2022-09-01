@@ -1,9 +1,12 @@
 ﻿@using Domain.Characters
 @using Domain.Common
+@using UI.Services
+@inject SheetJank SheetJank
+@implements IDisposable
 
 <MudStack>
 	<MudStack Row="true" Class="flex-grow-1">
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="CanAddHarm" OnClick="AddHarm" Style="min-width: 125px;">Harm</MudButton>
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="!CanAddHarm" OnClick="AddHarm" Style="min-width: 125px;">Harm</MudButton>
 		<MudSelect @bind-Value="Intensity" Text="@Intensity?.ToString()">
 			@foreach (var intensity in Harm.AvailableIntensities)
 			{
@@ -28,13 +31,15 @@
 	[Parameter, EditorRequired]
 	public MonitorHarm Harm { get; set; } = new();
 
-		string HarmDescription { get; set; } = string.Empty;
+	string HarmDescription { get; set; } = string.Empty;
 
 	HarmIntensity? Intensity { get; set; } = null; // on init, first available harm
 
 	protected override void OnInitialized()
 	{
 		Intensity = Harm.AvailableIntensities.FirstOrDefault();
+
+		SheetJank.HarmChanged += StateHasChanged;
 
 		base.OnInitialized();
 	}
@@ -49,7 +54,7 @@
 	};
 
 	bool CanAddHarm =>
-		HarmDescription.HasInk() 
+		HarmDescription.HasInk()
 		&& Intensity != null;
 
 	void AddHarm()
@@ -65,5 +70,10 @@
 	{
 		HarmDescription = string.Empty;
 		Intensity = Harm.AvailableIntensities.FirstOrDefault();
+	}
+
+	public void Dispose()
+	{
+		SheetJank.HarmChanged -= StateHasChanged;
 	}
 }

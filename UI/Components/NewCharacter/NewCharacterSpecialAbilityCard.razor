@@ -43,16 +43,17 @@
 		Playbook.TakeAbility(ChosenAbility);
 	}
 
-	protected override async Task OnParametersSetAsync()
+	protected override async Task OnInitializedAsync()
 	{
-		await base.OnParametersSetAsync();
-
 		_ = Playbook ?? throw new ArgumentNullException(nameof(Playbook));
 
 		if (Playbook.Option == PlaybookOption.Unknown)
 			return;
 
 		AvailableAbilities = await Loader.LoadAvailableAbilitiesAsync(Playbook.Option.ToString());
+		ChosenAbility = Playbook.Abilities.FirstOrDefault();
+
+		await base.OnInitializedAsync();
 	}
 
 	public static string DisplayText(PlaybookSpecialAbility ability) =>

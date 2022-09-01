@@ -1,0 +1,16 @@
+﻿namespace UI.Services;
+
+public class SheetJank
+{
+	public event Action? HarmChanged;
+	public void NotifyHarmChanged() => HarmChanged?.Invoke();
+
+	public event Action? InsightChanged;
+	public void NotifyInsightChanged() => InsightChanged?.Invoke();
+
+	public event Action? ProwessChanged;
+	public void NotifyProwessChanged() => ProwessChanged?.Invoke();
+
+	public event Action? ResolveChanged;
+	public void NotifyResolveChanged() => ResolveChanged?.Invoke();
+}

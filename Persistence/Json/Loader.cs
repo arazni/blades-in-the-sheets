@@ -1,4 +1,5 @@
 ﻿using Domain.Characters;
+using Domain.Common;
 using Newtonsoft.Json;
 using Persistence.Json.DataModels;
 
@@ -30,8 +31,8 @@ public class Loader : ILoader
 
 	public async Task<PlaybookSpecialAbility[]> LoadAvailableAbilitiesAsync(string identifierOrPlaybook)
 	{
-		if (!Enum.TryParse(identifierOrPlaybook, out Source source))
-			source = Source.Custom;
+		if (!Enum.TryParse(identifierOrPlaybook, out PlaybookOption source))
+			source = PlaybookOption.Custom;
 
 		var file = await ReadFile(PlaybookAbilitiesFilePrefix, identifierOrPlaybook);
 
@@ -40,6 +41,24 @@ public class Loader : ILoader
 
 		return data.Select(data => new PlaybookSpecialAbility(data.Name, data.Description, data.TimesTakeable, source))
 			.ToArray();
+	}
+
+	public async Task<Dictionary<PlaybookOption, PlaybookSpecialAbility[]>> LoadAvailableAbilitiesByOptionAsync()
+	{
+		var sources = Enum.GetValues<PlaybookOption>()
+			.Where(s => !s.In(PlaybookOption.Custom, PlaybookOption.Unknown));
+
+		var tasks = sources.Select(source => ReadFile(source, PlaybookAbilitiesFilePrefix, source.ToString()));
+		var optionFiles = await Task.WhenAll(tasks);
+
+		return optionFiles.ToDictionary
+		(
+			optionFile => optionFile.Item1,
+			optionFile => JsonConvert.DeserializeObject<AvailablePlaybookSpecialAbilityData[]>(optionFile.Item2)
+				?.Select(data => new PlaybookSpecialAbility(data.Name, data.Description, data.TimesTakeable, optionFile.Item1))
+				.ToArray()
+				?? throw new JsonException($"Wasn't able to deserialize {optionFile.Item1} to {nameof(PlaybookSpecialAbility)}[]")
+		);
 	}
 
 	public async Task<GearItem[]> LoadAvailableItemsAsync(string identifierOrPlaybook)
@@ -62,6 +81,12 @@ public class Loader : ILoader
 
 		return specificGear.Concat(standardGear)
 			.ToArray();
+	}
+
+	private async Task<(T, string)> ReadFile<T>(T key, string prefix, string identifierOrPlaybook)
+	{
+		var file = await ReadFile(prefix, identifierOrPlaybook);
+		return (key, file);
 	}
 
 	private async Task<string> ReadFile(string prefix, string identifierOrPlaybook)

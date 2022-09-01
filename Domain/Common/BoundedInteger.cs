@@ -24,17 +24,17 @@ public class BoundedInteger
 		set => this.value = Math.Clamp(value, Min, Max);
 	}
 
-	public int Max { get; }
+	public int Max { get; set; }
 
-	public int Min { get; }
+	public int Min { get; set; }
 
 	public int Remainder(int delta)
 	{
-		if (delta > 0 && delta + Value > this.Max)
-			return this.value + delta - this.Max;
+		if (delta > 0 && delta + Value > Max)
+			return this.value + delta - Max;
 
-		if (delta < 0 && delta + Value < this.Min)
-			return this.value + delta - this.Min;
+		if (delta < 0 && delta + Value < Min)
+			return this.value + delta - Min;
 
 		return 0;
 	}

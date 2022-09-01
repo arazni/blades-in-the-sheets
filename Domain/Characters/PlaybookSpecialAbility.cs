@@ -8,7 +8,7 @@ public class PlaybookSpecialAbility
 	private readonly Ink name;
 	private readonly Ink description;
 
-	public PlaybookSpecialAbility(string name, string description, int timesTakable, Source source)
+	public PlaybookSpecialAbility(string name, string description, int timesTakable, PlaybookOption source)
 	{
 		this.name = new(name);
 
@@ -43,17 +43,10 @@ public class PlaybookSpecialAbility
 
 	public int TimesTakable => this.timesTaken.Max;
 
-	public Source Source { get; }
-}
+	public bool IsCompletelyLearned => TimesTakable == TimesTaken;
 
-public enum Source
-{
-	Cutter = 1,
-	Hound,
-	Leech,
-	Lurk,
-	Slide,
-	Spider,
-	Whisper,
-	Custom
+	public PlaybookOption Source { get; }
+
+	public PlaybookSpecialAbility Copy() =>
+		new(Name, Description, TimesTakable, Source);
 }

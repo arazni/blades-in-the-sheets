@@ -2,7 +2,7 @@
 
 public class Playbook
 {
-	private readonly Dictionary<string, PlaybookSpecialAbility> abilitiesByName = new();
+	private Dictionary<string, PlaybookSpecialAbility> abilitiesByName = new();
 
 	public Playbook(PlaybookOption option)
 	{
@@ -11,16 +11,27 @@ public class Playbook
 
 	public IReadOnlyCollection<PlaybookSpecialAbility> Abilities => this.abilitiesByName.Values;
 
+	public IReadOnlyDictionary<string, PlaybookSpecialAbility> AbilitiesByName
+	{
+		get => this.abilitiesByName;
+		private set { this.abilitiesByName = value.ToDictionary(k => k.Key, v => v.Value); } // json
+	}
+
 	public ExperienceTracker Experience { get; } = new(8);
 
 	public PlaybookOption Option { get; }
 
 	public bool TakeAbility(PlaybookSpecialAbility ability)
 	{
-		if (this.abilitiesByName.ContainsKey(ability.Name))
-			return false;
+		var isKnown = this.abilitiesByName.TryGetValue(ability.Name, out var knownAbility);
 
-		this.abilitiesByName.Add(ability.Name, ability);
+		if (isKnown)
+			return knownAbility!.Take();
+
+		var copy = ability.Copy();
+		copy.Take();
+
+		this.abilitiesByName.Add(copy.Name, copy);
 		return true;
 	}
 

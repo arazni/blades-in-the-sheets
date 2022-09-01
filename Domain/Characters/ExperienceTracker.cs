@@ -11,17 +11,21 @@ public class ExperienceTracker
 		this.experience = new BoundedInteger(0, maxExperience);
 	}
 
-	public int Experience
+	public int Points
 	{
 		get => this.experience.Value;
 		set => this.experience.Value = value;
 	}
 
-	internal int MaxExperience => this.experience.Max;
+	public int MaxPoints
+	{
+		get => this.experience.Max;
+		private set => this.experience.Value = value;
+	}
 
-	internal bool CanLevelUp => Experience == MaxExperience;
+	public bool CanLevelUp => Points == MaxPoints;
 
-	internal void Clear()
+	public void Clear()
 	{
 		this.experience.Value = 0;
 	}

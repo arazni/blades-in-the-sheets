@@ -44,10 +44,26 @@ public class SerializerTests
 	public (string, string) Serializer_Serializes_LurkCharacter()
 	{
 		var character = new Character(PlaybookOption.Lurk);
+		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1, PlaybookOption.Lurk));
 		var id = character.Id;
 		var json = this.serializer.Serialize(character);
 		json.Should().NotBeNullOrWhiteSpace();
 		return (id, json);
+	}
+
+	[Fact]
+	public void Serializer_Deserializes_LurkCharacter()
+	{
+		var (_, json) = Serializer_Serializes_LurkCharacter();
+		json.Should().NotBeNullOrWhiteSpace();
+
+		var character = this.serializer.Deserialize(json);
+
+		character.Should().NotBeNull();
+		character.Playbook.Option.Should().Be(PlaybookOption.Lurk);
+		character.Playbook.Abilities.Should().HaveCount(1);
+		character.Playbook.Experience.MaxPoints.Should().BeGreaterThan(0);
+		character.Talent.Insight.Experience.MaxPoints.Should().BeGreaterThan(0);
 	}
 
 	[Fact]
@@ -56,6 +72,7 @@ public class SerializerTests
 		var character = this.serializer.Deserialize(JsonJunk.SpiderJson);
 		character.Should().NotBeNull();
 		character.Playbook.Option.Should().Be(PlaybookOption.Spider);
+		character.Talent.Insight.Experience.MaxPoints.Should().BeGreaterThan(0);
 	}
 
 	[Fact]
@@ -102,108 +119,124 @@ public class JsonJunk
 {
 	public const string SpiderJson = @"
 {
-	""Id"": ""15bb5abd-09d0-472e-98db-ae65227889c0"",
-	""Dossier"": {
-		""Name"": ""Eleanor"",
-		""CrewId"": """",
-		""Alias"": ""Weave"",
-		""Look"": ""Weathered"",
-		""Notes"": """",
-		""Background"": {
-			""Background"": 2,
-			""Description"": """"
-		},
-		""Heritage"": {
-			""Heritage"": 1,
-			""Description"": """"
-		},
-		""Vice"": {
-			""Vice"": 4,
-			""Description"": """"
-		}
-	},
-	""Monitor"": {
-		""Stress"": {
-			""CurrentStress"": 0
-		},
-		""Trauma"": {},
-		""Harm"": {},
-		""Armor"": {}
-	},
-	""Talent"": {
-		""Insight"": {
-			""Hunt"": {
-				""Rating"": 0,
-				""PlaybookDefault"": 0
-			},
-			""Study"": {
-				""Rating"": 1,
-				""PlaybookDefault"": 1
-			},
-			""Survey"": {
-				""Rating"": 1,
-				""PlaybookDefault"": 0
-			},
-			""Tinker"": {
-				""Rating"": 0,
-				""PlaybookDefault"": 0
-			}
-		},
-		""Prowess"": {
-			""Finesse"": {
-				""Rating"": 1,
-				""PlaybookDefault"": 0
-			},
-			""Prowl"": {
-				""Rating"": 1,
-				""PlaybookDefault"": 0
-			},
-			""Skirmish"": {
-				""Rating"": 0,
-				""PlaybookDefault"": 0
-			},
-			""Wreck"": {
-				""Rating"": 0,
-				""PlaybookDefault"": 0
-			}
-		},
-		""Resolve"": {
-			""Attune"": {
-				""Rating"": 0,
-				""PlaybookDefault"": 0
-			},
-			""Command"": {
-				""Rating"": 0,
-				""PlaybookDefault"": 0
-			},
-			""Consort"": {
-				""Rating"": 2,
-				""PlaybookDefault"": 2
-			},
-			""Sway"": {
-				""Rating"": 1,
-				""PlaybookDefault"": 0
-			}
-		}
-	},
-	""Playbook"": {
-		""Experience"": {
-			""Experience"": 0
-		},
-		""Option"": 6
-	},
-	""Gear"": {
-		""Commitment"": {}
-	},
-	""Fund"": {
-		""Satchel"": {
-			""Coins"": 0
-		},
-		""Stash"": {
-			""Stash"": 0
-		}
-	},
-	""Rolodex"": {}
+  ""Id"": ""e8b8e79a-7823-4adf-9716-d5e7312c76a4"",
+  ""Dossier"": {
+    ""Name"": ""Billina"",
+    ""CrewId"": """",
+    ""Alias"": ""Thorn"",
+    ""Look"": ""Brooding bookworm"",
+    ""Notes"": """",
+    ""Background"": {
+      ""Background"": 1,
+      ""Description"": ""I have to know everything""
+    },
+    ""Heritage"": {
+      ""Heritage"": 3,
+      ""Description"": ""Strange stuff happens here""
+    },
+    ""Vice"": {
+      ""Vice"": 3,
+      ""Description"": ""Harvale Brogan, the Centuralia Club, Brightstone.""
+    }
+  },
+  ""Monitor"": {
+    ""Stress"": {
+      ""CurrentStress"": 0
+    },
+    ""Trauma"": {},
+    ""Harm"": {}
+  },
+  ""Talent"": {
+    ""Insight"": {
+      ""Hunt"": {
+        ""Rating"": 0,
+        ""PlaybookDefault"": 0
+      },
+      ""Study"": {
+        ""Rating"": 2,
+        ""PlaybookDefault"": 1
+      },
+      ""Survey"": {
+        ""Rating"": 1,
+        ""PlaybookDefault"": 0
+      },
+      ""Tinker"": {
+        ""Rating"": 0,
+        ""PlaybookDefault"": 0
+      },
+      ""Experience"": {
+        ""Points"": 0
+      }
+    },
+    ""Prowess"": {
+      ""Finesse"": {
+        ""Rating"": 0,
+        ""PlaybookDefault"": 0
+      },
+      ""Prowl"": {
+        ""Rating"": 1,
+        ""PlaybookDefault"": 0
+      },
+      ""Skirmish"": {
+        ""Rating"": 0,
+        ""PlaybookDefault"": 0
+      },
+      ""Wreck"": {
+        ""Rating"": 0,
+        ""PlaybookDefault"": 0
+      },
+      ""Experience"": {
+        ""Points"": 0
+      }
+    },
+    ""Resolve"": {
+      ""Attune"": {
+        ""Rating"": 0,
+        ""PlaybookDefault"": 0
+      },
+      ""Command"": {
+        ""Rating"": 0,
+        ""PlaybookDefault"": 0
+      },
+      ""Consort"": {
+        ""Rating"": 2,
+        ""PlaybookDefault"": 2
+      },
+      ""Sway"": {
+        ""Rating"": 1,
+        ""PlaybookDefault"": 0
+      },
+      ""Experience"": {
+        ""Points"": 0
+      }
+    }
+  },
+  ""Playbook"": {
+    ""AbilitiesByName"": {
+      ""Connected"": {
+        ""Name"": ""Connected"",
+        ""Description"": ""During downtime, you get +1 result level when you acquire an asset or reduce heat."",
+        ""TimesTaken"": 0,
+        ""Source"": 6
+      }
+    },
+    ""Experience"": {
+      ""Points"": 0
+    },
+    ""Option"": 6
+  },
+  ""Gear"": {
+    ""Commitment"": {}
+  },
+  ""Fund"": {
+    ""Satchel"": {
+      ""Coins"": 0
+    },
+    ""Stash"": {
+      ""Stash"": 0
+    }
+  },
+  ""Rolodex"": {}
 }
 ";
 }
