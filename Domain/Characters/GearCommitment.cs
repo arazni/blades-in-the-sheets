@@ -2,12 +2,12 @@
 
 public class GearCommitment
 {
-	internal LoadCommitments Commitment { get; set; }
+	public LoadCommitmentOption Commitment { get; set; }
 
 	public int MaxBulk => (int)Commitment;
 }
 
-public enum LoadCommitments
+public enum LoadCommitmentOption
 {
 	None = 0,
 	Light = 3,

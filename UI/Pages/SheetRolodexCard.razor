@@ -10,36 +10,34 @@
 		</CardHeaderActions>
 	</MudCardHeader>
 	<MudCardContent>
-		@*<MudStack>*@
-			@foreach (var friend in Rolodex.Friends)
-			{
-				<MudStack Row="true">
-					<MudTextField @bind-Value="friend.Entry" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" AdornmentIcon="@GetFriendIcon(friend)" Adornment="Adornment.Start" AdornmentColor="@GetFriendIconColor(friend)" />
-					@if (IsFixMode)
+		@foreach (var friend in Rolodex.Friends)
+		{
+			<MudStack Row="true">
+				<MudTextField @bind-Value="friend.Entry" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" AdornmentIcon="@GetFriendIcon(friend)" Adornment="Adornment.Start" AdornmentColor="@GetFriendIconColor(friend)" />
+				@if (IsFixMode)
+				{
+					if (friend.Closeness == FriendCloseness.CloseFriend)
 					{
-						if (friend.Closeness == FriendCloseness.CloseFriend)
+						<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="Rolodex.DowngradeCloseFriend">Estrange</MudButton>
+					}
+					else if (friend.Closeness == FriendCloseness.Rival)
+					{
+						<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="Rolodex.UpgradeRival">Reconcile</MudButton>
+					}
+					else
+					{
+						if (Rolodex.IsMissingCloseFriend)
 						{
-							<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="Rolodex.DowngradeCloseFriend">Estrange</MudButton>
+							<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyCloseFriend(friend))">Bond</MudButton>
 						}
-						else if (friend.Closeness == FriendCloseness.Rival)
+						if (Rolodex.IsMissingRival)
 						{
-							<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="Rolodex.UpgradeRival">Reconcile</MudButton>
-						}
-						else
-						{
-							if (Rolodex.IsMissingCloseFriend)
-							{
-								<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyCloseFriend(friend))">Bond</MudButton>
-							}
-							if (Rolodex.IsMissingRival)
-							{
-								<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyRival(friend))">Betray</MudButton>
-							}
+							<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyRival(friend))">Betray</MudButton>
 						}
 					}
-				</MudStack>
-			}
-		@*</MudStack>*@
+				}
+			</MudStack>
+		}
 	</MudCardContent>
 </MudCard>
 

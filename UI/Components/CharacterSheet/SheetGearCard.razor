@@ -1,0 +1,35 @@
+﻿@using Domain.Characters
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h4">Gear</MudText>
+		</CardHeaderContent>
+		<CardHeaderActions>
+			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" />
+		</CardHeaderActions>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudStack>
+			<MudRadioGroup @bind-SelectedOption="Gear.Commitment.Commitment">
+				<MudRadio Option="LoadCommitmentOption.Light">@((int)LoadCommitmentOption.Light) @LoadCommitmentOption.Light</MudRadio>
+				<MudRadio Option="LoadCommitmentOption.Normal">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</MudRadio>
+				<MudRadio Option="LoadCommitmentOption.Heavy">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</MudRadio>
+			</MudRadioGroup>
+			@foreach(var item in Gear.)
+		</MudStack>
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public Gear Gear { get; set; } = new();
+
+	[Parameter, EditorRequired]
+	public PlaybookOption Playbook { get; set; }
+
+	bool IsFixMode { get; set; } = false;
+
+
+}

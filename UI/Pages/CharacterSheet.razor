@@ -7,20 +7,23 @@
 
 <MudContainer>
 	<MudGrid>
-		<MudItem xs="12" md="6">
+		<MudItem xs="12" lg="6">
 			<SheetDossierCard Dossier="Character.Dossier" />
 		</MudItem>
-		<MudItem xs="12" md="6">
+		<MudItem xs="12" lg="6">
 			<SheetMonitorCard Character="Character" />
 		</MudItem>
-		<MudItem xs="12" md="6">
+		<MudItem xs="12" lg="6">
 			<SheetTalentCard Talent="Character.Talent" />
 		</MudItem>
-		<MudItem xs="12" md="6">
+		<MudItem xs="12" lg="6">
 			<SheetAbilitiesCard Playbook="Character.Playbook" />
 		</MudItem>
-		<MudItem xs="12" md="6">
+		<MudItem xs="12" lg="6">
 			<SheetRolodexCard Rolodex="Character.Rolodex" Playbook="Character.Playbook.Option" />
+		</MudItem>
+		<MudItem xs="12" lg="6">
+			<SheetGearCard Gear="Character.Gear" Playbook="Character.Playbook.Option" />
 		</MudItem>
 	</MudGrid>
 </MudContainer>
