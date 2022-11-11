@@ -1,4 +1,4 @@
-using Domain.Characters;
+using Models.Characters;
 using FluentAssertions;
 using Persistence.Json;
 using System.Linq;

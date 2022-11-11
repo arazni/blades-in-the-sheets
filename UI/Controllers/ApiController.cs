@@ -1,4 +1,4 @@
-﻿using Domain.Characters;
+﻿using Models.Characters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Json;

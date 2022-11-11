@@ -1,4 +1,4 @@
-﻿using Domain.Characters;
+﻿using Models.Characters;
 using Persistence.Json;
 using System.Threading.Tasks;
 using Xunit;

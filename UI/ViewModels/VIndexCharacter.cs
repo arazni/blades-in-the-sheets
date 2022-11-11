@@ -1,4 +1,4 @@
-﻿using Domain.Characters;
+﻿using Models.Characters;
 using static UI.Constants;
 
 namespace UI.ViewModels;

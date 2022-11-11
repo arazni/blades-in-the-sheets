@@ -1,5 +1,5 @@
-﻿using Domain.Characters;
-using Domain.Common;
+﻿using Models.Characters;
+using Models.Common;
 using Newtonsoft.Json;
 using Persistence.Json.DataModels;
 

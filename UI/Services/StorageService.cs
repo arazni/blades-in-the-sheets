@@ -1,5 +1,5 @@
 ﻿using Blazored.LocalStorage;
-using Domain.Characters;
+using Models.Characters;
 using Persistence.Json;
 
 namespace UI.Services;

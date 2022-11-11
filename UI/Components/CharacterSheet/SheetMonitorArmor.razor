@@ -1,4 +1,4 @@
-﻿@using Domain.Characters
+﻿@using Models.Characters
 
 <MudStack Row="true">
 	<MudCheckBox Checked="Character.IsStandardArmorUsed" Disabled="!Character.HasArmor" Label="Armor" T="bool" CheckedChanged="@((b) => StandardArmorChecked(b))" />

@@ -1,4 +1,4 @@
-﻿using Domain.Characters;
+﻿using Models.Characters;
 using Newtonsoft.Json;
 
 namespace Persistence.Json;

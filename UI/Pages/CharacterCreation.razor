@@ -1,5 +1,5 @@
 ﻿@page "/characters/{Id}"
-@using Domain.Characters
+@using Models.Characters
 @using UI.Components
 @using UI.Components.NewCharacter
 @using UI.Services
@@ -59,7 +59,7 @@
 
 	public VCharacter Character { get; private set; } = VCharacter.Empty();
 
-	private Character characterModel = Domain.Characters.Character.Empty();
+	private Character characterModel = Models.Characters.Character.Empty();
 
 	protected override async Task OnInitializedAsync()
 	{

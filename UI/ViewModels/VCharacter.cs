@@ -1,5 +1,5 @@
-﻿using Domain.Characters;
-using Monitor = Domain.Characters.Monitor;
+﻿using Models.Characters;
+using Monitor = Models.Characters.Monitor;
 
 namespace UI.ViewModels;
 

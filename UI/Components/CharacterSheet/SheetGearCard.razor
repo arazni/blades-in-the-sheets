@@ -1,4 +1,4 @@
-﻿@using Domain.Characters
+﻿@using Models.Characters
 
 <MudCard>
 	<MudCardHeader>
@@ -16,7 +16,7 @@
 				<MudRadio Option="LoadCommitmentOption.Normal">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</MudRadio>
 				<MudRadio Option="LoadCommitmentOption.Heavy">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</MudRadio>
 			</MudRadioGroup>
-			@foreach(var item in Gear.)
+			@*@foreach(var item in Gear.i)*@
 		</MudStack>
 	</MudCardContent>
 </MudCard>

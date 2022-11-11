@@ -1,5 +1,5 @@
-﻿using Domain.Characters;
-using Domain.Characters.Bases;
+﻿using Models.Characters;
+using Models.Characters.Bases;
 
 namespace UI.ViewModels;
 
