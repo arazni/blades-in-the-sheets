@@ -1,6 +1,6 @@
-﻿using Models.Characters;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models.Characters;
 using Persistence.Json;
 
 namespace UI.Controllers;

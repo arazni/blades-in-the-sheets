@@ -1,17 +1,25 @@
-﻿namespace Models.Characters;
+﻿using Models.Common;
+
+namespace Models.Characters;
 
 public class GearItem
 {
+	private readonly Ink name;
+
 	public GearItem(int bulk, string name, Sources source)
 	{
 		Bulk = bulk;
-		Name = name;
+		this.name = new(name);
 		Source = source;
 	}
 
 	public int Bulk { get; }
 
-	public string Name { get; }
+	public string Name
+	{
+		get => this.name.Value;
+		internal set => this.name.Value = value;
+	}
 
 	public Sources Source { get; }
 

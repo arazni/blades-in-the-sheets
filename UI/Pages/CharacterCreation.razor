@@ -1,10 +1,13 @@
 ﻿@page "/characters/{Id}"
 @using Models.Characters
+@using Persistence.Json;
 @using UI.Components
 @using UI.Components.NewCharacter
 @using UI.Services
 @using UI.ViewModels
 @inject IStorageService Storage
+@inject ICharacterCoordinator Coordinator
+@inject NavigationManager Navigator
 
 <MudHidden Breakpoint="Breakpoint.SmAndDown">
 	<MudTimeline TimelinePosition="@TimelinePosition.Start">
@@ -70,5 +73,6 @@
 	public async Task SaveAsync()
 	{
 		await Storage.Save(characterModel);
+		Navigator.NavigateTo($"/sheets/{Character.Id}");
 	}
 }

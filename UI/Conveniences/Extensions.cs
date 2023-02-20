@@ -14,4 +14,7 @@ public static class Extensions
 		ability == null ? string.Empty
 		: ability.TimesTakable == 1 ? ability.Name
 		: $"{ability.Name} ({ability.TimesTaken}/{ability.TimesTakable})";
+
+	public static string Display(this GearItem item) =>
+		$"{item.Bulk}: {item.Name}";
 }

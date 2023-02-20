@@ -1,4 +1,7 @@
 ﻿@using Models.Characters
+@using UI.Conveniences
+@using UI.Services
+@inject SheetJank SheetJank
 
 <MudCard>
 	<MudCardHeader>
@@ -11,12 +14,39 @@
 	</MudCardHeader>
 	<MudCardContent>
 		<MudStack>
-			<MudRadioGroup @bind-SelectedOption="Gear.Commitment.Commitment">
-				<MudRadio Option="LoadCommitmentOption.Light">@((int)LoadCommitmentOption.Light) @LoadCommitmentOption.Light</MudRadio>
-				<MudRadio Option="LoadCommitmentOption.Normal">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</MudRadio>
-				<MudRadio Option="LoadCommitmentOption.Heavy">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</MudRadio>
-			</MudRadioGroup>
-			@*@foreach(var item in Gear.i)*@
+			<MudStack Row="true" Justify="Justify.SpaceBetween">
+				<MudRadioGroup @bind-SelectedOption="Gear.Commitment.Commitment">
+					<MudRadio Option="LoadCommitmentOption.None" Disabled="!RadioCommitmentsEnabled">@LoadCommitmentOption.None</MudRadio>
+					<MudRadio Option="LoadCommitmentOption.Light" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Light) @LoadCommitmentOption.Light</MudRadio>
+					<MudRadio Option="LoadCommitmentOption.Normal" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</MudRadio>
+					<MudRadio Option="LoadCommitmentOption.Heavy" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</MudRadio>
+				</MudRadioGroup>
+				@if (CommitmentLocked)
+				{
+					<MudButton Variant="Variant.Filled" OnClick="() => { ClearCommitments(); CommitmentLocked = false; }">Reset</MudButton>
+				}
+				else
+				{
+					<MudButton Variant="Variant.Filled" OnClick="() => CommitmentLocked = true">Commit</MudButton>
+				}
+			</MudStack>
+			<MudText Typo="Typo.h6">Loadout</MudText>
+			<MudContainer>
+				@foreach (var item in Gear.Loadout)
+				{
+					@commitmentItemRenderer!(item);
+				}
+			</MudContainer>
+			<MudStack Row="true" Justify="Justify.SpaceBetween">
+				<MudText Typo="Typo.h6">Available Gear</MudText>
+				<MudText Typo="Typo.h6">Bulk Remaining: @Gear.AvailableBulk</MudText>
+			</MudStack>
+			<MudContainer>
+				@foreach (var item in Gear.UncommittedGear)
+				{
+					<MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.AddCircle" Disabled="!Gear.CanCommitGear(item) || !CommitmentLocked" OnClick="() => CommitGear(item)">@item.Display()</MudButton>
+				}
+			</MudContainer>
 		</MudStack>
 	</MudCardContent>
 </MudCard>
@@ -29,7 +59,59 @@
 	[Parameter, EditorRequired]
 	public PlaybookOption Playbook { get; set; }
 
-	bool IsFixMode { get; set; } = false;
+	bool CommitmentLocked { get; set; } = false;
 
+	bool RadioCommitmentsEnabled => IsFixMode || !CommitmentLocked;
 
+	public void CommitGear(GearItem item)
+	{
+		var isSuccessful = Gear.CommitGear(item);
+
+		if (isSuccessful)
+			SheetJank.NotifyGearChanged();
+	}
+
+	public void ClearCommitments()
+	{
+		var isSuccessful = Gear.ClearCommitments();
+
+		if (isSuccessful)
+			SheetJank.NotifyGearChanged();
+	}
+
+	public void UncommitGear(GearItem item)
+	{
+		var isSuccessful = Gear.UncommitGear(item);
+
+		if (isSuccessful)
+			SheetJank.NotifyGearChanged();
+	}
+
+	// Dynamic Rendering Demo. Unrecommended use case.
+
+	private bool isFixMode = false;
+
+	bool IsFixMode 
+	{
+		get => isFixMode;
+		set
+		{
+			commitmentItemRenderer = value ? (i) => RenderCommitmentButtons(i)
+				: (i) => RenderCommitmentText(i);
+			isFixMode = value;
+		}
+	}
+
+	protected override void OnInitialized()
+	{
+		commitmentItemRenderer = (i) => RenderCommitmentText(i);
+
+		base.OnInitialized();
+	}
+
+	private Func<GearItem, RenderFragment>? commitmentItemRenderer;
+
+	private RenderFragment RenderCommitmentText(GearItem item) => @<MudText>@item.Name (@item.Bulk)</MudText>;
+
+	private RenderFragment RenderCommitmentButtons(GearItem item) => @<MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveCircle" OnClick="() => UncommitGear(item)">@item.Name (@item.Bulk)</MudButton>;
 }

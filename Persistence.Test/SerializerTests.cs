@@ -1,5 +1,5 @@
-﻿using Models.Characters;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Models.Characters;
 using Newtonsoft.Json;
 using Persistence.Json;
 using System;
@@ -11,10 +11,14 @@ namespace Persistence.Test;
 public class SerializerTests
 {
 	private readonly ISerializer serializer;
+	private readonly ILoader loader;
+	private readonly ICharacterCoordinator characterCoordinator;
 
 	public SerializerTests()
 	{
 		this.serializer = new Serializer();
+		this.loader = new Loader(new ServerFileReader());
+		this.characterCoordinator = new CharacterCoordinator(this.loader);
 	}
 
 	[Fact]
@@ -39,6 +43,26 @@ public class SerializerTests
 		character.Talent.Prowl.PlaybookDefault.Should().Be(2);
 		character.Talent.Finesse.PlaybookDefault.Should().Be(1);
 		character.Id.Should().Be(id);
+	}
+
+	[Fact]
+	public async void Serializer_Serializes_CoordinatorCharacter()
+	{
+		var model = await this.characterCoordinator.InitializeCharacter(PlaybookOption.Leech);
+		model.Should().NotBeNull();
+		model.Playbook.Option.Should().Be(PlaybookOption.Leech);
+		model.Gear.AvailableGear.Should().NotBeEmpty();
+		model.Gear.AvailableGear.Where(g => g.Source == GearItem.Sources.Leech).Should().NotBeEmpty();
+		model.Gear.AvailableGear.Where(g => g.Source == GearItem.Sources.Standard).Should().NotBeEmpty();
+
+		var json = this.serializer.Serialize(model);
+		var character = this.serializer.Deserialize(json);
+
+		character.Should().NotBeNull();
+		character.Playbook.Option.Should().Be(PlaybookOption.Leech);
+		character.Gear.AvailableGear.Should().NotBeEmpty();
+		character.Gear.AvailableGear.Where(g => g.Source == GearItem.Sources.Leech).Should().NotBeEmpty();
+		character.Gear.AvailableGear.Where(g => g.Source == GearItem.Sources.Standard).Should().NotBeEmpty();
 	}
 
 	[Fact]

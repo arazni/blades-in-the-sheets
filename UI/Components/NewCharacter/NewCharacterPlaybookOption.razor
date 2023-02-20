@@ -1,6 +1,8 @@
 ﻿@using Models.Characters
+@using Persistence.Json;
 @using UI.Services
 @inject IStorageService Storage
+@inject ICharacterCoordinator Coordinator
 @inject NavigationManager Navigator
 
 <MudCard Outlined="true" Class="mx-4 my-1 mud-theme-primary">
@@ -26,7 +28,7 @@
 
 	public async Task CreateCharacter()
 	{
-		var character = new Character(Playbook);
+		var character = await Coordinator.InitializeCharacter(Playbook);
 		await Storage.Save(character);
 		Navigator.NavigateTo($"/characters/{character.Id}");
 	}

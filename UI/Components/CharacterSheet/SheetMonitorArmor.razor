@@ -1,4 +1,7 @@
 ﻿@using Models.Characters
+@using UI.Services
+@inject SheetJank SheetJank
+@implements IDisposable
 
 <MudStack Row="true">
 	<MudCheckBox Checked="Character.IsStandardArmorUsed" Disabled="!Character.HasArmor" Label="Armor" T="bool" CheckedChanged="@((b) => StandardArmorChecked(b))" />
@@ -13,6 +16,13 @@
 {
 	[Parameter, EditorRequired]
 	public Character Character { get; set; } = Character.Empty();
+
+	protected override void OnInitialized()
+	{
+		SheetJank.GearChanged += StateHasChanged;
+
+		base.OnInitialized();
+	}
 
 	void StandardArmorChecked(bool isChecked)
 	{
@@ -36,5 +46,10 @@
 			Character.UseSpecialArmor();
 		else
 			Character.RestoreSpecialArmor();
+	}
+
+	public void Dispose()
+	{
+		SheetJank.GearChanged -= StateHasChanged;
 	}
 }

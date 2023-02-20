@@ -14,6 +14,7 @@ builder.Services.AddTransient<IStorageService, StorageService>();
 builder.Services.AddTransient<ISerializer, Serializer>();
 builder.Services.AddTransient<ILoader, Loader>();
 builder.Services.AddTransient<IFileReader, HttpFileReader>();
+builder.Services.AddTransient<ICharacterCoordinator, CharacterCoordinator>();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddSingleton<SheetJank>();
 builder.Services.AddMudServices();

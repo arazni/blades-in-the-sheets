@@ -1,45 +1,101 @@
-﻿namespace Models.Characters;
+﻿using Newtonsoft.Json;
+
+namespace Models.Characters;
 
 public class Gear
 {
-	private readonly Dictionary<string, GearItem> loadoutByName = new(StringComparer.InvariantCultureIgnoreCase);
+	[JsonProperty]
+	private Dictionary<string, GearItem> LoadoutByName { get; set; } = new(StringComparer.InvariantCultureIgnoreCase);
+	[JsonProperty]
+	private Dictionary<string, GearItem> AvailableGearByName { get; set; } = new(StringComparer.InvariantCultureIgnoreCase);
 
 	public GearCommitment Commitment { get; } = new();
 
-	public IReadOnlyCollection<GearItem> Loadout => this.loadoutByName.Values;
+	public IReadOnlyCollection<GearItem> Loadout => LoadoutByName.Values;
+
+	public IReadOnlyCollection<GearItem> AvailableGear => AvailableGearByName.Values;
+
+	public IReadOnlyCollection<GearItem> UncommittedGear => AvailableGearByName.Where(available => !LoadoutByName.ContainsKey(available.Key))
+		.Select(uncommitted => uncommitted.Value)
+		.ToArray();
 
 	public int MaxBulk => Commitment.MaxBulk;
 
 	public int AvailableBulk => Commitment.MaxBulk - Loadout.Sum(i => i.Bulk);
 
-	public bool CommitGear(GearItem item)
+	public bool AddAvailableItem(GearItem item)
 	{
+		if (AvailableGearByName.ContainsKey(item.Name))
+			return false;
+
+		AvailableGearByName.Add(item.Name, item);
+		return true;
+	}
+
+	public bool RemoveAvailableItem(GearItem item)
+	{
+		if (!AvailableGearByName.ContainsKey(item.Name))
+			return false;
+
+		AvailableGearByName.Remove(item.Name);
+		LoadoutByName.Remove(item.Name);
+
+		return true;
+	}
+
+	public bool ClearAvailableItems()
+	{
+		if (!AvailableGearByName.Any())
+			return false;
+
+		ClearCommitments();
+		AvailableGearByName.Clear();
+		return true;
+	}
+
+	public bool CanCommitGear(GearItem item)
+	{
+		if (Commitment.Commitment == LoadCommitmentOption.None)
+			return false;
+
+		if (!AvailableGearByName.ContainsKey(item.Name))
+			return false;
+
 		if (item.Bulk > AvailableBulk)
 			return false;
 
-		if (this.loadoutByName.ContainsKey(item.Name))
+		if (LoadoutByName.ContainsKey(item.Name))
 			return false;
 
-		this.loadoutByName.Add(item.Name, item);
+		return true;
+	}
+
+	public bool HasCommitted() => Commitment.Commitment != LoadCommitmentOption.None;
+
+	public bool CommitGear(GearItem item)
+	{
+		if (!CanCommitGear(item))
+			return false;
+
+		LoadoutByName.Add(item.Name, item);
 		return true;
 	}
 
 	public bool UncommitGear(GearItem item)
 	{
-		if (!this.loadoutByName.ContainsKey(item.Name))
+		if (!AvailableGearByName.ContainsKey(item.Name))
 			return false;
 
-		this.loadoutByName.Remove(item.Name);
-		return true;
+		return LoadoutByName.Remove(item.Name);
 	}
 
 	public bool ClearCommitments()
 	{
-		if (!this.loadoutByName.Any())
+		if (!LoadoutByName.Any())
 			return false;
 
-		this.loadoutByName.Clear();
-
+		LoadoutByName.Clear();
+		Commitment.Commitment = LoadCommitmentOption.None;
 		return true;
 	}
 }

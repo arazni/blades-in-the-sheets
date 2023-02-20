@@ -13,4 +13,7 @@ public class SheetJank
 
 	public event Action? ResolveChanged;
 	public void NotifyResolveChanged() => ResolveChanged?.Invoke();
+
+	public event Action? GearChanged;
+	public void NotifyGearChanged() => GearChanged?.Invoke();
 }

@@ -6,21 +6,27 @@ public class Ink
 
 	public Ink(string value)
 	{
-		if (string.IsNullOrWhiteSpace(value))
-			throw new ArgumentException(value, nameof(value));
-
-		this.value = value.Trim();
+		Value = value;
+		this.value = Value; // C# nullability silliness
 	}
 
-	public string Value 
+	public string Value
 	{
 		get => this.value;
 		set
 		{
-			if (string.IsNullOrWhiteSpace(value))
+			if (!value.HasInk())
 				throw new ArgumentException(Value, nameof(Value));
 
 			this.value = value.Trim();
 		}
 	}
+
+	public override bool Equals(object? obj) =>
+		obj is null ? false
+		: obj is Ink other ? Value.Equals(other.Value)
+		: false;
+
+	public override int GetHashCode() =>
+		Value.GetHashCode();
 }
