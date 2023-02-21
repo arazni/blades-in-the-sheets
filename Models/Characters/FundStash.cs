@@ -16,7 +16,20 @@ public class FundStash : IRollable
 
 	public int Rating => Stash / 10;
 
-	public Lifestyles Lifestyle => (Lifestyles)Rating;
+	public bool IsFull => Stash == MaxCoins;
+
+	public int MaxCoins => this.stash.Max;
+
+	public int MinCoins => this.stash.Min;
+
+	public int MaxAffordable => Stash / 2;
+
+	public int CoinSpaceRemaining => MaxCoins - Stash;
+
+	public Lifestyles Lifestyle => Stash <= 10 ? Lifestyles.PoorSoul
+		: Stash <= 20 ? Lifestyles.Meager
+		: Stash < 40 ? Lifestyles.Modest
+		: Lifestyles.Fine;
 
 	/// <returns>The number of coins left over after stowing.</returns>
 	public int Stow(int coins)

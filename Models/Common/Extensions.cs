@@ -1,4 +1,6 @@
-﻿namespace Models.Common;
+﻿using System.ComponentModel;
+
+namespace Models.Common;
 
 public static class Extensions
 {
@@ -29,4 +31,17 @@ public static class Extensions
 	public static string Join<T>(this IEnumerable<T> source, string separator) where T : Enum =>
 		source.Select(s => s.ToString())
 			.Join(separator);
+
+	public static string Description<T>(this T option) where T : Enum
+	{
+		var description = typeof(T)
+			.GetField(option.ToString())
+			!.GetCustomAttributes(typeof(DescriptionAttribute), true)
+			as DescriptionAttribute[];
+
+		if (description != null && description.Any())
+			return description.First().Description;
+
+		return option.ToString();
+	}
 }
