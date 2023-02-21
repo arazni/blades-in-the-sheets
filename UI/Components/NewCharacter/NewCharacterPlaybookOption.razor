@@ -5,7 +5,7 @@
 @inject ICharacterCoordinator Coordinator
 @inject NavigationManager Navigator
 
-<MudCard Outlined="true" Class="mx-4 my-1 mud-theme-primary">
+<MudCard Outlined="true" Class="mx-4 my-1">
 	<MudCardHeader >
 		<MudText Typo="Typo.h4">@Playbook</MudText>
 	</MudCardHeader>
@@ -14,7 +14,7 @@
 		<MudText Typo="Typo.body1" Class="my-2">@Hook[(Hook.IndexOf(".")+1)..]</MudText>
 	</MudCardContent>
 	<MudCardActions>
-		<MudButton Color="Color.Secondary" FullWidth="true" OnClick="CreateCharacter">Create @Playbook</MudButton>
+		<MudButton Color="Color.Primary" FullWidth="true" OnClick="CreateCharacter">Create @Playbook</MudButton>
 	</MudCardActions>
 </MudCard>
 

@@ -1,7 +1,7 @@
 ﻿@using Models.Characters
 <MudStack>
 	<MudStack Row="true">
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="min-width: 125px;">Trauma</MudButton>
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle">Trauma</MudButton>
 		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableAddTrauma" Required="!DisableAddTrauma">
 			@foreach (var option in TraumaOptions)
 			{

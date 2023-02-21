@@ -6,7 +6,7 @@
 
 <MudStack>
 	<MudStack Row="true" Class="flex-grow-1">
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="!CanAddHarm" OnClick="AddHarm" Style="min-width: 125px;">Harm</MudButton>
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="!CanAddHarm" OnClick="AddHarm" Style="@Constants.Buttons.ButtonDimensionStyle">Harm</MudButton>
 		<MudSelect @bind-Value="Intensity" Text="@Intensity?.ToString()">
 			@foreach (var intensity in Harm.AvailableIntensities)
 			{

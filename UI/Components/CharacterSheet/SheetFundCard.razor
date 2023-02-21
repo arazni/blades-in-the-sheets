@@ -11,31 +11,34 @@
 		</CardHeaderActions>
 	</MudCardHeader>
 	<MudCardContent>
-		<MudStack Spacing="5">
-			<MudStack Row="true" AlignItems="AlignItems.End">
-				<MudText Typo="Typo.caption">Satchel: </MudText>
-				<MudRating @bind-SelectedValue="Fund.Satchel.Coins" ReadOnly="!IsFixMode" MaxValue="Fund.Satchel.MaxCoins" FullIcon="@Icons.Material.Filled.Paid" EmptyIcon="@Icons.Material.Outlined.Paid" Color="Color.Primary" />
-			</MudStack>
-			<MudStack Row="true" Justify="Justify.SpaceBetween">
-				<MudStack Row="true" AlignItems="AlignItems.End">
-					<MudText Typo="Typo.caption">Stash: </MudText>
-					<MudNumericField @bind-Value="Fund.Stash.Stash" Disabled="!IsFixMode" Min="Fund.Stash.MinCoins" Max="Fund.Stash.MaxCoins" />
+		<MudGrid Style="align-items: end;">
+			<MudItem xs="12">
+				<MudStack Spacing="1">
+					<MudText Typo="Typo.caption">Satchel: </MudText>
+					<MudRating @bind-SelectedValue="Fund.Satchel.Coins" ReadOnly="!IsFixMode" MaxValue="Fund.Satchel.MaxCoins" FullIcon="@Icons.Material.Filled.Paid" EmptyIcon="@Icons.Material.Outlined.Paid" Color="Color.Primary" />
 				</MudStack>
-				<MudStack Row="true" AlignItems="AlignItems.End">
-					<MudText Typo="Typo.caption">Lifestyle:</MudText>
-					<MudText Typo="Typo.body1">@Fund.Lifestyle.Description()</MudText>
-				</MudStack>
-				<MudStack Row="true" AlignItems="AlignItems.End">
-					<MudText Typo="Typo.caption">Rating:</MudText>
-					<MudText Typo="Typo.body1">@Fund.Stash.Rating</MudText>
-				</MudStack>
-			</MudStack>
-			<MudStack Row="true">
+			</MudItem>
+			<MudItem xs="12" lg="6">
+				<MudNumericField @bind-Value="Fund.Stash.Stash" Label="Stash" Disabled="!IsFixMode" Min="Fund.Stash.MinCoins" Max="Fund.Stash.MaxCoins" />
+			</MudItem>
+			<MudItem xs="6" lg="3">
+				<MudText Typo="Typo.caption">Lifestyle:</MudText>
+				<MudText Typo="Typo.body1">@Fund.Lifestyle.Description()</MudText>
+			</MudItem>
+			<MudItem xs="6" lg="3">
+				<MudText Typo="Typo.caption">Rating:</MudText>
+				<MudText Typo="Typo.body1">@Fund.Stash.Rating</MudText>
+			</MudItem>
+			<MudItem xs="12" lg="6">
 				<MudNumericField @bind-Value="CoinChangeInput" Label="Coins to change" Min="Fund.MinCoins" Max="InputMaximum" />
-				<MudButton Size="Size.Medium" Variant="Variant.Filled" Disabled="!GainButtonEnabled" OnClick="() => Fund.Gain(CoinChangeInput)" Style="min-width: 125px;">Gain</MudButton>
-				<MudButton Size="Size.Medium" Variant="Variant.Filled" Disabled="!SpendButtonEnabled" OnClick="() => Fund.Spend(CoinChangeInput)" Style="min-width: 125px;">Spend</MudButton>
-			</MudStack>
-		</MudStack>
+			</MudItem>
+			<MudItem xs="12" lg="6">
+				<MudButtonGroup Size="Size.Medium" Variant="Variant.Filled" Style="width: 100%">
+					<MudButton Disabled="!GainButtonEnabled" OnClick="() => Fund.Gain(CoinChangeInput)" Style="@ButtonStyle">Gain</MudButton>
+					<MudButton Disabled="!SpendButtonEnabled" OnClick="() => Fund.Spend(CoinChangeInput)" Style="@ButtonStyle">Spend</MudButton>
+				</MudButtonGroup>
+			</MudItem>
+		</MudGrid>
 	</MudCardContent>
 </MudCard>
 
@@ -48,11 +51,11 @@
 
 	int CoinChangeInput { get; set; } = 0;
 
-	string LifeStyleText => $"Lifestyle {(int)Fund.Lifestyle}: {Fund.Lifestyle.Description()}";
-
 	int InputMaximum => Math.Max(Fund.CoinSpaceRemaining, Fund.MaxAffordable);
 
 	bool GainButtonEnabled => Fund.CanGain(CoinChangeInput) && CoinChangeInput > 0;
 
 	bool SpendButtonEnabled => Fund.CanSpend(CoinChangeInput) && CoinChangeInput > 0;
+
+	string ButtonStyle { get; } = Constants.Buttons.ButtonDimensionStyle + "width: 50%;";
 }

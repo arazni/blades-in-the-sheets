@@ -3,17 +3,18 @@
 @using UI.Components
 @using UI.Components.NewCharacter
 
-<MudText Typo="Typo.h2">
-	Choose a Playbook.
-</MudText>
-
 <MudContainer MaxWidth="MaxWidth.Small">
-	<MudStack>
+	<MudGrid AlignItems="AlignItems.Center">
+		<MudItem xs="12">
+			<MudText Align="Align.Center" Typo="Typo.h2">Choose a Playbook.</MudText>
+		</MudItem>
 		@foreach (var (book, hook) in options)
 		{
-			<NewCharacterPlaybookOption Playbook="@book" Hook="@hook"/>
+			<MudItem xs="12">
+				<NewCharacterPlaybookOption Playbook="@book" Hook="@hook"/>
+			</MudItem>
 		}
-	</MudStack>
+	</MudGrid>
 </MudContainer>
 
 @code
