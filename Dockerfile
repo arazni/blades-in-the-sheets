@@ -7,13 +7,12 @@ WORKDIR /src
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
 WORKDIR /src
-
-COPY blades/*.csproj .
-RUN dotnet restore --use-current-runtime
+COPY . .
+RUN dotnet restore
+RUN dotnet build -c Release -o /out
 
 FROM build AS publish
-COPY blades/. .
-RUN dotnet publish -c Release -o /out --use-current-runtime
+RUN dotnet publish -c Release -o /out
 
 # Building final image used in running container
 FROM base AS final
