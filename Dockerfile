@@ -20,4 +20,5 @@ RUN apk update \
     && apk add unzip procps
 WORKDIR /src
 COPY --from=publish /out .
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet Server.dll
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet UI.dll
