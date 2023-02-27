@@ -29,6 +29,7 @@
 			<SheetFundCard Fund="Character.Fund" />
 		</MudItem>
 	</MudGrid>
+	<MudFab Color="SaveButtonColor" StartIcon="@Icons.Material.Filled.Save" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
 </MudContainer>
 
 @code
@@ -38,8 +39,20 @@
 
 	public Character Character { get; set; } = Character.Empty();
 
+	private bool isSaving = false;
+
+	Color SaveButtonColor => isSaving ? Color.Tertiary
+		: Color.Primary;
+
 	protected override async Task OnInitializedAsync()
 	{
 		Character = await Storage.Load(Id);
+	}
+
+	async Task Save()
+	{
+		isSaving = true;
+		await Storage.Save(Character);
+		isSaving = false;
 	}
 }
