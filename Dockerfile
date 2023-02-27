@@ -7,12 +7,13 @@ WORKDIR /src
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
 WORKDIR /src
-COPY . .
-RUN dotnet restore ./UI/UI.csproj
-RUN dotnet build "./UI/UI.csproj" -c Release -o /out
+
+COPY *.csproj .
+RUN dotnet restore --use-current-runtime
 
 FROM build AS publish
-RUN dotnet publish UI/UI.csproj -c Release -o /out
+COPY . .
+RUN dotnet publish -c Release -o /out --use-current-runtime
 
 # Building final image used in running container
 FROM base AS final
