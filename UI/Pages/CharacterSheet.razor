@@ -6,30 +6,33 @@
 @inject IStorageService Storage
 
 <MudContainer>
-	<MudGrid>
-		<MudItem xs="12" lg="6">
-			<SheetDossierCard Dossier="Character.Dossier" />
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<SheetMonitorCard Character="Character" />
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<SheetTalentCard Talent="Character.Talent" />
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<SheetAbilitiesCard Playbook="Character.Playbook" />
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<SheetRolodexCard Rolodex="Character.Rolodex" Playbook="Character.Playbook.Option" />
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<SheetGearCard Gear="Character.Gear" Playbook="Character.Playbook.Option" />
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<SheetFundCard Fund="Character.Fund" />
-		</MudItem>
-	</MudGrid>
-	<MudFab Color="SaveButtonColor" StartIcon="@Icons.Material.Filled.Save" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
+	@if (Character != null)
+	{
+		<MudGrid>
+			<MudItem xs="12" lg="6">
+				<SheetDossierCard Dossier="Character!.Dossier" />
+			</MudItem>
+			<MudItem xs="12" lg="6">
+				<SheetMonitorCard Character="Character" />
+			</MudItem>
+			<MudItem xs="12" lg="6">
+				<SheetTalentCard Talent="Character!.Talent" />
+			</MudItem>
+			<MudItem xs="12" lg="6">
+				<SheetAbilitiesCard Playbook="Character!.Playbook" />
+			</MudItem>
+			<MudItem xs="12" lg="6">
+				<SheetRolodexCard Rolodex="Character!.Rolodex" Playbook="Character!.Playbook.Option" />
+			</MudItem>
+			<MudItem xs="12" lg="6">
+				<SheetGearCard Character="Character" Playbook="Character!.Playbook.Option" />
+			</MudItem>
+			<MudItem xs="12" lg="6">
+				<SheetFundCard Fund="Character!.Fund" />
+			</MudItem>
+		</MudGrid>
+		<MudFab Color="SaveButtonColor" StartIcon="@Icons.Material.Filled.Save" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
+	}
 </MudContainer>
 
 @code
@@ -37,7 +40,7 @@
 	[Parameter, EditorRequired]
 	public string Id { get; set; } = string.Empty;
 
-	public Character Character { get; set; } = Character.Empty();
+	public Character? Character { get; set; }
 
 	private bool isSaving = false;
 
@@ -52,7 +55,7 @@
 	async Task Save()
 	{
 		isSaving = true;
-		await Storage.Save(Character);
+		await Storage.Save(Character!);
 		isSaving = false;
 	}
 }

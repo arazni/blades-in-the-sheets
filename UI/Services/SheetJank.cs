@@ -16,4 +16,7 @@ public class SheetJank
 
 	public event Action? GearChanged;
 	public void NotifyGearChanged() => GearChanged?.Invoke();
+
+	public event Action? SatchelChanged;
+	public void NotifySatchelChanged() => SatchelChanged?.Invoke();
 }

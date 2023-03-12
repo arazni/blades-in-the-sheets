@@ -30,6 +30,8 @@ public partial class Character
 
 	public Rolodex Rolodex { get; private set; } = new();
 
+	public string Notebook { get; set; } = string.Empty;
+
 	public bool IsRetired => Monitor.Trauma.IsRetired;
 
 	public bool IsDeadish => Monitor.Harm.IsFatal;

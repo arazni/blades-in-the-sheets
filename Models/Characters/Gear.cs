@@ -21,7 +21,7 @@ public class Gear
 
 	public int MaxBulk => Commitment.MaxBulk;
 
-	public int AvailableBulk => Commitment.MaxBulk - Loadout.Sum(i => i.Bulk);
+	internal int AvailableBulk => Commitment.MaxBulk - Loadout.Sum(i => i.Bulk);
 
 	public bool AddAvailableItem(GearItem item)
 	{
@@ -53,7 +53,7 @@ public class Gear
 		return true;
 	}
 
-	public bool CanCommitGear(GearItem item)
+	internal bool CanCommitGear(GearItem item)
 	{
 		if (Commitment.Commitment == LoadCommitmentOption.None)
 			return false;
@@ -72,7 +72,7 @@ public class Gear
 
 	public bool HasCommitted() => Commitment.Commitment != LoadCommitmentOption.None;
 
-	public bool CommitGear(GearItem item)
+	internal bool CommitGear(GearItem item)
 	{
 		if (!CanCommitGear(item))
 			return false;
@@ -81,7 +81,7 @@ public class Gear
 		return true;
 	}
 
-	public bool UncommitGear(GearItem item)
+	internal bool UncommitGear(GearItem item)
 	{
 		if (!AvailableGearByName.ContainsKey(item.Name))
 			return false;
@@ -89,7 +89,7 @@ public class Gear
 		return LoadoutByName.Remove(item.Name);
 	}
 
-	public bool ClearCommitments()
+	internal bool ClearCommitments()
 	{
 		if (!LoadoutByName.Any())
 			return false;

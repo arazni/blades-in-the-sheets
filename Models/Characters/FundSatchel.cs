@@ -9,7 +9,15 @@ public class FundSatchel
 	public int Coins
 	{
 		get => this.coins.Value;
-		set => this.coins.Value = value;
+		set
+		{
+			var anyDifference = this.coins.Value != value;
+
+			this.coins.Value = value;
+
+			if (anyDifference)
+				NotifySatchelChanged();
+		}
 	}
 
 	public bool IsFull => Coins == MaxCoins;
@@ -22,30 +30,61 @@ public class FundSatchel
 
 	public int CoinSpaceRemaining => MaxCoins - Coins;
 
-	public bool SpendIfAffordable(int amountSpent = 1)
+	internal bool SpendIfAffordable(int amountSpent = 1)
 	{
 		if (amountSpent < 0)
 			throw new ArgumentOutOfRangeException(nameof(amountSpent), amountSpent, nameof(SpendIfAffordable));
 
-		return this.coins.ChangeIfWithinBound(-amountSpent);
+		if (amountSpent == 0 || Coins == 0)
+			return false;
+
+		var hasChanged = this.coins.ChangeIfWithinBound(-amountSpent);
+
+		if (hasChanged)
+			NotifySatchelChanged();
+
+		return hasChanged;
 	}
 
-	public int SpendAsMuchAsAffordable(int amountSpent)
+	internal int SpendAsMuchAsAffordable(int amountSpent)
 	{
 		if (amountSpent < 0)
-			throw new ArgumentOutOfRangeException(nameof(amountSpent), amountSpent, nameof(SpendIfAffordable));
+			throw new ArgumentOutOfRangeException(nameof(amountSpent), amountSpent, nameof(SpendAsMuchAsAffordable));
 
-		return Math.Abs(this.coins.ChangeUntilBound(-amountSpent));
+		if (amountSpent == 0)
+			return 0;
+
+		if (Coins == 0)
+			return amountSpent;
+
+		var remainder = Math.Abs(this.coins.ChangeUntilBound(-amountSpent));
+
+		NotifySatchelChanged();
+
+		return remainder;
 	}
 
 	public bool WillFit(int coins) =>
 		this.coins.IsDeltaWithinBound(coins);
 
-	public int Gain(int amountGained = 1)
+	internal int Gain(int amountGained = 1)
 	{
 		if (amountGained < 0)
 			throw new ArgumentOutOfRangeException(nameof(amountGained), amountGained, nameof(Gain));
 
-		return Math.Abs(this.coins.ChangeUntilBound(amountGained));
+		if (amountGained == 0)
+			return 0;
+
+		if (Coins == MaxCoins)
+			return amountGained;
+
+		var remainder = Math.Abs(this.coins.ChangeUntilBound(amountGained));
+
+		NotifySatchelChanged();
+
+		return remainder;
 	}
+
+	public event Action? SatchelChanged;
+	public void NotifySatchelChanged() => SatchelChanged?.Invoke();
 }
