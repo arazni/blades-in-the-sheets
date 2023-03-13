@@ -18,6 +18,13 @@ public class BoundedInteger
 		Value = Min;
 	}
 
+	public BoundedInteger(int min, int max, int value)
+	{
+		Min = min;
+		Max = max;
+		Value = value;
+	}
+
 	public int Value
 	{
 		get => this.value;

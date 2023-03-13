@@ -5,7 +5,7 @@ namespace Models.Characters.Bases;
 
 public abstract class TalentAttribute : IRollable
 {
-	public ExperienceTracker Experience { get; } = new(6);
+	public ExperienceTracker Experience { get; private set; } = new(6);
 
 	public int Rating =>
 		GetType()

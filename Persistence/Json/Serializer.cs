@@ -1,5 +1,6 @@
 ﻿using Models.Characters;
 using Newtonsoft.Json;
+using Persistence.Json.Converters;
 
 namespace Persistence.Json;
 
@@ -13,7 +14,11 @@ public class Serializer : ISerializer
 		{
 			Formatting = Formatting.Indented,
 			ObjectCreationHandling = ObjectCreationHandling.Replace,
-			ContractResolver = new BladesJsonContractResolver()
+			ContractResolver = new BladesJsonContractResolver(),
+			Converters = new List<JsonConverter>()
+			{
+				new ExperienceTrackerConverter()
+			}
 		};
 	}
 

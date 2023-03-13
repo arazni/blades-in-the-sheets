@@ -66,6 +66,27 @@ public class SerializerTests
 	}
 
 	[Fact]
+	public async void Serializer_Serializes_Experience()
+	{
+		var model = await this.characterCoordinator.InitializeCharacter(PlaybookOption.Leech);
+		model.Should().NotBeNull();
+		model.Playbook.Experience.Points = 5;
+		model.Talent.Resolve.Experience.Points = 1;
+		model.Talent.Prowess.Experience.Points = 3;
+		model.Talent.Insight.Experience.Points = 2;
+
+		var json = this.serializer.Serialize(model);
+		json.Should().Contain("\"Points\": 5");
+		var character = this.serializer.Deserialize(json);
+
+		character.Should().NotBeNull();
+		character.Playbook.Experience.Points.Should().Be(5);
+		character.Talent.Resolve.Experience.Points.Should().Be(1);
+		character.Talent.Prowess.Experience.Points.Should().Be(3);
+		character.Talent.Insight.Experience.Points.Should().Be(2);
+	}
+
+	[Fact]
 	public (string, string) Serializer_Serializes_LurkCharacter()
 	{
 		var character = new Character(PlaybookOption.Lurk);
@@ -198,6 +219,7 @@ public class JsonJunk
         ""PlaybookDefault"": 0
       },
       ""Experience"": {
+				""MaxPoints"": 6,
         ""Points"": 0
       }
     },
@@ -219,6 +241,7 @@ public class JsonJunk
         ""PlaybookDefault"": 0
       },
       ""Experience"": {
+				""MaxPoints"": 6,
         ""Points"": 0
       }
     },
@@ -240,6 +263,7 @@ public class JsonJunk
         ""PlaybookDefault"": 0
       },
       ""Experience"": {
+				""MaxPoints"": 6,
         ""Points"": 0
       }
     }
@@ -254,6 +278,7 @@ public class JsonJunk
       }
     },
     ""Experience"": {
+			""MaxPoints"": 8,
       ""Points"": 0
     },
     ""Option"": 6

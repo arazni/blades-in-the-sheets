@@ -17,7 +17,7 @@ public class Playbook
 		private set { this.abilitiesByName = value.ToDictionary(k => k.Key, v => v.Value); } // json
 	}
 
-	public ExperienceTracker Experience { get; } = new(8);
+	public ExperienceTracker Experience { get; private set; } = new(8);
 
 	public PlaybookOption Option { get; }
 
