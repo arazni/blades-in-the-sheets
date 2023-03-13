@@ -84,6 +84,9 @@ public class SerializerTests
 		character.Talent.Resolve.Experience.Points.Should().Be(1);
 		character.Talent.Prowess.Experience.Points.Should().Be(3);
 		character.Talent.Insight.Experience.Points.Should().Be(2);
+
+		character.Talent.Resolve.Experience.MaxPoints.Should().Be(6);
+		character.Playbook.Experience.MaxPoints.Should().Be(8);
 	}
 
 	[Fact]
@@ -219,8 +222,8 @@ public class JsonJunk
         ""PlaybookDefault"": 0
       },
       ""Experience"": {
-				""MaxPoints"": 6,
-        ""Points"": 0
+        ""Points"": 0,
+				""MaxPoints"": 6
       }
     },
     ""Prowess"": {
@@ -241,8 +244,8 @@ public class JsonJunk
         ""PlaybookDefault"": 0
       },
       ""Experience"": {
-				""MaxPoints"": 6,
-        ""Points"": 0
+        ""Points"": 0,
+				""MaxPoints"": 6
       }
     },
     ""Resolve"": {
@@ -263,8 +266,8 @@ public class JsonJunk
         ""PlaybookDefault"": 0
       },
       ""Experience"": {
-				""MaxPoints"": 6,
-        ""Points"": 0
+        ""Points"": 0,
+				""MaxPoints"": 6
       }
     }
   },
@@ -278,8 +281,8 @@ public class JsonJunk
       }
     },
     ""Experience"": {
-			""MaxPoints"": 8,
-      ""Points"": 0
+      ""Points"": 0,
+			""MaxPoints"": 6
     },
     ""Option"": 6
   },

@@ -6,11 +6,21 @@ public class ExperienceTrackerConverter : JsonConverter<ExperienceTracker>
 {
 	public override ExperienceTracker? ReadJson(JsonReader reader, Type objectType, ExperienceTracker? existingValue, bool hasExistingValue, JsonSerializer serializer)
 	{
-		reader.Read();
-		var max = reader.ReadAsInt32() ?? 0;
-		reader.Read();
+		reader.Read(); // open
+
 		var points = reader.ReadAsInt32() ?? 0;
 		reader.Read();
+
+		int max;
+		if (existingValue == null)
+			max = reader.ReadAsInt32() ?? 0;
+		else
+		{
+			max = existingValue.MaxPoints;
+			reader.Read();
+		}
+
+		reader.Read(); // close
 
 		return new ExperienceTracker(max, points);
 	}
@@ -29,7 +39,7 @@ public class ExperienceTrackerConverter : JsonConverter<ExperienceTracker>
 
 	public class ExperienceDto
 	{
-		public int MaxPoints { get; set; }
 		public int Points { get; set; }
+		public int MaxPoints { get; set; }
 	}
 }
