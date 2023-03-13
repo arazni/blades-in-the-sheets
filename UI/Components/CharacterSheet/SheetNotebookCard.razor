@@ -1,0 +1,18 @@
+﻿@using Models.Characters;
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h4">Notebook</MudText>
+		</CardHeaderContent>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudTextField @bind-Value="Character.Notebook" Lines="10" />
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[EditorRequired, Parameter]
+	public Character Character { get; set; }
+}

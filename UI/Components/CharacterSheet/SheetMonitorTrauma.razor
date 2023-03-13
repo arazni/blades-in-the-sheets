@@ -2,7 +2,7 @@
 <MudStack>
 	<MudStack Row="true">
 		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle">Trauma</MudButton>
-		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableAddTrauma" Required="!DisableAddTrauma">
+		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect">
 			@foreach (var option in TraumaOptions)
 			{
 				<MudSelectItem T="TraumaOption?" Value="option">
@@ -34,11 +34,22 @@
 	[Parameter, EditorRequired]
 	public Monitor Monitor { get; set; } = new();
 
-	bool DisableAddTrauma =>
+	bool DisableTraumaSelect =>
 		Monitor.Stress.CurrentStress != MonitorStress.MaxStress
 		&& !IsFixMode;
 
-	TraumaOption? SelectedTrauma { get; set; } = null;
+	bool DisableAddTrauma =>
+		DisableTraumaSelect
+		|| SelectedTrauma == null;
+
+	private TraumaOption? selectedTrauma = null;
+
+	TraumaOption? SelectedTrauma 
+	{
+		get => Monitor.Stress.CurrentStress != MonitorStress.MaxStress ? null
+			: selectedTrauma;
+		set => selectedTrauma = value;
+	}
 
 	IReadOnlyCollection<TraumaOption?> TraumaOptions =>
 		Enum.GetValues<TraumaOption>()
