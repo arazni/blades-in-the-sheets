@@ -19,6 +19,9 @@ public static class Extensions
 	public static bool In<T>(this T source, params T[] list) =>
 		list.Contains(source);
 
+	public static bool EndsIn(this string source, params string[] list) =>
+		list.Any(l => source.EndsWith(l, StringComparison.InvariantCultureIgnoreCase));
+
 	public static bool Has(this IEnumerable<string> source, string item) =>
 		item.In(source);
 

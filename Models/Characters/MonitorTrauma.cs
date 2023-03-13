@@ -1,12 +1,15 @@
-﻿namespace Models.Characters;
+﻿using Newtonsoft.Json;
+
+namespace Models.Characters;
 
 public class MonitorTrauma
 {
-	private readonly SortedSet<TraumaOption> traumas = new();
+	[JsonProperty]
+	private SortedSet<TraumaOption> TraumaSet { get; set; } = new();
 
 	public static int MaxTraumas => 4;
 
-	public IReadOnlyCollection<TraumaOption> Traumas => this.traumas;
+	public IReadOnlyCollection<TraumaOption> Traumas => TraumaSet;
 
 	public bool Add(TraumaOption trauma)
 	{
@@ -16,12 +19,12 @@ public class MonitorTrauma
 		if (IsRetired)
 			return false;
 
-		return this.traumas.Add(trauma);
+		return TraumaSet.Add(trauma);
 	}
 
-	public bool Remove(TraumaOption trauma) => this.traumas.Remove(trauma);
+	public bool Remove(TraumaOption trauma) => TraumaSet.Remove(trauma);
 
-	internal bool IsRetired => this.traumas.Count == MaxTraumas;
+	internal bool IsRetired => Traumas.Count == MaxTraumas;
 }
 
 public enum TraumaOption

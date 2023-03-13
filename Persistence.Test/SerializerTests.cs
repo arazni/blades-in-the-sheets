@@ -90,6 +90,49 @@ public class SerializerTests
 	}
 
 	[Fact]
+	public async void Serializer_Serializes_MonitorHarm()
+	{
+		var model = await this.characterCoordinator.InitializeCharacter(PlaybookOption.Leech);
+		model.Should().NotBeNull();
+		model.Monitor.Harm.AddHarm("lesser", HarmIntensity.Lesser);
+		model.Monitor.Harm.AddHarm("lesser 2", HarmIntensity.Lesser);
+		//model.Monitor.Harm.AddHarm("moderate", HarmIntensity.Moderate);
+		model.Monitor.Harm.AddHarm("major", HarmIntensity.Severe);
+		model.Monitor.Harm.AddHarm("oh no", HarmIntensity.Severe);
+		model.IsDeadish.Should().BeTrue();
+
+		var json = this.serializer.Serialize(model);
+		json.Should().Contain("\"Items\":");
+		var character = this.serializer.Deserialize(json);
+		character.Should().NotBeNull();
+
+		character.Monitor.Harm.LesserHarms.Should().HaveCount(2);
+		//character.Monitor.Harm.ModerateHarms.Should().HaveCount(1);
+		character.Monitor.Harm.SevereHarms.Should().HaveCount(1);
+		character.Monitor.Harm.FatalHarms.Should().HaveCount(1);
+		character.IsDeadish.Should().BeTrue();
+	}
+
+	[Fact]
+	public async void Serializer_Serializes_RolloverClock()
+	{
+		var model = await this.characterCoordinator.InitializeCharacter(PlaybookOption.Leech);
+		model.Should().NotBeNull();
+		model.Monitor.Harm.HealingClock.Progress(5);
+		model.Monitor.Harm.HealingClock.Time.Should().Be(4);
+		model.Monitor.Harm.HealingClock.Rollover.Should().Be(1);
+
+		var json = this.serializer.Serialize(model);
+		json.Should().Contain("\"Rollover\": 1");
+		json.Should().Contain("\"Time\": 4");
+
+		var character = this.serializer.Deserialize(json);
+		character.Should().NotBeNull();
+		character.Monitor.Harm.HealingClock.Time.Should().Be(4);
+		character.Monitor.Harm.HealingClock.Rollover.Should().Be(1);
+	}
+
+	[Fact]
 	public (string, string) Serializer_Serializes_LurkCharacter()
 	{
 		var character = new Character(PlaybookOption.Lurk);

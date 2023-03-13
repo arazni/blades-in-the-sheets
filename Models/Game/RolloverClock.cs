@@ -4,7 +4,11 @@
 // when not part of the Reset() method
 public class RolloverClock : ProjectClock
 {
-	public RolloverClock(int size) : base(size) { }
+	public RolloverClock(int size, int time = 0, int rollover = 0) : base(size)
+	{
+		Time = time;
+		Rollover = rollover;
+	}
 
 	public int Rollover { get; private set; }
 
@@ -14,7 +18,7 @@ public class RolloverClock : ProjectClock
 		set
 		{
 			base.Time = value;
-			Rollover = 0;
+			Rollover = 0; // hacky?
 		}
 	}
 

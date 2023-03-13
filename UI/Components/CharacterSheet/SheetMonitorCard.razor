@@ -1,6 +1,9 @@
 @using Models.Characters
 @using Models.Common
-@using static Constants.Classes
+@using UI.Services;
+@inject SheetJank SheetJank;
+@implements IDisposable;
+@using static Constants.Classes;
 
 <MudCard>
 	<MudCardHeader>
@@ -54,4 +57,14 @@
 		Monitor.Stress.CurrentStress > 6 ? Color.Error
 		: Monitor.Stress.CurrentStress > 3 ? Color.Warning
 		: Color.Primary;
+
+	protected override void OnInitialized()
+	{
+		SheetJank.TraumaChanged += StateHasChanged;
+	}
+
+	public void Dispose()
+	{
+		SheetJank.TraumaChanged -= StateHasChanged;
+	}
 }

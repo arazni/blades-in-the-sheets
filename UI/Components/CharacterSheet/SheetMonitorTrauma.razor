@@ -1,4 +1,7 @@
-﻿@using Models.Characters
+﻿@using Models.Characters;
+@using UI.Services;
+@inject SheetJank SheetJank;
+
 <MudStack>
 	<MudStack Row="true">
 		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle">Trauma</MudButton>
@@ -44,7 +47,7 @@
 
 	private TraumaOption? selectedTrauma = null;
 
-	TraumaOption? SelectedTrauma 
+	TraumaOption? SelectedTrauma
 	{
 		get => Monitor.Stress.CurrentStress != MonitorStress.MaxStress ? null
 			: selectedTrauma;
@@ -68,13 +71,16 @@
 			return;
 
 		if (!IsFixMode)
-				Monitor.Stress.CurrentStress = 0;
+		{
+			Monitor.Stress.CurrentStress = 0;
+			SheetJank.NotifyTraumaChanged();
+		}
 
 		SelectedTrauma = null;
 	}
 
 	void RemoveTrauma(TraumaOption trauma)
 	{
-			Monitor.Trauma.Remove(trauma);
+		Monitor.Trauma.Remove(trauma);
 	}
 }

@@ -33,7 +33,7 @@ public class ExperienceTrackerConverter : JsonConverter<ExperienceTracker>
 		serializer.Serialize(writer, new ExperienceDto
 		{
 			Points = value.Points,
-			MaxPoints = value.MaxPoints,
+			MaxPoints = value.MaxPoints
 		});
 	}
 

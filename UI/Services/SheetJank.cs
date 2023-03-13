@@ -5,6 +5,9 @@ public class SheetJank
 	public event Action? HarmChanged;
 	public void NotifyHarmChanged() => HarmChanged?.Invoke();
 
+	public event Action? TraumaChanged;
+	public void NotifyTraumaChanged() => TraumaChanged?.Invoke();
+
 	public event Action? InsightChanged;
 	public void NotifyInsightChanged() => InsightChanged?.Invoke();
 

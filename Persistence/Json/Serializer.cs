@@ -17,7 +17,9 @@ public class Serializer : ISerializer
 			ContractResolver = new BladesJsonContractResolver(),
 			Converters = new List<JsonConverter>()
 			{
-				new ExperienceTrackerConverter()
+				new ExperienceTrackerConverter(),
+				new BoundedCollectionStringConverter(),
+				new RolloverClockConverter()
 			}
 		};
 	}
