@@ -5,9 +5,9 @@
 @inject IStorageService Storage
 
 <MudContainer>
-	<MudText Typo=Typo.h1>Blades in the Dark Character Sheet App</MudText>
-
 	<MudStack>
+		<MudText Typo=Typo.h3>Blades in the Dark Character Sheet App</MudText>
+
 		@foreach (var character in Characters)
 		{
 			<MudCard>
@@ -28,7 +28,7 @@
 
 		<MudCard>
 			<MudCardContent>
-				<MudLink Href="/new" Typo=Typo.h2>Create a new character!</MudLink>
+				<MudLink Href="/new" Typo=Typo.h3>Create a new character!</MudLink>
 			</MudCardContent>
 		</MudCard>
 	</MudStack>

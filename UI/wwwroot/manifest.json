@@ -1,6 +1,7 @@
 {
   "name": "Sheets in the Dark",
-  "short_name": "BitD Sheets",
+	"short_name": "BitD Sheets",
+	"version": "2",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
