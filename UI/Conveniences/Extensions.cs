@@ -17,4 +17,16 @@ public static class Extensions
 
 	public static string Display(this GearItem item) =>
 		$"{item.Bulk}: {item.Name}";
+
+	public static string PlaybookExperienceCondition(this PlaybookOption option) => option switch
+	{
+		PlaybookOption.Cutter => "You addressed a challenge with violence or coercion",
+		PlaybookOption.Hound => "You addressed a challenge with tracking or violence",
+		PlaybookOption.Leech => "You addressed a challenge with technical skill or mayhem",
+		PlaybookOption.Lurk => "You addressed a challenge with stealth or evasion",
+		PlaybookOption.Slide => "You addressed a challenge with deception or influence",
+		PlaybookOption.Spider => "You addressed a challenge with calculation or conspiracy",
+		PlaybookOption.Whisper => "You addressed a challenge with knowledge or arcane power",
+		_ => "You addressed a challenge in your unique way"
+	};
 }
