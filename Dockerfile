@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 RUN apt-get update
 RUN apt-get install --no-install-recommends --yes python3
+RUN dotnet workload restore
 WORKDIR /src
 COPY ["Server/Server.csproj", "Server/"]
 COPY ["UI/UI.csproj", "UI/"]
@@ -16,7 +17,6 @@ COPY ["Models/Models.csproj", "Models/"]
 RUN dotnet restore "Server/Server.csproj"
 COPY . .
 WORKDIR "/src/Server"
-RUN dotnet workload restore
 RUN dotnet build "Server.csproj" -c Release -o /app/build
 
 FROM build AS publish
