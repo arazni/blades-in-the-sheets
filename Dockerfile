@@ -13,7 +13,7 @@ COPY ["Server/Server.csproj", "Server/"]
 COPY ["UI/UI.csproj", "UI/"]
 COPY ["Persistence/Persistence.csproj", "Persistence/"]
 COPY ["Models/Models.csproj", "Models/"]
-RUN dotnet workload restore
+RUN dotnet workload restore Server/Server.csproj
 RUN dotnet restore "Server/Server.csproj"
 COPY . .
 WORKDIR "/src/Server"
