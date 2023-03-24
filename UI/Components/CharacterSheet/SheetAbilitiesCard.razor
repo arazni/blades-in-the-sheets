@@ -18,7 +18,7 @@
 		<MudStack>
 			<MudRating @bind-SelectedValue="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
 			<MudStack Row="true" Class="flex-grow-1">
-				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Filled" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@Constants.Buttons.ButtonDimensionStyle">Ability</MudButton>
+				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@Constants.Buttons.ButtonDimensionStyle">Ability</MudButton>
 				<MudSelect @bind-Value="SelectedAbility" ToStringFunc="@converter">
 					@foreach (var ability in LearnableAbilities)
 					{

@@ -35,9 +35,9 @@
 				<MudNumericField @bind-Value="CoinChangeInput" Label="Coins to change" Min="Fund.MinCoins" Max="InputMaximum" />
 			</MudItem>
 			<MudItem xs="12" lg="6">
-				<MudButtonGroup Size="Size.Medium" Variant="Variant.Filled" Style="width: 100%">
-					<MudButton Disabled="!GainButtonEnabled" OnClick="() => Fund.Gain(CoinChangeInput)" Style="@ButtonStyle">Gain</MudButton>
-					<MudButton Disabled="!SpendButtonEnabled" OnClick="() => Fund.Spend(CoinChangeInput)" Style="@ButtonStyle">Spend</MudButton>
+				<MudButtonGroup Size="Size.Medium" Variant="Variant.Outlined" Style="width: 100%">
+					<MudButton Disabled="!GainButtonEnabled" OnClick="() => Fund.Gain(CoinChangeInput)" Style="@ButtonStyle" Variant="Variant.Outlined">Gain</MudButton>
+					<MudButton Disabled="!SpendButtonEnabled" OnClick="() => Fund.Spend(CoinChangeInput)" Style="@ButtonStyle" Variant="Variant.Outlined">Spend</MudButton>
 				</MudButtonGroup>
 			</MudItem>
 		</MudGrid>

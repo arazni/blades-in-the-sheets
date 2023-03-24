@@ -3,14 +3,20 @@
 @inject SheetJank SheetJank
 @implements IDisposable
 
-<MudStack Row="true">
-	<MudCheckBox Checked="Character.IsStandardArmorUsed" Disabled="!Character.HasArmor" Label="Armor" T="bool" CheckedChanged="@((b) => StandardArmorChecked(b))" />
-	<MudCheckBox Checked="Character.IsHeavyArmorUsed" Disabled="!Character.HasHeavyArmor" Label="Heavy Armor" T="bool" CheckedChanged="@((b) => HeavyArmorChecked(b))" />
+<MudGrid Spacing="0">
+	<MudItem xs="6" sm="4">
+		<MudCheckBox Checked="Character.IsStandardArmorUsed" Disabled="!Character.HasArmor" Label="Armor" T="bool" CheckedChanged="@((b) => StandardArmorChecked(b))" />
+	</MudItem>
+	<MudItem xs="6" sm="4">
+		<MudCheckBox Checked="Character.IsHeavyArmorUsed" Disabled="!Character.HasHeavyArmor" Label="Heavy Armor" T="bool" CheckedChanged="@((b) => HeavyArmorChecked(b))" />
+	</MudItem>
 	@if (Character.CanHaveSpecialArmor)
 	{
-		<MudCheckBox Checked="Character.IsSpecialArmorUsed" Label="Special Armor" T="bool" CheckedChanged="@((b) => SpecialArmorChecked(b))" />
+		<MudItem xs="12" sm="4">
+			<MudCheckBox Checked="Character.IsSpecialArmorUsed" Label="Special Armor" T="bool" CheckedChanged="@((b) => SpecialArmorChecked(b))" />
+		</MudItem>
 	}
-</MudStack>
+</MudGrid>
 
 @code
 {

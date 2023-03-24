@@ -20,20 +20,20 @@
 					<MudRadioGroup @bind-SelectedOption="Gear.Commitment.Commitment">
 						<MudRadio Option="LoadCommitmentOption.None" Disabled="!RadioCommitmentsEnabled">@LoadCommitmentOption.None</MudRadio>
 						<MudRadio Option="LoadCommitmentOption.Light" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Light) @LoadCommitmentOption.Light</MudRadio>
-							<MudRadio Option="LoadCommitmentOption.Normal" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</MudRadio>
-							<MudRadio Option="LoadCommitmentOption.Heavy" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</MudRadio>
-							<MudRadio Option="LoadCommitmentOption.Encumbered" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Encumbered) @LoadCommitmentOption.Encumbered</MudRadio>
-						</MudRadioGroup>
-					</MudItem>
-					<MudItem xs="12" sm="4">
-						@if (CommitmentLocked)
-						{
-							<MudButton FullWidth="true" Variant="Variant.Filled" OnClick="() => { ClearCommitments(); CommitmentLocked = false; }">Reset</MudButton>
-						}
-						else
-						{
-						<MudButton FullWidth="true" Variant="Variant.Filled" OnClick="() => CommitmentLocked = true">Commit</MudButton>
-						}
+						<MudRadio Option="LoadCommitmentOption.Normal" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</MudRadio>
+						<MudRadio Option="LoadCommitmentOption.Heavy" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</MudRadio>
+						<MudRadio Option="LoadCommitmentOption.Encumbered" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Encumbered) @LoadCommitmentOption.Encumbered</MudRadio>
+					</MudRadioGroup>
+				</MudItem>
+				<MudItem xs="12" sm="4">
+					@if (CommitmentLocked)
+					{
+						<MudButton FullWidth="true" Variant="Variant.Outlined" OnClick="() => { ClearCommitments(); CommitmentLocked = false; }">Reset</MudButton>
+					}
+					else
+					{
+						<MudButton FullWidth="true" Variant="Variant.Outlined" OnClick="() => CommitmentLocked = true">Commit</MudButton>
+					}
 				</MudItem>
 			</MudGrid>
 			<MudText Typo="Typo.h6">Loadout</MudText>
