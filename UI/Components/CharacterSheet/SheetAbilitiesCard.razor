@@ -9,15 +9,19 @@
 <SheetCard @bind-IsFixMode="IsFixMode" Header="@Playbook.Option.ToString()">
 	<MudStack>
 		<MudRating @bind-SelectedValue="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
-		<MudStack Row="true" Class="flex-grow-1">
-			<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@Constants.Buttons.ButtonDimensionStyle">Ability</MudButton>
-			<MudSelect @bind-Value="SelectedAbility" ToStringFunc="@converter">
-				@foreach (var ability in LearnableAbilities)
-				{
-					<MudSelectItem Value="ability" />
-				}
-			</MudSelect>
-		</MudStack>
+		<MudGrid>
+			<MudItem xs="12" sm="9">
+				<MudSelect @bind-Value="SelectedAbility" ToStringFunc="@converter">
+					@foreach (var ability in LearnableAbilities)
+					{
+						<MudSelectItem Value="ability" />
+					}
+				</MudSelect>
+			</MudItem>
+			<MudItem xs="12" sm="3">
+				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@Constants.Buttons.ButtonDimensionStyle">Ability</MudButton>
+			</MudItem>
+		</MudGrid>
 		<MudStack>
 			@foreach (var ability in KnownAbilities)
 			{
