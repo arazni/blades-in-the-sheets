@@ -1,0 +1,51 @@
+﻿@using Models.Characters;
+@using Models.Common;
+@using UI.Conveniences;
+@using UI.Services;
+@inject SheetJank SheetJank
+
+@if (Ability == null || Playbook == null) { return; }
+
+@if (IsFixMode)
+{
+	<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" OnClick="(e => RemoveAbility(Ability))">@Ability.LearnedTimesDisplayName()</MudButton>
+	<MudTextField @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Lines="5" Variant="Variant.Outlined" Label="@EditAbilityLabel" />
+}
+else
+{
+	<MudText Typo="Typo.h6">@Ability.LearnedTimesDisplayName()</MudText>
+	<MudText>@Ability.Description</MudText>
+}
+@code
+{
+		[Parameter, EditorRequired]
+		public bool IsFixMode { get; set; } = false;
+
+		[Parameter, EditorRequired]
+		public Character? Character { get; set; }
+
+		[Parameter, EditorRequired]
+		public PlaybookSpecialAbility? Ability { get; set; }
+
+		Playbook? Playbook => Character?.Playbook;
+
+		void OverwriteDescription(string description) 
+		{
+			var hadSpecialArmor = Character!.HasSpecialArmor;
+			var changed = Ability!.OverwriteDescription(description);
+
+			if (!changed) 
+				return;
+
+			if (hadSpecialArmor != Character!.HasSpecialArmor)
+				SheetJank.NotifyAbilitiesChanged();
+		}
+
+		void RemoveAbility(PlaybookSpecialAbility ability)
+		{
+			Playbook!.RemoveAbility(ability);
+			SheetJank.NotifyAbilitiesChanged();
+		}
+
+		string EditAbilityLabel => $"Edit {Ability!.Name} Description";
+}

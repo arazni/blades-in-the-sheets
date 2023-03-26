@@ -22,4 +22,7 @@ public class SheetJank
 
 	public event Action? SatchelChanged;
 	public void NotifySatchelChanged() => SatchelChanged?.Invoke();
+
+	public event Action? AbilitiesChanged;
+	public void NotifyAbilitiesChanged() => AbilitiesChanged?.Invoke();
 }

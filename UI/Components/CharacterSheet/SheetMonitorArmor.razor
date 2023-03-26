@@ -10,7 +10,7 @@
 	<MudItem xs="6" sm="4">
 		<MudCheckBox Checked="Character.IsHeavyArmorUsed" Disabled="!Character.HasHeavyArmor" Label="Heavy Armor" T="bool" CheckedChanged="@((b) => HeavyArmorChecked(b))" />
 	</MudItem>
-	@if (Character.CanHaveSpecialArmor)
+	@if (Character.HasSpecialArmor)
 	{
 		<MudItem xs="12" sm="4">
 			<MudCheckBox Checked="Character.IsSpecialArmorUsed" Label="Special Armor" T="bool" CheckedChanged="@((b) => SpecialArmorChecked(b))" />
@@ -26,6 +26,7 @@
 	protected override void OnInitialized()
 	{
 		SheetJank.GearChanged += StateHasChanged;
+		SheetJank.AbilitiesChanged += StateHasChanged;
 
 		base.OnInitialized();
 	}
@@ -57,5 +58,6 @@
 	public void Dispose()
 	{
 		SheetJank.GearChanged -= StateHasChanged;
+		SheetJank.AbilitiesChanged -= StateHasChanged;
 	}
 }

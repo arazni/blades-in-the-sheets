@@ -2,8 +2,9 @@
 @using Persistence.Json
 @using UI.Conveniences
 @using UI.Services
+@implements IDisposable
 @inject ILoader Loader
-
+@inject SheetJank SheetJank
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="@Playbook.Option.ToString()">
 	<MudStack>
@@ -20,15 +21,7 @@
 		<MudStack>
 			@foreach (var ability in KnownAbilities)
 			{
-				@if (IsFixMode)
-				{
-					<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" OnClick="(e => RemoveAbility(ability))">@ability.LearnedTimesDisplayName()</MudButton>
-				}
-				else
-				{
-					<MudText Typo="Typo.h6">@ability.LearnedTimesDisplayName()</MudText>
-				}
-				<MudText>@ability.Description</MudText>
+				<SheetAbility Character="Character" Ability="ability" IsFixMode="IsFixMode" />
 			}
 		</MudStack>
 	</MudStack>
@@ -37,7 +30,9 @@
 @code
 {
 	[Parameter, EditorRequired]
-	public Playbook Playbook { get; set; } = Playbook.Empty();
+	public Character Character { get; set; } = Character.Empty();
+
+	Playbook Playbook => Character.Playbook;
 
 	public bool IsFixMode { get; set; }
 
@@ -67,7 +62,14 @@
 	{
 		AvailableAbilitiesByOptions = await Loader.LoadAvailableAbilitiesByOptionAsync();
 
+		SheetJank.AbilitiesChanged += StateHasChanged;
+
 		await base.OnInitializedAsync();
+	}
+
+	public void Dispose()
+	{
+		SheetJank.AbilitiesChanged -= StateHasChanged;
 	}
 
 	bool CanAddAbility =>
@@ -90,11 +92,7 @@
 			Playbook.Experience.Clear();
 
 		SelectedAbility = null;
-	}
-
-	void RemoveAbility(PlaybookSpecialAbility ability)
-	{
-		Playbook.RemoveAbility(ability);
+		SheetJank.NotifyAbilitiesChanged();
 	}
 
 	Func<PlaybookSpecialAbility?, string> converter = psa =>

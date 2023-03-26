@@ -41,6 +41,15 @@ public class PlaybookSpecialAbility
 		private set => this.timesTaken.Value = value;
 	}
 
+	public bool OverwriteDescription(string description)
+	{
+		if (!description.HasInk())
+			return false;
+
+		Description = description;
+		return true;
+	}
+
 	public int TimesTakable => this.timesTaken.Max;
 
 	public bool IsCompletelyLearned => TimesTakable == TimesTaken;

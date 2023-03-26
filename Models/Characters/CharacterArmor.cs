@@ -20,7 +20,7 @@ public partial class Character // Armor
 		Gear.Loadout.Select(item => item.Name)
 			.Has(Heavy);
 
-	public bool CanHaveSpecialArmor =>
+	public bool HasSpecialArmor =>
 		Playbook.Abilities.Select(ability => ability.Description)
 			.Any(description => description.Embeds(Special));
 
@@ -42,7 +42,7 @@ public partial class Character // Armor
 
 	public void UseSpecialArmor()
 	{
-		if (!CanHaveSpecialArmor)
+		if (!HasSpecialArmor)
 			throw new InvalidOperationException("Tried to use special armor that doesn't exist");
 
 		this.isSpecialArmorUsed = true;
