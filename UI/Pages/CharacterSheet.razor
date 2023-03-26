@@ -5,37 +5,28 @@
 @using UI.Services
 @inject IStorageService Storage
 
-<MudContainer>
-	@if (Character != null)
-	{
-		<MudGrid>
-			<MudItem xs="12" lg="6">
-				<SheetDossierCard Dossier="Character!.Dossier" />
-			</MudItem>
-			<MudItem xs="12" lg="6">
+@if (Character == null) { return; }
+
+<MudContainer MaxWidth="MaxWidth.False">
+	<MudGrid>
+		<MudItem xs="12" lg="6">
+			<MudStack>
+				<SheetDossierCard Dossier="Character.Dossier" />
 				<SheetMonitorCard Character="Character" />
-			</MudItem>
-			<MudItem xs="12" lg="6">
-				<SheetTalentCard Talent="Character!.Talent" />
-			</MudItem>
-			<MudItem xs="12" lg="6">
-				<SheetAbilitiesCard Playbook="Character!.Playbook" />
-			</MudItem>
-			<MudItem xs="12" lg="6">
-				<SheetRolodexCard Rolodex="Character!.Rolodex" Playbook="Character!.Playbook.Option" />
-			</MudItem>
-			<MudItem xs="12" lg="6">
-				<SheetGearCard Character="Character" Playbook="Character!.Playbook.Option" />
-			</MudItem>
-			<MudItem xs="12" lg="6">
-				<SheetFundCard Fund="Character!.Fund" />
-			</MudItem>
-			<MudItem xs="12" lg="6">
-				<SheetNotebookCard Character="Character!" />
-			</MudItem>
-		</MudGrid>
-		<MudFab Color="SaveButtonColor" StartIcon="@Icons.Material.Filled.Save" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
-	}
+				<SheetTalentCard Talent="Character.Talent" />
+				<SheetAbilitiesCard Playbook="Character.Playbook" />
+			</MudStack>
+		</MudItem>
+		<MudItem xs="12" lg="6">
+			<MudStack>
+				<SheetRolodexCard Rolodex="Character.Rolodex" Playbook="Character.Playbook.Option" />
+				<SheetGearCard Character="Character" Playbook="Character.Playbook.Option" />
+				<SheetFundCard Fund="Character.Fund" />
+				<SheetNotebookCard Character="Character" />
+			</MudStack>
+		</MudItem>
+	</MudGrid>
+	<MudFab Color="SaveButtonColor" StartIcon="@Icons.Material.Filled.Save" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
 </MudContainer>
 
 @code
