@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Models.Common;
+using Newtonsoft.Json;
 
 namespace Models.Characters;
 
@@ -8,6 +9,8 @@ public class Gear
 	private Dictionary<string, GearItem> LoadoutByName { get; set; } = new(StringComparer.InvariantCultureIgnoreCase);
 	[JsonProperty]
 	private Dictionary<string, GearItem> AvailableGearByName { get; set; } = new(StringComparer.InvariantCultureIgnoreCase);
+
+	private const string Bandolier = "bandolier";
 
 	public GearCommitment Commitment { get; } = new();
 
@@ -102,4 +105,6 @@ public class Gear
 		Commitment.Commitment = LoadCommitmentOption.None;
 		return true;
 	}
+
+	public bool HasCommittedBandolier => Loadout.Any(x => x.Name.Embeds(Bandolier));
 }
