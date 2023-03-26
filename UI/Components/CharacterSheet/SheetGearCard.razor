@@ -1,6 +1,8 @@
 ﻿@using Models.Characters
+@using Models.Common;
 @using UI.Conveniences
 @using UI.Services
+@using static Models.Characters.GearItem;
 @inject SheetJank SheetJank
 @implements IDisposable
 
@@ -28,13 +30,13 @@
 			</MudItem>
 		</MudGrid>
 		<MudText Typo="Typo.h6">Loadout</MudText>
-		<MudContainer>
+		<MudStack>
 			<MudText>Coin (@Character.Fund.Satchel.Coins)</MudText>
 			@foreach (var item in Gear.Loadout)
 			{
 				@commitmentItemRenderer!(item)
 			}
-		</MudContainer>
+		</MudStack>
 		<MudStack Row="true" Justify="Justify.SpaceBetween">
 			<MudText Typo="Typo.h6">Available Gear</MudText>
 			<MudText Typo="Typo.h6">Bulk Remaining: @Character.AvailableBulk</MudText>
@@ -42,9 +44,31 @@
 		<MudContainer>
 			@foreach (var item in Gear.UncommittedGear)
 			{
-				<MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.AddCircle" Disabled="!Character.CanCommitGear(item) || !CommitmentLocked" OnClick="() => CommitGear(item)">@item.Display()</MudButton>
+				@if(!IsFixMode)
+				{
+					<MudButton Style="margin: 5px;" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.AddCircle" Disabled="!Character.CanCommitGear(item) || !CommitmentLocked" OnClick="() => CommitGear(item)">@item.Display()</MudButton>
+				}
+				else
+				{
+					<MudButton Style="margin: 5px;" Variant="Variant.Filled" Color="Color.Secondary" EndIcon="@Icons.Material.Filled.Delete" OnClick="() => Gear.RemoveAvailableItem(item)">@item.Display()</MudButton>
+				}
 			}
 		</MudContainer>
+		@if (IsFixMode)
+		{
+			<MudText Typo="Typo.h6">Add Item</MudText>
+			<MudGrid>
+				<MudItem xs="4">
+					<MudTextField @bind-Value=addableItem.Bulk Label="Bulk" />
+				</MudItem>
+				<MudItem xs="8" sm="4">
+					<MudTextField @bind-Value=addableItem.Name Label="Name" />
+				</MudItem>
+				<MudItem xs="12" sm="4">
+					<MudButton OnClick="AddItem" Disabled="!IsAddItemEnabled" Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle">Add</MudButton>
+				</MudItem>
+			</MudGrid>
+		}
 	</MudStack>
 </SheetCard>
 
@@ -88,7 +112,7 @@
 
 	// Dynamic Rendering Demo. Unrecommended use case.
 
-	private bool isFixMode = false;
+	bool isFixMode = false;
 
 	bool IsFixMode
 	{
@@ -115,9 +139,35 @@
 		Character.Fund.Satchel.SatchelChanged -= StateHasChanged;
 	}
 
-	private Func<GearItem, RenderFragment>? commitmentItemRenderer;
+	Func<GearItem, RenderFragment>? commitmentItemRenderer;
 
-	private RenderFragment RenderCommitmentText(GearItem item) => @<MudText>@item.Name (@item.Bulk)</MudText>;
+	RenderFragment RenderCommitmentText(GearItem item) => @<MudText>@item.Name (@item.Bulk)</MudText>;
 
-	private RenderFragment RenderCommitmentButtons(GearItem item) => @<MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveCircle" OnClick="() => UncommitGear(item)">@item.Name (@item.Bulk)</MudButton>;
+	RenderFragment RenderCommitmentButtons(GearItem item) => @<MudButton Style="margin: 5px; max-width: 400px" FullWidth="false" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveCircle" OnClick="() => UncommitGear(item)">@item.Name (@item.Bulk)</MudButton>;
+
+	NewItem addableItem = new();
+
+	bool IsAddItemEnabled => addableItem.Name.HasInk() && Gear.CanAddAvailableItem(addableItem.Name);
+
+	void AddItem()
+	{
+		if (!IsAddItemEnabled)
+			return;
+
+		var item = new GearItem(addableItem.Bulk, addableItem.Name, SourceOption.Custom);
+		Gear.AddAvailableItem(item);
+		addableItem.Reset();
+	}
+
+	private class NewItem
+	{
+		public int Bulk { get; set; } = 0;
+		public string Name { get; set; } = string.Empty;
+
+		public void Reset()
+		{
+			Bulk = 0;
+			Name = string.Empty;
+		}
+	}
 }

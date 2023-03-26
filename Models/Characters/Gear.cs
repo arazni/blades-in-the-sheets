@@ -23,9 +23,13 @@ public class Gear
 
 	internal int AvailableBulk => Commitment.MaxBulk - Loadout.Sum(i => i.Bulk);
 
+	public bool CanAddAvailableItem(string itemName) => !AvailableGearByName.ContainsKey(itemName);
+
+	public bool CanAddAvailableItem(GearItem item) => CanAddAvailableItem(item.Name);
+
 	public bool AddAvailableItem(GearItem item)
 	{
-		if (AvailableGearByName.ContainsKey(item.Name))
+		if (!CanAddAvailableItem(item))
 			return false;
 
 		AvailableGearByName.Add(item.Name, item);

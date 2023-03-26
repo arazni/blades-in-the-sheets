@@ -52,8 +52,8 @@ public class SerializerTests
 		model.Should().NotBeNull();
 		model.Playbook.Option.Should().Be(PlaybookOption.Leech);
 		model.Gear.AvailableGear.Should().NotBeEmpty();
-		model.Gear.AvailableGear.Where(g => g.Source == GearItem.Sources.Leech).Should().NotBeEmpty();
-		model.Gear.AvailableGear.Where(g => g.Source == GearItem.Sources.Standard).Should().NotBeEmpty();
+		model.Gear.AvailableGear.Where(g => g.Source == GearItem.SourceOption.Leech).Should().NotBeEmpty();
+		model.Gear.AvailableGear.Where(g => g.Source == GearItem.SourceOption.Standard).Should().NotBeEmpty();
 
 		var json = this.serializer.Serialize(model);
 		var character = this.serializer.Deserialize(json);
@@ -61,8 +61,8 @@ public class SerializerTests
 		character.Should().NotBeNull();
 		character.Playbook.Option.Should().Be(PlaybookOption.Leech);
 		character.Gear.AvailableGear.Should().NotBeEmpty();
-		character.Gear.AvailableGear.Where(g => g.Source == GearItem.Sources.Leech).Should().NotBeEmpty();
-		character.Gear.AvailableGear.Where(g => g.Source == GearItem.Sources.Standard).Should().NotBeEmpty();
+		character.Gear.AvailableGear.Where(g => g.Source == GearItem.SourceOption.Leech).Should().NotBeEmpty();
+		character.Gear.AvailableGear.Where(g => g.Source == GearItem.SourceOption.Standard).Should().NotBeEmpty();
 	}
 
 	[Fact]

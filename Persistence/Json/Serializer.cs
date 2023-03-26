@@ -13,7 +13,7 @@ public class Serializer : ISerializer
 		this.serializerSettings = new JsonSerializerSettings
 		{
 			Formatting = Formatting.Indented,
-			ObjectCreationHandling = ObjectCreationHandling.Replace,
+			ObjectCreationHandling = ObjectCreationHandling.Reuse, // preserve objects such as Dictionary with StringComparer
 			ContractResolver = new BladesJsonContractResolver(),
 			Converters = new List<JsonConverter>()
 			{

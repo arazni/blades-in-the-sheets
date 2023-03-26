@@ -63,8 +63,8 @@ public class Loader : ILoader
 
 	public async Task<GearItem[]> LoadAvailableItemsAsync(string identifierOrPlaybook)
 	{
-		if (!Enum.TryParse(identifierOrPlaybook, out GearItem.Sources source))
-			source = GearItem.Sources.Custom;
+		if (!Enum.TryParse(identifierOrPlaybook, out GearItem.SourceOption source))
+			source = GearItem.SourceOption.Custom;
 
 		var file = await ReadFile(GearLoadFilePrefix, identifierOrPlaybook);
 
@@ -77,7 +77,7 @@ public class Loader : ILoader
 			?? throw new JsonException($"Wasn't able to deserialize {StandardGearLoadFileSuffix} to {nameof(GearItem)}[]");
 
 		var specificGear = specificData.Select(d => new GearItem(d.Bulk, d.Name, source));
-		var standardGear = standardData.Select(d => new GearItem(d.Bulk, d.Name, GearItem.Sources.Standard));
+		var standardGear = standardData.Select(d => new GearItem(d.Bulk, d.Name, GearItem.SourceOption.Standard));
 
 		return specificGear.Concat(standardGear)
 			.ToArray();

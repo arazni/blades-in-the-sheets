@@ -8,7 +8,7 @@
 
 @if (IsFixMode)
 {
-	<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" OnClick="(e => RemoveAbility(Ability))">@Ability.LearnedTimesDisplayName()</MudButton>
+	<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="(e => RemoveAbility(Ability))">@Ability.LearnedTimesDisplayName()</MudButton>
 	<MudTextField @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Lines="5" Variant="Variant.Outlined" Label="@EditAbilityLabel" />
 }
 else

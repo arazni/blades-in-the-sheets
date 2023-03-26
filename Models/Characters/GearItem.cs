@@ -6,7 +6,7 @@ public class GearItem
 {
 	private readonly Ink name;
 
-	public GearItem(int bulk, string name, Sources source)
+	public GearItem(int bulk, string name, SourceOption source)
 	{
 		Bulk = bulk;
 		this.name = new(name);
@@ -21,9 +21,9 @@ public class GearItem
 		internal set => this.name.Value = value;
 	}
 
-	public Sources Source { get; }
+	public SourceOption Source { get; }
 
-	public enum Sources
+	public enum SourceOption
 	{
 		Standard,
 		Cutter,

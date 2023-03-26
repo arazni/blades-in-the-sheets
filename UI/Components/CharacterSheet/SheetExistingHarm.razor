@@ -10,7 +10,7 @@
 	{
 		@foreach (var description in HarmDescriptions)
 		{
-			<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" OnClick="@(e => RemoveHarm(description))">@description</MudButton>
+			<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(e => RemoveHarm(description))">@description</MudButton>
 		}
 	}
 	else
