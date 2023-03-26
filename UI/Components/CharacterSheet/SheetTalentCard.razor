@@ -1,32 +1,20 @@
 @using Models.Characters
 
-<MudCard>
-	<MudCardHeader>
-		@*<MudStack Row="true" Justify="Justify.SpaceBetween" Class="flex-grow-1">*@
-		<CardHeaderContent>
-			<MudText Typo="Typo.h4">Talents</MudText>
-		</CardHeaderContent>
-		<CardHeaderActions>
-			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" />
-		</CardHeaderActions>
-		@*</MudStack>*@
-	</MudCardHeader>
+<SheetCard @bind-IsFixMode="IsFixMode" Header="Talents">
 	<CascadingValue Name="IsFixMode" Value="@IsFixMode">
-		<MudCardContent>
-			<MudGrid>
-				<MudItem Class="flex-grow-1">
-					<SheetTalentAttribute Attribute="(global::Models.Characters.Bases.TalentAttribute)Talent.Insight" Name="(global::Models.Characters.AttributeName)global::Models.Characters.AttributeName.Insight" />
-				</MudItem>
-				<MudItem Class="flex-grow-1">
-					<SheetTalentAttribute Attribute="(global::Models.Characters.Bases.TalentAttribute)Talent.Prowess" Name="(global::Models.Characters.AttributeName)global::Models.Characters.AttributeName.Prowess" />
-				</MudItem>
-				<MudItem Class="flex-grow-1">
-					<SheetTalentAttribute Attribute="(global::Models.Characters.Bases.TalentAttribute)Talent.Resolve" Name="(global::Models.Characters.AttributeName)global::Models.Characters.AttributeName.Resolve" />
-				</MudItem>
-			</MudGrid>
-		</MudCardContent>
+		<MudGrid>
+			<MudItem Class="flex-grow-1">
+				<SheetTalentAttribute Attribute="(global::Models.Characters.Bases.TalentAttribute)Talent.Insight" Name="(global::Models.Characters.AttributeName)global::Models.Characters.AttributeName.Insight" />
+			</MudItem>
+			<MudItem Class="flex-grow-1">
+				<SheetTalentAttribute Attribute="(global::Models.Characters.Bases.TalentAttribute)Talent.Prowess" Name="(global::Models.Characters.AttributeName)global::Models.Characters.AttributeName.Prowess" />
+			</MudItem>
+			<MudItem Class="flex-grow-1">
+				<SheetTalentAttribute Attribute="(global::Models.Characters.Bases.TalentAttribute)Talent.Resolve" Name="(global::Models.Characters.AttributeName)global::Models.Characters.AttributeName.Resolve" />
+			</MudItem>
+		</MudGrid>
 	</CascadingValue>
-</MudCard>
+</SheetCard>
 
 @code
 {

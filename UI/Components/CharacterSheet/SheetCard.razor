@@ -1,0 +1,43 @@
+﻿
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h4">@Header</MudText>
+		</CardHeaderContent>
+		<CardHeaderActions>
+			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Hide Mode" ToggledTitle="Disable Hide Mode" Icon="@Icons.Material.Filled.RemoveRedEye" ToggledIcon="@Icons.Material.Filled.HideImage" @bind-Toggled="@IsHideMode" />
+			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" @bind-Toggled:after="UpdateIsFixMode" Style="@FixModeStyle" />
+		</CardHeaderActions>
+	</MudCardHeader>
+	<MudCardContent Style="@HideModeStyle">
+		@ChildContent
+	</MudCardContent>
+</MudCard>
+
+@code
+{
+	[Parameter]
+	public bool HasFixMode { get; set; } = true;
+
+	[Parameter]
+	public bool IsFixMode { get; set; } = false;
+
+	[Parameter, EditorRequired]
+	public string Header { get; set; } = string.Empty;
+
+	[Parameter, EditorRequired]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public EventCallback<bool> IsFixModeChanged { get; set; }
+
+	bool IsHideMode { get; set; } = false;
+
+	string HideModeStyle => IsHideMode ? DisplayNone : string.Empty;
+
+	string FixModeStyle => HasFixMode ? string.Empty : DisplayNone;
+
+	const string DisplayNone = "display: none;";
+
+	private async Task UpdateIsFixMode() => await IsFixModeChanged.InvokeAsync(IsFixMode);
+}

@@ -1,32 +1,25 @@
 ﻿@using Models.Characters;
 @using UI.Conveniences;
 
-<MudCard>
-	<MudCardHeader>
-		<CardHeaderContent>
-			<MudText Typo="Typo.h4">Reminders</MudText>
-		</CardHeaderContent>
-	</MudCardHeader>
-	<MudCardContent>
-		<MudStack>
-			<MudText Typo="Typo.body1">Every time you roll a desperate action, mark xp in that action's attribute.</MudText>
-			<MudText Typo="Typo.body1">At the end of each session, for each item below, mark 1 xp (in your playbook or an attribute) or 2 xp if that item occurred multiple times.</MudText>
-			<MudStack AlignItems="AlignItems.Center" Row="true">
-				<MudRating @bind-SelectedValue="Character.Session.PlaybookExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
-				<MudText Typo="Typo.body1">@Character.Playbook.Option.PlaybookExperienceCondition().</MudText>
-			</MudStack>
-			<MudStack AlignItems="AlignItems.Center" Row="true">
-				<MudRating @bind-SelectedValue="Character.Session.CharacterExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
-				<MudText Typo="Typo.body1">You expressed your beliefs, drives, heritage, or background.</MudText>
-			</MudStack>
-			<MudStack AlignItems="AlignItems.Center" Row="true">
-				<MudRating @bind-SelectedValue="Character.Session.StruggleExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
-				<MudText Typo="Typo.body1">You struggled with issues from your vice or traumas during the session.</MudText>
-			</MudStack>
+<SheetCard HasFixMode="false" Header="Reminders">
+	<MudStack>
+		<MudText Typo="Typo.body1">Every time you roll a desperate action, mark xp in that action's attribute.</MudText>
+		<MudText Typo="Typo.body1">At the end of each session, for each item below, mark 1 xp (in your playbook or an attribute) or 2 xp if that item occurred multiple times.</MudText>
+		<MudStack AlignItems="AlignItems.Center" Row="true">
+			<MudRating @bind-SelectedValue="Character.Session.PlaybookExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+			<MudText Typo="Typo.body1">@Character.Playbook.Option.PlaybookExperienceCondition().</MudText>
 		</MudStack>
-		<MudTextField Label="Notes" @bind-Value="Character.Notebook" Lines="10" />
-	</MudCardContent>
-</MudCard>
+		<MudStack AlignItems="AlignItems.Center" Row="true">
+			<MudRating @bind-SelectedValue="Character.Session.CharacterExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+			<MudText Typo="Typo.body1">You expressed your beliefs, drives, heritage, or background.</MudText>
+		</MudStack>
+		<MudStack AlignItems="AlignItems.Center" Row="true">
+			<MudRating @bind-SelectedValue="Character.Session.StruggleExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+			<MudText Typo="Typo.body1">You struggled with issues from your vice or traumas during the session.</MudText>
+		</MudStack>
+	</MudStack>
+	<MudTextField Label="Notes" @bind-Value="Character.Notebook" Lines="10" />
+</SheetCard>
 
 @code
 {

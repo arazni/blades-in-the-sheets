@@ -3,46 +3,36 @@
 @using UI.Services;
 @inject SheetJank SheetJank;
 
-<MudCard>
-	<MudCardHeader>
-		<CardHeaderContent>
-			<MudText Typo="Typo.h4">Fund</MudText>
-		</CardHeaderContent>
-		<CardHeaderActions>
-			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" />
-		</CardHeaderActions>
-	</MudCardHeader>
-	<MudCardContent>
-		<MudGrid Style="align-items: end;">
-			<MudItem xs="12">
-				<MudStack Spacing="1">
-					<MudText Typo="Typo.caption">Satchel: </MudText>
-					<MudRating @bind-SelectedValue="Fund.Satchel.Coins" ReadOnly="!IsFixMode" MaxValue="Fund.Satchel.MaxCoins" FullIcon="@Icons.Material.Filled.Paid" EmptyIcon="@Icons.Material.Outlined.Paid" Color="Color.Primary" />
-				</MudStack>
-			</MudItem>
-			<MudItem xs="12" lg="6">
-				<MudNumericField @bind-Value="Fund.Stash.Stash" Label="Stash" Disabled="!IsFixMode" Min="Fund.Stash.MinCoins" Max="Fund.Stash.MaxCoins" />
-			</MudItem>
-			<MudItem xs="6" lg="3">
-				<MudText Typo="Typo.caption">Lifestyle:</MudText>
-				<MudText Typo="Typo.body1">@Fund.Lifestyle.Description()</MudText>
-			</MudItem>
-			<MudItem xs="6" lg="3">
-				<MudText Typo="Typo.caption">Rating:</MudText>
-				<MudText Typo="Typo.body1">@Fund.Stash.Rating</MudText>
-			</MudItem>
-			<MudItem xs="12" lg="6">
-				<MudNumericField @bind-Value="CoinChangeInput" Label="Coins to change" Min="Fund.MinCoins" Max="InputMaximum" />
-			</MudItem>
-			<MudItem xs="12" lg="6">
-				<MudButtonGroup Size="Size.Medium" Variant="Variant.Outlined" Style="width: 100%">
-					<MudButton Disabled="!GainButtonEnabled" OnClick="() => Fund.Gain(CoinChangeInput)" Style="@ButtonStyle" Variant="Variant.Outlined">Gain</MudButton>
-					<MudButton Disabled="!SpendButtonEnabled" OnClick="() => Fund.Spend(CoinChangeInput)" Style="@ButtonStyle" Variant="Variant.Outlined">Spend</MudButton>
-				</MudButtonGroup>
-			</MudItem>
-		</MudGrid>
-	</MudCardContent>
-</MudCard>
+<SheetCard @bind-IsFixMode="IsFixMode" Header="Fund">
+	<MudGrid Style="align-items: end;">
+		<MudItem xs="12">
+			<MudStack Spacing="1">
+				<MudText Typo="Typo.caption">Satchel: </MudText>
+				<MudRating @bind-SelectedValue="Fund.Satchel.Coins" ReadOnly="!IsFixMode" MaxValue="Fund.Satchel.MaxCoins" FullIcon="@Icons.Material.Filled.Paid" EmptyIcon="@Icons.Material.Outlined.Paid" Color="Color.Primary" />
+			</MudStack>
+		</MudItem>
+		<MudItem xs="12" lg="6">
+			<MudNumericField @bind-Value="Fund.Stash.Stash" Label="Stash" Disabled="!IsFixMode" Min="Fund.Stash.MinCoins" Max="Fund.Stash.MaxCoins" />
+		</MudItem>
+		<MudItem xs="6" lg="3">
+			<MudText Typo="Typo.caption">Lifestyle:</MudText>
+			<MudText Typo="Typo.body1">@Fund.Lifestyle.Description()</MudText>
+		</MudItem>
+		<MudItem xs="6" lg="3">
+			<MudText Typo="Typo.caption">Rating:</MudText>
+			<MudText Typo="Typo.body1">@Fund.Stash.Rating</MudText>
+		</MudItem>
+		<MudItem xs="12" lg="6">
+			<MudNumericField @bind-Value="CoinChangeInput" Label="Coins to change" Min="Fund.MinCoins" Max="InputMaximum" />
+		</MudItem>
+		<MudItem xs="12" lg="6">
+			<MudButtonGroup Size="Size.Medium" Variant="Variant.Outlined" Style="width: 100%">
+				<MudButton Disabled="!GainButtonEnabled" OnClick="() => Fund.Gain(CoinChangeInput)" Style="@ButtonStyle" Variant="Variant.Outlined">Gain</MudButton>
+				<MudButton Disabled="!SpendButtonEnabled" OnClick="() => Fund.Spend(CoinChangeInput)" Style="@ButtonStyle" Variant="Variant.Outlined">Spend</MudButton>
+			</MudButtonGroup>
+		</MudItem>
+	</MudGrid>
+</SheetCard>
 
 @code
 {

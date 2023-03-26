@@ -1,11 +1,11 @@
 {
 	"name": "Sheets in the Dark",
 	"short_name": "BitD Sheets",
-	"version": "5",
+	"version": "6",
 	"start_url": "./",
 	"display": "standalone",
-	"background_color": "#ffffff",
-	"theme_color": "#03173d",
+	"background_color": "#32333dff",
+	"theme_color": "#776be7ff",
 	"prefer_related_applications": false,
 	"icons": [
 		{

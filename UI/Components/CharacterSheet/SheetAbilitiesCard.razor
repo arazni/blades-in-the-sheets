@@ -5,44 +5,34 @@
 @inject ILoader Loader
 
 
-<MudCard>
-	<MudCardHeader>
-		<CardHeaderContent>
-			<MudText Typo="Typo.h4">@Playbook.Option</MudText>
-		</CardHeaderContent>
-		<CardHeaderActions>
-			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" />
-		</CardHeaderActions>
-	</MudCardHeader>
-	<MudCardContent>
-		<MudStack>
-			<MudRating @bind-SelectedValue="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
-			<MudStack Row="true" Class="flex-grow-1">
-				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@Constants.Buttons.ButtonDimensionStyle">Ability</MudButton>
-				<MudSelect @bind-Value="SelectedAbility" ToStringFunc="@converter">
-					@foreach (var ability in LearnableAbilities)
-					{
-						<MudSelectItem Value="ability" />
-					}
-				</MudSelect>
-			</MudStack>
-			<MudStack>
-				@foreach (var ability in KnownAbilities)
+<SheetCard @bind-IsFixMode="IsFixMode" Header="@Playbook.Option.ToString()">
+	<MudStack>
+		<MudRating @bind-SelectedValue="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+		<MudStack Row="true" Class="flex-grow-1">
+			<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@Constants.Buttons.ButtonDimensionStyle">Ability</MudButton>
+			<MudSelect @bind-Value="SelectedAbility" ToStringFunc="@converter">
+				@foreach (var ability in LearnableAbilities)
 				{
-					@if (IsFixMode)
-					{
-						<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" OnClick="(e => RemoveAbility(ability))">@ability.LearnedTimesDisplayName()</MudButton>
-					}
-					else
-					{
-						<MudText Typo="Typo.h6">@ability.LearnedTimesDisplayName()</MudText>
-					}
-					<MudText>@ability.Description</MudText>
+					<MudSelectItem Value="ability" />
 				}
-			</MudStack>
+			</MudSelect>
 		</MudStack>
-	</MudCardContent>
-</MudCard>
+		<MudStack>
+			@foreach (var ability in KnownAbilities)
+			{
+				@if (IsFixMode)
+				{
+					<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" OnClick="(e => RemoveAbility(ability))">@ability.LearnedTimesDisplayName()</MudButton>
+				}
+				else
+				{
+					<MudText Typo="Typo.h6">@ability.LearnedTimesDisplayName()</MudText>
+				}
+				<MudText>@ability.Description</MudText>
+			}
+		</MudStack>
+	</MudStack>
+</SheetCard>
 
 @code
 {

@@ -1,16 +1,7 @@
 ﻿@using Models.Characters
 @using UI.Conveniences
 
-<MudCard>
-	<MudCardHeader>
-		<CardHeaderContent>
-			<MudText Typo="Typo.h4">Dossier</MudText>
-		</CardHeaderContent>
-		<CardHeaderActions>
-			<MudToggleIconButton Color="Color.Primary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" />
-		</CardHeaderActions>
-	</MudCardHeader>
-	<MudCardContent>
+<SheetCard @bind-IsFixMode="IsFixMode" Header="Dossier">
 		<MudGrid>
 			<MudItem xs="8">
 				<MudTextField @bind-Value="Dossier.Name" HelperText="Name" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
@@ -25,8 +16,7 @@
 			<MudTextField @bind-Value="Dossier.Vice.Description" HelperText="@ViceHelperText" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" />
 			<MudTextField @bind-Value="Dossier.Look" HelperText="Look" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" />
 		</MudStack>
-	</MudCardContent>
-</MudCard>
+</SheetCard>
 
 @code
 {

@@ -1,0 +1,69 @@
+@using Models.Characters
+
+<SheetCard @bind-IsFixMode="IsFixMode" Header="@RolodexDisplayName()">
+	@foreach (var friend in Rolodex.Friends)
+	{
+		<MudStack Row="true">
+			<MudTextField @bind-Value="friend.Entry" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" AdornmentIcon="@GetFriendIcon(friend)" Adornment="Adornment.Start" AdornmentColor="@GetFriendIconColor(friend)" />
+			@if (IsFixMode)
+			{
+				if (friend.Closeness == FriendCloseness.CloseFriend)
+				{
+					<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="Rolodex.DowngradeCloseFriend">Estrange</MudButton>
+				}
+				else if (friend.Closeness == FriendCloseness.Rival)
+				{
+					<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="Rolodex.UpgradeRival">Reconcile</MudButton>
+				}
+				else
+				{
+					if (Rolodex.IsMissingCloseFriend)
+					{
+						<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyCloseFriend(friend))">Bond</MudButton>
+					}
+					if (Rolodex.IsMissingRival)
+					{
+						<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyRival(friend))">Betray</MudButton>
+					}
+				}
+			}
+		</MudStack>
+	}
+</SheetCard>
+
+@code
+{
+	[Parameter, EditorRequired]
+	public Rolodex Rolodex { get; set; } = new();
+
+	[Parameter, EditorRequired]
+	public PlaybookOption Playbook { get; set; }
+
+	bool IsFixMode { get; set; } = false;
+
+	static string GetFriendIcon(RolodexFriend friend) => friend.Closeness switch
+	{
+		FriendCloseness.CloseFriend => Icons.Material.Filled.Favorite,
+		FriendCloseness.Rival => Icons.Material.Filled.Dangerous,
+		_ => Icons.Material.Filled.Label
+	};
+
+	static Color GetFriendIconColor(RolodexFriend friend) => friend.Closeness switch
+	{
+		FriendCloseness.CloseFriend => Color.Secondary,
+		FriendCloseness.Rival => Color.Warning,
+		_ => Color.Default
+	};
+
+	string RolodexDisplayName() => Playbook switch
+	{
+		PlaybookOption.Cutter => "Dangerous Friends",
+		PlaybookOption.Hound => "Deadly Friends",
+		PlaybookOption.Leech => "Clever Friends",
+		PlaybookOption.Lurk => "Shady Friends",
+		PlaybookOption.Slide => "Sly Friends",
+		PlaybookOption.Spider => "Shrewd Friends",
+		PlaybookOption.Whisper => "Strange Friends",
+		_ => "Remarkable Friends"
+	};
+}
