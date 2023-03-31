@@ -7,7 +7,7 @@
 
 @if (Character == null) { return; }
 
-<MudContainer MaxWidth="MaxWidth.False">
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
 	<MudGrid>
 		<MudItem xs="12" lg="6">
 			<MudStack>
@@ -26,7 +26,7 @@
 			</MudStack>
 		</MudItem>
 	</MudGrid>
-	<MudFab Color="SaveButtonColor" StartIcon="@Icons.Material.Filled.Save" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
+	<MudFab Color="SaveButtonColor" StartIcon="@SaveIcon" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
 </MudContainer>
 
 @code
@@ -38,8 +38,11 @@
 
 	private bool isSaving = false;
 
-	Color SaveButtonColor => isSaving ? Color.Tertiary
-		: Color.Primary;
+	Color SaveButtonColor => isSaving ? Color.Success
+		: Color.Tertiary;
+
+	string SaveIcon => isSaving ? Icons.Material.Filled.CheckCircle
+		: Icons.Material.Filled.Save;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -50,6 +53,7 @@
 	{
 		isSaving = true;
 		await Storage.Save(Character!);
+		await Task.Delay(1000);
 		isSaving = false;
 	}
 }
