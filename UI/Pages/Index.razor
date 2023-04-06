@@ -6,7 +6,7 @@
 
 <MudContainer>
 	<MudStack>
-		<MudText Typo=Typo.h3>Blades in the Dark Character Sheet App</MudText>
+		<MudText Typo=Typo.h3 Style="margin: 20px 0;">@HeaderText</MudText>
 
 		@foreach (var character in Characters)
 		{
@@ -14,7 +14,7 @@
 				<MudCardHeader>
 					<MudStack>
 						<MudLink Href="@character.Link">
-							<MudText>@character.Alias the @character.Playbook</MudText>
+							<MudText Typo="Typo.h6">@character.Alias the @character.Playbook</MudText>
 						</MudLink>
 					</MudStack>
 				</MudCardHeader>
@@ -28,7 +28,7 @@
 
 		<MudCard>
 			<MudCardContent>
-				<MudLink Href="/new" Typo=Typo.h3>Create a new character!</MudLink>
+				<MudLink Href="/new" Typo=Typo.h5>Create a new character!</MudLink>
 			</MudCardContent>
 		</MudCard>
 	</MudStack>
@@ -46,4 +46,7 @@
 
 		await base.OnInitializedAsync();
 	}
+
+	string HeaderText => Characters.Any() ? "Your scoundrels await:"
+		: "A Blades in the Dark Character Sheet App";
 }

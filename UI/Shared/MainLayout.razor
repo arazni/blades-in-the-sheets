@@ -6,7 +6,7 @@
 	<MudAppBar Elevation="1">
 		<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
 		<MudText Typo="Typo.h5" Class="ml-3">Blades in the Sheets</MudText>
-		@*<MudImage Src="/icon-192.png" ObjectFit="ObjectFit.ScaleDown" Alt="Icon of a blade piercing a character sheet" Style="@IconStyle" />*@
+		<MudImage Src="/icon-192.png" ObjectFit="ObjectFit.ScaleDown" Alt="Icon of a blade piercing a character sheet" Style="@IconStyle" />
 	</MudAppBar>
 	<MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
 		<MudText Style="display: flex; justify-content: right; margin-right: 10px" Typo="Typo.caption">Version 6</MudText>
