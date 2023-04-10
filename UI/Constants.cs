@@ -17,6 +17,8 @@ public static class Constants
 
 		public const string Sheets = "sheets";
 
+		public const string Tips = "tip-jar";
+
 		public static string Character(string id) => $"{Characters}/{id}";
 
 		public static string Sheet(string id) => $"{Sheets}/{id}";
