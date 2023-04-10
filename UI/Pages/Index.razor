@@ -3,6 +3,7 @@
 @using Persistence.Json
 @using System.Text;
 @using UI.Services
+@using static UI.Constants;
 @inject IStorageService Storage
 @inject IJSRuntime JS
 
@@ -19,14 +20,8 @@
 						</MudLink>
 					</CardHeaderContent>
 					<CardHeaderActions>
-						@if (IsDownloadMode)
-						{
-							<MudButton Color="Color.Tertiary" OnClick="_ => Download(character.Id)" Variant="Variant.Filled">Download</MudButton>
-						}
-						@if (IsDeleteMode)
-						{
-							<MudButton Color="Color.Secondary" OnClick="_ => Delete(character.Id)" Variant="Variant.Filled">Delete</MudButton>
-						}
+							<MudButton Color="Color.Tertiary" OnClick="_ => Download(character.Id)" Variant="Variant.Filled" Style="@DownloadModeStyle">Download</MudButton>
+							<MudButton Color="Color.Secondary" OnClick="_ => Delete(character.Id)" Variant="Variant.Filled" Style="@DeleteModeStyle">Delete</MudButton>
 					</CardHeaderActions>
 				</MudCardHeader>
 				<MudCardContent>
@@ -39,7 +34,7 @@
 		<MudCard>
 			<MudCardHeader>
 				<CardHeaderContent>
-					<MudLink Href="/new" Typo=Typo.h5>Create a new character!</MudLink>
+					<MudLink Href="@Paths.New" Typo=Typo.h5>Create a new character!</MudLink>
 				</CardHeaderContent>
 				<CardHeaderActions>
 					@if (Characters.Any())
@@ -95,6 +90,12 @@
 	bool IsDeleteMode { get; set; }
 
 	bool IsDownloadMode { get; set; }
+
+	string DownloadModeStyle => IsDownloadMode ? ""
+		: "display: none;";
+
+	string DeleteModeStyle => IsDeleteMode ? ""
+		: "display: none;";
 
 	string DeleteModeButtonText => IsDeleteMode ? "Cancel Delete Mode"
 		: "Delete Mode";

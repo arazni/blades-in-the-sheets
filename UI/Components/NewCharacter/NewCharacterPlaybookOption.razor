@@ -1,6 +1,7 @@
 ﻿@using Models.Characters
 @using Persistence.Json;
 @using UI.Services
+@using static UI.Constants;
 @inject IStorageService Storage
 @inject ICharacterCoordinator Coordinator
 @inject NavigationManager Navigator
@@ -30,6 +31,6 @@
 	{
 		var character = await Coordinator.InitializeCharacter(Playbook);
 		await Storage.Save(character);
-		Navigator.NavigateTo($"/characters/{character.Id}");
+		Navigator.NavigateTo(Paths.Character(character.Id));
 	}
 }

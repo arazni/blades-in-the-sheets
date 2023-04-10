@@ -5,6 +5,7 @@
 @using UI.Components.NewCharacter
 @using UI.Services
 @using UI.ViewModels
+@using static UI.Constants;
 @inject IStorageService Storage
 @inject ICharacterCoordinator Coordinator
 @inject NavigationManager Navigator
@@ -73,6 +74,6 @@
 	public async Task SaveAsync()
 	{
 		await Storage.Save(characterModel);
-		Navigator.NavigateTo($"/sheets/{Character.Id}");
+		Navigator.NavigateTo(Paths.Sheet(Character.Id));
 	}
 }

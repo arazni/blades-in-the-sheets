@@ -11,9 +11,11 @@ public static class Constants
 
 	public static class Paths
 	{
-		public const string Characters = "/characters";
+		public const string New = "new";
 
-		public const string Sheets = "/sheets";
+		public const string Characters = "characters";
+
+		public const string Sheets = "sheets";
 
 		public static string Character(string id) => $"{Characters}/{id}";
 
