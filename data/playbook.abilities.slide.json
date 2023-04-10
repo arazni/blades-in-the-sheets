@@ -1,0 +1,47 @@
+[
+  {
+    "TimesTakeable": 1,
+    "Name": "Rook's Gambit",
+    "Description": "Take 2 stress to roll your best action rating while performing a different action. Say how you adapt your skill to this use."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Cloak & Dagger",
+    "Description": "When you use a disguise or other form of covert misdirection, you get +1d to rolls to confuse or deflect suspicion. When you throw off your disguise, the resulting surprise gives you the initiative in the situation."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Ghost Voice",
+    "Description": "You know the secret method to interact with a ghost or demon as if it was a normal human, regardless of how wild or feral it appears. You gain potency when communicating with the supernatural."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Like Looking into a Mirror",
+    "Description": "You can always tell when someone is lying to you."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "A Little Something on the Side",
+    "Description": "At the end of each downtime phase, you earn +2 stash."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Mesmerism",
+    "Description": "When you Sway someone, you may cause them to forget that it's happened until they next interact with you."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Subterfuge",
+    "Description": "You may expend your special armor to resist a consequence from suspicion or persuasion, or to push yourself for subterfuge."
+  },
+  {
+    "TimesTakeable": 1,
+    "Name": "Trust in Me",
+    "Description": "You get +1d vs. a target with whom you have an intimate relationship."
+  },
+  {
+    "TimesTakeable": 3,
+    "Name": "Veteran",
+    "Description": "Choose a special ability from another source"
+  }
+]

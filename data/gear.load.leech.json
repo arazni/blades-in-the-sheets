@@ -1,0 +1,34 @@
+﻿[
+  {
+    "bulk": "1",
+    "name": "Fine tinkering tools"
+  },
+  {
+    "bulk": "2",
+    "name": "Fine wrecking tools"
+  },
+  {
+    "bulk": "0",
+    "name": "Blowgun & darts, syringes"
+  },
+  {
+    "bulk": "1",
+    "name": "Bandolier (3 uses)"
+  },
+  {
+    "bulk": "1",
+    "name": "A 2nd Bandolier (3 uses)"
+  },
+  {
+    "bulk": "1",
+    "name": "A gadget"
+  },
+  {
+    "bulk": "1",
+    "name": "A 2nd gadget"
+  },
+  {
+    "bulk": "1",
+    "name": "A 3rd gadget"
+  }
+]
