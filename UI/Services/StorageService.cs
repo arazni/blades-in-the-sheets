@@ -50,6 +50,21 @@ public class StorageService : IStorageService
 			.ToArray();
 	}
 
+	public async Task Delete(string id) =>
+		await this.storageService.RemoveItemAsync(CharacterKey(id));
+
+	public async Task<string> GetFile(string id) =>
+		await this.storageService.GetItemAsStringAsync(CharacterKey(id));
+
+	public async Task PutFile(string json)
+	{
+		var character = this.serializer.Deserialize(json);
+
+		if (character == null) return;
+
+		await Save(character);
+	}
+
 	private static string CharacterKey(string characterId) =>
 		$"{CharacterPrefix}{KeyDelimiter}{characterId}";
 

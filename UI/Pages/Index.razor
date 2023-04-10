@@ -1,22 +1,33 @@
 ﻿@page "/"
 @using Models.Characters
 @using Persistence.Json
+@using System.Text;
 @using UI.Services
 @inject IStorageService Storage
+@inject IJSRuntime JS
 
 <MudContainer>
 	<MudStack>
 		<MudText Typo=Typo.h3 Style="margin: 20px 0;">@HeaderText</MudText>
-
 		@foreach (var character in Characters)
 		{
 			<MudCard>
 				<MudCardHeader>
-					<MudStack>
+					<CardHeaderContent>
 						<MudLink Href="@character.Link">
 							<MudText Typo="Typo.h6">@character.Alias the @character.Playbook</MudText>
 						</MudLink>
-					</MudStack>
+					</CardHeaderContent>
+					<CardHeaderActions>
+						@if (IsDownloadMode)
+						{
+							<MudButton Color="Color.Tertiary" OnClick="_ => Download(character.Id)" Variant="Variant.Filled">Download</MudButton>
+						}
+						@if (IsDeleteMode)
+						{
+							<MudButton Color="Color.Secondary" OnClick="_ => Delete(character.Id)" Variant="Variant.Filled">Delete</MudButton>
+						}
+					</CardHeaderActions>
 				</MudCardHeader>
 				<MudCardContent>
 					<MudStack>
@@ -25,10 +36,26 @@
 				</MudCardContent>
 			</MudCard>
 		}
-
 		<MudCard>
+			<MudCardHeader>
+				<CardHeaderContent>
+					<MudLink Href="/new" Typo=Typo.h5>Create a new character!</MudLink>
+				</CardHeaderContent>
+				<CardHeaderActions>
+					@if (Characters.Any())
+					{
+
+						<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" @bind-Toggled="IsDownloadMode" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Download" ToggledIcon="@Icons.Material.Filled.FileDownloadOff" Title="Enable Download Mode" ToggledTitle="Disable Download Mode" />
+						<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" @bind-Toggled="IsDeleteMode" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Delete" ToggledIcon="@Icons.Material.Filled.Cancel" Title="Enable Delete Mode" ToggledTitle="Disable Delete Mode" />
+					}
+				</CardHeaderActions>
+			</MudCardHeader>
 			<MudCardContent>
-				<MudLink Href="/new" Typo=Typo.h5>Create a new character!</MudLink>
+				<MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFiles" Accept=".json">
+					<ButtonTemplate>
+						<MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.CloudUpload" for="@context">Upload Scoundrels</MudButton>
+					</ButtonTemplate>
+				</MudFileUpload>
 			</MudCardContent>
 		</MudCard>
 	</MudStack>
@@ -36,17 +63,72 @@
 
 @code
 {
+	IJSObjectReference? module;
 	IReadOnlyCollection<VIndexCharacter> Characters { get; set; } = Array.Empty<VIndexCharacter>();
 
 	protected override async Task OnInitializedAsync()
 	{
-		var characters = await Storage.LoadAll();
-		Characters = characters.Select(c => new VIndexCharacter(c))
-			.ToArray();
+		await Load();
 
 		await base.OnInitializedAsync();
 	}
 
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+			module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/Index.razor.js");
+
+		await base.OnAfterRenderAsync(firstRender);
+	}
+
+	async Task Load()
+	{
+		var characters = await Storage.LoadAll();
+		Characters = characters.Select(c => new VIndexCharacter(c))
+			.OrderBy(c => c.Alias)
+			.ToArray();
+	}
+
 	string HeaderText => Characters.Any() ? "Your scoundrels await:"
 		: "A Blades in the Dark Character Sheet App";
+
+	bool IsDeleteMode { get; set; }
+
+	bool IsDownloadMode { get; set; }
+
+	string DeleteModeButtonText => IsDeleteMode ? "Cancel Delete Mode"
+		: "Delete Mode";
+
+	Color DeleteModeColor => IsDeleteMode ? Color.Tertiary
+		: Color.Secondary;
+
+	void ToggleDeleteMode() => IsDeleteMode = !IsDeleteMode;
+
+	async Task Delete(string id)
+	{
+		await Storage.Delete(id);
+		await Load();
+	}
+
+	async Task Download(string id)
+	{
+		var json = await Storage.GetFile(id);
+		var bytes = Encoding.Unicode.GetBytes(json);
+		var memory = new MemoryStream(bytes);
+		using var streamRef = new DotNetStreamReference(memory);
+
+		await module!.InvokeVoidAsync("downloadFileFromStream", "blades-in-the-sheets.json", streamRef);
+	}
+
+	private async Task UploadFiles(IReadOnlyList<IBrowserFile> files)
+	{
+		foreach (var file in files)
+		{
+			var buffer = new byte[file.Size];
+			await file.OpenReadStream().ReadAsync(buffer);
+			var json = Encoding.Unicode.GetString(buffer);
+			await Storage.PutFile(json);
+		}
+		await Load();
+	}
 }
