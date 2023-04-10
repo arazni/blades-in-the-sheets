@@ -1,0 +1,24 @@
+name: Deploy to GH Pages
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy-to-github-pages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: setup-sdk
+      uses: actions/setup-dotnet@v3.0.3
+      with: 
+        dotnet-version: 7.0.x
+        
+    - name: publish-project
+      run: dotnet publish "UI.csproj" -c Release -o release -p:GHPages=true
+      
+    - name: deploy-site
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: dist/release/wwwroot
