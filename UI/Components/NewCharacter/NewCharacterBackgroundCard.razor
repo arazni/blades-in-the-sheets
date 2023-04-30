@@ -1,4 +1,5 @@
 ﻿@using Models.Characters
+@using Models.Settings;
 @using UI.ViewModels
 
 <MudCard Outlined="true">
@@ -6,12 +7,12 @@
 		<MudText>Choose a background</MudText>
 	</MudCardHeader>
 	<MudCardContent>
-		<MudSelect @bind-Value="Background.Background" Label="Background">
-			@foreach (var vOption in Options)
+		<MudSelect @bind-Value="Background.Name" Label="Background">
+			@foreach (var option in BackgroundSettings)
 			{
-				<MudSelectItem T="BackgroundOption" Value="vOption.Option">
-					<MudText>@vOption.DisplayName</MudText>
-					<MudText>@vOption.Example</MudText>
+				<MudSelectItem T="string" Value="option.Name">
+					<MudText>@option.Name</MudText>
+					<MudText>@option.Example</MudText>
 				</MudSelectItem>
 			}
 		</MudSelect>
@@ -25,11 +26,9 @@
 	[Parameter, EditorRequired]
 	public DossierBackground Background { get; set; } = new();
 
-	private string Example() =>
-		Example(Background.Background);
+	[Parameter, EditorRequired]
+	public BackgroundSetting[] BackgroundSettings { get; set; } = EmptyGameSetting.Backgrounds();
 
-	private string Example(BackgroundOption option) =>
-		Options.First(o => o.Option == option).Example;
-
-	private IReadOnlyCollection<VBackground> Options => VBackground.Options;
+	string Example() =>
+		BackgroundSettings.FirstOrDefault(b => b.Name == Background.Name)?.Example ?? string.Empty;
 }

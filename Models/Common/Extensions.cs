@@ -29,11 +29,10 @@ public static class Extensions
 		!string.IsNullOrWhiteSpace(source);
 
 	public static string Join(this IEnumerable<string> source, string separator) =>
-		string.Join(separator, source);
+		string.Join(separator, source)!;
 
-	public static string Join<T>(this IEnumerable<T> source, string separator) where T : Enum =>
-		source.Select(s => s.ToString())
-			.Join(separator);
+	public static string Join<T>(this IEnumerable<T> source, string separator) where T : notnull =>
+		string.Join(separator, source.Select(s => s.ToString()));
 
 	public static string Description<T>(this T option) where T : Enum
 	{

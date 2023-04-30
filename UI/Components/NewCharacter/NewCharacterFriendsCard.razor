@@ -1,5 +1,6 @@
 ﻿@using Models.Characters
 @using Models.Common
+@using Models.Settings;
 @using Persistence.Json
 @inject ILoader Loader
 
@@ -40,7 +41,10 @@
 	public Rolodex Rolodex { get; set; } = new();
 
 	[Parameter, EditorRequired]
-	public PlaybookOption PlaybookOption { get; set; } = new();
+	public string PlaybookName { get; set; } = string.Empty;
+
+	[Parameter, EditorRequired]
+	public RolodexSetting RolodexSetting { get; set; } = EmptyGameSetting.RolodexSetting();
 
 	private RolodexFriend? CloseFriend { get; set; }
 
@@ -58,11 +62,9 @@
 		Rolodex.Friends.Where(f => !f.Closeness.In(FriendCloseness.Rival, FriendCloseness.CloseFriend))
 			.ToArray();
 
-	protected override async Task OnParametersSetAsync()
+	protected override void OnInitialized()
 	{
-		await base.OnParametersSetAsync();
-
-		if (PlaybookOption == PlaybookOption.Unknown)
+		if (!PlaybookName.HasInk())
 			return;
 
 		if (Rolodex.Friends.Any())
@@ -72,8 +74,12 @@
 			return;
 		}
 
-		var friends = await Loader.LoadAvailableFriendsAsync(PlaybookOption.ToString());
+		var friends = RolodexSetting.Friends.Select(f => new RolodexFriend(f))
+			.ToArray();
+
 		Rolodex.ReplaceFriends(friends);
+
+		base.OnInitialized();
 	}
 
 	private void OnCloseFriendChanged(RolodexFriend friend)

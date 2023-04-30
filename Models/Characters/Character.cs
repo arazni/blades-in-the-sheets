@@ -1,28 +1,34 @@
-﻿namespace Models.Characters;
+﻿using Models.Common;
+using Models.Settings;
+
+namespace Models.Characters;
 
 public partial class Character
 {
-	private Character()
-	{
-		Playbook = new(PlaybookOption.Unknown);
-		Talent = new(PlaybookOption.Unknown);
-	}
+	private Character() { }
 
-	public Character(PlaybookOption option)
+	public Character(GameSetting game, string playbookName)
 	{
-		Playbook = new(option);
-		Talent = new(option);
+		Playbook = new(playbookName);
+		Talent = new
+		(
+			game.Attributes,
+			game.Playbooks.First(playbookSetting => playbookSetting.Name.Like(playbookName)).DefaultActionPoints,
+			game.ActionPointMaximum
+		);
 	}
 
 	public string Id { get; private set; } = Guid.NewGuid().ToString();
+
+	public string GameName { get; private set; } = Constants.Games.BladesInTheDark;
 
 	public Dossier Dossier { get; private set; } = new();
 
 	public Monitor Monitor { get; private set; } = new();
 
-	public Talent Talent { get; private set; }
+	public Talent Talent { get; private set; } = Talent.Empty();
 
-	public Playbook Playbook { get; private set; }
+	public Playbook Playbook { get; private set; } = Playbook.Empty();
 
 	public Gear Gear { get; private set; } = new();
 

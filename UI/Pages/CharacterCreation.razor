@@ -25,7 +25,7 @@
 			<NewCharacterSpecialAbilityCard Playbook="@Character.Playbook" />
 		</MudTimelineItem>
 		<MudTimelineItem>
-			<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookOption="@Character.Playbook.Option" />
+			<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookName="@Character.Playbook.Name" />
 		</MudTimelineItem>
 		<MudTimelineItem>
 			<NewCharacterViceCard Vice="@Character.Dossier.Vice" />
@@ -47,7 +47,7 @@
 		<NewCharacterBackgroundCard Background="@Character.Dossier.Background" />
 		<NewCharacterActionDotsCard Character="@Character" />
 		<NewCharacterSpecialAbilityCard Playbook="@Character.Playbook" />
-		<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookOption="@Character.Playbook.Option" />
+		<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookName="@Character.Playbook.Name" />
 		<NewCharacterViceCard Vice="@Character.Dossier.Vice" />
 		<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
 		<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
@@ -61,19 +61,17 @@
 	[Parameter, EditorRequired]
 	public string Id { get; set; } = string.Empty;
 
-	public VCharacter Character { get; private set; } = VCharacter.Empty();
-
-	private Character characterModel = Models.Characters.Character.Empty();
+	public Character Character { get; private set; } = Character.Empty();
 
 	protected override async Task OnInitializedAsync()
 	{
-		characterModel = await Storage.Load(Id);
-		Character = new(characterModel);
+		Character = await Storage.Load(Id);
+		await base.OnInitializedAsync();
 	}
 
 	public async Task SaveAsync()
 	{
-		await Storage.Save(characterModel);
+		await Storage.Save(Character);
 		Navigator.NavigateTo(Paths.Sheet(Character.Id));
 	}
 }

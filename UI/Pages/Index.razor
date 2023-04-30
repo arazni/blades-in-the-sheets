@@ -1,11 +1,13 @@
 ﻿@page "/"
 @using Models.Characters
+@using Models.Settings
 @using Persistence.Json
-@using System.Text;
+@using System.Text
 @using UI.Services
 @using static UI.Constants;
 @inject IStorageService Storage
 @inject IJSRuntime JS
+@inject ILoader Loader
 @inject NavigationManager Navigator
 
 <MudContainer>
@@ -81,7 +83,27 @@
 	async Task Load()
 	{
 		var characters = await Storage.LoadAll();
-		Characters = characters.Select(c => new VIndexCharacter(c))
+
+		if (!characters.Any())
+			return;
+
+		var gameSettingLoads = characters.Select(c => c.GameName)
+			.Distinct()
+			.Select(name => Loader.LoadSettings(name));
+
+		var gameSettings = await Task.WhenAll(gameSettingLoads);
+		var gameSettingsByName = gameSettings.ToDictionary
+		(
+			gameSetting => gameSetting.Name,
+			gameSetting => gameSetting
+		);
+
+		Characters = characters.Select(c => new VIndexCharacter
+			(
+				c,
+				gameSettingsByName[c.GameName].GetHeritage(c.Dossier.Heritage.Name).BlurbFlavor,
+				gameSettingsByName[c.GameName].GetBackground(c.Dossier.Background.Name).BlurbFlavor
+			))
 			.OrderBy(c => c.Alias)
 			.ToArray();
 	}
@@ -93,11 +115,9 @@
 
 	bool IsDownloadMode { get; set; }
 
-	string DownloadModeStyle => IsDownloadMode ? ""
-		: "display: none;";
+	string DownloadModeStyle => UI.Constants.Classes.Display(IsDownloadMode);
 
-	string DeleteModeStyle => IsDeleteMode ? ""
-		: "display: none;";
+	string DeleteModeStyle => UI.Constants.Classes.Display(IsDeleteMode);
 
 	string DeleteModeButtonText => IsDeleteMode ? "Cancel Delete Mode"
 		: "Delete Mode";

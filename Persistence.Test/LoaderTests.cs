@@ -1,9 +1,10 @@
-using Models.Characters;
 using FluentAssertions;
+using Models.Settings;
 using Persistence.Json;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using static Models.Legacy.RetiredOptions;
 
 namespace Persistence.Test;
 public class LoaderTests
@@ -26,9 +27,14 @@ public class LoaderTests
 	[InlineData(PlaybookOption.Whisper)]
 	public async Task LoadsAvailableFriends(PlaybookOption playbook)
 	{
-		var result = await this.loader.LoadAvailableFriendsAsync(playbook.ToString());
+		var setting = await this.loader.LoadSettings(Constants.Games.BladesInTheDark);
 
-		result.Should().NotBeEmpty();
+		var result = setting.GetPlaybookSetting(playbook.ToString())
+			.Rolodex;
+
+		result.Should().NotBeNull();
+		result.Name.Should().NotBeNullOrWhiteSpace();
+		result.Friends.Should().NotBeEmpty();
 	}
 
 	[Theory]
@@ -41,28 +47,13 @@ public class LoaderTests
 	[InlineData(PlaybookOption.Whisper)]
 	public async Task LoadsAvailableAbilities(PlaybookOption playbook)
 	{
-		var result = await this.loader.LoadAvailableAbilitiesAsync(playbook.ToString());
+		var setting = await this.loader.LoadSettings(Constants.Games.BladesInTheDark);
+
+		var result = setting.GetPlaybookSetting(playbook.ToString())
+			.SpecialAbilities;
 
 		result.Should().NotBeEmpty();
 		result.Should().HaveCountGreaterThanOrEqualTo(8);
-		result.Sum(r => r.TimesTakable).Should().Be(12);
-	}
-
-	[Theory]
-	[InlineData(PlaybookOption.Cutter)]
-	[InlineData(PlaybookOption.Hound)]
-	[InlineData(PlaybookOption.Leech)]
-	[InlineData(PlaybookOption.Lurk)]
-	[InlineData(PlaybookOption.Slide)]
-	[InlineData(PlaybookOption.Spider)]
-	[InlineData(PlaybookOption.Whisper)]
-	public async Task LoadsAvailableItems(PlaybookOption playbook)
-	{
-		var result = await this.loader.LoadAvailableItemsAsync(playbook.ToString());
-
-		result.Should().NotBeEmpty();
-		result.Should().HaveCountGreaterThanOrEqualTo(6);
-		result.Select(r => r.Bulk).Should().Contain(0);
-		result.Select(r => r.Name).Should().OnlyHaveUniqueItems();
+		result.Sum(r => r.TimesTakeable).Should().Be(12);
 	}
 }

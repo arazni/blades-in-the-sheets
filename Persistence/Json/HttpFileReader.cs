@@ -1,4 +1,7 @@
-﻿namespace Persistence.Json;
+﻿using Newtonsoft.Json;
+using Persistence.Json.DataModels;
+
+namespace Persistence.Json;
 
 public class HttpFileReader : IFileReader
 {
@@ -12,4 +15,14 @@ public class HttpFileReader : IFileReader
 
 	public async Task<string> ReadFile(string fileName) =>
 		await this.http.GetStringAsync($"{DataFolder}/{fileName}");
+
+	public async Task<GameFile[]> AllFiles()
+	{
+		var response = await this.http.GetAsync($"{DataFolder}/games.json");
+
+		var raw = await response.Content.ReadAsStringAsync();
+
+		return JsonConvert.DeserializeObject<GameFile[]>(raw)
+			?? Array.Empty<GameFile>();
+	}
 }

@@ -1,0 +1,403 @@
+{
+	"definitions": {
+		"ActionSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"ShortDescription": {
+					"type": [
+						"string"
+					]
+				},
+				"LongDescription": {
+					"type": [
+						"string"
+					]
+				}
+			},
+			"required": [
+				"Name",
+				"ShortDescription",
+				"LongDescription"
+			]
+		},
+		"AttributeSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"Actions": {
+					"type": [
+						"array"
+					],
+					"items": {
+						"$ref": "#/definitions/ActionSetting"
+					}
+				}
+			},
+			"required": [
+				"Name",
+				"Actions"
+			]
+		},
+		"BackgroundSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"Example": {
+					"type": [
+						"string"
+					]
+				},
+				"BlurbFlavor": {
+					"type": [
+						"string"
+					]
+				}
+			},
+			"required": [
+				"Name",
+				"Example",
+				"BlurbFlavor"
+			]
+		},
+		"DefaultActionPointSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Action": {
+					"type": [
+						"string"
+					]
+				},
+				"Points": {
+					"type": "integer"
+				}
+			},
+			"required": [
+				"Action",
+				"Points"
+			]
+		},
+		"GearItemSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"Bulk": {
+					"type": "integer"
+				}
+			},
+			"required": [
+				"Name",
+				"Bulk"
+			]
+		},
+		"HeritageSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"Description": {
+					"type": [
+						"string"
+					]
+				},
+				"BlurbFlavor": {
+					"type": [
+						"string"
+					]
+				}
+			},
+			"required": [
+				"Name",
+				"Description",
+				"BlurbFlavor"
+			]
+		},
+		"PlaybookSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"Hook": {
+					"type": [
+						"string"
+					]
+				},
+				"SpecialAbilities": {
+					"type": [
+						"array"
+					],
+					"items": {
+						"$ref": "#/definitions/SpecialAbilitySetting"
+					}
+				},
+				"Rolodex": {
+					"$ref": "#/definitions/RolodexSetting"
+				},
+				"Items": {
+					"type": [
+						"array"
+					],
+					"items": {
+						"$ref": "#/definitions/GearItemSetting"
+					}
+				},
+				"DefaultActionPoints": {
+					"type": [
+						"array"
+					],
+					"items": {
+						"$ref": "#/definitions/DefaultActionPointSetting"
+					}
+				},
+				"ExperienceCondition": {
+					"type": [
+						"string"
+					]
+				},
+				"AliasSynonym": {
+					"type": [
+						"string",
+						"null"
+					]
+				}
+			},
+			"required": [
+				"Name",
+				"Hook",
+				"SpecialAbilities",
+				"Rolodex",
+				"Items",
+				"DefaultActionPoints",
+				"ExperienceCondition"
+			]
+		},
+		"RolodexSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"Friends": {
+					"type": [
+						"array"
+					],
+					"items": {
+						"type": [
+							"string"
+						]
+					}
+				}
+			},
+			"required": [
+				"Name",
+				"Friends"
+			]
+		},
+		"SpecialAbilitySetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"TimesTakeable": {
+					"type": "integer"
+				},
+				"Description": {
+					"type": [
+						"string"
+					]
+				}
+			},
+			"required": [
+				"Name",
+				"TimesTakeable",
+				"Description"
+			]
+		},
+		"ThesaurusSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Coin": {
+					"type": [
+						"string",
+						"null"
+					]
+				},
+				"Bulk": {
+					"type": [
+						"string",
+						"null"
+					]
+				}
+			}
+		},
+		"ViceSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"Description": {
+					"type": [
+						"string"
+					]
+				},
+				"Sources": {
+					"type": [
+						"array"
+					],
+					"items": {
+						"type": [
+							"string"
+						]
+					}
+				}
+			},
+			"required": [
+				"Name",
+				"Description",
+				"Sources"
+			]
+		}
+	},
+	"type": "object",
+	"properties": {
+		"Name": {
+			"type": [
+				"string"
+			]
+		},
+		"Playbooks": {
+			"type": [
+				"array"
+			],
+			"items": {
+				"$ref": "#/definitions/PlaybookSetting"
+			}
+		},
+		"Traumas": {
+			"type": [
+				"array"
+			],
+			"items": {
+				"type": [
+					"string"
+				]
+			}
+		},
+		"Heritages": {
+			"type": [
+				"array"
+			],
+			"items": {
+				"$ref": "#/definitions/HeritageSetting"
+			}
+		},
+		"Vices": {
+			"type": [
+				"array"
+			],
+			"items": {
+				"$ref": "#/definitions/ViceSetting"
+			}
+		},
+		"Attributes": {
+			"type": [
+				"array"
+			],
+			"items": {
+				"$ref": "#/definitions/AttributeSetting"
+			}
+		},
+		"Backgrounds": {
+			"type": [
+				"array"
+			],
+			"items": {
+				"$ref": "#/definitions/BackgroundSetting"
+			}
+		},
+		"SharedItems": {
+			"type": [
+				"array"
+			],
+			"items": {
+				"$ref": "#/definitions/GearItemSetting"
+			}
+		},
+		"Thesaurus": {
+			"type": [
+				"object"
+			],
+			"$ref": "#/definitions/ThesaurusSetting"
+		},
+		"RecoveryClockSize": {
+			"type": "integer"
+		},
+		"ActionPointMaximum": {
+			"type": "integer"
+		}
+	},
+	"required": [
+		"Name",
+		"Playbooks",
+		"Traumas",
+		"Heritages",
+		"Vices",
+		"Attributes",
+		"Backgrounds",
+		"SharedItems",
+		"RecoveryClockSize",
+		"ActionPointMaximum"
+	]
+}

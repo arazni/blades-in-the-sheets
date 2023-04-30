@@ -8,7 +8,7 @@
 		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect">
 			@foreach (var option in TraumaOptions)
 			{
-				<MudSelectItem T="TraumaOption?" Value="option">
+				<MudSelectItem T="string" Value="option">
 					<MudText>@option</MudText>
 				</MudSelectItem>
 			}
@@ -37,6 +37,9 @@
 	[Parameter, EditorRequired]
 	public Monitor Monitor { get; set; } = new();
 
+	[Parameter, EditorRequired]
+	public IReadOnlyCollection<string> TraumaOptions { get; set; } = Array.Empty<string>();
+
 	bool DisableTraumaSelect =>
 		Monitor.Stress.CurrentStress != MonitorStress.MaxStress
 		&& !IsFixMode;
@@ -45,27 +48,21 @@
 		DisableTraumaSelect
 		|| SelectedTrauma == null;
 
-	private TraumaOption? selectedTrauma = null;
+	private string? selectedTrauma;
 
-	TraumaOption? SelectedTrauma
+	string? SelectedTrauma
 	{
 		get => Monitor.Stress.CurrentStress != MonitorStress.MaxStress ? null
 			: selectedTrauma;
 		set => selectedTrauma = value;
 	}
 
-	IReadOnlyCollection<TraumaOption?> TraumaOptions =>
-		Enum.GetValues<TraumaOption>()
-			.Except(Monitor.Trauma.Traumas)
-			.Select(t => (TraumaOption?)t)
-			.ToArray();
-
 	void AddTrauma()
 	{
 		if (SelectedTrauma == null)
 			return;
 
-		var success = Monitor.Trauma.Add(SelectedTrauma.Value);
+		var success = Monitor.Trauma.Add(SelectedTrauma);
 
 		if (!success)
 			return;
@@ -79,7 +76,7 @@
 		SelectedTrauma = null;
 	}
 
-	void RemoveTrauma(TraumaOption trauma)
+	void RemoveTrauma(string trauma)
 	{
 		Monitor.Trauma.Remove(trauma);
 	}

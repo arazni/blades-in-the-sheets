@@ -1,6 +1,7 @@
 @using Models.Characters
+@using Models.Settings;
 
-<SheetCard @bind-IsFixMode="IsFixMode" Header="@RolodexDisplayName()">
+<SheetCard @bind-IsFixMode="IsFixMode" Header="@RolodexSetting?.Name">
 	@foreach (var friend in Rolodex.Friends)
 	{
 		<MudStack Row="true">
@@ -37,7 +38,7 @@
 	public Rolodex Rolodex { get; set; } = new();
 
 	[Parameter, EditorRequired]
-	public PlaybookOption Playbook { get; set; }
+	public RolodexSetting? RolodexSetting { get; set; }
 
 	bool IsFixMode { get; set; } = false;
 
@@ -53,17 +54,5 @@
 		FriendCloseness.CloseFriend => Color.Secondary,
 		FriendCloseness.Rival => Color.Warning,
 		_ => Color.Default
-	};
-
-	string RolodexDisplayName() => Playbook switch
-	{
-		PlaybookOption.Cutter => "Dangerous Friends",
-		PlaybookOption.Hound => "Deadly Friends",
-		PlaybookOption.Leech => "Clever Friends",
-		PlaybookOption.Lurk => "Shady Friends",
-		PlaybookOption.Slide => "Sly Friends",
-		PlaybookOption.Spider => "Shrewd Friends",
-		PlaybookOption.Whisper => "Strange Friends",
-		_ => "Remarkable Friends"
 	};
 }

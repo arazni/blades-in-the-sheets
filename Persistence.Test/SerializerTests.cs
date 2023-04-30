@@ -1,10 +1,14 @@
 ﻿using FluentAssertions;
 using Models.Characters;
+using Models.Common;
+using Models.Settings;
 using Newtonsoft.Json;
 using Persistence.Json;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
+using static Models.Legacy.RetiredOptions;
 
 namespace Persistence.Test;
 
@@ -22,9 +26,9 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public (string, string) Serializer_Serializes_EmptyCharacter()
+	public async Task<(string, string)> Serializer_Serializes_EmptyCharacter()
 	{
-		var character = new Character(PlaybookOption.Lurk);
+		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Lurk.ToString());
 		var id = character.Id;
 		var json = this.serializer.Serialize(character);
 		json.Should().NotBeNullOrWhiteSpace();
@@ -32,48 +36,47 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public void Serializer_Deserializes_EmptyCharacter()
+	public async Task Serializer_Deserializes_EmptyCharacter()
 	{
-		var (id, json) = Serializer_Serializes_EmptyCharacter();
+		var (id, json) = await Serializer_Serializes_EmptyCharacter();
 
 		var character = this.serializer.Deserialize(json);
 		character.Should().NotBeNull();
-		character.Playbook.Option.Should().Be(PlaybookOption.Lurk);
-		character.Talent.Prowl.Rating.Should().Be(2);
-		character.Talent.Prowl.PlaybookDefault.Should().Be(2);
-		character.Talent.Finesse.PlaybookDefault.Should().Be(1);
+		character.Playbook.Name.Should().Be(PlaybookOption.Lurk.ToString());
+		character.Talent.ActionsByName[ActionName.Prowl.ToString()].Rating.Should().Be(2);
+		character.Talent.ActionsByName[ActionName.Finesse.ToString()].Rating.Should().Be(1);
 		character.Id.Should().Be(id);
 	}
 
 	[Fact]
 	public async void Serializer_Serializes_CoordinatorCharacter()
 	{
-		var model = await this.characterCoordinator.InitializeCharacter(PlaybookOption.Leech);
+		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
-		model.Playbook.Option.Should().Be(PlaybookOption.Leech);
+		model.Playbook.Name.Should().Be(PlaybookOption.Leech.ToString());
 		model.Gear.AvailableGear.Should().NotBeEmpty();
-		model.Gear.AvailableGear.Where(g => g.Source == GearItem.SourceOption.Leech).Should().NotBeEmpty();
-		model.Gear.AvailableGear.Where(g => g.Source == GearItem.SourceOption.Standard).Should().NotBeEmpty();
+		model.Gear.AvailableGear.Should().Contain(g => g.Name.Like("Fine tinkering tools"));
+		model.Gear.AvailableGear.Should().Contain(g => g.Name.Like("A Pistol"));
 
 		var json = this.serializer.Serialize(model);
 		var character = this.serializer.Deserialize(json);
 
 		character.Should().NotBeNull();
-		character.Playbook.Option.Should().Be(PlaybookOption.Leech);
+		character.Playbook.Name.Should().Be(PlaybookOption.Leech.ToString());
 		character.Gear.AvailableGear.Should().NotBeEmpty();
-		character.Gear.AvailableGear.Where(g => g.Source == GearItem.SourceOption.Leech).Should().NotBeEmpty();
-		character.Gear.AvailableGear.Where(g => g.Source == GearItem.SourceOption.Standard).Should().NotBeEmpty();
+		character.Gear.AvailableGear.Should().Contain(g => g.Name.Like("Fine tinkering tools"));
+		character.Gear.AvailableGear.Should().Contain(g => g.Name.Like("A Pistol"));
 	}
 
 	[Fact]
 	public async void Serializer_Serializes_Experience()
 	{
-		var model = await this.characterCoordinator.InitializeCharacter(PlaybookOption.Leech);
+		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
 		model.Playbook.Experience.Points = 5;
-		model.Talent.Resolve.Experience.Points = 1;
-		model.Talent.Prowess.Experience.Points = 3;
-		model.Talent.Insight.Experience.Points = 2;
+		model.Talent.AttributesByName[AttributeName.Resolve.ToString()].Experience.Points = 1;
+		model.Talent.AttributesByName[AttributeName.Prowess.ToString()].Experience.Points = 3;
+		model.Talent.AttributesByName[AttributeName.Insight.ToString()].Experience.Points = 2;
 
 		var json = this.serializer.Serialize(model);
 		json.Should().Contain("\"Points\": 5");
@@ -81,18 +84,18 @@ public class SerializerTests
 
 		character.Should().NotBeNull();
 		character.Playbook.Experience.Points.Should().Be(5);
-		character.Talent.Resolve.Experience.Points.Should().Be(1);
-		character.Talent.Prowess.Experience.Points.Should().Be(3);
-		character.Talent.Insight.Experience.Points.Should().Be(2);
+		character.Talent.AttributesByName[AttributeName.Resolve.ToString()].Experience.Points.Should().Be(1);
+		character.Talent.AttributesByName[AttributeName.Prowess.ToString()].Experience.Points.Should().Be(3);
+		character.Talent.AttributesByName[AttributeName.Insight.ToString()].Experience.Points.Should().Be(2);
 
-		character.Talent.Resolve.Experience.MaxPoints.Should().Be(6);
+		character.Talent.AttributesByName[AttributeName.Resolve.ToString()].Experience.MaxPoints.Should().Be(6);
 		character.Playbook.Experience.MaxPoints.Should().Be(8);
 	}
 
 	[Fact]
 	public async void Serializer_Serializes_MonitorHarm()
 	{
-		var model = await this.characterCoordinator.InitializeCharacter(PlaybookOption.Leech);
+		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
 		model.Monitor.Harm.AddHarm("lesser", HarmIntensity.Lesser);
 		model.Monitor.Harm.AddHarm("lesser 2", HarmIntensity.Lesser);
@@ -116,7 +119,7 @@ public class SerializerTests
 	[Fact]
 	public async void Serializer_Serializes_RolloverClock()
 	{
-		var model = await this.characterCoordinator.InitializeCharacter(PlaybookOption.Leech);
+		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
 		model.Monitor.Harm.HealingClock.Progress(5);
 		model.Monitor.Harm.HealingClock.Time.Should().Be(4);
@@ -133,10 +136,10 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public (string, string) Serializer_Serializes_LurkCharacter()
+	public async Task<(string, string)> Serializer_Serializes_LurkCharacter()
 	{
-		var character = new Character(PlaybookOption.Lurk);
-		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1, PlaybookOption.Lurk));
+		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
+		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1));
 
 		character.Rolodex.ReplaceFriends(new[] { new RolodexFriend("Favorite"), new RolodexFriend("Rival"), new RolodexFriend("3") });
 		character.Rolodex.AssignOnlyCloseFriend(character.Rolodex.Friends.First(f => f.Entry == "Favorite"));
@@ -149,18 +152,18 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public void Serializer_Deserializes_LurkCharacter()
+	public async Task Serializer_Deserializes_LurkCharacter()
 	{
-		var (_, json) = Serializer_Serializes_LurkCharacter();
+		var (_, json) = await Serializer_Serializes_LurkCharacter();
 		json.Should().NotBeNullOrWhiteSpace();
 
 		var character = this.serializer.Deserialize(json);
 
 		character.Should().NotBeNull();
-		character.Playbook.Option.Should().Be(PlaybookOption.Lurk);
+		character.Playbook.Name.Should().Be(PlaybookOption.Lurk.ToString());
 		character.Playbook.Abilities.Should().HaveCount(1);
 		character.Playbook.Experience.MaxPoints.Should().BeGreaterThan(0);
-		character.Talent.Insight.Experience.MaxPoints.Should().BeGreaterThan(0);
+		character.Talent.AttributesByName[AttributeName.Insight.ToString()].Experience.MaxPoints.Should().BeGreaterThan(0);
 		character.Rolodex.Friends.Should().HaveCountGreaterThan(0);
 		character.Rolodex.CloseFriend.Should().NotBeNull();
 		character.Rolodex.Rival.Should().NotBeNull();
@@ -171,8 +174,8 @@ public class SerializerTests
 	{
 		var character = this.serializer.Deserialize(JsonJunk.SpiderJson);
 		character.Should().NotBeNull();
-		character.Playbook.Option.Should().Be(PlaybookOption.Spider);
-		character.Talent.Insight.Experience.MaxPoints.Should().BeGreaterThan(0);
+		character.Playbook.Name.Should().Be(PlaybookOption.Spider.ToString());
+		character.Talent.AttributesByName[AttributeName.Insight.ToString()].Experience.MaxPoints.Should().BeGreaterThan(0);
 	}
 
 	[Fact]

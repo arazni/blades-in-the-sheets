@@ -31,4 +31,6 @@
 		</None>
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties wwwroot_4data_4blades-in-the-dark_1json__JsonSchema="game-settings-schema.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

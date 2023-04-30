@@ -26,11 +26,11 @@
 	bool IsFixMode { get; set; } = false;
 
 	string BackgroundHelperText =>
-		$"Background: {Dossier.Background.Background}";
+		$"Background: {Dossier.Background.Name}";
 
 	string HeritageHelperText =>
-		$"Heritage: {Dossier.Heritage.Heritage.DisplayName()}";
+		$"Heritage: {Dossier.Heritage.Name}";
 
 	string ViceHelperText =>
-		$"Vice: {Dossier.Vice.Vice}";
+		$"Vice: {Dossier.Vice.Name}";
 }

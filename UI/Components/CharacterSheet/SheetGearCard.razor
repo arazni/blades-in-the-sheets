@@ -1,5 +1,6 @@
 ﻿@using Models.Characters
 @using Models.Common;
+@using Models.Settings;
 @using UI.Conveniences
 @using UI.Services
 @using static Models.Characters.GearItem;
@@ -81,9 +82,6 @@
 	[Parameter, EditorRequired]
 	public Character Character { get; set; } = Character.Empty();
 
-	[Parameter, EditorRequired]
-	public PlaybookOption Playbook { get; set; }
-
 	public Gear Gear => Character.Gear;
 
 	bool CommitmentLocked { get; set; } = false;
@@ -158,7 +156,7 @@
 		if (!IsAddItemEnabled)
 			return;
 
-		var item = new GearItem(addableItem.Bulk, addableItem.Name, SourceOption.Custom);
+		var item = new GearItem(addableItem.Bulk, addableItem.Name);
 		Gear.AddAvailableItem(item);
 		addableItem.Reset();
 	}

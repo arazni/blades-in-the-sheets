@@ -1,4 +1,5 @@
 ﻿@using Models.Characters
+@using Models.Settings;
 @using Persistence.Json
 @inject ILoader Loader
 
@@ -27,7 +28,10 @@
 @code
 {
 	[Parameter, EditorRequired]
-	public Playbook Playbook { get; set; } = new(PlaybookOption.Unknown);
+	public Playbook Playbook { get; set; } = Playbook.Empty();
+
+	[Parameter, EditorRequired]
+	public GameSetting? GameSetting { get; set; }
 
 	public PlaybookSpecialAbility[] AvailableAbilities { get; private set; } = new PlaybookSpecialAbility[0];
 
@@ -35,27 +39,20 @@
 
 	private void OnChosenAbilityChanged(PlaybookSpecialAbility value)
 	{
-		if (Playbook == null)
-			return;
-
 		Playbook.ClearAbilities();
 		ChosenAbility = value;
 		Playbook.TakeAbility(ChosenAbility);
 	}
 
-	protected override async Task OnParametersSetAsync()
+	protected override void OnInitialized()
 	{
-		_ = Playbook ?? throw new ArgumentNullException(nameof(Playbook));
+		AvailableAbilities = GameSetting!.GetPlaybookSetting(Playbook.Name)
+			.GetAvailableAbilities();
 
-		if (Playbook.Option == PlaybookOption.Unknown)
-			return;
-
-		AvailableAbilities = await Loader.LoadAvailableAbilitiesAsync(Playbook.Option.ToString());
-
-		await base.OnInitializedAsync();
+		base.OnInitialized();
 	}
 
 	public static string DisplayText(PlaybookSpecialAbility ability) =>
-		ability.TimesTakable == 1 ? ability.Name
-		: $"{ability.Name} (take once of {ability.TimesTakable} possible times)";
+		ability.TimesTakeable == 1 ? ability.Name
+		: $"{ability.Name} (take once of {ability.TimesTakeable} possible times)";
 }
