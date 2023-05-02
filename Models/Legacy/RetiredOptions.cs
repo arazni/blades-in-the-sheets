@@ -43,7 +43,7 @@ public static class RetiredOptions
 
 	public enum BackgroundOption
 	{
-		Unknown,
+		Unknown = 0,
 		Academic,
 		Labor,
 		Law,
@@ -81,6 +81,7 @@ public static class RetiredOptions
 
 	public enum PlaybookOption
 	{
+		Unknown = 0,
 		Cutter,
 		Hound,
 		Leech,

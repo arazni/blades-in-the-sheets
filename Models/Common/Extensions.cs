@@ -25,6 +25,9 @@ public static class Extensions
 	public static bool Has(this IEnumerable<string> source, string item) =>
 		item.In(source);
 
+	public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable) =>
+		enumerable == null || !enumerable.Any();
+
 	public static bool HasInk(this string source) =>
 		!string.IsNullOrWhiteSpace(source);
 

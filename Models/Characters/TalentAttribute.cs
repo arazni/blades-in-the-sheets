@@ -6,6 +6,7 @@ namespace Models.Characters;
 
 public class TalentAttribute : IRollable
 {
+	[JsonConstructor]
 	private TalentAttribute() { }
 
 	public TalentAttribute(AttributeSetting setting, int actionPointsMaximum)

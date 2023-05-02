@@ -5,13 +5,17 @@ namespace Models.Characters;
 
 public class TalentAction : IRollable
 {
-	private TalentAction() { }
+	private readonly BoundedInteger rating;
 
-	private readonly BoundedInteger rating = new(4);
-
-	public TalentAction(int actionPointsMaximum)
+	public TalentAction(int maxRating)
 	{
-		this.rating = new BoundedInteger(actionPointsMaximum);
+		this.rating = new BoundedInteger(maxRating);
+	}
+
+	public int MaxRating
+	{
+		get => this.rating.Max;
+		private set => this.rating.Max = value;
 	}
 
 	public int Rating
@@ -20,11 +24,8 @@ public class TalentAction : IRollable
 		set => this.rating.Value = value;
 	}
 
-	public int MaxRating =>
-		this.rating.Max;
-
 	public bool HasMaxRating =>
 		MaxRating == this.rating.Value;
 
-	public static TalentAction Empty() => new();
+	public static TalentAction Empty() => new(4);
 }

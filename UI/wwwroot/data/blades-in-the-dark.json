@@ -1031,5 +1031,5 @@
 		"Bulk": "Bulk"
 	},
 	"RecoveryClockSize": 4,
-	"ActionPointMaximum": 1
+	"ActionPointMaximum": 4
 }

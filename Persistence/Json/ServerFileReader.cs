@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Models.Common;
+using Newtonsoft.Json;
 using Persistence.Json.DataModels;
 
 namespace Persistence.Json;
@@ -9,10 +10,16 @@ public class ServerFileReader : IFileReader
 
 	private static string GetDataDirectoryPath()
 	{
-		DirectoryInfo directory = new(Directory.GetCurrentDirectory());
+		var cwd = Directory.GetCurrentDirectory().Split(Path.DirectorySeparatorChar);
+		var binIndex = cwd.TakeWhile(directory => directory != "bin").Count();
+		cwd[binIndex - 1] = "UI";
+
+		DirectoryInfo directory = new(cwd.Join(Path.DirectorySeparatorChar.ToString()));
 
 		directory = directory.EnumerateDirectories()
-			.FirstOrDefault(d => d.Name == "Data")
+			.FirstOrDefault(d => d.Name == "wwwroot")
+			?.EnumerateDirectories()
+			.FirstOrDefault(d => d.Name == "data")
 			?? throw new DirectoryNotFoundException($"Data is not a subdirectory of {directory.FullName}");
 
 		return directory.FullName;

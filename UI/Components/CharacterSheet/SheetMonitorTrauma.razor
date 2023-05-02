@@ -35,7 +35,7 @@
 	public bool IsFixMode { get; set; }
 
 	[Parameter, EditorRequired]
-	public Monitor Monitor { get; set; } = new();
+	public Monitor Monitor { get; set; } = Monitor.Empty();
 
 	[Parameter, EditorRequired]
 	public IReadOnlyCollection<string> TraumaOptions { get; set; } = Array.Empty<string>();

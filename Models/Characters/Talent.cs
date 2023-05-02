@@ -4,6 +4,8 @@ namespace Models.Characters;
 
 public class Talent
 {
+	private Dictionary<string, TalentAttribute> attributesByName = new();
+
 	private Talent() { }
 
 	public Talent(AttributeSetting[] attributes, DefaultActionPointSetting[] defaultPoints, int actionPointMaximum)
@@ -19,7 +21,16 @@ public class Talent
 			throw new ArgumentOutOfRangeException(nameof(defaultPoints));
 	}
 
-	public IReadOnlyDictionary<string, TalentAttribute> AttributesByName { get; set; } = new Dictionary<string, TalentAttribute>();
+	public IReadOnlyDictionary<string, TalentAttribute> AttributesByName
+	{
+		get => this.attributesByName;
+		private set => this.attributesByName = value.ToDictionary
+		(
+			k => k.Key,
+			v => v.Value,
+			StringComparer.OrdinalIgnoreCase
+		);
+	}
 
 	public IReadOnlyDictionary<string, TalentAction> ActionsByName =>
 		AttributesByName.Values

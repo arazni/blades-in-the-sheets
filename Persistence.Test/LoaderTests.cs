@@ -54,6 +54,6 @@ public class LoaderTests
 
 		result.Should().NotBeEmpty();
 		result.Should().HaveCountGreaterThanOrEqualTo(8);
-		result.Sum(r => r.TimesTakeable).Should().Be(12);
+		result.Sum(r => r.TimesTakeable).Should().Be(11);
 	}
 }

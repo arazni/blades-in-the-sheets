@@ -4,6 +4,7 @@ using Models.Common;
 using Models.Settings;
 using Newtonsoft.Json;
 using Persistence.Json;
+using Persistence.Json.Migrations;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,12 +18,14 @@ public class SerializerTests
 	private readonly ISerializer serializer;
 	private readonly ILoader loader;
 	private readonly ICharacterCoordinator characterCoordinator;
+	private readonly IMigrationHandler migrationHandler;
 
 	public SerializerTests()
 	{
 		this.serializer = new Serializer();
 		this.loader = new Loader(new ServerFileReader());
 		this.characterCoordinator = new CharacterCoordinator(this.loader);
+		this.migrationHandler = new MigrationHandler();
 	}
 
 	[Fact]
@@ -138,7 +141,7 @@ public class SerializerTests
 	[Fact]
 	public async Task<(string, string)> Serializer_Serializes_LurkCharacter()
 	{
-		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
+		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Lurk.ToString());
 		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1));
 
 		character.Rolodex.ReplaceFriends(new[] { new RolodexFriend("Favorite"), new RolodexFriend("Rival"), new RolodexFriend("3") });
@@ -172,7 +175,8 @@ public class SerializerTests
 	[Fact]
 	public void Serializer_Deserializes_RealCharacter()
 	{
-		var character = this.serializer.Deserialize(JsonJunk.SpiderJson);
+		var migratedJson = this.migrationHandler.Migrate(JsonJunk.SpiderJsonV1);
+		var character = this.serializer.Deserialize(migratedJson);
 		character.Should().NotBeNull();
 		character.Playbook.Name.Should().Be(PlaybookOption.Spider.ToString());
 		character.Talent.AttributesByName[AttributeName.Insight.ToString()].Experience.MaxPoints.Should().BeGreaterThan(0);
@@ -216,134 +220,4 @@ public class FieldClass
 public class ContainerClass
 {
 	public FieldClass SomeField { get; set; } = new FieldClass(0, 100);  // <-- default value here
-}
-
-public class JsonJunk
-{
-	public const string SpiderJson = @"
-{
-  ""Id"": ""e8b8e79a-7823-4adf-9716-d5e7312c76a4"",
-  ""Dossier"": {
-    ""Name"": ""Billina"",
-    ""CrewId"": """",
-    ""Alias"": ""Thorn"",
-    ""Look"": ""Brooding bookworm"",
-    ""Notes"": """",
-    ""Background"": {
-      ""Background"": 1,
-      ""Description"": ""I have to know everything""
-    },
-    ""Heritage"": {
-      ""Heritage"": 3,
-      ""Description"": ""Strange stuff happens here""
-    },
-    ""Vice"": {
-      ""Vice"": 3,
-      ""Description"": ""Harvale Brogan, the Centuralia Club, Brightstone.""
-    }
-  },
-  ""Monitor"": {
-    ""Stress"": {
-      ""CurrentStress"": 0
-    },
-    ""Trauma"": {},
-    ""Harm"": {}
-  },
-  ""Talent"": {
-    ""Insight"": {
-      ""Hunt"": {
-        ""Rating"": 0,
-        ""PlaybookDefault"": 0
-      },
-      ""Study"": {
-        ""Rating"": 2,
-        ""PlaybookDefault"": 1
-      },
-      ""Survey"": {
-        ""Rating"": 1,
-        ""PlaybookDefault"": 0
-      },
-      ""Tinker"": {
-        ""Rating"": 0,
-        ""PlaybookDefault"": 0
-      },
-      ""Experience"": {
-        ""Points"": 0,
-				""MaxPoints"": 6
-      }
-    },
-    ""Prowess"": {
-      ""Finesse"": {
-        ""Rating"": 0,
-        ""PlaybookDefault"": 0
-      },
-      ""Prowl"": {
-        ""Rating"": 1,
-        ""PlaybookDefault"": 0
-      },
-      ""Skirmish"": {
-        ""Rating"": 0,
-        ""PlaybookDefault"": 0
-      },
-      ""Wreck"": {
-        ""Rating"": 0,
-        ""PlaybookDefault"": 0
-      },
-      ""Experience"": {
-        ""Points"": 0,
-				""MaxPoints"": 6
-      }
-    },
-    ""Resolve"": {
-      ""Attune"": {
-        ""Rating"": 0,
-        ""PlaybookDefault"": 0
-      },
-      ""Command"": {
-        ""Rating"": 0,
-        ""PlaybookDefault"": 0
-      },
-      ""Consort"": {
-        ""Rating"": 2,
-        ""PlaybookDefault"": 2
-      },
-      ""Sway"": {
-        ""Rating"": 1,
-        ""PlaybookDefault"": 0
-      },
-      ""Experience"": {
-        ""Points"": 0,
-				""MaxPoints"": 6
-      }
-    }
-  },
-  ""Playbook"": {
-    ""AbilitiesByName"": {
-      ""Connected"": {
-        ""Name"": ""Connected"",
-        ""Description"": ""During downtime, you get +1 result level when you acquire an asset or reduce heat."",
-        ""TimesTaken"": 0,
-        ""Source"": 6
-      }
-    },
-    ""Experience"": {
-      ""Points"": 0,
-			""MaxPoints"": 6
-    },
-    ""Option"": 6
-  },
-  ""Gear"": {
-    ""Commitment"": {}
-  },
-  ""Fund"": {
-    ""Satchel"": {
-      ""Coins"": 0
-    },
-    ""Stash"": {
-      ""Stash"": 0
-    }
-  },
-  ""Rolodex"": {}
-}
-";
 }

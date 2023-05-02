@@ -6,6 +6,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 		<RunAOTCompilation>true</RunAOTCompilation>
+		<PublishTrimmed>true</PublishTrimmed>
+		<SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
+		<InvariantGlobalization>true</InvariantGlobalization>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -26,11 +29,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="Data\*">
+		<Content Update="wwwroot\data\blades-in-the-dark.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
+		</Content>
+		<Content Update="wwwroot\data\games.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties wwwroot_4data_4blades-in-the-dark_1json__JsonSchema="game-settings-schema.json" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties wwwroot_4data_4blades-in-the-dark_1json__JsonSchema="game-settings-schema.json" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

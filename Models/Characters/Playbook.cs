@@ -14,12 +14,12 @@ public class Playbook
 	public IReadOnlyDictionary<string, PlaybookSpecialAbility> AbilitiesByName
 	{
 		get => this.abilitiesByName;
-		private set { this.abilitiesByName = value.ToDictionary(k => k.Key, v => v.Value); } // json
+		private set => this.abilitiesByName = value.ToDictionary(k => k.Key, v => v.Value); // json
 	}
 
 	public ExperienceTracker Experience { get; private set; } = new(8);
 
-	public string Name { get; }
+	public string Name { get; private set; }
 
 	public bool TakeAbility(PlaybookSpecialAbility ability)
 	{

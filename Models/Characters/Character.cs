@@ -1,11 +1,18 @@
-﻿using Models.Common;
-using Models.Settings;
+﻿using Models.Settings;
+using Newtonsoft.Json;
 
 namespace Models.Characters;
 
 public partial class Character
 {
-	private Character() { }
+	[JsonConstructor]
+	private Character()
+	{
+		Playbook = Playbook.Empty();
+		Talent = Talent.Empty();
+		Monitor = Monitor.Empty();
+		GameName = string.Empty;
+	}
 
 	public Character(GameSetting game, string playbookName)
 	{
@@ -13,22 +20,26 @@ public partial class Character
 		Talent = new
 		(
 			game.Attributes,
-			game.Playbooks.First(playbookSetting => playbookSetting.Name.Like(playbookName)).DefaultActionPoints,
+			game.GetPlaybookSetting(playbookName).DefaultActionPoints,
 			game.ActionPointMaximum
 		);
+		Monitor = new(game.RecoveryClockSize);
+		GameName = game.Name;
 	}
 
 	public string Id { get; private set; } = Guid.NewGuid().ToString();
 
-	public string GameName { get; private set; } = Constants.Games.BladesInTheDark;
+	public string GameName { get; private set; }
+
+	public int? Version { get; private set; }
 
 	public Dossier Dossier { get; private set; } = new();
 
-	public Monitor Monitor { get; private set; } = new();
+	public Monitor Monitor { get; private set; }
 
-	public Talent Talent { get; private set; } = Talent.Empty();
+	public Talent Talent { get; private set; }
 
-	public Playbook Playbook { get; private set; } = Playbook.Empty();
+	public Playbook Playbook { get; private set; }
 
 	public Gear Gear { get; private set; } = new();
 
