@@ -23,4 +23,12 @@ public class MigratorTests
 		output.Should().ContainAll("\"ActionsByName\":", "\"AttributesByName\":", "\"Version\": 2");
 		this.serializer.Deserialize(output);
 	}
+
+	[Fact]
+	public void Migrator_HandlesAlreadyMigrated()
+	{
+		var output = this.migrator.Migrate(JsonJunk.SpiderJsonV1);
+		output = this.migrator.Migrate(output);
+		this.serializer.Deserialize(output);
+	}
 }

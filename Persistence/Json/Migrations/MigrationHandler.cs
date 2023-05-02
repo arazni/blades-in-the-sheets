@@ -5,15 +5,20 @@ namespace Persistence.Json.Migrations;
 
 public class MigrationHandler : IMigrationHandler
 {
+	private const int MaxVersion = 2; // optimization
+
 	public string Migrate(string json)
 	{
 		var jObject = JObject.Parse(json);
 
 		int version;
-		if (jObject.SelectToken("$.Version") is not JValue jVersion || !jVersion.HasValues)
+		if (jObject.SelectToken("$.Version") is not JValue jVersion)
 			version = 1;
 		else
 			version = jVersion.Value<int>();
+
+		if (version == MaxVersion)
+			return json;
 
 		JsonVersion jsonVersion = new
 		(

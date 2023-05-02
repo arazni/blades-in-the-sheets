@@ -30,7 +30,7 @@ public static class Version2
 		ReplacePlaybookDefaultsWithMaxRatings(jObject);
 
 		ReplaceDossierChildName(jObject, "Background", (i) => ((BackgroundOption)i).ToString());
-		ReplaceDossierChildName(jObject, "Heritage", (i) => ((HeritageOption)i).ToString());
+		ReplaceDossierChildName(jObject, "Heritage", (i) => ((HeritageOption)i).Description());
 		ReplaceDossierChildName(jObject, "Vice", (i) => ((ViceOption)i).ToString());
 
 		NestProperty(jObject, "$.Talent", "AttributesByName");

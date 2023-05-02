@@ -60,12 +60,18 @@ public class StorageService : IStorageService
 	public async Task Delete(string id) =>
 		await this.storageService.RemoveItemAsync(CharacterKey(id));
 
-	public async Task<string> GetFile(string id) =>
-		await this.storageService.GetItemAsStringAsync(CharacterKey(id));
+	public async Task<string> GetFile(string id)
+	{
+		var json = await this.storageService.GetItemAsStringAsync(CharacterKey(id));
+
+		return this.migrator.Migrate(json);
+	}
 
 	public async Task PutFile(string json)
 	{
-		var character = this.serializer.Deserialize(json);
+		var migratedJson = this.migrator.Migrate(json);
+
+		var character = this.serializer.Deserialize(migratedJson);
 
 		if (character == null) return;
 
