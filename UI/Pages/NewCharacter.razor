@@ -24,7 +24,7 @@
 {
 	public string GameName { get; set; } = string.Empty;
 
-	GameSetting? GameSetting { get; set; }
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
 	protected override async Task OnInitializedAsync()
 	{

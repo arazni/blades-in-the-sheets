@@ -38,7 +38,7 @@
 	public Character Character { get; set; } = Character.Empty();
 
 	[Parameter, EditorRequired]
-	public GameSetting? GameSetting { get; set; }
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
 	Playbook Playbook => Character.Playbook;
 
@@ -65,7 +65,7 @@
 
 	protected override void OnInitialized()
 	{
-		AvailableAbilities = GameSetting!.GetPlaybookSetting(Playbook.Name)
+		AvailableAbilities = GameSetting.GetPlaybookSetting(Playbook.Name)
 			.GetAvailableAbilities();
 
 		SheetJank.AbilitiesChanged += StateHasChanged;

@@ -40,7 +40,6 @@
 				<CardHeaderActions>
 					@if (Characters.Any())
 					{
-
 						<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" @bind-Toggled="IsDownloadMode" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Download" ToggledIcon="@Icons.Material.Filled.FileDownloadOff" Title="Enable Download Mode" ToggledTitle="Disable Download Mode" />
 						<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" @bind-Toggled="IsDeleteMode" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Delete" ToggledIcon="@Icons.Material.Filled.Cancel" Title="Enable Delete Mode" ToggledTitle="Disable Delete Mode" />
 					}
@@ -98,13 +97,12 @@
 			gameSetting => gameSetting
 		);
 
-		Characters = characters.Select(c => new VIndexCharacter
+		Characters = characters.Select(character => new VIndexCharacter
 			(
-				c,
-				gameSettingsByName[c.GameName].GetHeritage(c.Dossier.Heritage.Name).BlurbFlavor,
-				gameSettingsByName[c.GameName].GetBackground(c.Dossier.Background.Name).BlurbFlavor
+				gameSettingsByName[character.GameName],
+				character
 			))
-			.OrderBy(c => c.Alias)
+			.OrderBy(c => (c.GameName, c.Alias))
 			.ToArray();
 	}
 

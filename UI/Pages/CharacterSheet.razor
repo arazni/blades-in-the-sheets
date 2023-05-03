@@ -1,28 +1,29 @@
 ﻿@page "/sheets/{Id}"
 @using Models.Characters
+@using Models.Settings;
+@using Persistence.Json;
 @using UI.Components
 @using UI.Components.CharacterSheet
 @using UI.Services
 @inject IStorageService Storage
-
-@if (Character == null) { return; }
+@inject ILoader Loader
 
 <MudContainer MaxWidth="MaxWidth.ExtraLarge">
 	<MudGrid>
 		<MudItem xs="12" lg="6">
 			<MudStack>
 				<SheetDossierCard Dossier="Character.Dossier" />
-				<SheetMonitorCard Character="Character" />
+				<SheetMonitorCard GameSetting="GameSetting" Character="Character" />
 				<SheetTalentCard Talent="Character.Talent" />
-				<SheetAbilitiesCard Character="Character" />
+				<SheetAbilitiesCard GameSetting="GameSetting" Character="Character" />
 			</MudStack>
 		</MudItem>
 		<MudItem xs="12" lg="6">
 			<MudStack>
-				<SheetRolodexCard Rolodex="Character.Rolodex" Playbook="Character.Playbook.Name" />
+				<SheetRolodexCard RolodexSetting="GameSetting.GetPlaybookSetting(Character.Playbook.Name).Rolodex" Rolodex="Character.Rolodex" Playbook="Character.Playbook.Name" />
 				<SheetGearCard Character="Character" Playbook="Character.Playbook.Name" />
 				<SheetFundCard Fund="Character.Fund" />
-				<SheetNotebookCard Character="Character" />
+				<SheetNotebookCard GameSetting="GameSetting" Character="Character" />
 			</MudStack>
 		</MudItem>
 	</MudGrid>
@@ -34,7 +35,9 @@
 	[Parameter, EditorRequired]
 	public string Id { get; set; } = string.Empty;
 
-	public Character? Character { get; set; }
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
+
+	public Character Character { get; set; } = Character.Empty();
 
 	private bool isSaving = false;
 
@@ -47,6 +50,7 @@
 	protected override async Task OnInitializedAsync()
 	{
 		Character = await Storage.Load(Id);
+		GameSetting = await Loader.LoadSettings(Character.GameName);
 	}
 
 	async Task Save()

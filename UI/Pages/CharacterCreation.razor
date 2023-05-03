@@ -1,5 +1,6 @@
 ﻿@page "/characters/{Id}"
 @using Models.Characters
+@using Models.Settings;
 @using Persistence.Json;
 @using UI.Components
 @using UI.Components.NewCharacter
@@ -9,52 +10,20 @@
 @inject IStorageService Storage
 @inject ICharacterCoordinator Coordinator
 @inject NavigationManager Navigator
+@inject ILoader Loader
 
-<MudHidden Breakpoint="Breakpoint.SmAndDown">
-	<MudTimeline TimelinePosition="@TimelinePosition.Start">
-		<MudTimelineItem>
-			<NewCharacterHeritageCard Heritage="@Character.Dossier.Heritage" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterBackgroundCard Background="@Character.Dossier.Background" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterActionDotsCard Character="@Character" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterSpecialAbilityCard Playbook="@Character.Playbook" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookName="@Character.Playbook.Name" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterViceCard Vice="@Character.Dossier.Vice" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
-				Finish your scoundrel
-			</MudButton>
-		</MudTimelineItem>
-	</MudTimeline>
-</MudHidden>
-
-<MudHidden Breakpoint="Breakpoint.MdAndUp">
-	<MudStack>
-		<NewCharacterHeritageCard Heritage="@Character.Dossier.Heritage" />
-		<NewCharacterBackgroundCard Background="@Character.Dossier.Background" />
-		<NewCharacterActionDotsCard Character="@Character" />
-		<NewCharacterSpecialAbilityCard Playbook="@Character.Playbook" />
-		<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookName="@Character.Playbook.Name" />
-		<NewCharacterViceCard Vice="@Character.Dossier.Vice" />
-		<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
-		<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
-			Finish your scoundrel
-		</MudButton>
-	</MudStack>
-</MudHidden>
+<MudStack>
+	<NewCharacterHeritageCard HeritageSettings="GameSetting.Heritages" Heritage="@Character.Dossier.Heritage" />
+	<NewCharacterBackgroundCard BackgroundSettings="GameSetting.Backgrounds" Background="@Character.Dossier.Background" />
+	<NewCharacterActionDotsCard GameSetting="GameSetting" Character="@Character" />
+	<NewCharacterSpecialAbilityCard PlaybookSetting="PlaybookSetting" Playbook="@Character.Playbook" />
+	<NewCharacterFriendsCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="@Character.Rolodex" PlaybookName="@Character.Playbook.Name" />
+	<NewCharacterViceCard ViceSettings="GameSetting.Vices" Vice="@Character.Dossier.Vice" />
+	<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
+	<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
+		Finish your scoundrel
+	</MudButton>
+</MudStack>
 
 @code
 {
@@ -63,9 +32,15 @@
 
 	public Character Character { get; private set; } = Character.Empty();
 
+	public GameSetting GameSetting { get; private set; } = EmptyGameSetting.Game();
+
+	public PlaybookSetting PlaybookSetting => GameSetting.GetPlaybookSetting(Character.Playbook.Name);
+
 	protected override async Task OnInitializedAsync()
 	{
 		Character = await Storage.Load(Id);
+		GameSetting = await Loader.LoadSettings(Character.GameName);
+
 		await base.OnInitializedAsync();
 	}
 

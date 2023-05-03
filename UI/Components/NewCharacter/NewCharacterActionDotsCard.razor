@@ -57,13 +57,13 @@
 	public Character Character { get; set; } = Character.Empty();
 
 	[Parameter, EditorRequired]
-	public GameSetting? GameSetting { get; set; }
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
 	private V4ActionDots ViewModel { get; set; } = V4ActionDots.Empty();
 
 	protected override async Task OnInitializedAsync()
 	{
-		ViewModel = new(Character, GameSetting!, Character.Playbook.Name);
+		ViewModel = new(Character, GameSetting, Character.Playbook.Name);
 
 		await base.OnInitializedAsync();
 	}

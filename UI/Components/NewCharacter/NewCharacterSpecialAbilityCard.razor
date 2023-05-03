@@ -31,7 +31,7 @@
 	public Playbook Playbook { get; set; } = Playbook.Empty();
 
 	[Parameter, EditorRequired]
-	public GameSetting? GameSetting { get; set; }
+	public PlaybookSetting PlaybookSetting { get; set; } = EmptyGameSetting.Playbook();
 
 	public PlaybookSpecialAbility[] AvailableAbilities { get; private set; } = new PlaybookSpecialAbility[0];
 
@@ -46,8 +46,7 @@
 
 	protected override void OnInitialized()
 	{
-		AvailableAbilities = GameSetting!.GetPlaybookSetting(Playbook.Name)
-			.GetAvailableAbilities();
+		AvailableAbilities = PlaybookSetting.GetAvailableAbilities();
 
 		base.OnInitialized();
 	}

@@ -26,14 +26,14 @@
 	public string PlaybookName { get; set; } = string.Empty;
 
 	[Parameter, EditorRequired]
-	public GameSetting? GameSetting { get; set; }
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
 	[Parameter, EditorRequired]
 	public string Hook { get; set; } = string.Empty;
 
 	public async Task CreateCharacter()
 	{
-		var character = Coordinator.InitializeCharacter(GameSetting!, PlaybookName);
+		var character = Coordinator.InitializeCharacter(GameSetting, PlaybookName);
 		await Storage.Save(character);
 		Navigator.NavigateTo(Paths.Character(character.Id));
 	}

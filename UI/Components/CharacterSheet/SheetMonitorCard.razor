@@ -1,5 +1,6 @@
 @using Models.Characters
 @using Models.Common
+@using Models.Settings;
 @using UI.Services;
 @inject SheetJank SheetJank;
 @implements IDisposable;
@@ -13,7 +14,7 @@
 			</MudSlider>
 		</MudItem>
 		<MudItem xs="12">
-			<SheetMonitorTrauma IsFixMode="IsFixMode" Monitor="Monitor" />
+			<SheetMonitorTrauma IsFixMode="IsFixMode" Monitor="Monitor" TraumaOptions="GameSetting.Traumas" />
 		</MudItem>
 		<MudItem xs="12">
 			<SheetMonitorHarm IsFixMode="IsFixMode" Harm="Monitor.Harm" />
@@ -31,6 +32,9 @@
 {
 	[Parameter, EditorRequired]
 	public Character Character { get; set; } = Character.Empty();
+
+	[Parameter, EditorRequired]
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
 	public Monitor Monitor => Character.Monitor;
 

@@ -28,12 +28,12 @@
 	public Character Character { get; set; } = Character.Empty();
 
 	[EditorRequired, Parameter]
-	public GameSetting? GameSetting { get; set; }
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
 	protected override void OnInitialized()
 	{
-		playbookExperienceCondition = GameSetting!.GetPlaybookSetting(Character.Playbook.Name)
-		.ExperienceCondition;
+		playbookExperienceCondition = GameSetting.GetPlaybookSetting(Character.Playbook.Name)
+			.ExperienceCondition;
 
 		base.OnInitialized();
 	}
