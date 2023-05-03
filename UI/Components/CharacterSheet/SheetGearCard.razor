@@ -3,9 +3,8 @@
 @using Models.Settings;
 @using UI.Conveniences
 @using UI.Services
-@using static Models.Characters.GearItem;
+@using static Models.Characters.GearItem
 @inject SheetJank SheetJank
-@implements IDisposable
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Gear">
 	<MudStack>
@@ -32,7 +31,6 @@
 		</MudGrid>
 		<MudText Typo="Typo.h6">Loadout</MudText>
 		<MudStack>
-			<MudText>Coin (@Character.Fund.Satchel.Coins)</MudText>
 			@foreach (var item in Gear.Loadout)
 			{
 				@commitmentItemRenderer!(item)
@@ -131,14 +129,7 @@
 	{
 		commitmentItemRenderer = (i) => RenderCommitmentText(i);
 
-		Character.Fund.Satchel.SatchelChanged += StateHasChanged;
-
 		base.OnInitialized();
-	}
-
-	public void Dispose()
-	{
-		Character.Fund.Satchel.SatchelChanged -= StateHasChanged;
 	}
 
 	Func<GearItem, RenderFragment>? commitmentItemRenderer;
