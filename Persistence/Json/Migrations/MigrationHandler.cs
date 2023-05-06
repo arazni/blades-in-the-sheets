@@ -5,8 +5,6 @@ namespace Persistence.Json.Migrations;
 
 public class MigrationHandler : IMigrationHandler
 {
-	private const int MaxVersion = 2; // optimization
-
 	public string Migrate(string json)
 	{
 		var jObject = JObject.Parse(json);
@@ -31,32 +29,4 @@ public class MigrationHandler : IMigrationHandler
 
 		return final.Json.ToString();
 	}
-
-	//public VersionResult NeedsToMigrate(string fileName)
-	//{
-	//	var pieces = fileName.Split('.');
-
-	//	if (pieces.IsNullOrEmpty() || !pieces.Last().Like("json"))
-	//		throw new ApplicationException("Expecting the file name to end with .json");
-
-	//	if (pieces.Length == 2)
-	//		return new(1, true);
-
-	//	string possibleVersion = pieces[^2];
-
-	//	if (!possibleVersion.StartsWith("version"))
-	//		//throw new ApplicationException("Expecting the file name to end with .version{number}.json, where {number} is the file version");
-	//		return new(1, true);
-
-	//	var versionText = possibleVersion["version".Length..];
-
-	//	if (!int.TryParse(versionText, out var versionNumber))
-	//		//throw new ApplicationException("Expecting the file name to end with .version{number}.json, where {number} is the file version");
-	//		return new(1, true);
-
-	//	if (versionNumber < MaxMigrationVersion)
-	//		return new(versionNumber, true);
-
-	//	return new(versionNumber, false);
-	//}
 }

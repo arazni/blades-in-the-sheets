@@ -63,11 +63,14 @@
 
 	PlaybookSpecialAbility? SelectedAbility { get; set; }
 
-	protected override void OnInitialized()
+	protected override void OnParametersSet()
 	{
 		AvailableAbilities = GameSetting.GetPlaybookSetting(Playbook.Name)
 			.GetAvailableAbilities();
+	}
 
+	protected override void OnInitialized()
+	{
 		SheetJank.AbilitiesChanged += StateHasChanged;
 
 		base.OnInitialized();

@@ -12,7 +12,8 @@ public record GameSetting
 	GearItemSetting[] SharedItems,
 	ThesaurusSetting Thesaurus,
 	int RecoveryClockSize,
-	int ActionPointMaximum
+	int ActionPointMaximum,
+	StartingAbilitySetting? StartingAbility = null
 );
 
 public record PlaybookSetting
@@ -90,4 +91,24 @@ public record ThesaurusSetting
 (
 	string Coin = "Coin",
 	string Bulk = "Bulk"
+);
+
+public record StartingAbilitySetting
+(
+	PlaybookStartingAbilitySetting[] PlaybookStartingAbilities,
+	HeritageStartingAbilitySetting[] HeritageStartingAbilities
+);
+
+public record PlaybookStartingAbilitySetting
+(
+	string Playbook,
+	string Name,
+	string Description
+);
+
+public record HeritageStartingAbilitySetting
+(
+	string Heritage,
+	string Name,
+	string Description
 );

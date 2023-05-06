@@ -49,7 +49,7 @@
 
 	void LevelUp()
 	{
-		if (Attribute.LevelUp(ActionName))
+		if (!Attribute.LevelUp(ActionName))
 			return;
 
 		Notify();

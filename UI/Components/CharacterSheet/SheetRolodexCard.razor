@@ -1,7 +1,7 @@
 @using Models.Characters
 @using Models.Settings;
 
-<SheetCard @bind-IsFixMode="IsFixMode" Header="@RolodexSetting?.Name">
+<SheetCard @bind-IsFixMode="IsFixMode" Header="@RolodexSetting.Name">
 	@foreach (var friend in Rolodex.Friends)
 	{
 		<MudStack Row="true">
@@ -38,7 +38,7 @@
 	public Rolodex Rolodex { get; set; } = new();
 
 	[Parameter, EditorRequired]
-	public RolodexSetting? RolodexSetting { get; set; }
+	public RolodexSetting RolodexSetting { get; set; } = EmptyGameSetting.Rolodex();
 
 	bool IsFixMode { get; set; } = false;
 

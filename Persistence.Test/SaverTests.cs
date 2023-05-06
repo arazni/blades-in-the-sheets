@@ -1,6 +1,7 @@
 ﻿using Models.Characters;
 using Models.Settings;
 using Persistence.Json;
+using Persistence.Json.Migrations;
 using System.Threading.Tasks;
 using Xunit;
 using static Models.Legacy.RetiredOptions;
@@ -22,6 +23,6 @@ public class SaverTests
 	public async Task SavesEmptyCharacter()
 	{
 		var gameSetting = await this.loader.LoadSettings(Constants.Games.BladesInTheDark);
-		await this.saver.Save(new Character(gameSetting, PlaybookOption.Lurk.ToString()));
+		await this.saver.Save(new Character(gameSetting, PlaybookOption.Lurk.ToString(), IMigrationHandler.MaxVersion));
 	}
 }

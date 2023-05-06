@@ -53,6 +53,8 @@
 	protected override void OnInitialized()
 	{
 		SheetJank.TraumaChanged += StateHasChanged;
+
+		base.OnInitialized();
 	}
 
 	public void Dispose()

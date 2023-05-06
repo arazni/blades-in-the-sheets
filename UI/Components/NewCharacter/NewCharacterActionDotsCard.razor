@@ -61,10 +61,10 @@
 
 	private V4ActionDots ViewModel { get; set; } = V4ActionDots.Empty();
 
-	protected override async Task OnInitializedAsync()
+	protected override void OnParametersSet()
 	{
 		ViewModel = new(Character, GameSetting, Character.Playbook.Name);
 
-		await base.OnInitializedAsync();
+		base.OnParametersSet();
 	}
 }

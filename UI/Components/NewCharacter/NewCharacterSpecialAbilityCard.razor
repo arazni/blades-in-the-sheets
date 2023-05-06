@@ -44,11 +44,11 @@
 		Playbook.TakeAbility(ChosenAbility);
 	}
 
-	protected override void OnInitialized()
+	protected override void OnParametersSet()
 	{
 		AvailableAbilities = PlaybookSetting.GetAvailableAbilities();
 
-		base.OnInitialized();
+		base.OnParametersSet();
 	}
 
 	public static string DisplayText(PlaybookSpecialAbility ability) =>

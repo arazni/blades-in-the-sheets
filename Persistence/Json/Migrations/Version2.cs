@@ -34,9 +34,9 @@ public static class Version2
 		ReplaceDossierChildName(jObject, "Vice", (i) => ((ViceOption)i).ToString());
 
 		NestProperty(jObject, "$.Talent", "AttributesByName");
-		NestProperty(jObject, "$.Talent..Insight", "ActionsByName");
-		NestProperty(jObject, "$.Talent..Prowess", "ActionsByName");
-		NestProperty(jObject, "$.Talent..Resolve", "ActionsByName");
+		NestProperty(jObject, "$.Talent..Insight", "ActionsByName", "Experience");
+		NestProperty(jObject, "$.Talent..Prowess", "ActionsByName", "Experience");
+		NestProperty(jObject, "$.Talent..Resolve", "ActionsByName", "Experience");
 
 		AddObject(jObject, "$.Gear.AvailableGearByName", "A Coin", new { Bulk = 1, Name = "A Coin" });
 		AddObject(jObject, "$.Gear.AvailableGearByName", "2 Coin", new { Bulk = 2, Name = "2 Coin" });
@@ -104,14 +104,17 @@ public static class Version2
 			property.Remove();
 	}
 
-	private static void NestProperty(JObject json, string path, string childPropertyName)
+	private static void NestProperty(JObject json, string path, string childPropertyName, params string[] excludingPropertyNames)
 	{
 		var parentProperty = json.SelectToken(path) as JObject
 			?? throw Error(path);
 
 		var children = parentProperty.DeepClone();
 
-		foreach (var child in parentProperty.Children().ToArray())
+		foreach (var child in children.Children().IntersectBy(excludingPropertyNames, token => (token as JProperty)?.Name).ToArray())
+			child.Remove();
+
+		foreach (var child in parentProperty.Children().ExceptBy(excludingPropertyNames, token => (token as JProperty)?.Name).ToArray())
 			child.Remove();
 
 		parentProperty.Add(childPropertyName, children);

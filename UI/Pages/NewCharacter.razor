@@ -1,4 +1,4 @@
-﻿@page "/new/{GameName}"
+﻿@page "/new/{GameName?}"
 @using Models.Characters
 @using Models.Settings
 @using Persistence.Json
@@ -7,33 +7,37 @@
 @inject ILoader Loader
 
 <MudContainer MaxWidth="MaxWidth.Small">
-	<MudGrid AlignItems="AlignItems.Center">
-		<MudItem xs="12">
-			<MudText Align="Align.Center" Typo="Typo.h2">Choose a Playbook.</MudText>
-		</MudItem>
-		@foreach (var (book, hook) in options)
-		{
-			<MudItem xs="12">
-				<NewCharacterPlaybookOption GameSetting="GameSetting" PlaybookName="@book" Hook="@hook" />
-			</MudItem>
-		}
-	</MudGrid>
+	<MudStack>
+		<MudText Typo="Typo.h3" Align="Align.Center">@GameName</MudText>
+		<MudText Typo="Typo.h4" Align="Align.Center">Choose a playbook.</MudText>
+		<MudGrid AlignItems="AlignItems.Center">
+			@foreach (var (book, hook) in options)
+			{
+				<MudItem xs="12">
+					<NewCharacterPlaybookOption GameSetting="GameSetting" PlaybookName="@book" Hook="@hook" />
+				</MudItem>
+			}
+		</MudGrid>
+	</MudStack>
 </MudContainer>
 
 @code
 {
-	public string GameName { get; set; } = string.Empty;
+	[Parameter]
+	public string? GameName { get; set; } = string.Empty;
 
 	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
+		GameName ??= Models.Settings.Constants.Games.BladesInTheDark;
+
 		GameSetting = await Loader.LoadSettings(GameName);
 
 		options = GameSetting.Playbooks.Select(p => (p.Name, p.Hook))
 			.ToArray();
 
-		await base.OnInitializedAsync();
+		await base.OnParametersSetAsync();
 	}
 
 	private (string, string)[] options = Array.Empty<(string, string)>();

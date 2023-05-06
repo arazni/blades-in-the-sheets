@@ -20,8 +20,8 @@
 		</MudItem>
 		<MudItem xs="12" lg="6">
 			<MudStack>
-				<SheetRolodexCard RolodexSetting="GameSetting.GetPlaybookSetting(Character.Playbook.Name).Rolodex" Rolodex="Character.Rolodex" Playbook="Character.Playbook.Name" />
-				<SheetGearCard Character="Character" Playbook="Character.Playbook.Name" />
+				<SheetRolodexCard RolodexSetting="GameSetting.GetPlaybookSetting(Character.Playbook.Name).Rolodex" Rolodex="Character.Rolodex" />
+				<SheetGearCard Character="Character" />
 				<SheetFundCard Fund="Character.Fund" />
 				<SheetNotebookCard GameSetting="GameSetting" Character="Character" />
 			</MudStack>
@@ -47,10 +47,12 @@
 	string SaveIcon => isSaving ? Icons.Material.Filled.CheckCircle
 		: Icons.Material.Filled.Save;
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
 		Character = await Storage.Load(Id);
 		GameSetting = await Loader.LoadSettings(Character.GameName);
+
+		await base.OnParametersSetAsync();
 	}
 
 	async Task Save()

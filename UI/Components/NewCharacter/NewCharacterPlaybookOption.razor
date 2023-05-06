@@ -1,10 +1,8 @@
 ﻿@using Models.Characters
-@using Models.Settings;
-@using Persistence.Json;
+@using Models.Settings
+@using Persistence.Json
 @using UI.Services
-@using static UI.Constants;
-@inject IStorageService Storage
-@inject ICharacterCoordinator Coordinator
+@using static UI.Constants
 @inject NavigationManager Navigator
 
 <MudCard Outlined="true" Class="mx-4 my-1">
@@ -31,10 +29,8 @@
 	[Parameter, EditorRequired]
 	public string Hook { get; set; } = string.Empty;
 
-	public async Task CreateCharacter()
+	public void CreateCharacter()
 	{
-		var character = Coordinator.InitializeCharacter(GameSetting, PlaybookName);
-		await Storage.Save(character);
-		Navigator.NavigateTo(Paths.Character(character.Id));
+		Navigator.NavigateTo(Paths.NewCharacter(GameSetting.Name, PlaybookName));
 	}
 }

@@ -1,4 +1,4 @@
-﻿@page "/characters/{Id}"
+﻿@page "/new/{GameName}/{PlaybookName}"
 @using Models.Characters
 @using Models.Settings;
 @using Persistence.Json;
@@ -27,8 +27,14 @@
 
 @code
 {
-	[Parameter, EditorRequired]
+	[Parameter]
 	public string Id { get; set; } = string.Empty;
+
+	[Parameter]
+	public string GameName { get; set; } = string.Empty;
+
+	[Parameter]
+	public string PlaybookName { get; set; } = string.Empty;
 
 	public Character Character { get; private set; } = Character.Empty();
 
@@ -36,12 +42,12 @@
 
 	public PlaybookSetting PlaybookSetting => GameSetting.GetPlaybookSetting(Character.Playbook.Name);
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
-		Character = await Storage.Load(Id);
-		GameSetting = await Loader.LoadSettings(Character.GameName);
+		GameSetting = await Loader.LoadSettings(GameName);
+		Character = Coordinator.InitializeCharacter(GameSetting, PlaybookName);
 
-		await base.OnInitializedAsync();
+		await base.OnParametersSetAsync();
 	}
 
 	public async Task SaveAsync()

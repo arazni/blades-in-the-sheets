@@ -4,22 +4,20 @@ public static class Constants
 {
 	public static class Classes
 	{
-		public static string DisplayNone(bool isDisplayNone) => isDisplayNone ? "d-none" : string.Empty;
+		public static string DisplayNone(bool isDisplayNone) => isDisplayNone ? "display: none;" : string.Empty;
 
-		public static string Display(bool isDisplay) => isDisplay ? string.Empty : "d-none";
+		public static string Display(bool isDisplay) => isDisplay ? string.Empty : "display: none;";
 	}
 
 	public static class Paths
 	{
 		public const string New = "new";
 
-		public const string Characters = "characters";
-
 		public const string Sheets = "sheets";
 
 		public const string Tips = "tip-jar";
 
-		public static string Character(string id) => $"{Characters}/{id}";
+		public static string NewCharacter(string game, string playbook) => $"{New}/{game}/{playbook}";
 
 		public static string Sheet(string id) => $"{Sheets}/{id}";
 	}

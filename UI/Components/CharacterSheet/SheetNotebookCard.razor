@@ -8,7 +8,7 @@
 		<MudText Typo="Typo.body1">At the end of each session, for each item below, mark 1 xp (in your playbook or an attribute) or 2 xp if that item occurred multiple times.</MudText>
 		<MudStack AlignItems="AlignItems.Center" Row="true">
 			<MudRating @bind-SelectedValue="Character.Session.PlaybookExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
-			<MudText Typo="Typo.body1">@playbookExperienceCondition.</MudText>
+			<MudText Typo="Typo.body1">@PlaybookExperienceCondition.</MudText>
 		</MudStack>
 		<MudStack AlignItems="AlignItems.Center" Row="true">
 			<MudRating @bind-SelectedValue="Character.Session.CharacterExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
@@ -30,13 +30,6 @@
 	[EditorRequired, Parameter]
 	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
-	protected override void OnInitialized()
-	{
-		playbookExperienceCondition = GameSetting.GetPlaybookSetting(Character.Playbook.Name)
-			.ExperienceCondition;
-
-		base.OnInitialized();
-	}
-
-	string playbookExperienceCondition = string.Empty;
+	string PlaybookExperienceCondition => GameSetting.GetPlaybookSetting(Character.Playbook.Name)
+		.ExperienceCondition;
 }

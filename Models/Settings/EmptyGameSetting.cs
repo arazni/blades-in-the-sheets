@@ -15,7 +15,7 @@ public static class EmptyGameSetting
 		string.Empty,
 		string.Empty,
 		Array.Empty<SpecialAbilitySetting>(),
-		RolodexSetting(),
+		Rolodex(),
 		Array.Empty<GearItemSetting>(),
 		Array.Empty<DefaultActionPointSetting>(),
 		string.Empty
@@ -38,7 +38,7 @@ public static class EmptyGameSetting
 
 	public static HeritageSetting[] Heritages() => Array.Empty<HeritageSetting>();
 
-	public static RolodexSetting RolodexSetting() => rolodex;
+	public static RolodexSetting Rolodex() => rolodex;
 
 	public static ViceSetting[] Vices() => Array.Empty<ViceSetting>();
 

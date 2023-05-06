@@ -14,7 +14,7 @@ public partial class Character
 		GameName = string.Empty;
 	}
 
-	public Character(GameSetting game, string playbookName)
+	public Character(GameSetting game, string playbookName, int version)
 	{
 		Playbook = new(playbookName);
 		Talent = new
@@ -25,13 +25,14 @@ public partial class Character
 		);
 		Monitor = new(game.RecoveryClockSize);
 		GameName = game.Name;
+		Version = version;
 	}
 
 	public string Id { get; private set; } = Guid.NewGuid().ToString();
 
 	public string GameName { get; private set; }
 
-	public int? Version { get; private set; }
+	public int Version { get; private set; }
 
 	public Dossier Dossier { get; private set; } = new();
 

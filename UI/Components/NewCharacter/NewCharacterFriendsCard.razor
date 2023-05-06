@@ -39,12 +39,12 @@
 {
 	[Parameter, EditorRequired]
 	public Rolodex Rolodex { get; set; } = new();
-
+			
 	[Parameter, EditorRequired]
 	public string PlaybookName { get; set; } = string.Empty;
 
 	[Parameter, EditorRequired]
-	public RolodexSetting RolodexSetting { get; set; } = EmptyGameSetting.RolodexSetting();
+	public RolodexSetting RolodexSetting { get; set; } = EmptyGameSetting.Rolodex();
 
 	private RolodexFriend? CloseFriend { get; set; }
 
@@ -62,7 +62,7 @@
 		Rolodex.Friends.Where(f => !f.Closeness.In(FriendCloseness.Rival, FriendCloseness.CloseFriend))
 			.ToArray();
 
-	protected override void OnInitialized()
+	protected override void OnParametersSet()
 	{
 		if (!PlaybookName.HasInk())
 			return;
@@ -79,7 +79,7 @@
 
 		Rolodex.ReplaceFriends(friends);
 
-		base.OnInitialized();
+		base.OnParametersSet();
 	}
 
 	private void OnCloseFriendChanged(RolodexFriend friend)

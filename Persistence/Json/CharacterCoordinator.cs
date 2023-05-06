@@ -1,5 +1,6 @@
 ﻿using Models.Characters;
 using Models.Settings;
+using Persistence.Json.Migrations;
 
 namespace Persistence.Json;
 
@@ -16,7 +17,7 @@ public class CharacterCoordinator : ICharacterCoordinator
 	{
 		var playbookSetting = gameSetting.GetPlaybookSetting(playbookName);
 
-		var character = new Character(gameSetting, playbookName);
+		var character = new Character(gameSetting, playbookName, IMigrationHandler.MaxVersion);
 
 		InitializeAvailableGear(gameSetting, playbookSetting, character);
 		return character;
