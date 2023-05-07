@@ -1,0 +1,992 @@
+{
+	"Name": "Scum and Villainy",
+	"Playbooks": [
+		{
+			"Name": "Mechanic",
+			"Hook": "A gearhead and hacker. Play a Mechanic if you want to make new devices, keep your ship in good shape, or hack systems.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Bailing Wire and Mech-Tape",
+					"Description": "You get an extra downtime activity to repair, and the repair activity costs you 0 cred."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Construct Whisperer",
+					"Description": "Machines speak to you when you study them. The first time you roll a critical while fixing or building a particular machine, you may add a simple modification to it."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Junkyard Hunter",
+					"Description": "When you acquire parts or equipment during downtime, you may either gain two assets or one asset at +1 quality."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Hacker",
+					"Description": "You may expend your special armor to resist the consequences of hacking, or to push yourself when hacking or gathering info electronically."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Fixed",
+					"Description": "You may expend your special armor to resist a consequence from machines breaking or being damaged, or to push yourself when repairing or building a machine."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Mechanic's Heart",
+					"Description": "When you speak from your heart, your words can reach even the most hardened criminal, and you gain potency."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Overclock",
+					"Description": "When you spend a gambit on a rig roll to repair or upgrade, treat the system you worked on as 1 quality higher for the remainder of the job."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Analyst",
+					"Description": "When you hack a system, you may also ask a question about the owner or location of the system as though you had rolled a 6 ongather info. When you resist the consequences of hacking, roll +1d."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Colorful Friends",
+				"Friends": [
+					"Slice, a junkyard owner",
+					"Nisa, a previous employer",
+					"Stev, a gambler of ill repute",
+					"Len, a black market dealer",
+					"Kenn, a family member"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Fine Hacking Rig"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Fine Ship Repair Tools"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Small Drone"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Vision-enhancing Goggles"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Spare Parts"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Genius Pet"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Rig",
+					"Points": 2
+				},
+				{
+					"Action": "Study",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You address challenges with technical skill or ingenuity"
+		},
+		{
+			"Name": "Muscle",
+			"Hook": "Muscles are good at winning fights. Play a Muscle if you want to be unstoppable in combat.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Wrecking Crew",
+					"Description": "Your strength and ferocity are infamous. When striking in melee, you gain +1d. Whenever you spend a gambit in combat, you also gain +1 effect on that action."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Backup",
+					"Description": "An ally s push costs 1 stress (not 2) on any action you set up or assist."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Battleborn",
+					"Description": "You may expend your special armor to reduce harm from an attack in combat, or to push yourself during a fight."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Bodyguard",
+					"Description": "When you protect a crewmate, resist with +1d. When you take harm, clear 1 stress"
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Flesh Wound",
+					"Description": "If you re wounded at the beginning of downtime, mark +3 segments on your healing clock. When you push yourself to ignore wound penalties, it takes only 1 stress (not 2)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Predator",
+					"Description": "Take +1d to rolls against weakened or vulnerable targets.Whenever you gather information on a weakness or vulnerability, the worst you can get is a 4-5 result."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ready For Anything",
+					"Description": "When being ambushed, you gain potency to all actions during a flashback, and your first flashback costs 0 stress."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Scary",
+					"Description": "You have an air of menace and danger obvious to even the most unobservant. You gain potency when trying to intimidate someone. If done immediately after a show of force, also take +1d."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Deadly Friends",
+				"Friends": [
+					"Krieger, a blaster pistol",
+					"Shod, a weapons dealer",
+					"Chon-zek, a bounty hunter",
+					"Yazu, a crooked cop",
+					"Aya, an assassin"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Krieger, a fine blaster pistol."
+				},
+				{
+					"Bulk": 2,
+					"Name": "Vera, a fine sniper rifle"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Zmei, a fine flamethrower"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Sunder, a fine vibro-blade"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Zarathustra, a detonator launcher"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Fine Martial Arts Style"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Mystic Ammunition"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Scrap",
+					"Points": 2
+				},
+				{
+					"Action": "Command",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with force or threats."
+		},
+		{
+			"Name": "Mystic",
+			"Hook": "A galactic wanderer, in touch with the Way. Play one if you want to use artifacts and weird powers.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Kinetics",
+					"Description": "You can push yourself to do one of the following: use The Way to throw a table-sized object with dangerous force or propel yourself briefly with superhuman speed."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Psy-Blade",
+					"Description": "You can focus Way energy into your melee weapon. While charged, the weapon can cut through non-shielded materials with ease, and you gain potency on your melee attacks."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Center",
+					"Description": "You gain Meditation as a vice. When you indulge this vice, clear +1 stress and add Dark Visions as a possible overindulgence"
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Way Shield",
+					"Description": "You can block blaster bolts with The Way (resist with resolve). If you resist a blaster attack, you may spend 1 stress to redirect fire and make an attack of your own with it."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Warded",
+					"Description": "You may expend your special armor to resist the consequences of a Way attack or artifact use, or push yourself when using mystic powers."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Psy-Dancing",
+					"Description": "You may push yourself to cloud a target s mind and sway them in the face of contradictory evidence. Spend 1 stress for each additional feature: they have only vague memories of the event and/or it works on a small group."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Visions",
+					"Description": "Spend 1 stress to remotely view a distant place or person tied to you in some intimate way. Spend 1 stress for each extra feature: it lasts for a minute rather than a moment and/or your target can also see and hear you and/or you may see something only familiar to you, not intimate."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Sundering",
+					"Description": "You may push yourself to attune to The Way and twist it, causing psychic harm to anyone in the area vulnerable to your assault. You may spend 1 stress for each additional feature: it damages instead of stuns and/or you and anyone you choose get +2d to resist the effects."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Weird Friends",
+				"Friends": [
+					"Horux, a former teacher",
+					"Hicks, a mystic goods supplier",
+					"Laxx, a xeno",
+					"Rye, an unrequited love",
+					"Blish, a fellow mystic"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 2,
+					"Name": "Fine Melee Weapon"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Offerings"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Trappings of Religion"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Outdated Religious Outfit"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Memento of Your Travels"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Precursor Artifact"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Attune",
+					"Points": 2
+				},
+				{
+					"Action": "Scramble",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with wisdom or The Way"
+		},
+		{
+			"Name": "Pilot",
+			"Hook": "A ship-handling wizard and danger addict. Play a Pilot if you want to be a daredevil at the wheel and widely traveled.",
+			"AliasSynonym": "Call Sign",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Keen Eye",
+					"Description": "You have sharp eyes and notice small details many might overlook. Gain +1d when firing ship guns or making trick shots."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Side Job",
+					"Description": "You may spend a downtime activity in port doing odd jobs. Gain 1 cred. If there are rumors floating about, the GM will tell you of them."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Exceed Specs",
+					"Description": "While onboard a ship, you may damage a ship system you have access to in order to gain +1d or +1 effect to a roll."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Leaf On The Wind",
+					"Description": "When you push yourself, you may spend +1 stress (3 stress total) to gain both +1 effect and +1d instead of one or the other."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Hedonist",
+					"Description": "When you indulge your vice, you may adjust the dice outcome by +/-2. An ally who joins you may do the same."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Commander",
+					"Description": "Whenever you lead a group action, gain +1 scale (for example, a small group counts as a medium group). If you lead a group action in combat, you may count multiple 6s from different rolls as a critical."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Traveler",
+					"Description": "You re comfortable around unusual cultures and xenos. You gain potency when attempting to consort with or sway them."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Punch It!",
+					"Description": "When you spend a gambit on a desperate roll, it counts as risky instead."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Fast Friends",
+				"Friends": [
+					"Yattu, a gang boss",
+					"Triv, a ship mechanic",
+					"Choss, a professional racer",
+					"Meris, a scoundrel",
+					"Mav, a former mentor"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 2,
+					"Name": "Fine Customized Spacesuit"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Fine Small Urbot"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Fine Mechanics Kit"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Grappling Hook"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Guild License"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Victory Cigars"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Helm",
+					"Points": 2
+				},
+				{
+					"Action": "Rig",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with speed or flair"
+		},
+		{
+			"Name": "Scoundrel",
+			"Hook": "A scrappy and lucky survivor, Scoundrels love getting into and out of trouble. Play a Scoundrel if you want to press your luck.",
+			"AliasSynonym": "Outlaw Name",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Never Tell Me The Odds",
+					"Description": "You generate gambits on desperate rolls. You may also generate gambits even if you spent a gambit."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "I Know A Guy",
+					"Description": "When you first dock at a port after being away, pick one and ask the GM about a job: it s not deadly or it pays well enough or it s not a rush job or it comes from a faction you trust or it targets an enemy you have. You may spend 1 cred per additional feature."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Tenacious",
+					"Description": "Penalties from harm are one level less severe (though level 4 harm is still fatal)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "When The Chips Are Down",
+					"Description": "You gain a second use of special armor between each downtime."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Devil's Own Luck",
+					"Description": "You may expend your special armor to resist the consequences of blaster fire, or to push yourself when talking your way out of (or running from) trouble."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Daredevil",
+					"Description": "When you make a desperate roll, you may take +1d. If you do so, do not mark xp in that action s attribute."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Shoot First",
+					"Description": "When you attack from hiding or spring a trap, take +1d. When there s a question about who acts first, the answer is you (two characters with Shoot First act simultaneously)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ask Questions Later",
+					"Description": "When you consort to gather info, you gain +1 effect and can in addition ask: Who might this benefit?"
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "\"Friends\"",
+				"Friends": [
+					"Nyx, a moneylender",
+					"Ora, an info broker",
+					"Jal, a ship mechanic",
+					"Rhin, a smuggler",
+					"Battro, a bounty hunter"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Fine Blaster Pistol"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Fine Blaster Pistol (matching pair)"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Fine Coat"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Loaded Dice or Trick Holo-Cards"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Forged Documents"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Mystic Ammunition"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Personal Memento"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Sway",
+					"Points": 2
+				},
+				{
+					"Action": "Skulk",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with charm or audacity"
+		},
+		{
+			"Name": "Speaker",
+			"Hook": "A respectable person on the take. Play a Speaker if you want to be the respectable one and use connections to get your way.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Favors Owed",
+					"Description": "During downtime, you get +1d when you acquire assets or lay low. Any time you gather info, take +1d."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Player",
+					"Description": "You always know when someone is lying to you."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Infiltrator",
+					"Description": "You are not affected by quality or Tier when you bypass security measures."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Subterfuge",
+					"Description": "You may expend your special armor to resist a consequence of persuasion or suspicion. When you resist with insight, gain +1d."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Heart to Heart",
+					"Description": "When you provide meaningful insight or heartfelt advice that a crewmate follows, you both clear 1 stress."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Old Friends",
+					"Description": "Whenever you land in a new location, write down a friend you know there (under Influential Friends on your playbook sheet)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Disarming",
+					"Description": "Whenever you use a gambit while speaking, hostilities and danger also pause while you speak."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Purpose",
+					"Description": "You may expend your special armor to push yourself when outclassed by your opposition, or when under the effects of wounds. When you resist with resolve, gain +1d."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source."
+				}
+			],
+			"Rolodex": {
+				"Name": "Influential Friends",
+				"Friends": [
+					"Arryn, a Noble",
+					"Manda, a Guild member",
+					"Kerry, a doctor",
+					"Je-zee, a diplomat",
+					"_______, _________"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Fine Clothes"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Legitimate ID"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Luxury Item (0)"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Luxury Item (1)"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Luxury Item (2)"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Memento of a Past Encounter"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Consort",
+					"Points": 2
+				},
+				{
+					"Action": "Command",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with deception or influence"
+		},
+		{
+			"Name": "Stitch",
+			"Hook": "A spacefaring healer or scientist. Play a Stitch to deal with science, patch people up, and be the crew s moral compass.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Physicker",
+					"Description": "You may study a malady, wounds, or corpse, and gather info from a crime scene. Also, your crew gets +1d to recovery rolls."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Patch",
+					"Description": "You may doctor someone during a job to allow them to ignore the effects of a harm penalty."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Welcome Anywhere",
+					"Description": "While wearing your medic garb, you are welcome even in dangerous places. Gain +1d to consort and sway when offering to tend to anyone in need."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Under Pressure",
+					"Description": "Add a gambit to the pool whenever you or a crew member suffers level 2 or greater harm."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Combat Medic",
+					"Description": "You may expend your special armor to resist any consequence while tending to a patient. When you doctor someone in combat, clear 1 stress."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Moral Compass",
+					"Description": "When you do the right thing at cost to yourself, mark xp (any category)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Dr. Strange",
+					"Description": "Your research and fields of study are fringe, esoteric, and focus on the mystical. You may always handle Precursor artifacts safely. When you study an artifact or doctor a strange substance, you may ask one: what could this do? or why could this be dangerous?"
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Book Learning",
+					"Description": "You speak a multitude of languages and are broadly educated. Gain +1d when using study during a downtime activity."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Old Friends",
+				"Friends": [
+					"Jackev, a drug dealer",
+					"Alben, a former patient",
+					"Ditha, a family member",
+					"Juda, a doctor",
+					"Lynie, a hospital admin"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 2,
+					"Name": "Fine Medkit"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Fine Bedside Manner"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Fine Clothing"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Recognizable Medic Garb"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Candies & Treats"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Syringes & Applicators"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Doctor",
+					"Points": 2
+				},
+				{
+					"Action": "Study",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with insight or compassion"
+		}
+	],
+	"Traumas": [
+		"Cold",
+		"Haunted",
+		"Obsessed",
+		"Paranoid",
+		"Reckless",
+		"Soft",
+		"Unstable",
+		"Vicious"
+	],
+	"Heritages": [
+		{
+			"Name": "Imperial",
+			"BlurbFlavor": "the Hegemony",
+			"Description": "Those with imperial heritage hail from Warren or the Core worlds. You were brought up educated in ways of the Hegemony, through a Guild vocational education, Cult teachings, or Noble family tutors."
+		},
+		{
+			"Name": "Spacer",
+			"BlurbFlavor": "space; it's all you know",
+			"Description": "If you'd rather be more at home on a creaking ship, you could be from a spacer family. Ice miners, station mechanics, and most merchants are born, grow old, and die in space and may or may not view your terrestrial ventures with suspicion."
+		},
+		{
+			"Name": "Colonist",
+			"BlurbFlavor": "a colonized planet",
+			"Description": "The exact opposite are colonist families. Farmers, miners, and terraformers form the backbone of the Hegemony. Fighting for a living on the borders of planets, these folks deal with alien beasts and odd Precursor ruins more than most."
+		},
+		{
+			"Name": "Manufactured",
+			"BlurbFlavor": "a facility",
+			"Description": "Manufactured families are fundamentally controlled in some way by the Guilds. For example, a Yaru clone who's escaped from a facility or a Urbot that's avoided routine memory wipes. You may often have to hide your origin and independence."
+		},
+		{
+			"Name": "Wanderer",
+			"BlurbFlavor": "anywhere and everywhere",
+			"Description": "If you want to be without a planet to call home, you could be from a wanderer heritage. A small but notable portion of the Hegemony move from planet to planet, as opportunities emerge and galactic economic cycles shift. Or just follow where the Way takes you."
+		},
+		{
+			"Name": "Xeno",
+			"BlurbFlavor": "a strange home",
+			"Description": "Xeno families are as diverse as the countless kinds of Xenos in the galaxy. You were raised in a non-human culture. Xenos struggle to find acceptance in the Hegemony, and many of their practices are seen as strange or unusual."
+		}
+	],
+	"Vices": [
+		{
+			"Name": "Faith",
+			"Description": "You re part of a Cult, or observe specific ceremonies at regular intervals.",
+			"Sources": []
+		},
+		{
+			"Name": "Gambling",
+			"Description": "You crave games of chance, betting on sporting events, etc.",
+			"Sources": []
+		},
+		{
+			"Name": "Luxury",
+			"Description": "You seek the high life with expensive, ostentatious displays of wealth.",
+			"Sources": []
+		},
+		{
+			"Name": "Obligation",
+			"Description": "You're devoted to a family, cause, organization, charity, etc.",
+			"Sources": []
+		},
+		{
+			"Name": "Pleasure",
+			"Description": "You seek hedonistic gratification from lovers, food, drink, drugs, art, etc.",
+			"Sources": []
+		},
+		{
+			"Name": "Stupor",
+			"Description": "You dull the senses with drug abuse, excessive drinking, fighting to exhaustion, etc.",
+			"Sources": []
+		},
+		{
+			"Name": "Weird",
+			"Description": "You perform strange experiments, explore the Way, commune with Ur artifacts, and so on.",
+			"Sources": []
+		}
+	],
+	"Backgrounds": [
+		{
+			"Name": "Academic",
+			"Example": "A professor, student, researcher, or other knowledge-driven vocation.",
+			"BlurbFlavor": "an academic"
+		},
+		{
+			"Name": "Labor",
+			"Example": "A factory worker, driver, dockhand, miner, or other tradesperson. The majority of the Hegemony is of this background.",
+			"BlurbFlavor": "a laborer"
+		},
+		{
+			"Name": "Cult",
+			"Example": "Part of a Cult, officially sanctioned or not. A holy warrior, priest, or religious devotee.",
+			"BlurbFlavor": "a cultist"
+		},
+		{
+			"Name": "Guilder",
+			"Example": "Involved in the of machinations of a Guild, such as a ship designer, financial analyst, or logistics officer.",
+			"BlurbFlavor": "a guilder"
+		},
+		{
+			"Name": "Military",
+			"Example": "A Hegemonic soldier, mercenary, intelligence operative, strategist, training instructor, etc.",
+			"BlurbFlavor": "a soldier"
+		},
+		{
+			"Name": "Noble",
+			"Example": "Living the life of luxury, such as a dilettante, someone caught up in House politics, etc",
+			"BlurbFlavor": "a noble"
+		},
+		{
+			"Name": "Syndicate",
+			"Example": "Part of an organized criminal gang, from the lowest lookout to ousted former crime lord.",
+			"BlurbFlavor": "a criminal"
+		}
+	],
+	"Attributes": [
+		{
+			"Name": "Insight",
+			"Actions": [
+				{
+					"Name": "Doctor",
+					"ShortDescription": "When you doctor, you attend to the needs of another by lending aid and comfort, or you look scientifically at the world.",
+					"LongDescription": "You might treat someone s injuries. You might analyze a substance s composition to learn how it functions. You might comfort someone in distress (but consort might be better)."
+				},
+				{
+					"Name": "Hack",
+					"ShortDescription": "When you hack, you breach the security systems of computers or override their controls.",
+					"LongDescription": "You might access a data console to find a captive being held somewhere on the station. You might scramble a drone s control systems to keep it from firing on you. You might override a door s controls to get it to open (though rig might be better)."
+				},
+				{
+					"Name": "Rig",
+					"ShortDescription": "When you rig mechanisms, you alter how an existing mechanism works or create a new one.",
+					"LongDescription": "You might disable a trap. You might repair a damaged ship system. You might crack a safe. You might overdrive an engine. You might program a bomb to detonate later. You might force a door open (though hack might be better)."
+				},
+				{
+					"Name": "Study",
+					"ShortDescription": "When you study, you scrutinize details and interpret evidence.",
+					"LongDescription": "You might gather information from documents, newspapers, and books. You might do research on an esoteric topic. You might closely analyze a person to detect lies or true feelings. You could deduce a person s intention to kill you (but attune might be better)."
+				}
+			]
+		},
+		{
+			"Name": "Prowess",
+			"Actions": [
+				{
+					"Name": "Helm",
+					"ShortDescription": "When you helm, you pilot a vehicle or use vehicle weapons.",
+					"LongDescription": "You might plot a jump through a dark hyperspace lane. You might dive through a canyon to escape a chasing ship. You might fire quad-lasers at hostile pirates. You might reroute power on the ship to weather fire (though rig may be better)."
+				},
+				{
+					"Name": "Scramble",
+					"ShortDescription": "When you scramble, you lift, climb, jump, run, or swim, usually either away from or into danger.",
+					"LongDescription": "You might vault over a turnstile while escaping authorities. You might climb up the side of a cliff to approach a secret base. You might dodge blaster fire as you cross the hanger to get to your ship. You might chase after a mark you re following (though skulk might be better)."
+				},
+				{
+					"Name": "Scrap",
+					"ShortDescription": "When you scrap, you engage in pitched combat with the intent to harm or neutralize your opposition.",
+					"LongDescription": "You might brawl or wrestle with your foe. You might use a melee weapon. You might storm a barricade or hold a position in battle. You might lay down blaster fire. If you re using a vehicle or ship weapon, you should use helm instead."
+				},
+				{
+					"Name": "Skulk",
+					"ShortDescription": "When you skulk, you move stealthily or without being noticed.",
+					"LongDescription": "You might sneak past security or hide in the shadows. You might lift a cred-stick off a mark. You might sneak up behind someone to attack them by surprise (but scrap might be better). You could try to climb up the side of a building (but scramble might be better)."
+				}
+			]
+		},
+		{
+			"Name": "Resolve",
+			"Actions": [
+				{
+					"Name": "Attune",
+					"ShortDescription": "When you attune to the Way, you open your mind to the galactic energies underlying all of existence.",
+					"LongDescription": "You might communicate with a non-sentient species or robot. You could safely handle Precursor artifacts or remnants that tap directly into the Way. You might sense unseen danger, or killing intent (though study might be better)."
+				},
+				{
+					"Name": "Command",
+					"ShortDescription": "When you command, you compel obedience with your force of personality.",
+					"LongDescription": "You might intimidate or threaten to get what you want. You might lead an action with NPCs. You might order people to do what you want (though sway might be better)."
+				},
+				{
+					"Name": "Consort",
+					"ShortDescription": "When you consort, you socialize with friends and contacts.",
+					"LongDescription": "You might gain access to resources, information, people, or places. You might make a good impression or win someone over with your charm and style. You might make new friends or connect with your heritage or background. You could try to direct your friends with social pressure (but command might be better)."
+				},
+				{
+					"Name": "Sway",
+					"ShortDescription": "When you sway, you influence someone with guile, charm, or logic.",
+					"LongDescription": "You might outright lie to someone s face. You might persuade a sucker to believe you. You might argue the facts with an officer. You could try to trick people into affection or obedience (but consort or command might be better)."
+				}
+			]
+		}
+	],
+	"SharedItems": [
+		{
+			"Bulk": 1,
+			"Name": "Blaster Pistol"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Heavy Blaster"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Detonator"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Hacking Tools"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Repair Tools"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Medkit"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Melee Weapon"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Spy Gear"
+		},
+		{
+			"Bulk": 0,
+			"Name": "Illicit Drugs"
+		},
+		{
+			"Bulk": 0,
+			"Name": "Communicator"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Armor"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Spacesuit"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Mystic Ammunition"
+		}
+	],
+	"Thesaurus": {
+		"Coin": "Cred",
+		"Bulk": "Load"
+	},
+	"RecoveryClockSize": 6,
+	"ActionPointMaximum": 3,
+	"StartingAbility": {
+		"AbilitiesByHeritage": {
+			"Xeno": {
+				"Name": "Xeno",
+				"Description": "You may spend stress (0-2) to perform an inhuman feat only members of your species can do."
+			}
+		},
+		"AbilitiesByPlaybook": {
+			"Mechanic": {
+				"Name": "Tinker",
+				"Description": "When you work on a clock with rig or hack, or when you study a schematic, fill +1 segment."
+			},
+			"Muscle": {
+				"Name": "Unstoppable",
+				"Description": "You can push yourself to do one of the following: perform a feat of physical force that verges on the superhuman or engage a small gang on equal footing in close combat."
+			},
+			"Mystic": {
+				"Name": "The Way",
+				"Description": "You can spend a gambit instead of paying any stress cost."
+			},
+			"Pilot": {
+				"Name": "Ace Pilot",
+				"Description": "You have potency on all speed-related rolls. When you roll to resist the consequences of piloting, gain +1d."
+			},
+			"Scoundrel": {
+				"Name": "Serendipitous",
+				"Description": "Your crew starts with +1 gambit when the pool resets."
+			},
+			"Speaker": {
+				"Name": "Air of Respectability",
+				"Description": "You get an extra downtime activity to acquire assets or lay low."
+			},
+			"Stitch": {
+				"Name": "I'm A Doctor, Not A...",
+				"Description": "You can push yourself to roll your doctor rating while performing a different action. Say which patient, research, or posting taught you this trick."
+			}
+		}
+	}
+}

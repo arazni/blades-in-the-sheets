@@ -24,13 +24,13 @@
 	public string PlaybookName { get; set; } = string.Empty;
 
 	[Parameter, EditorRequired]
-	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
+	public string GameFileStem { get; set; } = string.Empty;
 
 	[Parameter, EditorRequired]
 	public string Hook { get; set; } = string.Empty;
 
 	public void CreateCharacter()
 	{
-		Navigator.NavigateTo(Paths.NewCharacter(GameSetting.Name, PlaybookName));
+		Navigator.NavigateTo(Paths.NewCharacter(GameFileStem, PlaybookName));
 	}
 }

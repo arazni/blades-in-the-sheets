@@ -1,6 +1,10 @@
 [
 	{
 		"Name": "Blades in the Dark",
-		"File": "blades-in-the-dark.json"
+		"Stem": "blades-in-the-dark"
+	},
+	{
+		"Name": "Scum and Villainy",
+		"Stem": "scum-and-villainy"
 	}
 ]

@@ -7,7 +7,7 @@
 				<MudTextField @bind-Value="Dossier.Name" HelperText="Name" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
 			</MudItem>
 			<MudItem xs="4">
-				<MudTextField @bind-Value="Dossier.Alias" HelperText="Alias" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+				<MudTextField @bind-Value="Dossier.Alias" HelperText="AliasSynonym" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
 			</MudItem>
 		</MudGrid>
 		<MudStack>
@@ -22,6 +22,9 @@
 {
 	[Parameter, EditorRequired]
 	public Dossier Dossier { get; set; } = new();
+
+	[Parameter]
+	public string AliasSynonym { get; set; } = Models.Settings.Constants.DefaultNames.Alias;
 
 	bool IsFixMode { get; set; } = false;
 

@@ -12,18 +12,20 @@
 @inject NavigationManager Navigator
 @inject ILoader Loader
 
-<MudStack>
-	<NewCharacterHeritageCard HeritageSettings="GameSetting.Heritages" Heritage="@Character.Dossier.Heritage" />
-	<NewCharacterBackgroundCard BackgroundSettings="GameSetting.Backgrounds" Background="@Character.Dossier.Background" />
-	<NewCharacterActionDotsCard GameSetting="GameSetting" Character="@Character" />
-	<NewCharacterSpecialAbilityCard PlaybookSetting="PlaybookSetting" Playbook="@Character.Playbook" />
-	<NewCharacterFriendsCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="@Character.Rolodex" PlaybookName="@Character.Playbook.Name" />
-	<NewCharacterViceCard ViceSettings="GameSetting.Vices" Vice="@Character.Dossier.Vice" />
-	<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
-	<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
-		Finish your scoundrel
-	</MudButton>
-</MudStack>
+<MudContainer MaxWidth="MaxWidth.Medium">
+	<MudStack>
+		<NewCharacterHeritageCard HeritageSettings="GameSetting.Heritages" Heritage="@Character.Dossier.Heritage" />
+		<NewCharacterBackgroundCard BackgroundSettings="GameSetting.Backgrounds" Background="@Character.Dossier.Background" />
+		<NewCharacterActionDotsCard GameSetting="GameSetting" Character="Character" />
+		<NewCharacterSpecialAbilityCard GameSetting="GameSetting" Character="Character" />
+		<NewCharacterFriendsCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="Character.Rolodex" PlaybookName="@Character.Playbook.Name" />
+		<NewCharacterViceCard ViceSettings="GameSetting.Vices" Vice="@Character.Dossier.Vice" />
+		<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
+		<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
+			Finish Your @PlaybookName
+		</MudButton>
+	</MudStack>
+</MudContainer>
 
 @code
 {
@@ -44,7 +46,7 @@
 
 	protected override async Task OnParametersSetAsync()
 	{
-		GameSetting = await Loader.LoadSettings(GameName);
+		GameSetting = await Loader.LoadSetting(GameName);
 		Character = Coordinator.InitializeCharacter(GameSetting, PlaybookName);
 
 		await base.OnParametersSetAsync();

@@ -3,7 +3,11 @@
 @using Models.Settings
 @using Persistence.Json
 @using System.Text
+@using System.Linq
+@using Persistence.Json.DataModels;
+@using System.Collections.Immutable;
 @using UI.Services
+@using static Models.Settings.Constants;
 @using static UI.Constants;
 @inject IStorageService Storage
 @inject IJSRuntime JS
@@ -47,10 +51,18 @@
 			</MudCardHeader>
 			<MudCardContent>
 				<MudStack>
-					<MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Add" OnClick="New" Style="width: 215px;">Secure a Scoundrel</MudButton>
+					<MudSelect @bind-Value="SelectedGameFile" ToStringFunc="gameFile => gameFile.Name" Label="Select a Game">
+						@foreach (var gameFile in AvailableGameFiles)
+						{
+							<MudSelectItem T="GameFile" Value="gameFile">
+								<MudText>@gameFile.Name</MudText>
+							</MudSelectItem>
+						}
+					</MudSelect>
+					<MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Add" OnClick="New" Style="width: 215px;">Create a Character</MudButton>
 					<MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFiles" Accept=".json">
 						<ButtonTemplate>
-							<MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Upload" for="@context" Style="width: 215px;">Import Scoundrels</MudButton>
+							<MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Upload" for="@context" Style="width: 215px;">Import Characters</MudButton>
 						</ButtonTemplate>
 					</MudFileUpload>
 				</MudStack>
@@ -62,11 +74,30 @@
 @code
 {
 	IJSObjectReference? module;
+
 	IReadOnlyCollection<VIndexCharacter> Characters { get; set; } = Array.Empty<VIndexCharacter>();
+
+	GameFile[] AvailableGameFiles { get; set; } = Array.Empty<GameFile>();
+
+	GameFile SelectedGameFile { get; set; } = new(Games.BladesInTheDark, Games.BladesInTheDarkStem);
+
+	IReadOnlyDictionary<string, GameSetting> GameSettingsByName = ImmutableDictionary<string, GameSetting>.Empty;
 
 	protected override async Task OnInitializedAsync()
 	{
-		await Load();
+		AvailableGameFiles = await Loader.LoadGameFiles();
+
+		var gameSettingLoads = AvailableGameFiles.Select(gameFile => Loader.LoadSetting(gameFile));
+
+		var gameSettings = await Task.WhenAll(gameSettingLoads);
+
+		GameSettingsByName = gameSettings.ToImmutableDictionary
+		(
+			gameSetting => gameSetting.Name,
+			gameSetting => gameSetting
+		);
+
+		await LoadCharacters();
 
 		await base.OnInitializedAsync();
 	}
@@ -79,27 +110,16 @@
 		await base.OnAfterRenderAsync(firstRender);
 	}
 
-	async Task Load()
+	async Task LoadCharacters()
 	{
 		var characters = await Storage.LoadAll();
 
 		if (!characters.Any())
 			return;
 
-		var gameSettingLoads = characters.Select(c => c.GameName)
-			.Distinct()
-			.Select(name => Loader.LoadSettings(name));
-
-		var gameSettings = await Task.WhenAll(gameSettingLoads);
-		var gameSettingsByName = gameSettings.ToDictionary
-		(
-			gameSetting => gameSetting.Name,
-			gameSetting => gameSetting
-		);
-
 		Characters = characters.Select(character => new VIndexCharacter
 			(
-				gameSettingsByName[character.GameName],
+				GameSettingsByName[character.GameName],
 				character
 			))
 			.OrderBy(c => (c.GameName, c.Alias))
@@ -128,7 +148,7 @@
 	async Task Delete(string id)
 	{
 		await Storage.Delete(id);
-		await Load();
+		await LoadCharacters();
 	}
 
 	async Task Download(VIndexCharacter character)
@@ -150,8 +170,9 @@
 			var json = Encoding.Unicode.GetString(buffer);
 			await Storage.PutFile(json);
 		}
-		await Load();
+
+		await LoadCharacters();
 	}
 
-	void New() => Navigator.NavigateTo(Paths.New);
+	void New() => Navigator.NavigateTo(Paths.NewCharacter(SelectedGameFile.Stem));
 }

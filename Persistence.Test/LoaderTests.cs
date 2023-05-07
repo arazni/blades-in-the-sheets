@@ -27,7 +27,7 @@ public class LoaderTests
 	[InlineData(PlaybookOption.Whisper)]
 	public async Task LoadsAvailableFriends(PlaybookOption playbook)
 	{
-		var setting = await this.loader.LoadSettings(Constants.Games.BladesInTheDark);
+		var setting = await this.loader.LoadSetting(Constants.Games.BladesInTheDark);
 
 		var result = setting.GetPlaybookSetting(playbook.ToString())
 			.Rolodex;
@@ -47,7 +47,7 @@ public class LoaderTests
 	[InlineData(PlaybookOption.Whisper)]
 	public async Task LoadsAvailableAbilities(PlaybookOption playbook)
 	{
-		var setting = await this.loader.LoadSettings(Constants.Games.BladesInTheDark);
+		var setting = await this.loader.LoadSetting(Constants.Games.BladesInTheDark);
 
 		var result = setting.GetPlaybookSetting(playbook.ToString())
 			.SpecialAbilities;

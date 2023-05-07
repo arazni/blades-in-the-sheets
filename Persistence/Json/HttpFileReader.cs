@@ -13,8 +13,8 @@ public class HttpFileReader : IFileReader
 		this.http = http;
 	}
 
-	public async Task<string> ReadFile(string fileName) =>
-		await this.http.GetStringAsync($"{DataFolder}/{fileName}");
+	public async Task<string> ReadFile(string fileStem) =>
+		await this.http.GetStringAsync($"{DataFolder}/{fileStem}.json");
 
 	public async Task<GameFile[]> AllFiles()
 	{

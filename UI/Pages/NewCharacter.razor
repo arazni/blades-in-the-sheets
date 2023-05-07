@@ -1,4 +1,4 @@
-﻿@page "/new/{GameName?}"
+﻿@page "/new/{GameFileStem?}"
 @using Models.Characters
 @using Models.Settings
 @using Persistence.Json
@@ -14,7 +14,7 @@
 			@foreach (var (book, hook) in options)
 			{
 				<MudItem xs="12">
-					<NewCharacterPlaybookOption GameSetting="GameSetting" PlaybookName="@book" Hook="@hook" />
+					<NewCharacterPlaybookOption GameFileStem="@GameFileStem" PlaybookName="@book" Hook="@hook" />
 				</MudItem>
 			}
 		</MudGrid>
@@ -24,15 +24,17 @@
 @code
 {
 	[Parameter]
-	public string? GameName { get; set; } = string.Empty;
+	public string? GameFileStem { get; set; }
 
-	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
+	GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
+
+	string GameName => GameSetting.Name;
 
 	protected override async Task OnParametersSetAsync()
 	{
-		GameName ??= Models.Settings.Constants.Games.BladesInTheDark;
+		GameFileStem ??= Models.Settings.Constants.Games.BladesInTheDarkStem;
 
-		GameSetting = await Loader.LoadSettings(GameName);
+		GameSetting = await Loader.LoadSetting(GameFileStem);
 
 		options = GameSetting.Playbooks.Select(p => (p.Name, p.Hook))
 			.ToArray();

@@ -1,8 +1,11 @@
 ﻿using Models.Settings;
+using Persistence.Json.DataModels;
 
 namespace Persistence.Json;
 
 public interface ILoader
 {
-	Task<GameSetting> LoadSettings(string gameName);
+	Task<GameFile[]> LoadGameFiles();
+	Task<GameSetting> LoadSetting(string gameName);
+	Task<GameSetting> LoadSetting(GameFile gameFile);
 }

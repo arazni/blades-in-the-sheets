@@ -1,4 +1,6 @@
-﻿namespace Models.Settings;
+﻿using System.Collections.Immutable;
+
+namespace Models.Settings;
 
 public record GameSetting
 (
@@ -25,7 +27,7 @@ public record PlaybookSetting
 	GearItemSetting[] Items,
 	DefaultActionPointSetting[] DefaultActionPoints,
 	string ExperienceCondition,
-	string? AliasSynonym = "Alias"
+	string AliasSynonym = Constants.DefaultNames.Alias
 );
 
 public record SpecialAbilitySetting
@@ -89,26 +91,18 @@ public record ActionSetting
 
 public record ThesaurusSetting
 (
-	string Coin = "Coin",
-	string Bulk = "Bulk"
+	string Coin = Constants.DefaultNames.Coin,
+	string Bulk = Constants.DefaultNames.Bulk
 );
 
 public record StartingAbilitySetting
 (
-	PlaybookStartingAbilitySetting[] PlaybookStartingAbilities,
-	HeritageStartingAbilitySetting[] HeritageStartingAbilities
+	ImmutableDictionary<string, StartingSpecialAbilitySetting> AbilitiesByPlaybook,
+	ImmutableDictionary<string, StartingSpecialAbilitySetting> AbilitiesByHeritage
 );
 
-public record PlaybookStartingAbilitySetting
+public record StartingSpecialAbilitySetting
 (
-	string Playbook,
-	string Name,
-	string Description
-);
-
-public record HeritageStartingAbilitySetting
-(
-	string Heritage,
 	string Name,
 	string Description
 );

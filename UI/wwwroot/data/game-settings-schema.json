@@ -21,6 +21,7 @@
 					]
 				}
 			},
+			"additionalProperties": false,
 			"required": [
 				"Name",
 				"ShortDescription",
@@ -46,6 +47,7 @@
 					}
 				}
 			},
+			"additionalProperties": false,
 			"required": [
 				"Name",
 				"Actions"
@@ -72,6 +74,7 @@
 					]
 				}
 			},
+			"additionalProperties": false,
 			"required": [
 				"Name",
 				"Example",
@@ -111,6 +114,7 @@
 					"type": "integer"
 				}
 			},
+			"additionalProperties": false,
 			"required": [
 				"Name",
 				"Bulk"
@@ -137,6 +141,7 @@
 					]
 				}
 			},
+			"additionalProperties": false,
 			"required": [
 				"Name",
 				"Description",
@@ -197,6 +202,7 @@
 					]
 				}
 			},
+			"additionalProperties": false,
 			"required": [
 				"Name",
 				"Hook",
@@ -228,6 +234,7 @@
 					}
 				}
 			},
+			"additionalProperties": false,
 			"required": [
 				"Name",
 				"Friends"
@@ -252,6 +259,7 @@
 					]
 				}
 			},
+			"additionalProperties": false,
 			"required": [
 				"Name",
 				"TimesTakeable",
@@ -275,7 +283,8 @@
 						"null"
 					]
 				}
-			}
+			},
+			"additionalProperties": false
 		},
 		"ViceSetting": {
 			"type": [
@@ -303,10 +312,62 @@
 					}
 				}
 			},
+			"additionalProperties": false,
 			"required": [
 				"Name",
 				"Description",
 				"Sources"
+			]
+		},
+		"StartingSpecialAbilitySetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"Description": {
+					"type": [
+						"string"
+					]
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"Name",
+				"Description"
+			]
+		},
+		"StartingAbilitySetting": {
+			"type": [
+				"object",
+				"null"
+			],
+			"properties": {
+				"AbilitiesByPlaybook": {
+					"type": [
+						"object"
+					],
+					"additionalProperties": {
+						"$ref": "/definitions/StartingSpecialAbilitySetting"
+					}
+				},
+				"AbilitiesByHeritage": {
+					"type": [
+						"object"
+					],
+					"additionalProperties": {
+						"$ref": "/definitions/StartingSpecialAbilitySetting"
+					}
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"AbilitiesByPlaybook",
+				"AbilitiesByHeritage"
 			]
 		}
 	},
@@ -386,8 +447,15 @@
 		},
 		"ActionPointMaximum": {
 			"type": "integer"
+		},
+		"StartingAbility": {
+			"type": [
+				"object"
+			],
+			"$ref": "#/definitions/StartingAbilitySetting"
 		}
 	},
+	"additionalProperties": false,
 	"required": [
 		"Name",
 		"Playbooks",

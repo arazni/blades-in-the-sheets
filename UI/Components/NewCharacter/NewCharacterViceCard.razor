@@ -3,7 +3,7 @@
 
 <MudCard Outlined="true">
 	<MudCardHeader>
-		<MudText>Choose a vice and its purveyor</MudText>
+		<MudText Typo="Typo.h6">@HeaderText()</MudText>
 	</MudCardHeader>
 	<MudCardContent>
 		<MudStack>
@@ -17,15 +17,18 @@
 				}
 			</MudSelect>
 			<MudText>@Elaboration()</MudText>
-			<MudTextField @bind-Value="Vice.Description" HelperText="A detail about your purveyor and how you indulge in your vice." Placeholder="@ExamplePlaceholder()" />
-			<MudExpansionPanels>
-				<MudExpansionPanel Text="In world example purveyors">
-					@foreach (var example in Examples())
-					{
-						<MudText>@example</MudText>
-					}
-				</MudExpansionPanel>
-			</MudExpansionPanels>
+			<MudTextField @bind-Value="Vice.Description" HelperText="@HelperText()" Placeholder="@ExamplePlaceholder()" />
+			@if (HasExamples)
+			{
+				<MudExpansionPanels>
+					<MudExpansionPanel Text="In world example purveyors">
+						@foreach (var example in Examples())
+						{
+							<MudText>@example</MudText>
+						}
+					</MudExpansionPanel>
+				</MudExpansionPanels>
+			}
 		</MudStack>
 	</MudCardContent>
 </MudCard>
@@ -38,16 +41,26 @@
 	[Parameter, EditorRequired]
 	public ViceSetting[] ViceSettings { get; set; } = EmptyGameSetting.Vices();
 
-	private string Elaboration() =>
+	bool HasExamples => Examples().Any();
+
+	string Elaboration() =>
 		ViceSettings.FirstOrDefault(v => v.Name == Vice.Name)?.Description 
 			?? string.Empty;
 
-	private IEnumerable<string> Examples() =>
+	IEnumerable<string> Examples() =>
 		ViceSettings.FirstOrDefault(v => v.Name == Vice.Name)?.Sources
 			?? Array.Empty<string>();
 
-	private string ExamplePlaceholder() =>
+	string ExamplePlaceholder() =>
 		Examples()
 			.FirstOrDefault()
 			?? string.Empty;
+
+	string HeaderText() =>
+		HasExamples ? "Choose a vice and its purveyor"
+		: "Choose a vice";
+
+	string HelperText() =>
+		HasExamples ? "A detail about your purveyor and how you indulge in your vice."
+		: "A detail about how you indulge in your vice.";
 }

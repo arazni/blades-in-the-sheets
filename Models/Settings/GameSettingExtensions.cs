@@ -2,6 +2,7 @@
 using Models.Common;
 
 namespace Models.Settings;
+
 public static class GameSettingExtensions
 {
 	public static PlaybookSetting GetPlaybookSetting(this GameSetting gameSetting, string playbookName) =>
@@ -46,4 +47,18 @@ public static class GameSettingExtensions
 			.FirstOrDefault(dap => dap.Action == actionName)
 			?.Points
 			?? 0;
+
+	public static PlaybookSpecialAbility[] GetAvailableStartingAbilities(this GameSetting gameSetting, string heritageName, string playbookName)
+	{
+		if (gameSetting == EmptyGameSetting.Game() || gameSetting.StartingAbility == null)
+			return EmptyGameSetting.PlaybookSpecialAbilities();
+
+		var abilities = new StartingSpecialAbilitySetting?[2];
+		gameSetting.StartingAbility.AbilitiesByPlaybook.TryGetValue(playbookName, out abilities[0]);
+		gameSetting.StartingAbility.AbilitiesByHeritage.TryGetValue(heritageName, out abilities[1]);
+
+		return abilities.Where(setting => setting != null)
+			.Select(setting => new PlaybookSpecialAbility(setting!.Name, setting.Description, 1))
+			.ToArray();
+	}
 }

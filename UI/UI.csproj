@@ -35,12 +35,13 @@
 		<Content Update="wwwroot\data\games.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Update="wwwroot\data\scum-and-villainy.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ProjectExtensions>
-		<VisualStudio>
-			<UserProperties wwwroot_4data_4blades-in-the-dark_1json__JsonSchema="game-settings-schema.json" />
-		</VisualStudio>
+		<VisualStudio><UserProperties wwwroot_4data_4blades-in-the-dark_1json__JsonSchema="game-settings-schema.json" wwwroot_4data_4scum-and-villainy_1json__JsonSchema="game-settings-schema.json" /></VisualStudio>
 	</ProjectExtensions>
 
 </Project>

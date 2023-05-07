@@ -42,7 +42,7 @@
 		</MudStack>
 		<MudStack Row="true" Justify="Justify.SpaceBetween">
 			<MudText Typo="Typo.h6">Available Gear</MudText>
-			<MudText Typo="Typo.h6">Bulk Remaining: @Character.AvailableBulk</MudText>
+			<MudText Typo="Typo.h6">@BulkSynonym Remaining: @Character.AvailableBulk</MudText>
 		</MudStack>
 		<MudContainer>
 			@foreach (var item in Gear.UncommittedGear)
@@ -62,7 +62,7 @@
 			<MudText Typo="Typo.h6">Add Item</MudText>
 			<MudGrid>
 				<MudItem xs="4" sm="2">
-					<MudTextField @bind-Value=addableItem.Bulk Label="Bulk" />
+					<MudTextField @bind-Value=addableItem.Bulk Label="@BulkSynonym" />
 				</MudItem>
 				<MudItem xs="8" sm="6">
 					<MudTextField @bind-Value=addableItem.Name Label="Name" />
@@ -79,6 +79,9 @@
 {
 	[Parameter, EditorRequired]
 	public Character Character { get; set; } = Character.Empty();
+
+	[Parameter]
+	public string BulkSynonym { get; set; } = Models.Settings.Constants.DefaultNames.Bulk;
 
 	public Gear Gear => Character.Gear;
 

@@ -1,57 +1,105 @@
 ﻿@using Models.Characters
-@using Models.Settings;
+@using Models.Settings
 @using Persistence.Json
 @inject ILoader Loader
 
 <MudCard Outlined="true">
 	<MudCardHeader>
-		<MudText>Choose a special ability</MudText>
+		<MudText Typo="Typo.h6">Choose a special ability</MudText>
 	</MudCardHeader>
 	<MudCardContent>
-		<MudText>If you're unsure which one to pick, the first is considered a good default choice.</MudText>
-		<MudSelect T="PlaybookSpecialAbility" Value="ChosenAbility" ValueChanged="OnChosenAbilityChanged" Label="Special Ability" >
-			@foreach (var ability in AvailableAbilities)
+		<MudStack>
+			<MudStack>
+				<MudText>If you're unsure which one to pick, the first is considered a good default choice.</MudText>
+				<MudSelect T="PlaybookSpecialAbility" Value="ChosenAbility" ValueChanged="OnChosenAbilityChanged" Label="Special Ability" ToStringFunc="a => a?.Name">
+					@foreach (var ability in AvailableAbilities)
+					{
+						<MudSelectItem T="PlaybookSpecialAbility" Value="ability">
+							<MudText>@DisplayText(ability)</MudText>
+							<MudText>@ability.Description</MudText>
+						</MudSelectItem>
+					}
+				</MudSelect>
+			</MudStack>
+			@if (HasStartingAbilities)
 			{
-				<MudSelectItem T="PlaybookSpecialAbility" Value="ability">
-					<MudText>@DisplayText(ability)</MudText>
-					<MudText>@ability.Description</MudText>
-				</MudSelectItem>
+				<MudStack>
+					<MudText>@GameSetting.Name also has unique starting abilities.</MudText>
+					<MudSelect T="PlaybookSpecialAbility" Value="ChosenStartingAbility" ValueChanged="OnChosenStartingAbilityChanged" Label="Starting Ability" ToStringFunc="a => a?.Name">
+						@foreach (var ability in AvailableStartingAbilities)
+						{
+							<MudSelectItem T="PlaybookSpecialAbility" Value="ability">
+								<MudText>@DisplayText(ability)</MudText>
+								<MudText>@ability.Description</MudText>
+							</MudSelectItem>
+						}
+					</MudSelect>
+				</MudStack>
 			}
-		</MudSelect>
-		@foreach(var ability in Playbook.Abilities)
-		{
-			<MudText>@ability.Description</MudText>
-		}
+			@foreach (var ability in Playbook.Abilities)
+			{
+				<MudStack>
+					<MudText>@ability.Name</MudText>
+					<MudText>@ability.Description</MudText>
+				</MudStack>
+			}
+		</MudStack>
 	</MudCardContent>
 </MudCard>
 
 @code
 {
 	[Parameter, EditorRequired]
-	public Playbook Playbook { get; set; } = Playbook.Empty();
+	public Character Character { get; set; } = Character.Empty();
 
 	[Parameter, EditorRequired]
-	public PlaybookSetting PlaybookSetting { get; set; } = EmptyGameSetting.Playbook();
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
-	public PlaybookSpecialAbility[] AvailableAbilities { get; private set; } = new PlaybookSpecialAbility[0];
+	Playbook Playbook => Character.Playbook;
 
-	private PlaybookSpecialAbility? ChosenAbility { get; set; }
+	PlaybookSpecialAbility[] AvailableAbilities { get; set; } = Array.Empty<PlaybookSpecialAbility>();
+
+	PlaybookSpecialAbility? ChosenAbility { get; set; }
+
+	PlaybookSpecialAbility[] AvailableStartingAbilities =>
+		GameSetting.GetAvailableStartingAbilities(Character.Dossier.Heritage.Name, Character.Playbook.Name);
+
+	PlaybookSpecialAbility? ChosenStartingAbility { get; set; }
+
+	bool HasStartingAbilities => AvailableStartingAbilities.Any();
 
 	private void OnChosenAbilityChanged(PlaybookSpecialAbility value)
 	{
 		Playbook.ClearAbilities();
 		ChosenAbility = value;
 		Playbook.TakeAbility(ChosenAbility);
+
+		if (ChosenStartingAbility != null)
+			Playbook.TakeAbility(ChosenStartingAbility);
+	}
+
+	private void OnChosenStartingAbilityChanged(PlaybookSpecialAbility value)
+	{
+		Playbook.ClearAbilities();
+		ChosenStartingAbility = value;
+		Playbook.TakeAbility(ChosenStartingAbility);
+
+		if (ChosenAbility != null)
+			Playbook.TakeAbility(ChosenAbility);
 	}
 
 	protected override void OnParametersSet()
 	{
-		AvailableAbilities = PlaybookSetting.GetAvailableAbilities();
+		AvailableAbilities = GameSetting.GetPlaybookSetting(Playbook.Name)
+			.GetAvailableAbilities();
+
+		if (ChosenStartingAbility == null && ChosenAbility == null && HasStartingAbilities)
+			OnChosenStartingAbilityChanged(AvailableStartingAbilities.First());
 
 		base.OnParametersSet();
 	}
 
-	public static string DisplayText(PlaybookSpecialAbility ability) =>
+	private static string DisplayText(PlaybookSpecialAbility ability) =>
 		ability.TimesTakeable == 1 ? ability.Name
 		: $"{ability.Name} (take once of {ability.TimesTakeable} possible times)";
 }

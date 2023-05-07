@@ -22,7 +22,7 @@ public class SaverTests
 	[Fact]
 	public async Task SavesEmptyCharacter()
 	{
-		var gameSetting = await this.loader.LoadSettings(Constants.Games.BladesInTheDark);
+		var gameSetting = await this.loader.LoadSetting(Constants.Games.BladesInTheDark);
 		await this.saver.Save(new Character(gameSetting, PlaybookOption.Lurk.ToString(), IMigrationHandler.MaxVersion));
 	}
 }

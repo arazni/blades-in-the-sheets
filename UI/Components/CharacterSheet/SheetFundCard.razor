@@ -23,7 +23,7 @@
 			<MudText Typo="Typo.body1">@Fund.Stash.Rating</MudText>
 		</MudItem>
 		<MudItem xs="12" lg="6">
-			<MudNumericField @bind-Value="CoinChangeInput" Label="Coins to change" Min="Fund.MinCoins" Max="InputMaximum" />
+			<MudNumericField @bind-Value="CoinChangeInput" Label="@CoinChangeInputLabel" Min="Fund.MinCoins" Max="InputMaximum" />
 		</MudItem>
 		<MudItem xs="12" lg="6">
 			<MudButtonGroup Size="Size.Medium" Variant="Variant.Outlined" Style="width: 100%">
@@ -39,9 +39,14 @@
 	[Parameter, EditorRequired]
 	public Fund Fund { get; set; } = new();
 
+	[Parameter]
+	public string CoinSynonym { get; set; } = Models.Settings.Constants.DefaultNames.Coin;
+
 	bool IsFixMode { get; set; } = false;
 
 	int CoinChangeInput { get; set; } = 0;
+
+	string CoinChangeInputLabel => $"{CoinSynonym} to change";
 
 	int InputMaximum => Math.Max(Fund.CoinSpaceRemaining, Fund.MaxAffordable);
 

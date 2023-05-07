@@ -12,7 +12,7 @@
 	<MudGrid>
 		<MudItem xs="12" lg="6">
 			<MudStack>
-				<SheetDossierCard Dossier="Character.Dossier" />
+				<SheetDossierCard Dossier="Character.Dossier" AliasSynonym="@PlaybookSetting.AliasSynonym" />
 				<SheetMonitorCard GameSetting="GameSetting" Character="Character" />
 				<SheetTalentCard Talent="Character.Talent" />
 				<SheetAbilitiesCard GameSetting="GameSetting" Character="Character" />
@@ -20,9 +20,9 @@
 		</MudItem>
 		<MudItem xs="12" lg="6">
 			<MudStack>
-				<SheetRolodexCard RolodexSetting="GameSetting.GetPlaybookSetting(Character.Playbook.Name).Rolodex" Rolodex="Character.Rolodex" />
-				<SheetGearCard Character="Character" />
-				<SheetFundCard Fund="Character.Fund" />
+				<SheetRolodexCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="Character.Rolodex" />
+				<SheetGearCard Character="Character" BulkSynonym="@GameSetting.Thesaurus.Bulk" />
+				<SheetFundCard Fund="Character.Fund" CoinSynonym="@GameSetting.Thesaurus.Coin" />
 				<SheetNotebookCard GameSetting="GameSetting" Character="Character" />
 			</MudStack>
 		</MudItem>
@@ -39,6 +39,8 @@
 
 	public Character Character { get; set; } = Character.Empty();
 
+	PlaybookSetting PlaybookSetting => GameSetting.GetPlaybookSetting(Character.Playbook.Name);
+
 	private bool isSaving = false;
 
 	Color SaveButtonColor => isSaving ? Color.Success
@@ -50,7 +52,7 @@
 	protected override async Task OnParametersSetAsync()
 	{
 		Character = await Storage.Load(Id);
-		GameSetting = await Loader.LoadSettings(Character.GameName);
+		GameSetting = await Loader.LoadSetting(Character.GameName);
 
 		await base.OnParametersSetAsync();
 	}
