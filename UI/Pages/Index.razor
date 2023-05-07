@@ -31,7 +31,7 @@
 				</MudCardHeader>
 				<MudCardContent>
 					<MudStack>
-						<MudText>@character.Blurb</MudText>
+						<MudText>@Blurb(character)</MudText>
 					</MudStack>
 				</MudCardContent>
 			</MudCard>
@@ -85,6 +85,8 @@
 
 	protected override async Task OnInitializedAsync()
 	{
+		await LoadCharacters();
+
 		AvailableGameFiles = await Loader.LoadGameFiles();
 
 		var gameSettingLoads = AvailableGameFiles.Select(gameFile => Loader.LoadSetting(gameFile));
@@ -96,8 +98,6 @@
 			gameSetting => gameSetting.Name,
 			gameSetting => gameSetting
 		);
-
-		await LoadCharacters();
 
 		await base.OnInitializedAsync();
 	}
@@ -117,11 +117,7 @@
 		if (!characters.Any())
 			return;
 
-		Characters = characters.Select(character => new VIndexCharacter
-			(
-				GameSettingsByName[character.GameName],
-				character
-			))
+		Characters = characters.Select(character => new VIndexCharacter(character))
 			.OrderBy(c => (c.GameName, c.Alias))
 			.ToArray();
 	}
@@ -175,4 +171,12 @@
 	}
 
 	void New() => Navigator.NavigateTo(Paths.NewCharacter(SelectedGameFile.Stem));
+
+	string Blurb(VIndexCharacter vCharacter)
+	{
+		if (!GameSettingsByName.TryGetValue(vCharacter.GameName, out var gameSetting))
+			return vCharacter.Blurb(EmptyGameSetting.Game());
+
+		return vCharacter.Blurb(gameSetting);
+	}
 }

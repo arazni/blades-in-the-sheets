@@ -6,18 +6,15 @@ namespace UI.ViewModels;
 
 public class VIndexCharacter
 {
-	private readonly string backgroundBlurb;
-	private readonly string heritageBlurb;
-
-	public VIndexCharacter(GameSetting gameSetting, Character character)
+	public VIndexCharacter(Character character)
 	{
 		Id = character.Id;
 		Name = character.Dossier.Name;
 		Alias = character.Dossier.Alias;
 		Playbook = character.Playbook.Name;
 		GameName = character.GameName;
-		this.backgroundBlurb = gameSetting.GetBackground(character.Dossier.Background.Name).BlurbFlavor;
-		this.heritageBlurb = gameSetting.GetHeritage(character.Dossier.Heritage.Name).BlurbFlavor;
+		Background = character.Dossier.Background.Name;
+		Heritage = character.Dossier.Heritage.Name;
 	}
 
 	public string Id { get; }
@@ -30,7 +27,11 @@ public class VIndexCharacter
 
 	public string GameName { get; }
 
-	public string Blurb => $"{Name}, {this.backgroundBlurb} from {this.heritageBlurb}";
+	public string Background { get; }
+
+	public string Heritage { get; }
+
+	public string Blurb(GameSetting gameSetting) => $"{Name}, {gameSetting.GetBackground(Background).BlurbFlavor} from {gameSetting.GetHeritage(Heritage).BlurbFlavor}";
 
 	public string Link => Paths.Sheet(Id);
 }
