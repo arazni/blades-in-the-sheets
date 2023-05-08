@@ -43,12 +43,12 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Analyst",
-					"Description": "When you hack a system, you may also ask a question about the owner or location of the system as though you had rolled a 6 ongather info. When you resist the consequences of hacking, roll +1d."
+					"Description": "When you hack a system, you may also ask a question about the owner or location of the system as though you had rolled a 6 on gather info. When you resist the consequences of hacking, roll +1d."
 				},
 				{
 					"TimesTakeable": 3,
 					"Name": "Veteran",
-					"Description": "Choose a special ability from another source"
+					"Description": "Choose a special ability from another source."
 				}
 			],
 			"Rolodex": {
@@ -76,7 +76,7 @@
 				},
 				{
 					"Bulk": 1,
-					"Name": "Vision-enhancing Goggles"
+					"Name": "Vision-Enhancing Goggles"
 				},
 				{
 					"Bulk": 1,
@@ -97,11 +97,11 @@
 					"Points": 1
 				}
 			],
-			"ExperienceCondition": "You address challenges with technical skill or ingenuity"
+			"ExperienceCondition": "You addressed a tough challenge with technical skill or ingenuity"
 		},
 		{
 			"Name": "Muscle",
-			"Hook": "Muscles are good at winning fights. Play a Muscle if you want to be unstoppable in combat.",
+			"Hook": "A dangerous and intimidating fighter. Play a Muscle if you want to be unstoppable in combat.",
 			"SpecialAbilities": [
 				{
 					"TimesTakeable": 1,
@@ -111,7 +111,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Backup",
-					"Description": "An ally s push costs 1 stress (not 2) on any action you set up or assist."
+					"Description": "An ally's push costs 1 stress (not 2) on any action you set up or assist."
 				},
 				{
 					"TimesTakeable": 1,
@@ -121,17 +121,17 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Bodyguard",
-					"Description": "When you protect a crewmate, resist with +1d. When you take harm, clear 1 stress"
+					"Description": "When you protect a crewmate, resist with +1d. When you take harm, clear 1 stress."
 				},
 				{
 					"TimesTakeable": 1,
 					"Name": "Flesh Wound",
-					"Description": "If you re wounded at the beginning of downtime, mark +3 segments on your healing clock. When you push yourself to ignore wound penalties, it takes only 1 stress (not 2)."
+					"Description": "If you're wounded at the beginning of downtime, mark +3 segments on your healing clock. When you push yourself to ignore wound penalties, it takes only 1 stress (not 2)."
 				},
 				{
 					"TimesTakeable": 1,
 					"Name": "Predator",
-					"Description": "Take +1d to rolls against weakened or vulnerable targets.Whenever you gather information on a weakness or vulnerability, the worst you can get is a 4-5 result."
+					"Description": "Take +1d to rolls against weakened or vulnerable targets.Whenever you gather information on a weakness or vulnerability, the worst you can get is a 4/5 result."
 				},
 				{
 					"TimesTakeable": 1,
@@ -146,13 +146,13 @@
 				{
 					"TimesTakeable": 3,
 					"Name": "Veteran",
-					"Description": "Choose a special ability from another source"
+					"Description": "Choose a special ability from another source."
 				}
 			],
 			"Rolodex": {
 				"Name": "Deadly Friends",
 				"Friends": [
-					"Krieger, a blaster pistol",
+					"Krieger, a fine blaster pistol",
 					"Shod, a weapons dealer",
 					"Chon-zek, a bounty hunter",
 					"Yazu, a crooked cop",
@@ -199,16 +199,16 @@
 					"Points": 1
 				}
 			],
-			"ExperienceCondition": "You addressed a challenge with force or threats."
+			"ExperienceCondition": "You addressed a tough challenge with force or threats"
 		},
 		{
 			"Name": "Mystic",
-			"Hook": "A galactic wanderer, in touch with the Way. Play one if you want to use artifacts and weird powers.",
+			"Hook": "A galactic wanderer in touch with the Way. Play one if you want to use artifacts and weird powers.",
 			"SpecialAbilities": [
 				{
 					"TimesTakeable": 1,
 					"Name": "Kinetics",
-					"Description": "You can push yourself to do one of the following: use The Way to throw a table-sized object with dangerous force or propel yourself briefly with superhuman speed."
+					"Description": "You can push yourself to do one of the following: use The Way to throw a table-sized object with dangerous force—propel yourself briefly with superhuman speed."
 				},
 				{
 					"TimesTakeable": 1,
@@ -218,7 +218,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Center",
-					"Description": "You gain Meditation as a vice. When you indulge this vice, clear +1 stress and add Dark Visions as a possible overindulgence"
+					"Description": "You gain Meditation as a vice. When you indulge this vice, clear +1 stress and add Dark Visions as a possible overindulgence."
 				},
 				{
 					"TimesTakeable": 1,
@@ -233,22 +233,22 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Psy-Dancing",
-					"Description": "You may push yourself to cloud a target s mind and sway them in the face of contradictory evidence. Spend 1 stress for each additional feature: they have only vague memories of the event and/or it works on a small group."
+					"Description": "You may push yourself to cloud a target's mind and sway them in the face of contradictory evidence. Spend 1 stress for each additional feature: they have only vague memories of the event and/or it works on a small group."
 				},
 				{
 					"TimesTakeable": 1,
 					"Name": "Visions",
-					"Description": "Spend 1 stress to remotely view a distant place or person tied to you in some intimate way. Spend 1 stress for each extra feature: it lasts for a minute rather than a moment and/or your target can also see and hear you and/or you may see something only familiar to you, not intimate."
+					"Description": "Spend 1 stress to remotely view a distant place or person tied to you in some intimate way. Spend 1 stress for each extra feature: it lasts for a minute rather than a moment—your target can also see and hear you—you may see something only familiar to you, not intimate."
 				},
 				{
 					"TimesTakeable": 1,
 					"Name": "Sundering",
-					"Description": "You may push yourself to attune to The Way and twist it, causing psychic harm to anyone in the area vulnerable to your assault. You may spend 1 stress for each additional feature: it damages instead of stuns and/or you and anyone you choose get +2d to resist the effects."
+					"Description": "You may push yourself to attune to The Way and twist it, causing psychic harm to anyone in the area vulnerable to your assault. You may spend 1 stress for each additional feature: it damages instead of stuns—you and anyone you choose get +2d to resist the effects."
 				},
 				{
 					"TimesTakeable": 3,
 					"Name": "Veteran",
-					"Description": "Choose a special ability from another source"
+					"Description": "Choose a special ability from another source."
 				}
 			],
 			"Rolodex": {
@@ -297,7 +297,7 @@
 					"Points": 1
 				}
 			],
-			"ExperienceCondition": "You addressed a challenge with wisdom or The Way"
+			"ExperienceCondition": "You addressed a tough challenge with wisdom or The Way"
 		},
 		{
 			"Name": "Pilot",
@@ -337,7 +337,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Traveler",
-					"Description": "You re comfortable around unusual cultures and xenos. You gain potency when attempting to consort with or sway them."
+					"Description": "You're comfortable around unusual cultures and xenos. You gain potency when attempting to consort with or sway them."
 				},
 				{
 					"TimesTakeable": 1,
@@ -347,7 +347,7 @@
 				{
 					"TimesTakeable": 3,
 					"Name": "Veteran",
-					"Description": "Choose a special ability from another source"
+					"Description": "Choose a special ability from another source."
 				}
 			],
 			"Rolodex": {
@@ -396,11 +396,11 @@
 					"Points": 1
 				}
 			],
-			"ExperienceCondition": "You addressed a challenge with speed or flair"
+			"ExperienceCondition": "You addressed a tough challenge with speed or flair"
 		},
 		{
 			"Name": "Scoundrel",
-			"Hook": "A scrappy and lucky survivor, Scoundrels love getting into and out of trouble. Play a Scoundrel if you want to press your luck.",
+			"Hook": "A scrappy and lucky survivor. Scoundrels love getting into and out of trouble. Play a Scoundrel if you want to press your luck.",
 			"AliasSynonym": "Outlaw Name",
 			"SpecialAbilities": [
 				{
@@ -411,7 +411,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "I Know A Guy",
-					"Description": "When you first dock at a port after being away, pick one and ask the GM about a job: it s not deadly or it pays well enough or it s not a rush job or it comes from a faction you trust or it targets an enemy you have. You may spend 1 cred per additional feature."
+					"Description": "When you first dock at a port after being away, pick one and ask the GM about a job: it's not deadly—it pays well enough—it's not a rush job—it comes from a faction you trust—it targets an enemy you have. You may spend 1 cred per additional feature."
 				},
 				{
 					"TimesTakeable": 1,
@@ -446,7 +446,7 @@
 				{
 					"TimesTakeable": 3,
 					"Name": "Veteran",
-					"Description": "Choose a special ability from another source"
+					"Description": "Choose a special ability from another source."
 				}
 			],
 			"Rolodex": {
@@ -499,7 +499,7 @@
 					"Points": 1
 				}
 			],
-			"ExperienceCondition": "You addressed a challenge with charm or audacity"
+			"ExperienceCondition": "You addressed a tough challenge with charm or audacity"
 		},
 		{
 			"Name": "Speaker",
@@ -533,7 +533,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Old Friends",
-					"Description": "Whenever you land in a new location, write down a friend you know there (under Influential Friends on your playbook sheet)."
+					"Description": "Whenever you land in a new location, write down a friend you know there (see Influential Friends)."
 				},
 				{
 					"TimesTakeable": 1,
@@ -558,7 +558,7 @@
 					"Manda, a Guild member",
 					"Kerry, a doctor",
 					"Je-zee, a diplomat",
-					"_______, _________"
+					"_______, _ _________"
 				]
 			},
 			"Items": [
@@ -572,15 +572,15 @@
 				},
 				{
 					"Bulk": 0,
-					"Name": "Luxury Item (0)"
+					"Name": "Small Luxury Item"
 				},
 				{
 					"Bulk": 1,
-					"Name": "Luxury Item (1)"
+					"Name": "Luxury Item "
 				},
 				{
 					"Bulk": 2,
-					"Name": "Luxury Item (2)"
+					"Name": "Large Luxury Item"
 				},
 				{
 					"Bulk": 0,
@@ -597,11 +597,11 @@
 					"Points": 1
 				}
 			],
-			"ExperienceCondition": "You addressed a challenge with deception or influence"
+			"ExperienceCondition": "You addressed a tough challenge with deception or influence"
 		},
 		{
 			"Name": "Stitch",
-			"Hook": "A spacefaring healer or scientist. Play a Stitch to deal with science, patch people up, and be the crew s moral compass.",
+			"Hook": "A spacefaring healer or scientist. Play a Stitch to deal with science, patch people up, and be the crew's moral compass.",
 			"SpecialAbilities": [
 				{
 					"TimesTakeable": 1,
@@ -636,7 +636,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Dr. Strange",
-					"Description": "Your research and fields of study are fringe, esoteric, and focus on the mystical. You may always handle Precursor artifacts safely. When you study an artifact or doctor a strange substance, you may ask one: what could this do? or why could this be dangerous?"
+					"Description": "Your research and fields of study are fringe, esoteric, and focus on the mystical. You may always handle Precursor artifacts safely. When you study an artifact or doctor a strange substance, you may ask one: what could this do?—why could this be dangerous?"
 				},
 				{
 					"TimesTakeable": 1,
@@ -646,7 +646,7 @@
 				{
 					"TimesTakeable": 3,
 					"Name": "Veteran",
-					"Description": "Choose a special ability from another source"
+					"Description": "Choose a special ability from another source."
 				}
 			],
 			"Rolodex": {
@@ -695,7 +695,7 @@
 					"Points": 1
 				}
 			],
-			"ExperienceCondition": "You addressed a challenge with insight or compassion"
+			"ExperienceCondition": "You addressed a tough challenge with insight or compassion"
 		}
 	],
 	"Traumas": [
@@ -711,13 +711,13 @@
 	"Heritages": [
 		{
 			"Name": "Imperial",
-			"BlurbFlavor": "the Hegemony",
+			"BlurbFlavor": "among the Hegemony",
 			"Description": "Those with imperial heritage hail from Warren or the Core worlds. You were brought up educated in ways of the Hegemony, through a Guild vocational education, Cult teachings, or Noble family tutors."
 		},
 		{
 			"Name": "Spacer",
-			"BlurbFlavor": "space; it's all you know",
-			"Description": "If you'd rather be more at home on a creaking ship, you could be from a spacer family. Ice miners, station mechanics, and most merchants are born, grow old, and die in space and may or may not view your terrestrial ventures with suspicion."
+			"BlurbFlavor": "the creaking ships of space",
+			"Description": "If you'd rather be more at home on a creaking ship, you could be from a spacer family. Ice miners, station mechanics, and most merchants are born, grow old, and die in space—and may or may not view your terrestrial ventures with suspicion."
 		},
 		{
 			"Name": "Colonist",
@@ -727,7 +727,7 @@
 		{
 			"Name": "Manufactured",
 			"BlurbFlavor": "a facility",
-			"Description": "Manufactured families are fundamentally controlled in some way by the Guilds. For example, a Yaru clone who's escaped from a facility or a Urbot that's avoided routine memory wipes. You may often have to hide your origin and independence."
+			"Description": "Manufactured \"families\" are fundamentally controlled in some way by the Guilds. For example, a Yaru clone who's escaped from a facility or a Urbot that's avoided routine memory wipes. You may often have to hide your origin and independence."
 		},
 		{
 			"Name": "Wanderer",
@@ -743,7 +743,7 @@
 	"Vices": [
 		{
 			"Name": "Faith",
-			"Description": "You re part of a Cult, or observe specific ceremonies at regular intervals.",
+			"Description": "You're part of a Cult, or observe specific ceremonies at regular intervals.",
 			"Sources": []
 		},
 		{
@@ -897,6 +897,14 @@
 			"Name": "Blaster Pistol"
 		},
 		{
+			"Bulk": 1,
+			"Name": "2nd Blaster Pistol"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Melee Weapon"
+		},
+		{
 			"Bulk": 2,
 			"Name": "Heavy Blaster"
 		},
@@ -918,10 +926,6 @@
 		},
 		{
 			"Bulk": 1,
-			"Name": "Melee Weapon"
-		},
-		{
-			"Bulk": 1,
 			"Name": "Spy Gear"
 		},
 		{
@@ -939,10 +943,6 @@
 		{
 			"Bulk": 2,
 			"Name": "Spacesuit"
-		},
-		{
-			"Bulk": 1,
-			"Name": "Mystic Ammunition"
 		}
 	],
 	"Thesaurus": {
@@ -965,7 +965,7 @@
 			},
 			"Muscle": {
 				"Name": "Unstoppable",
-				"Description": "You can push yourself to do one of the following: perform a feat of physical force that verges on the superhuman or engage a small gang on equal footing in close combat."
+				"Description": "You can push yourself to do one of the following: perform a feat of physical force that verges on the superhuman—engage a small gang on equal footing in close combat."
 			},
 			"Mystic": {
 				"Name": "The Way",

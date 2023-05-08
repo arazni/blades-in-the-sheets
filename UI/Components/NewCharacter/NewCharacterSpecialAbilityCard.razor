@@ -71,16 +71,18 @@
 	private void OnChosenAbilityChanged(PlaybookSpecialAbility value)
 	{
 		Playbook.ClearAbilities();
-		ChosenAbility = value;
-		Playbook.TakeAbility(ChosenAbility);
 
 		if (ChosenStartingAbility != null)
 			Playbook.TakeAbility(ChosenStartingAbility);
+
+		ChosenAbility = value;
+		Playbook.TakeAbility(ChosenAbility);
 	}
 
 	private void OnChosenStartingAbilityChanged(PlaybookSpecialAbility value)
 	{
 		Playbook.ClearAbilities();
+
 		ChosenStartingAbility = value;
 		Playbook.TakeAbility(ChosenStartingAbility);
 
