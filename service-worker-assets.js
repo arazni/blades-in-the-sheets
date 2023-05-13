@@ -77,7 +77,7 @@
       "url": "index.html"
     },
     {
-      "hash": "sha256-tRMAs6eidMaQoau9n7ZiQXmJI0bQr+\/UYbc7zGxq5D0=",
+      "hash": "sha256-w9Y5xjjA317Dy+fJwinsiQwE\/EN64OgY3Ad+xIvn0sE=",
       "url": "manifest.webmanifest"
     },
     {
@@ -89,7 +89,7 @@
       "url": "_framework\/dotnet.timezones.blat.br"
     },
     {
-      "hash": "sha256-tuIKjERhkgnp16ytB3G4Wtlu5uuZOrzeCATgKc\/l7tE=",
+      "hash": "sha256-7o550v1hUPZRQ169FGPu1I6n6cCv7xGx9SUCwEgK8qI=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -385,7 +385,7 @@
       "url": "_framework\/System.Xml.XmlSerializer.dll.br"
     },
     {
-      "hash": "sha256-7SvySK0EBgpurCeL7zm\/qFb\/U1xo+Hzk+ijMIZxZTXI=",
+      "hash": "sha256-eTrTCfIQIEhHE80aHVzrWfp4hygiFpRaIft9Mv8UYZA=",
       "url": "_framework\/UI.dll.br"
     },
     {
@@ -393,7 +393,7 @@
       "url": "_framework\/dotnet.7.0.5.810n2v5obn.js"
     },
     {
-      "hash": "sha256-VYhyNpMmH9ebCF\/QJatkgLhFO4Lm2w8n2WIAp8dReUc=",
+      "hash": "sha256-t5fMJHzWGFDmwHB1Ezoa7r1Z5iJ\/Pjqrjieg6nWl8n8=",
       "url": "_framework\/dotnet.wasm.br"
     },
     {
@@ -417,5 +417,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "6dyMFMlO"
+  "version": "Asbyxq+0"
 };

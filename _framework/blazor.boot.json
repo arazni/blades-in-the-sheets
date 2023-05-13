@@ -80,7 +80,7 @@
       "System.Xml.ReaderWriter.dll": "sha256-+FvW17cg6mWhckctyE0up0CG\/QZtyAqgPBKriKvgW2Y=",
       "System.Xml.XDocument.dll": "sha256-3pI9P6qIIlLGS33fj1MHYWw1Bv34aJnaRy5f8AbJpFc=",
       "System.Xml.XmlSerializer.dll": "sha256-n3rz2kSXORcXxN0JfoXkbfARzSv85b7wgMzTfyb5b7o=",
-      "UI.dll": "sha256-+hR3WZVOSInH7aCxhWpRBf0pflXOEzGXGU21hly4\/XA="
+      "UI.dll": "sha256-65qa8kPQglT9EifDfnKah6aeRgqFBrBBoH62aPfhlUk="
     },
     "extensions": null,
     "lazyAssembly": null,
@@ -89,12 +89,12 @@
     "runtime": {
       "dotnet.7.0.5.810n2v5obn.js": "sha256-ncMVcxGoYzVHHaMAU3TBj3VebGvEFUUCcgJNtwkcZYA=",
       "dotnet.timezones.blat": "sha256-rIVQOJ+gHn4DeRSq6Ac3CURS8YBJG3P4CtYPfIuZ\/kk=",
-      "dotnet.wasm": "sha256-mkyYOCcMRhSS\/wT\/3Dj19j75R5AgUgJB77rO793LOdY="
+      "dotnet.wasm": "sha256-7SyrKjbK+lVnoKmTbeoI\/opo3cDchSjJWPJ\/wBUwJsc="
     },
     "runtimeAssets": {
       "dotnet.wasm": {
         "behavior": "dotnetwasm",
-        "hash": "sha256-mkyYOCcMRhSS\/wT\/3Dj19j75R5AgUgJB77rO793LOdY="
+        "hash": "sha256-7SyrKjbK+lVnoKmTbeoI\/opo3cDchSjJWPJ\/wBUwJsc="
       }
     },
     "satelliteResources": null
