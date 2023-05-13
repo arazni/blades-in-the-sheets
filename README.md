@@ -1,6 +1,6 @@
 Hi all!
 
-I made a character sheet web app for Blades in the Dark.
+I made a character sheet web app for Blades in the Dark. It now also supports Scum and Villainy! Moving forward, supporting more Forged in the Dark games will be much easier.
 
 <a href='https://ko-fi.com/S6S5KA4DP' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
@@ -38,3 +38,27 @@ The Save button floats in the corner, ever reminding you to save when you're don
 
 Tech nerd stuff:
 It's a Progressive Web App using web assembly, written in C# and Blazor as an entirely client app with Ahead of Time compilation (for now). So while it is a bit of a heavy download size for a simple website, it has many benefits like an app. Once you've got it installed, you can turn on airplane mode and it'll still work completely. It's basically a full app that just happens to use the browser to download it once (or when it updates) and to run it.
+
+### Supporting more Forged in the Dark games
+
+I rewrote the app to load a game-settings.json file dynamically. You can find the schema for that here: UI/wwwroot/data/game-settings-schema.json
+
+If you're willing to help convert the game text into a json file, I'm typically willing to support the game in the app.
+
+### Release Notes
+
+#### Version 9
+
+- Create a game-settings-schema.json file that can be found here: UI/wwwroot/data/game-settings-schema.json
+
+- Migrate all the hardcoded Blades in the Dark stuff to a gamesettings file.
+
+- Support [Scum and Villainy](https://evilhat.com/product/scum-and-villainy/) with the help of redditor u/djsteele888 who filled out the vast majority of the Scum and Villainy json file.
+
+- Support all the dynamic loading of game settings within the code.
+
+- Remove the automatic assignment of coin to bulk in favor of coin items that can be added when necessary.
+
+- Support dll trimming for hopefully a smaller payload. (JITerpreter stuff is coming out in .NET 8 at the end of the year and I'd like to see if that behaves better than AOT for most people.)
+
+- If you have any trouble with the app, loading your characters, or importing your character json files, please seek me out on reddit, the blades in the dark discord, or file an issue here!
