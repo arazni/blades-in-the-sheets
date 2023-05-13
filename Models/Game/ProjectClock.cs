@@ -6,7 +6,7 @@ public class ProjectClock
 {
 	public ProjectClock(int size)
 	{
-		this.clock = new(0, size);
+		this.clock = new(size);
 	}
 
 	protected readonly BoundedInteger clock;

@@ -4,9 +4,9 @@ public class Playbook
 {
 	private Dictionary<string, PlaybookSpecialAbility> abilitiesByName = new();
 
-	public Playbook(PlaybookOption option)
+	public Playbook(string name)
 	{
-		Option = option;
+		Name = name;
 	}
 
 	public IReadOnlyCollection<PlaybookSpecialAbility> Abilities => this.abilitiesByName.Values;
@@ -14,18 +14,16 @@ public class Playbook
 	public IReadOnlyDictionary<string, PlaybookSpecialAbility> AbilitiesByName
 	{
 		get => this.abilitiesByName;
-		private set { this.abilitiesByName = value.ToDictionary(k => k.Key, v => v.Value); } // json
+		private set => this.abilitiesByName = value.ToDictionary(k => k.Key, v => v.Value); // json
 	}
 
 	public ExperienceTracker Experience { get; private set; } = new(8);
 
-	public PlaybookOption Option { get; }
+	public string Name { get; private set; }
 
 	public bool TakeAbility(PlaybookSpecialAbility ability)
 	{
-		var isKnown = this.abilitiesByName.TryGetValue(ability.Name, out var knownAbility);
-
-		if (isKnown)
+		if (this.abilitiesByName.TryGetValue(ability.Name, out var knownAbility))
 			return knownAbility!.Take();
 
 		var copy = ability.Copy();
@@ -35,14 +33,8 @@ public class Playbook
 		return true;
 	}
 
-	public bool RemoveAbility(PlaybookSpecialAbility ability)
-	{
-		if (!this.abilitiesByName.ContainsKey(ability.Name))
-			return false;
-
+	public bool RemoveAbility(PlaybookSpecialAbility ability) =>
 		this.abilitiesByName.Remove(ability.Name);
-		return true;
-	}
 
 	public bool ClearAbilities()
 	{
@@ -54,18 +46,5 @@ public class Playbook
 		return true;
 	}
 
-	public static Playbook Empty() => new(PlaybookOption.Unknown);
-}
-
-public enum PlaybookOption
-{
-	Unknown = -1,
-	Custom = 0,
-	Cutter = 1,
-	Hound,
-	Leech,
-	Lurk,
-	Slide,
-	Spider,
-	Whisper
+	public static Playbook Empty() => new(string.Empty);
 }

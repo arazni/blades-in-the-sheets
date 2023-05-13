@@ -25,15 +25,17 @@ public static class Extensions
 	public static bool Has(this IEnumerable<string> source, string item) =>
 		item.In(source);
 
+	public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable) =>
+		enumerable == null || !enumerable.Any();
+
 	public static bool HasInk(this string source) =>
 		!string.IsNullOrWhiteSpace(source);
 
 	public static string Join(this IEnumerable<string> source, string separator) =>
-		string.Join(separator, source);
+		string.Join(separator, source) ?? string.Empty;
 
-	public static string Join<T>(this IEnumerable<T> source, string separator) where T : Enum =>
-		source.Select(s => s.ToString())
-			.Join(separator);
+	public static string Join<T>(this IEnumerable<T> source, string separator) where T : notnull =>
+		string.Join(separator, source.Select(s => s.ToString()));
 
 	public static string Description<T>(this T option) where T : Enum
 	{

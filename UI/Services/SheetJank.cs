@@ -8,14 +8,9 @@ public class SheetJank
 	public event Action? TraumaChanged;
 	public void NotifyTraumaChanged() => TraumaChanged?.Invoke();
 
-	public event Action? InsightChanged;
-	public void NotifyInsightChanged() => InsightChanged?.Invoke();
-
-	public event Action? ProwessChanged;
-	public void NotifyProwessChanged() => ProwessChanged?.Invoke();
-
-	public event Action? ResolveChanged;
-	public void NotifyResolveChanged() => ResolveChanged?.Invoke();
+	public event Action<string>? AttributeChanged;
+	public void NotifyAttributeChanged(string attributeName) =>
+		AttributeChanged?.Invoke(attributeName);
 
 	public event Action? GearChanged;
 	public void NotifyGearChanged() => GearChanged?.Invoke();

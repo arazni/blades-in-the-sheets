@@ -1,5 +1,4 @@
 ﻿@using Models.Characters
-@using Models.Characters.Bases
 @using System.Diagnostics.CodeAnalysis
 @using UI.Services
 @inject SheetJank SheetJank;
@@ -8,52 +7,38 @@
 <MudStack>
 	<MudRating @bind-SelectedValue="Attribute.Experience.Points" MaxValue="Attribute!.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
 	<MudText Typo="Typo.h6">@Attribute.Rating @Name</MudText>
-	<SheetTalentAction Attribute="Attribute" Name="ActionNames[0]" />
-	<SheetTalentAction Attribute="Attribute" Name="ActionNames[1]" />
-	<SheetTalentAction Attribute="Attribute" Name="ActionNames[2]" />
-	<SheetTalentAction Attribute="Attribute" Name="ActionNames[3]" />
+	@foreach (var actionByName in Attribute.ActionsByName)
+	{
+		<SheetTalentAction Attribute="Attribute" AttributeName="@Name" ActionName="@actionByName.Key" Action="actionByName.Value" />
+	}
 </MudStack>
 
 @code
 {
 	[Parameter, EditorRequired]
-	public TalentAttribute? Attribute { get; set; }
+	public TalentAttribute Attribute { get; set; } = TalentAttribute.Empty();
 
 	[Parameter, EditorRequired]
-	public AttributeName Name { get; set; }
+	public string Name { get; set; } = string.Empty;
 
 	[CascadingParameter(Name = "IsFixMode")]
 	public bool IsFixMode { get; set; }
 
-	ActionName[] ActionNames { get; set; }
-		= Array.Empty<ActionName>();
-
-	protected override void OnParametersSet()
-	{
-		ActionNames = TalentAttribute.GetAttributeNames(Name);
-
-		base.OnParametersSet();
-	}
-
 	protected override void OnInitialized()
 	{
-		if (Name == AttributeName.Insight)
-			SheetJank.InsightChanged += StateHasChanged;
-		else if (Name == AttributeName.Prowess)
-			SheetJank.ProwessChanged += StateHasChanged;
-		else if (Name == AttributeName.Resolve)
-			SheetJank.ResolveChanged += StateHasChanged;
+		SheetJank.AttributeChanged += AttributeHasChanged;
 
 		base.OnInitialized();
 	}
 
 	public void Dispose()
 	{
-		if (Name == AttributeName.Insight)
-			SheetJank.InsightChanged -= StateHasChanged;
-		else if (Name == AttributeName.Prowess)
-			SheetJank.ProwessChanged -= StateHasChanged;
-		else if (Name == AttributeName.Resolve)
-			SheetJank.ResolveChanged -= StateHasChanged;
+		SheetJank.AttributeChanged -= AttributeHasChanged;
+	}
+
+	private void AttributeHasChanged(string attributeName)
+	{
+		if (attributeName == Name)
+			StateHasChanged();
 	}
 }

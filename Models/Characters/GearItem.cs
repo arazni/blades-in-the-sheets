@@ -6,11 +6,10 @@ public class GearItem
 {
 	private readonly Ink name;
 
-	public GearItem(int bulk, string name, SourceOption source)
+	public GearItem(int bulk, string name)
 	{
 		Bulk = bulk;
 		this.name = new(name);
-		Source = source;
 	}
 
 	public int Bulk { get; }
@@ -19,20 +18,5 @@ public class GearItem
 	{
 		get => this.name.Value;
 		internal set => this.name.Value = value;
-	}
-
-	public SourceOption Source { get; }
-
-	public enum SourceOption
-	{
-		Standard,
-		Cutter,
-		Hound,
-		Leech,
-		Lurk,
-		Slide,
-		Spider,
-		Whisper,
-		Custom
 	}
 }

@@ -1,15 +1,16 @@
 ﻿@using Models.Characters
+@using Models.Settings;
 @using UI.Conveniences
 
 <MudCard Outlined="true">
 	<MudCardHeader>
-		<MudText>Assign 4 action dots (@ViewModel.RemainingDots left)</MudText>
+		<MudText Typo="Typo.h6">Assign 4 action dots (@ViewModel.RemainingDots left)</MudText>
 	</MudCardHeader>
 	<MudCardContent>
 		<MudStack>
 			<MudExpansionPanels>
 				<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's heritage.">
-					<MudText>@ViewModel.Heritage.DisplayName(): @ViewModel.HeritageDescription</MudText>
+					<MudText>@ViewModel.Heritage: @ViewModel.HeritageDescription</MudText>
 				</MudExpansionPanel>
 				<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's background.">
 					<MudText>@ViewModel.Background: @ViewModel.BackgroundDescription</MudText>
@@ -53,14 +54,17 @@
 @code
 {
 	[Parameter, EditorRequired]
-	public VCharacter Character { get; set; } = VCharacter.Empty();
+	public Character Character { get; set; } = Character.Empty();
+
+	[Parameter, EditorRequired]
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
 	private V4ActionDots ViewModel { get; set; } = V4ActionDots.Empty();
 
-	protected override async Task OnParametersSetAsync()
+	protected override void OnParametersSet()
 	{
-		await base.OnParametersSetAsync();
+		ViewModel = new(Character, GameSetting, Character.Playbook.Name);
 
-		ViewModel = new(Character);
+		base.OnParametersSet();
 	}
 }

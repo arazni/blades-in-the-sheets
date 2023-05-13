@@ -1,5 +1,6 @@
-﻿@page "/characters/{Id}"
+﻿@page "/new/{GameName}/{PlaybookName}"
 @using Models.Characters
+@using Models.Settings;
 @using Persistence.Json;
 @using UI.Components
 @using UI.Components.NewCharacter
@@ -9,71 +10,51 @@
 @inject IStorageService Storage
 @inject ICharacterCoordinator Coordinator
 @inject NavigationManager Navigator
+@inject ILoader Loader
 
-<MudHidden Breakpoint="Breakpoint.SmAndDown">
-	<MudTimeline TimelinePosition="@TimelinePosition.Start">
-		<MudTimelineItem>
-			<NewCharacterHeritageCard Heritage="@Character.Dossier.Heritage" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterBackgroundCard Background="@Character.Dossier.Background" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterActionDotsCard Character="@Character" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterSpecialAbilityCard Playbook="@Character.Playbook" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookOption="@Character.Playbook.Option" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterViceCard Vice="@Character.Dossier.Vice" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
-		</MudTimelineItem>
-		<MudTimelineItem>
-			<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
-				Finish your scoundrel
-			</MudButton>
-		</MudTimelineItem>
-	</MudTimeline>
-</MudHidden>
-
-<MudHidden Breakpoint="Breakpoint.MdAndUp">
+<MudContainer MaxWidth="MaxWidth.Medium">
 	<MudStack>
-		<NewCharacterHeritageCard Heritage="@Character.Dossier.Heritage" />
-		<NewCharacterBackgroundCard Background="@Character.Dossier.Background" />
-		<NewCharacterActionDotsCard Character="@Character" />
-		<NewCharacterSpecialAbilityCard Playbook="@Character.Playbook" />
-		<NewCharacterFriendsCard Rolodex="@Character.Rolodex" PlaybookOption="@Character.Playbook.Option" />
-		<NewCharacterViceCard Vice="@Character.Dossier.Vice" />
+		<NewCharacterHeritageCard HeritageSettings="GameSetting.Heritages" Heritage="@Character.Dossier.Heritage" />
+		<NewCharacterBackgroundCard BackgroundSettings="GameSetting.Backgrounds" Background="@Character.Dossier.Background" />
+		<NewCharacterActionDotsCard GameSetting="GameSetting" Character="Character" />
+		<NewCharacterSpecialAbilityCard GameSetting="GameSetting" Character="Character" />
+		<NewCharacterFriendsCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="Character.Rolodex" PlaybookName="@Character.Playbook.Name" />
+		<NewCharacterViceCard ViceSettings="GameSetting.Vices" Vice="@Character.Dossier.Vice" />
 		<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
 		<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
-			Finish your scoundrel
+			Finish Your @PlaybookName
 		</MudButton>
 	</MudStack>
-</MudHidden>
+</MudContainer>
 
 @code
 {
-	[Parameter, EditorRequired]
+	[Parameter]
 	public string Id { get; set; } = string.Empty;
 
-	public VCharacter Character { get; private set; } = VCharacter.Empty();
+	[Parameter]
+	public string GameName { get; set; } = string.Empty;
 
-	private Character characterModel = Models.Characters.Character.Empty();
+	[Parameter]
+	public string PlaybookName { get; set; } = string.Empty;
 
-	protected override async Task OnInitializedAsync()
+	public Character Character { get; private set; } = Character.Empty();
+
+	public GameSetting GameSetting { get; private set; } = EmptyGameSetting.Game();
+
+	public PlaybookSetting PlaybookSetting => GameSetting.GetPlaybookSetting(Character.Playbook.Name);
+
+	protected override async Task OnParametersSetAsync()
 	{
-		characterModel = await Storage.Load(Id);
-		Character = new(characterModel);
+		GameSetting = await Loader.LoadSetting(GameName);
+		Character = Coordinator.InitializeCharacter(GameSetting, PlaybookName);
+
+		await base.OnParametersSetAsync();
 	}
 
 	public async Task SaveAsync()
 	{
-		await Storage.Save(characterModel);
+		await Storage.Save(Character);
 		Navigator.NavigateTo(Paths.Sheet(Character.Id));
 	}
 }

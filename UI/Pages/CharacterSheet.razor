@@ -1,28 +1,29 @@
 ﻿@page "/sheets/{Id}"
 @using Models.Characters
+@using Models.Settings;
+@using Persistence.Json;
 @using UI.Components
 @using UI.Components.CharacterSheet
 @using UI.Services
 @inject IStorageService Storage
-
-@if (Character == null) { return; }
+@inject ILoader Loader
 
 <MudContainer MaxWidth="MaxWidth.ExtraLarge">
 	<MudGrid>
 		<MudItem xs="12" lg="6">
 			<MudStack>
-				<SheetDossierCard Dossier="Character.Dossier" />
-				<SheetMonitorCard Character="Character" />
+				<SheetDossierCard Dossier="Character.Dossier" AliasSynonym="@PlaybookSetting.AliasSynonym" />
+				<SheetMonitorCard GameSetting="GameSetting" Character="Character" />
 				<SheetTalentCard Talent="Character.Talent" />
-				<SheetAbilitiesCard Character="Character" />
+				<SheetAbilitiesCard GameSetting="GameSetting" Character="Character" />
 			</MudStack>
 		</MudItem>
 		<MudItem xs="12" lg="6">
 			<MudStack>
-				<SheetRolodexCard Rolodex="Character.Rolodex" Playbook="Character.Playbook.Option" />
-				<SheetGearCard Character="Character" Playbook="Character.Playbook.Option" />
-				<SheetFundCard Fund="Character.Fund" />
-				<SheetNotebookCard Character="Character" />
+				<SheetRolodexCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="Character.Rolodex" />
+				<SheetGearCard Character="Character" BulkSynonym="@GameSetting.Thesaurus.Bulk" />
+				<SheetFundCard Fund="Character.Fund" CoinSynonym="@GameSetting.Thesaurus.Coin" />
+				<SheetNotebookCard GameSetting="GameSetting" Character="Character" />
 			</MudStack>
 		</MudItem>
 	</MudGrid>
@@ -34,7 +35,11 @@
 	[Parameter, EditorRequired]
 	public string Id { get; set; } = string.Empty;
 
-	public Character? Character { get; set; }
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
+
+	public Character Character { get; set; } = Character.Empty();
+
+	PlaybookSetting PlaybookSetting => GameSetting.GetPlaybookSetting(Character.Playbook.Name);
 
 	private bool isSaving = false;
 
@@ -44,9 +49,12 @@
 	string SaveIcon => isSaving ? Icons.Material.Filled.CheckCircle
 		: Icons.Material.Filled.Save;
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
 		Character = await Storage.Load(Id);
+		GameSetting = await Loader.LoadSetting(Character.GameName);
+
+		await base.OnParametersSetAsync();
 	}
 
 	async Task Save()

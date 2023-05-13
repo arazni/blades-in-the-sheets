@@ -1,24 +1,42 @@
-﻿namespace Models.Characters;
+﻿using Models.Settings;
+using Newtonsoft.Json;
+
+namespace Models.Characters;
 
 public partial class Character
 {
+	[JsonConstructor]
 	private Character()
 	{
-		Playbook = new(PlaybookOption.Unknown);
-		Talent = new(PlaybookOption.Unknown);
+		Playbook = Playbook.Empty();
+		Talent = Talent.Empty();
+		Monitor = Monitor.Empty();
+		GameName = string.Empty;
 	}
 
-	public Character(PlaybookOption option)
+	public Character(GameSetting game, string playbookName, int version)
 	{
-		Playbook = new(option);
-		Talent = new(option);
+		Playbook = new(playbookName);
+		Talent = new
+		(
+			game.Attributes,
+			game.GetPlaybookSetting(playbookName).DefaultActionPoints,
+			game.ActionPointMaximum
+		);
+		Monitor = new(game.RecoveryClockSize);
+		GameName = game.Name;
+		Version = version;
 	}
 
 	public string Id { get; private set; } = Guid.NewGuid().ToString();
 
+	public string GameName { get; private set; }
+
+	public int Version { get; private set; }
+
 	public Dossier Dossier { get; private set; } = new();
 
-	public Monitor Monitor { get; private set; } = new();
+	public Monitor Monitor { get; private set; }
 
 	public Talent Talent { get; private set; }
 

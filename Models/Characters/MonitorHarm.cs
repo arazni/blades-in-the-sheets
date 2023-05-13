@@ -15,7 +15,12 @@ public class MonitorHarm
 	[JsonProperty]
 	private BoundedCollection<string> BoundedFatalHarms { get; set; } = new(1);
 
-	public RolloverClock HealingClock { get; private set; } = new(4);
+	public MonitorHarm(int healingClockSize)
+	{
+		HealingClock = new(healingClockSize);
+	}
+
+	public RolloverClock HealingClock { get; private set; }
 
 	public bool IsIncapacitated =>
 		BoundedSevereHarms.Any();
@@ -123,6 +128,8 @@ public class MonitorHarm
 
 		return true;
 	}
+
+	public static MonitorHarm Empty() => new(4);
 }
 
 public enum HarmIntensity

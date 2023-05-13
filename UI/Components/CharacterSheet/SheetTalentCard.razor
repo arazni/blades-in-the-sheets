@@ -3,15 +3,12 @@
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Talents">
 	<CascadingValue Name="IsFixMode" Value="@IsFixMode">
 		<MudGrid>
-			<MudItem Class="flex-grow-1">
-				<SheetTalentAttribute Attribute="(global::Models.Characters.Bases.TalentAttribute)Talent.Insight" Name="(global::Models.Characters.AttributeName)global::Models.Characters.AttributeName.Insight" />
-			</MudItem>
-			<MudItem Class="flex-grow-1">
-				<SheetTalentAttribute Attribute="(global::Models.Characters.Bases.TalentAttribute)Talent.Prowess" Name="(global::Models.Characters.AttributeName)global::Models.Characters.AttributeName.Prowess" />
-			</MudItem>
-			<MudItem Class="flex-grow-1">
-				<SheetTalentAttribute Attribute="(global::Models.Characters.Bases.TalentAttribute)Talent.Resolve" Name="(global::Models.Characters.AttributeName)global::Models.Characters.AttributeName.Resolve" />
-			</MudItem>
+			@foreach(var attributeByName in Talent.AttributesByName)
+			{
+				<MudItem Class="flex-grow-1">
+					<SheetTalentAttribute Attribute="attributeByName.Value" Name="@attributeByName.Key" />
+				</MudItem>
+			}
 		</MudGrid>
 	</CascadingValue>
 </SheetCard>

@@ -1,27 +1,25 @@
 @using Models.Characters
+@using Models.Settings;
 
 <MudCard Outlined="true">
 	<MudCardHeader>
-		<MudText>Choose a vice and its purveyor</MudText>
+		<MudText Typo="Typo.h6">@HeaderText()</MudText>
 	</MudCardHeader>
 	<MudCardContent>
 		<MudStack>
-			@*<MudContainer>*@
-				<MudSelect @bind-Value="Vice.Vice" Label="Vice">
-					@foreach (var vOption in Options)
-					{
-						<MudSelectItem T="ViceOption" Value="vOption.Option">
-							<MudText>@vOption.DisplayName</MudText>
-							<MudText>@vOption.Elaboration</MudText>
-						</MudSelectItem>
-					}
-				</MudSelect>
-				<MudText>@Elaboration()</MudText>
-			@*</MudContainer>*@
-			@*<MudContainer>*@
-				<MudTextField @bind-Value="Vice.Description" 
-					HelperText="A detail about your purveyor and how you indulge in your vice."
-					Placeholder="@ExamplePlaceholder()" />
+			<MudSelect @bind-Value="Vice.Name" Label="Vice">
+				@foreach (var option in ViceSettings)
+				{
+					<MudSelectItem T="string" Value="option.Name">
+						<MudText>@option.Name</MudText>
+						<MudText>@option.Description</MudText>
+					</MudSelectItem>
+				}
+			</MudSelect>
+			<MudText>@Elaboration()</MudText>
+			<MudTextField @bind-Value="Vice.Description" HelperText="@HelperText()" Placeholder="@ExamplePlaceholder()" />
+			@if (HasExamples)
+			{
 				<MudExpansionPanels>
 					<MudExpansionPanel Text="In world example purveyors">
 						@foreach (var example in Examples())
@@ -30,7 +28,7 @@
 						}
 					</MudExpansionPanel>
 				</MudExpansionPanels>
-			@*</MudContainer>*@
+			}
 		</MudStack>
 	</MudCardContent>
 </MudCard>
@@ -40,19 +38,29 @@
 	[Parameter, EditorRequired]
 	public DossierVice Vice { get; set; } = new();
 
-	private string Elaboration() =>
-		Elaboration(Vice.Vice);
+	[Parameter, EditorRequired]
+	public ViceSetting[] ViceSettings { get; set; } = EmptyGameSetting.Vices();
 
-	private string Elaboration(ViceOption option) =>
-		Options.First(o => o.Option == option).Elaboration;
+	bool HasExamples => Examples().Any();
 
-	private IReadOnlyCollection<string> Examples() =>
-		Options.First(o => o.Option == Vice.Vice).Examples;
+	string Elaboration() =>
+		ViceSettings.FirstOrDefault(v => v.Name == Vice.Name)?.Description 
+			?? string.Empty;
 
-	private string ExamplePlaceholder() =>
+	IEnumerable<string> Examples() =>
+		ViceSettings.FirstOrDefault(v => v.Name == Vice.Name)?.Sources
+			?? Array.Empty<string>();
+
+	string ExamplePlaceholder() =>
 		Examples()
-			.First()
-			+ " Here, I...";
+			.FirstOrDefault()
+			?? string.Empty;
 
-	private IReadOnlyCollection<VVice> Options => VVice.Options;
+	string HeaderText() =>
+		HasExamples ? "Choose a vice and its purveyor"
+		: "Choose a vice";
+
+	string HelperText() =>
+		HasExamples ? "A detail about your purveyor and how you indulge in your vice."
+		: "A detail about how you indulge in your vice.";
 }

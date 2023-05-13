@@ -58,7 +58,7 @@
 @code
 {
 	[Parameter, EditorRequired]
-	public Monitor Monitor { get; set; } = new();
+	public Monitor Monitor { get; set; } = Monitor.Empty();
 
 	[Parameter, EditorRequired]
 	public bool IsFixMode { get; set; }

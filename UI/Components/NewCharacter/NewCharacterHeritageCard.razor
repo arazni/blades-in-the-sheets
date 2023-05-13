@@ -1,17 +1,18 @@
 ﻿@using Models.Characters
+@using Models.Settings;
 @using UI.ViewModels
 
 <MudCard Outlined="true">
 	<MudCardHeader>
-		<MudText>Choose a heritage</MudText>
+		<MudText Typo="Typo.h6">Choose a heritage</MudText>
 	</MudCardHeader>
 	<MudCardContent>
-		<MudSelect @bind-Value="Heritage.Heritage" Label="Heritage">
-			@foreach (var vOption in Options)
+		<MudSelect @bind-Value="Heritage.Name" Label="Heritage">
+			@foreach (var option in HeritageSettings)
 			{
-				<MudSelectItem T="HeritageOption" Value="vOption.Option">
-					<MudText>@vOption.DisplayName</MudText>
-					<MudText>@vOption.Elaboration</MudText>
+				<MudSelectItem T="string" Value="option.Name">
+					<MudText>@option.Name</MudText>
+					<MudText>@option.Description</MudText>
 				</MudSelectItem>
 			}
 		</MudSelect>
@@ -25,11 +26,9 @@
 	[Parameter, EditorRequired]
 	public DossierHeritage Heritage { get; set; } = new();
 
+	[Parameter, EditorRequired]
+	public HeritageSetting[] HeritageSettings { get; set; } = EmptyGameSetting.Heritages();
+
 	private string Elaboration() =>
-		Elaboration(Heritage.Heritage);
-
-	private string Elaboration(HeritageOption option) =>
-		Options.First(o => o.Option == option).Elaboration;
-
-	private IReadOnlyCollection<VHeritage> Options => VHeritage.Options;
+		HeritageSettings.FirstOrDefault(h => h.Name == Heritage.Name)?.Description ?? string.Empty;
 }

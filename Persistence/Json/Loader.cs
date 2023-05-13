@@ -1,5 +1,5 @@
-﻿using Models.Characters;
-using Models.Common;
+﻿using Models.Common;
+using Models.Settings;
 using Newtonsoft.Json;
 using Persistence.Json.DataModels;
 
@@ -7,10 +7,6 @@ namespace Persistence.Json;
 
 public class Loader : ILoader
 {
-	private const string FriendsFilePrefix = "friends";
-	private const string PlaybookAbilitiesFilePrefix = "playbook.abilities";
-	private const string GearLoadFilePrefix = "gear.load";
-	private const string StandardGearLoadFileSuffix = "standard";
 	private readonly IFileReader fileReader;
 
 	public Loader(IFileReader fileReader)
@@ -18,82 +14,43 @@ public class Loader : ILoader
 		this.fileReader = fileReader;
 	}
 
-	public async Task<RolodexFriend[]> LoadAvailableFriendsAsync(string identifierOrPlaybook)
+	public async Task<GameFile[]> LoadGameFiles() =>
+		await this.fileReader.AllFiles();
+
+	public async Task<GameSetting> LoadSetting(string gameName)
 	{
-		var file = await ReadFile(FriendsFilePrefix, identifierOrPlaybook);
+		var gameFiles = await LoadGameFiles();
 
-		var entries = JsonConvert.DeserializeObject<string[]>(file)
-			?? throw new JsonException($"Wasn't able to deserialize {identifierOrPlaybook} to {nameof(RolodexFriend)}[]");
+		var gameFile = gameFiles.FirstOrDefault(f => gameName.In(f.Name, f.Stem))
+			?? throw new ArgumentOutOfRangeException(nameof(gameName), $"Cannot recognize {gameName} in available settings files: {gameFiles.Join(", ")}");
 
-		return entries.Select(entry => new RolodexFriend(entry))
-			.ToArray();
+		return await LoadSetting(gameFile);
 	}
 
-	public async Task<PlaybookSpecialAbility[]> LoadAvailableAbilitiesAsync(string identifierOrPlaybook)
+	public async Task<GameSetting> LoadSetting(GameFile gameFile)
 	{
-		if (!Enum.TryParse(identifierOrPlaybook, out PlaybookOption source))
-			source = PlaybookOption.Custom;
+		string gameJson;
 
-		var file = await ReadFile(PlaybookAbilitiesFilePrefix, identifierOrPlaybook);
+		try
+		{
+			gameJson = await this.fileReader.ReadFile(gameFile.Stem);
+		}
+		catch (Exception ex)
+		{
+			throw new FileNotFoundException($"Cannot load file {gameFile}. Contact the software developer.", ex);
+		}
 
-		var data = JsonConvert.DeserializeObject<AvailablePlaybookSpecialAbilityData[]>(file)
-			?? throw new JsonException($"Wasn't able to deserialize {identifierOrPlaybook} to {nameof(PlaybookSpecialAbility)}[]");
+		GameSetting loadedGameSetting;
+		try
+		{
+			loadedGameSetting = JsonConvert.DeserializeObject<GameSetting>(gameJson)
+				?? throw new Exception();
+		}
+		catch (Exception ex)
+		{
+			throw new JsonSerializationException($"The file {gameFile} cannot deserialize into a {nameof(GameSetting)} correctly. You may need to update the file. See the game-settings-schema.json file in the repo.", ex);
+		}
 
-		return data.Select(data => new PlaybookSpecialAbility(data.Name, data.Description, data.TimesTakeable, source))
-			.ToArray();
+		return loadedGameSetting;
 	}
-
-	public async Task<Dictionary<PlaybookOption, PlaybookSpecialAbility[]>> LoadAvailableAbilitiesByOptionAsync()
-	{
-		var sources = Enum.GetValues<PlaybookOption>()
-			.Where(s => !s.In(PlaybookOption.Custom, PlaybookOption.Unknown));
-
-		var tasks = sources.Select(source => ReadFile(source, PlaybookAbilitiesFilePrefix, source.ToString()));
-		var optionFiles = await Task.WhenAll(tasks);
-
-		return optionFiles.ToDictionary
-		(
-			optionFile => optionFile.Item1,
-			optionFile => JsonConvert.DeserializeObject<AvailablePlaybookSpecialAbilityData[]>(optionFile.Item2)
-				?.Select(data => new PlaybookSpecialAbility(data.Name, data.Description, data.TimesTakeable, optionFile.Item1))
-				.ToArray()
-				?? throw new JsonException($"Wasn't able to deserialize {optionFile.Item1} to {nameof(PlaybookSpecialAbility)}[]")
-		);
-	}
-
-	public async Task<GearItem[]> LoadAvailableItemsAsync(string identifierOrPlaybook)
-	{
-		if (!Enum.TryParse(identifierOrPlaybook, out GearItem.SourceOption source))
-			source = GearItem.SourceOption.Custom;
-
-		var file = await ReadFile(GearLoadFilePrefix, identifierOrPlaybook);
-
-		var specificData = JsonConvert.DeserializeObject<AvailableGearItemData[]>(file)
-			?? throw new JsonException($"Wasn't able to deserialize {identifierOrPlaybook} to {nameof(GearItem)}[]");
-
-		file = await ReadFile(GearLoadFilePrefix, StandardGearLoadFileSuffix);
-
-		var standardData = JsonConvert.DeserializeObject<AvailableGearItemData[]>(file)
-			?? throw new JsonException($"Wasn't able to deserialize {StandardGearLoadFileSuffix} to {nameof(GearItem)}[]");
-
-		var specificGear = specificData.Select(d => new GearItem(d.Bulk, d.Name, source));
-		var standardGear = standardData.Select(d => new GearItem(d.Bulk, d.Name, GearItem.SourceOption.Standard));
-
-		return specificGear.Concat(standardGear)
-			.ToArray();
-	}
-
-	private async Task<(T, string)> ReadFile<T>(T key, string prefix, string identifierOrPlaybook)
-	{
-		var file = await ReadFile(prefix, identifierOrPlaybook);
-		return (key, file);
-	}
-
-	private async Task<string> ReadFile(string prefix, string identifierOrPlaybook)
-	{
-		var fileName = ToFileName(prefix, identifierOrPlaybook);
-		return await this.fileReader.ReadFile(fileName);
-	}
-
-	private static string ToFileName(string prefix, string identifierOrPlaybook) => $"{prefix}.{identifierOrPlaybook}.json".ToLower();
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using Persistence.Json;
+using Persistence.Json.Migrations;
 using UI;
 using UI.Services;
 
@@ -16,6 +17,7 @@ builder.Services.AddTransient<ISerializer, Serializer>();
 builder.Services.AddTransient<ILoader, Loader>();
 builder.Services.AddTransient<IFileReader, HttpFileReader>();
 builder.Services.AddTransient<ICharacterCoordinator, CharacterCoordinator>();
+builder.Services.AddTransient<IMigrationHandler, MigrationHandler>();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddSingleton<SheetJank>();
 builder.Services.AddMudServices();

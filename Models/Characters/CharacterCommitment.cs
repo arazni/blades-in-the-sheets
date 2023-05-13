@@ -2,7 +2,7 @@
 
 public partial class Character // Bulk
 {
-	public int AvailableBulk => Gear.AvailableBulk - Fund.Satchel.Coins;
+	public int AvailableBulk => Gear.AvailableBulk;
 
 	public bool CanCommitGear(GearItem item)
 	{

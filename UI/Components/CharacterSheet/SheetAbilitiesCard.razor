@@ -1,4 +1,5 @@
 @using Models.Characters
+@using Models.Settings;
 @using Persistence.Json
 @using UI.Conveniences
 @using UI.Services
@@ -6,7 +7,7 @@
 @inject ILoader Loader
 @inject SheetJank SheetJank
 
-<SheetCard @bind-IsFixMode="IsFixMode" Header="@Playbook.Option.ToString()">
+<SheetCard @bind-IsFixMode="IsFixMode" Header="@Playbook.Name.ToString()">
 	<MudStack>
 		<MudRating @bind-SelectedValue="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
 		<MudGrid>
@@ -19,7 +20,7 @@
 				</MudSelect>
 			</MudItem>
 			<MudItem xs="12" sm="3">
-				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@Constants.Buttons.ButtonDimensionStyle">Ability</MudButton>
+				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@UI.Constants.Buttons.ButtonDimensionStyle">Ability</MudButton>
 			</MudItem>
 		</MudGrid>
 		<MudStack>
@@ -36,6 +37,9 @@
 	[Parameter, EditorRequired]
 	public Character Character { get; set; } = Character.Empty();
 
+	[Parameter, EditorRequired]
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
+
 	Playbook Playbook => Character.Playbook;
 
 	public bool IsFixMode { get; set; }
@@ -43,10 +47,7 @@
 	IReadOnlyCollection<PlaybookSpecialAbility> KnownAbilities =>
 		Playbook.Abilities;
 
-	IReadOnlyDictionary<PlaybookOption, PlaybookSpecialAbility[]>? AvailableAbilitiesByOptions { get; set; }
-
-	IReadOnlyCollection<PlaybookSpecialAbility> AvailableAbilities =>
-		AvailableAbilitiesByOptions?[Playbook.Option] ?? Array.Empty<PlaybookSpecialAbility>();
+	IReadOnlyCollection<PlaybookSpecialAbility> AvailableAbilities = Array.Empty<PlaybookSpecialAbility>();
 
 	IReadOnlyCollection<PlaybookSpecialAbility> LearnableAbilities =>
 		AvailableAbilities.Where
@@ -62,13 +63,17 @@
 
 	PlaybookSpecialAbility? SelectedAbility { get; set; }
 
-	protected override async Task OnInitializedAsync()
+	protected override void OnParametersSet()
 	{
-		AvailableAbilitiesByOptions = await Loader.LoadAvailableAbilitiesByOptionAsync();
+		AvailableAbilities = GameSetting.GetPlaybookSetting(Playbook.Name)
+			.GetAvailableAbilities();
+	}
 
+	protected override void OnInitialized()
+	{
 		SheetJank.AbilitiesChanged += StateHasChanged;
 
-		await base.OnInitializedAsync();
+		base.OnInitialized();
 	}
 
 	public void Dispose()

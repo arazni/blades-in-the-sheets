@@ -1,36 +1,36 @@
 ﻿@using Models.Characters
-@using Persistence.Json;
+@using Models.Settings
+@using Persistence.Json
 @using UI.Services
-@using static UI.Constants;
-@inject IStorageService Storage
-@inject ICharacterCoordinator Coordinator
+@using static UI.Constants
 @inject NavigationManager Navigator
 
 <MudCard Outlined="true" Class="mx-4 my-1">
 	<MudCardHeader >
-		<MudText Typo="Typo.h4">@Playbook</MudText>
+		<MudText Typo="Typo.h4">@PlaybookName</MudText>
 	</MudCardHeader>
 	<MudCardContent>
 		<MudText Typo="Typo.body1" Class="my-2">@Hook[..(Hook.IndexOf(".")+1)]</MudText>
 		<MudText Typo="Typo.body1" Class="my-2">@Hook[(Hook.IndexOf(".")+1)..]</MudText>
 	</MudCardContent>
 	<MudCardActions>
-		<MudButton Color="Color.Primary" FullWidth="true" OnClick="CreateCharacter">Create @Playbook</MudButton>
+		<MudButton Color="Color.Primary" FullWidth="true" OnClick="CreateCharacter">Create @PlaybookName</MudButton>
 	</MudCardActions>
 </MudCard>
 
 @code
 {
-	[Parameter]
-	public PlaybookOption Playbook { get; set; }
+	[Parameter, EditorRequired]
+	public string PlaybookName { get; set; } = string.Empty;
 
-	[Parameter]
+	[Parameter, EditorRequired]
+	public string GameFileStem { get; set; } = string.Empty;
+
+	[Parameter, EditorRequired]
 	public string Hook { get; set; } = string.Empty;
 
-	public async Task CreateCharacter()
+	public void CreateCharacter()
 	{
-		var character = await Coordinator.InitializeCharacter(Playbook);
-		await Storage.Save(character);
-		Navigator.NavigateTo(Paths.Character(character.Id));
+		Navigator.NavigateTo(Paths.NewCharacter(GameFileStem, PlaybookName));
 	}
 }

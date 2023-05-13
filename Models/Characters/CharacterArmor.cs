@@ -1,4 +1,5 @@
 ﻿using Models.Common;
+using Models.Settings;
 
 namespace Models.Characters;
 
@@ -12,13 +13,18 @@ public partial class Character // Armor
 	private bool isHeavyArmorUsed;
 	private bool isSpecialArmorUsed;
 
+	// Dirty fix since we can't know armor rules for other games.
+	private string HeavyArmorSearchText =>
+		GameName == Constants.Games.BladesInTheDark ? Heavy
+		: Standard;
+
 	public bool HasArmor =>
 		Gear.Loadout.Select(item => item.Name)
 			.Has(Standard);
 
 	public bool HasHeavyArmor =>
 		Gear.Loadout.Select(item => item.Name)
-			.Has(Heavy);
+			.Has(HeavyArmorSearchText);
 
 	public bool HasSpecialArmor =>
 		Playbook.Abilities.Select(ability => ability.Description)

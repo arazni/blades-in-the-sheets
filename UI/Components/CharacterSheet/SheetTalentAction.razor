@@ -1,6 +1,6 @@
 ﻿@using Models.Characters
-@using Models.Characters.Bases
 @using System.Diagnostics.CodeAnalysis
+@using Models.Settings;
 @using UI.Services
 @inject SheetJank SheetJank
 
@@ -8,7 +8,7 @@
 	@if (IsFixMode)
 	{
 		<MudRating Size="Size.Small" @bind-SelectedValue="FixModeRating" MaxValue="Action.MaxRating" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
-		<MudText>@FixModeText</MudText>
+		<MudText>@ActionName</MudText>
 	}
 	else
 	{
@@ -22,34 +22,34 @@
 
 @code
 {
-	[Parameter, EditorRequired, MemberNotNull]
-	public TalentAttribute? Attribute { get; set; }
+	[Parameter, EditorRequired]
+	public string AttributeName { get; set; } = string.Empty;
 
 	[Parameter, EditorRequired]
-	public ActionName Name { get; set; }
+	public TalentAttribute Attribute { get; set; } = TalentAttribute.Empty();
+
+	[Parameter, EditorRequired]
+	public string ActionName { get; set; } = string.Empty;
+
+	[Parameter, EditorRequired]
+	public TalentAction Action { get; set; } = TalentAction.Empty();
 
 	[CascadingParameter(Name = "IsFixMode")]
 	public bool IsFixMode { get; set; }
 
-	TalentAction Action =>
-		Attribute!.ActionFromName(Name);
-
 	string LevelUpTitle =>
-		$"Level up {Name}";
+		$"Level up {ActionName}";
 
 	bool CanLevelUp =>
 		Attribute!.Experience.CanLevelUp
 		|| IsFixMode;
 
 	string Text =>
-		$"{Action.Rating} {Name}";
-
-	string FixModeText =>
-		Name.ToString();
+		$"{Action.Rating} {ActionName}";
 
 	void LevelUp()
 	{
-		if (!Attribute!.LevelUp(Name))
+		if (!Attribute.LevelUp(ActionName))
 			return;
 
 		Notify();
@@ -65,26 +65,6 @@
 		}
 	}
 
-	void Notify()
-	{
-		var attribute = TalentAction.GetAttributeName(Name);
-
-		if (attribute == AttributeName.Insight)
-		{
-			SheetJank.NotifyInsightChanged();
-			return;
-		}
-
-		if (attribute == AttributeName.Prowess)
-		{
-			SheetJank.NotifyProwessChanged();
-			return;
-		}
-
-		if (attribute == AttributeName.Resolve)
-		{
-			SheetJank.NotifyResolveChanged();
-			return;
-		}
-	}
+	void Notify() =>
+		SheetJank.NotifyAttributeChanged(AttributeName);
 }

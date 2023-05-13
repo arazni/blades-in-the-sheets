@@ -8,15 +8,13 @@ public class PlaybookSpecialAbility
 	private readonly Ink name;
 	private readonly Ink description;
 
-	public PlaybookSpecialAbility(string name, string description, int timesTakable, PlaybookOption source)
+	public PlaybookSpecialAbility(string name, string description, int timesTakeable)
 	{
 		this.name = new(name);
 
 		this.description = new(description);
 
-		this.timesTaken = new(Math.Max(1, timesTakable));
-
-		Source = source;
+		this.timesTaken = new(Math.Max(1, timesTakeable));
 	}
 
 	public bool Take() => TimesTaken != ++TimesTaken;
@@ -50,12 +48,10 @@ public class PlaybookSpecialAbility
 		return true;
 	}
 
-	public int TimesTakable => this.timesTaken.Max;
+	public int TimesTakeable => this.timesTaken.Max;
 
-	public bool IsCompletelyLearned => TimesTakable == TimesTaken;
-
-	public PlaybookOption Source { get; }
+	public bool IsCompletelyLearned => TimesTakeable == TimesTaken;
 
 	public PlaybookSpecialAbility Copy() =>
-		new(Name, Description, TimesTakable, Source);
+		new(Name, Description, TimesTakeable);
 }

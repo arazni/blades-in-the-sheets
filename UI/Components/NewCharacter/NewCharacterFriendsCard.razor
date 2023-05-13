@@ -1,11 +1,12 @@
 ﻿@using Models.Characters
 @using Models.Common
+@using Models.Settings;
 @using Persistence.Json
 @inject ILoader Loader
 
 <MudCard Outlined="true">
 	<MudCardHeader>
-		<MudText>Choose a close friend and a rival from among your contacts</MudText>
+		<MudText Typo="Typo.h6">Choose a close friend and a rival from among your contacts</MudText>
 	</MudCardHeader>
 	<MudCardContent>
 		<MudStack>
@@ -38,9 +39,12 @@
 {
 	[Parameter, EditorRequired]
 	public Rolodex Rolodex { get; set; } = new();
+			
+	[Parameter, EditorRequired]
+	public string PlaybookName { get; set; } = string.Empty;
 
 	[Parameter, EditorRequired]
-	public PlaybookOption PlaybookOption { get; set; } = new();
+	public RolodexSetting RolodexSetting { get; set; } = EmptyGameSetting.Rolodex();
 
 	private RolodexFriend? CloseFriend { get; set; }
 
@@ -58,11 +62,9 @@
 		Rolodex.Friends.Where(f => !f.Closeness.In(FriendCloseness.Rival, FriendCloseness.CloseFriend))
 			.ToArray();
 
-	protected override async Task OnParametersSetAsync()
+	protected override void OnParametersSet()
 	{
-		await base.OnParametersSetAsync();
-
-		if (PlaybookOption == PlaybookOption.Unknown)
+		if (!PlaybookName.HasInk())
 			return;
 
 		if (Rolodex.Friends.Any())
@@ -72,8 +74,12 @@
 			return;
 		}
 
-		var friends = await Loader.LoadAvailableFriendsAsync(PlaybookOption.ToString());
+		var friends = RolodexSetting.Friends.Select(f => new RolodexFriend(f))
+			.ToArray();
+
 		Rolodex.ReplaceFriends(friends);
+
+		base.OnParametersSet();
 	}
 
 	private void OnCloseFriendChanged(RolodexFriend friend)

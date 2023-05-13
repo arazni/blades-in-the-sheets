@@ -9,15 +9,7 @@ public class FundSatchel
 	public int Coins
 	{
 		get => this.coins.Value;
-		set
-		{
-			var anyDifference = this.coins.Value != value;
-
-			this.coins.Value = value;
-
-			if (anyDifference)
-				NotifySatchelChanged();
-		}
+		set => this.coins.Value = value;
 	}
 
 	public bool IsFull => Coins == MaxCoins;
@@ -38,12 +30,7 @@ public class FundSatchel
 		if (amountSpent == 0 || Coins == 0)
 			return false;
 
-		var hasChanged = this.coins.ChangeIfWithinBound(-amountSpent);
-
-		if (hasChanged)
-			NotifySatchelChanged();
-
-		return hasChanged;
+		return this.coins.ChangeIfWithinBound(-amountSpent);
 	}
 
 	internal int SpendAsMuchAsAffordable(int amountSpent)
@@ -57,11 +44,7 @@ public class FundSatchel
 		if (Coins == 0)
 			return amountSpent;
 
-		var remainder = Math.Abs(this.coins.ChangeUntilBound(-amountSpent));
-
-		NotifySatchelChanged();
-
-		return remainder;
+		return Math.Abs(this.coins.ChangeUntilBound(-amountSpent));
 	}
 
 	public bool WillFit(int coins) =>
@@ -78,13 +61,6 @@ public class FundSatchel
 		if (Coins == MaxCoins)
 			return amountGained;
 
-		var remainder = Math.Abs(this.coins.ChangeUntilBound(amountGained));
-
-		NotifySatchelChanged();
-
-		return remainder;
+		return Math.Abs(this.coins.ChangeUntilBound(amountGained));
 	}
-
-	public event Action? SatchelChanged;
-	public void NotifySatchelChanged() => SatchelChanged?.Invoke();
 }

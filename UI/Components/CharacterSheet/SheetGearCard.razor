@@ -1,10 +1,10 @@
 ﻿@using Models.Characters
 @using Models.Common;
+@using Models.Settings;
 @using UI.Conveniences
 @using UI.Services
-@using static Models.Characters.GearItem;
+@using static Models.Characters.GearItem
 @inject SheetJank SheetJank
-@implements IDisposable
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Gear">
 	<MudStack>
@@ -31,7 +31,6 @@
 		</MudGrid>
 		<MudText Typo="Typo.h6">Loadout</MudText>
 		<MudStack>
-			<MudText>Coin (@Character.Fund.Satchel.Coins)</MudText>
 			@foreach (var item in Gear.Loadout)
 			{
 				@commitmentItemRenderer!(item)
@@ -43,7 +42,7 @@
 		</MudStack>
 		<MudStack Row="true" Justify="Justify.SpaceBetween">
 			<MudText Typo="Typo.h6">Available Gear</MudText>
-			<MudText Typo="Typo.h6">Bulk Remaining: @Character.AvailableBulk</MudText>
+			<MudText Typo="Typo.h6">@BulkSynonym Remaining: @Character.AvailableBulk</MudText>
 		</MudStack>
 		<MudContainer>
 			@foreach (var item in Gear.UncommittedGear)
@@ -63,7 +62,7 @@
 			<MudText Typo="Typo.h6">Add Item</MudText>
 			<MudGrid>
 				<MudItem xs="4" sm="2">
-					<MudTextField @bind-Value=addableItem.Bulk Label="Bulk" />
+					<MudTextField @bind-Value=addableItem.Bulk Label="@BulkSynonym" />
 				</MudItem>
 				<MudItem xs="8" sm="6">
 					<MudTextField @bind-Value=addableItem.Name Label="Name" />
@@ -81,8 +80,8 @@
 	[Parameter, EditorRequired]
 	public Character Character { get; set; } = Character.Empty();
 
-	[Parameter, EditorRequired]
-	public PlaybookOption Playbook { get; set; }
+	[Parameter]
+	public string BulkSynonym { get; set; } = Models.Settings.Constants.DefaultNames.Bulk;
 
 	public Gear Gear => Character.Gear;
 
@@ -133,14 +132,7 @@
 	{
 		commitmentItemRenderer = (i) => RenderCommitmentText(i);
 
-		Character.Fund.Satchel.SatchelChanged += StateHasChanged;
-
 		base.OnInitialized();
-	}
-
-	public void Dispose()
-	{
-		Character.Fund.Satchel.SatchelChanged -= StateHasChanged;
 	}
 
 	Func<GearItem, RenderFragment>? commitmentItemRenderer;
@@ -158,7 +150,7 @@
 		if (!IsAddItemEnabled)
 			return;
 
-		var item = new GearItem(addableItem.Bulk, addableItem.Name, SourceOption.Custom);
+		var item = new GearItem(addableItem.Bulk, addableItem.Name);
 		Gear.AddAvailableItem(item);
 		addableItem.Reset();
 	}

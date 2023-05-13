@@ -1,32 +1,46 @@
-﻿@page "/new"
+﻿@page "/new/{GameFileStem?}"
 @using Models.Characters
+@using Models.Settings
+@using Persistence.Json
 @using UI.Components
 @using UI.Components.NewCharacter
+@inject ILoader Loader
 
 <MudContainer MaxWidth="MaxWidth.Small">
-	<MudGrid AlignItems="AlignItems.Center">
-		<MudItem xs="12">
-			<MudText Align="Align.Center" Typo="Typo.h2">Choose a Playbook.</MudText>
-		</MudItem>
-		@foreach (var (book, hook) in options)
-		{
-			<MudItem xs="12">
-				<NewCharacterPlaybookOption Playbook="@book" Hook="@hook"/>
-			</MudItem>
-		}
-	</MudGrid>
+	<MudStack>
+		<MudText Typo="Typo.h3" Align="Align.Center">@GameName</MudText>
+		<MudText Typo="Typo.h4" Align="Align.Center">Choose a playbook.</MudText>
+		<MudGrid AlignItems="AlignItems.Center">
+			@foreach (var (book, hook) in options)
+			{
+				<MudItem xs="12">
+					<NewCharacterPlaybookOption GameFileStem="@GameFileStem" PlaybookName="@book" Hook="@hook" />
+				</MudItem>
+			}
+		</MudGrid>
+	</MudStack>
 </MudContainer>
 
 @code
 {
-	private (PlaybookOption, string)[] options = new[]
-		{
-		(PlaybookOption.Cutter, "Cutters are good at winning fights, with violence and with intimidation. Play a Cutter if you want to get your way."),
-		(PlaybookOption.Hound, "Hounds are good at tracking things down and also long-distance combat. Play a Hound if you want to choose your battles."),
-		(PlaybookOption.Leech, "Leeches are good at using alchemy and wrecking stuff with sabotage. Play a Leech if you want to be creative with weird tools."),
-		(PlaybookOption.Lurk, "Lurks are good at sneaking around and breaking into places. Play a Lurk if you want to slink around in the shadows."),
-		(PlaybookOption.Slide, "Slides are good at social situations and subterfuge. Play a Slide if you want to manipulate and deceive people."),
-		(PlaybookOption.Spider, "Spiders are good at masterminding maneuvers. Play a Spider if you want to assist teammates and deal with other factions."),
-		(PlaybookOption.Whisper, "Whispers are good at magical stuff and dealing with ghosts. Play whisper a Whisper if you want to meddle with arcane powers.")
-	};
+	[Parameter]
+	public string? GameFileStem { get; set; }
+
+	GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
+
+	string GameName => GameSetting.Name;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		GameFileStem ??= Models.Settings.Constants.Games.BladesInTheDarkStem;
+
+		GameSetting = await Loader.LoadSetting(GameFileStem);
+
+		options = GameSetting.Playbooks.Select(p => (p.Name, p.Hook))
+			.ToArray();
+
+		await base.OnParametersSetAsync();
+	}
+
+	private (string, string)[] options = Array.Empty<(string, string)>();
 }

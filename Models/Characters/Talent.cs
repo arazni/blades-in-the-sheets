@@ -1,91 +1,59 @@
-﻿using System.Reflection;
+﻿using Models.Settings;
 
 namespace Models.Characters;
 
 public class Talent
 {
-	public Talent(PlaybookOption playbook)
+	private Dictionary<string, TalentAttribute> attributesByName = new();
+
+	private Talent() { }
+
+	public Talent(AttributeSetting[] attributes, DefaultActionPointSetting[] defaultPoints, int actionPointMaximum)
 	{
-		AssignDefaultRatings(playbook);
+		AttributesByName = attributes.ToDictionary
+		(
+			setting => setting.Name,
+			setting => new TalentAttribute(setting, actionPointMaximum),
+			StringComparer.OrdinalIgnoreCase
+		);
+
+		if (!AssignDefaultPoints(defaultPoints))
+			throw new ArgumentOutOfRangeException(nameof(defaultPoints));
 	}
 
-	public TalentInsight Insight { get; private set; } = new();
-
-	public TalentProwess Prowess { get; private set; } = new();
-
-	public TalentResolve Resolve { get; private set; } = new();
-
-	public TalentAction Hunt => Insight.Hunt;
-
-	public TalentAction Study => Insight.Study;
-
-	public TalentAction Survey => Insight.Survey;
-
-	public TalentAction Tinker => Insight.Tinker;
-
-	public TalentAction Finesse => Prowess.Finesse;
-
-	public TalentAction Prowl => Prowess.Prowl;
-
-	public TalentAction Skirmish => Prowess.Skirmish;
-
-	public TalentAction Wreck => Prowess.Wreck;
-
-	public TalentAction Attune => Resolve.Attune;
-
-	public TalentAction Command => Resolve.Command;
-
-	public TalentAction Consort => Resolve.Consort;
-
-	public TalentAction Sway => Resolve.Sway;
-
-	public IReadOnlyCollection<PropertyInfo> GetAttributes() =>
-		GetType()
-			.GetProperties()
-			.Where(p => p.PropertyType.IsAssignableTo(typeof(Bases.TalentAttribute)))
-			.ToArray();
-
-	private void AssignDefaultRatings(PlaybookOption playbook)
+	public IReadOnlyDictionary<string, TalentAttribute> AttributesByName
 	{
-		switch (playbook)
+		get => this.attributesByName;
+		private set => this.attributesByName = value.ToDictionary
+		(
+			k => k.Key,
+			v => v.Value,
+			StringComparer.OrdinalIgnoreCase
+		);
+	}
+
+	public IReadOnlyDictionary<string, TalentAction> ActionsByName =>
+		AttributesByName.Values
+			.SelectMany(a => a.ActionsByName)
+			.ToDictionary
+			(
+				actionByName => actionByName.Key,
+				actionByName => actionByName.Value,
+				StringComparer.OrdinalIgnoreCase
+			);
+
+	private bool AssignDefaultPoints(DefaultActionPointSetting[] settings)
+	{
+		foreach (var setting in settings)
 		{
-			case PlaybookOption.Cutter:
-				Skirmish.PlaybookDefault = 2;
-				Command.PlaybookDefault = 1;
-				break;
-			case PlaybookOption.Hound:
-				Hunt.PlaybookDefault = 2;
-				Survey.PlaybookDefault = 1;
-				break;
-			case PlaybookOption.Leech:
-				Tinker.PlaybookDefault = 2;
-				Wreck.PlaybookDefault = 1;
-				break;
-			case PlaybookOption.Lurk:
-				Prowl.PlaybookDefault = 2;
-				Finesse.PlaybookDefault = 1;
-				break;
-			case PlaybookOption.Slide:
-				Sway.PlaybookDefault = 2;
-				Consort.PlaybookDefault = 1;
-				break;
-			case PlaybookOption.Spider:
-				Consort.PlaybookDefault = 2;
-				Study.PlaybookDefault = 1;
-				break;
-			case PlaybookOption.Whisper:
-				Attune.PlaybookDefault = 2;
-				Study.PlaybookDefault = 1;
-				break;
+			if (!ActionsByName.TryGetValue(setting.Action, out var action))
+				return false;
+
+			action.Rating = setting.Points;
 		}
+
+		return true;
 	}
 
-	public static Talent Empty() => new(PlaybookOption.Unknown);
-}
-
-public enum AttributeName
-{
-	Insight,
-	Prowess,
-	Resolve
+	public static Talent Empty() => new();
 }

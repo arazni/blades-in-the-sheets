@@ -27,9 +27,8 @@ public class BladesJsonContractResolver : DefaultContractResolver
 		if (propertyInfo.SetMethod != null)
 			return true;
 
-		var getMethod = propertyInfo.GetMethod;
-		if (getMethod == null)
-			throw new InvalidOperationException("This property somehow has neither a getter nor a setter");
+		var getMethod = propertyInfo.GetMethod
+			?? throw new InvalidOperationException("This property somehow has neither a getter nor a setter");
 
 		var should = Attribute.GetCustomAttribute(getMethod, typeof(CompilerGeneratedAttribute)) != null;
 
