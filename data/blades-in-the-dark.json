@@ -1,0 +1,1035 @@
+{
+	"Name": "Blades in the Dark",
+	"Playbooks": [
+		{
+			"Name": "Cutter",
+			"Hook": "Cutters are good at winning fights, with violence and with intimidation. Play a Cutter if you want to get your way.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Battleborn",
+					"Description": "You may expend your special armor to reduce harm from an attack in combat or to push yourself during a fight."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Bodyguard",
+					"Description": "When you protect a teammate, take +1d to your resistance roll. When you gather info to anticipate possible threats in the current situation, you get +1 effect."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ghost Fighter",
+					"Description": "You may imbue your hands, melee weapons, or tools with spirit energy. You gain potency in combat vs. the supernatural. You may grapple with spirits to restrain and capture them."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Leader",
+					"Description": "When you Command a cohort in combat, they continue to fight when they would otherwise break (they're not taken out when they suffer level 3 harm). They gain +1 effect and 1 armor."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Mule",
+					"Description": "Your load limits are higher. Light: 5. Normal: 7. Heavy: 8."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Not to be Trifled With",
+					"Description": "You can push yourself to do one of the following: perform a feat of physical force that verges on the superhuman—engage a small gang on equal footing in close combat."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Savage",
+					"Description": "When you unleash physical violence, it's especially frightening. When you Command a frightened target, take +1d."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Vigorous",
+					"Description": "You recover from harm faster. Permanently fill in one of your healing clock segments. Take +1d to healing treatment rolls."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source."
+				}
+			],
+			"Rolodex": {
+				"Name": "Dangerous Friends",
+				"Friends": [
+					"Steiner, an assassin",
+					"Celene, a sentinel",
+					"Melvir, a physicker",
+					"Veleris, a spy",
+					"Casta, a bounty hunter"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Fine hand weapon"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Fine heavy weapon"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Scary weapon or tool"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Manacles & chain"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Rage essence vial"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Spiritbane charm"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Skirmish",
+					"Points": 2
+				},
+				{
+					"Action": "Command",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with violence or coercion"
+		},
+		{
+			"Name": "Hound",
+			"Hook": "Hounds are good at tracking things down and also long-distance combat. Play a Hound if you want to choose your battles.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Sharpshooter",
+					"Description": "You can push yourself to do one of the following: make a ranged attack at extreme distance beyond what’s normal for the weapon—unleash a barrage of rapid fire to suppress the enemy."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Focused",
+					"Description": "You may expend your special armor to resist a consequence of surprise or mental harm (fear, confusion, losing track of someone) or to push yourself for ranged combat or tracking."
+				},
+				{
+					"TimesTakeable": 2,
+					"Name": "Ghost Hunter",
+					"Description": "Your hunting pet is imbued with spirit energy. It gains potency when tracking or fighting the supernatural, and gains an arcane ability: ghost-form, mind-link, or arrow-swift. Take this ability again to choose an additional arcane ability for your pet."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Scout",
+					"Description": "When you gather info to locate a target, you get +1 effect. When you hide in a prepared position or use camouflage, you get +1d to rolls to avoid detection."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Survivor",
+					"Description": "From hard won experience or occult ritual, you are immune to the poisonous miasma of the deathlands and are able to subsist on the strange flora and fauna there. You get +1 stress box."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Tough as Nails",
+					"Description": "Penalties from harm are one level less severe (though level 4 harm is still fatal)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Vengeful",
+					"Description": "You gain an additional xp trigger: You got payback against someone who harmed you or someone you care about. If your crew helped you get payback, also mark crew xp."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Deadly Friends",
+				"Friends": [
+					"Steiner, an assassin",
+					"Celene, a sentinel",
+					"Melvir, a physicker",
+					"Veleris, a spy",
+					"Casta, a bounty hunter"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Fine pair of pistols"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Fine long rifle"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Electroplasmic ammunition"
+				},
+				{
+					"Bulk": 0,
+					"Name": "A trained hunting pet"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Spyglass"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Spiritbane charm"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Hunt",
+					"Points": 2
+				},
+				{
+					"Action": "Survey",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with tracking or violence"
+		},
+		{
+			"Name": "Leech",
+			"Hook": "Leeches are good at using alchemy and wrecking stuff with sabotage. Play a Leech if you want to be creative with weird tools.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Alchemist",
+					"Description": "When you invent or craft a creation with alchemical features, take +1 result level to your roll. You begin with one special formula already known."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Analyst",
+					"Description": "During downtime, you get two ticks to distribute among any long term project clocks that involve investigation or learning a new formula or design plan."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Artificer",
+					"Description": "When you invent or craft a creation with spark-craft features, take +1 result level to your roll. You begin with one special design already known."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Fortitude",
+					"Description": "You may expend your special armor to resist a consequence of fatigue, weakness, or chemical effects, or to push yourself when working with technical skill or handling alchemicals."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ghost Ward",
+					"Description": "You know how to Wreck an area with arcane substances and methods so it is either anathema or enticing to spirits (your choice)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Physicker",
+					"Description": "You can Tinker with bones, blood, and bodily humours to treat wounds or stabilize the dying. You may study a malady or corpse. Everyone in your crew gets +1d to their healing treatment rolls."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Saboteur",
+					"Description": "When you Wreck, the work is much quieter than it should be and the damage is hidden from casual inspection."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Venomous",
+					"Description": "Choose a drug or poison (from your bandolier stock) to which you have become immune. You can push yourself to secrete it through your skin or saliva or exhale it as a vapor."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Clever Friends",
+				"Friends": [
+					"Stazia, an apothecary",
+					"Veldren, a psychonaut",
+					"Eckerd, a corpse thief",
+					"Jul, a blood dealer",
+					"Malista, a priestess"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Fine tinkering tools"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Fine wrecking tools"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Blowgun & darts, syringes"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Bandolier (3 uses)"
+				},
+				{
+					"Bulk": 1,
+					"Name": "A 2nd Bandolier (3 uses)"
+				},
+				{
+					"Bulk": 1,
+					"Name": "A gadget"
+				},
+				{
+					"Bulk": 1,
+					"Name": "A 2nd gadget"
+				},
+				{
+					"Bulk": 1,
+					"Name": "A 3rd gadget"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Tinker",
+					"Points": 2
+				},
+				{
+					"Action": "Wreck",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with technical skill or mayhem"
+		},
+		{
+			"Name": "Lurk",
+			"Hook": "Lurks are good at sneaking around and breaking into places. Play a Lurk if you want to slink around in the shadows.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Infiltrator",
+					"Description": "You are not affected by quality or Tier when you bypass security measures."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ambush",
+					"Description": "When you attack from hiding or spring a trap, you get +1d."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Daredevil",
+					"Description": "When you roll a desperate action, you get +1d to your roll if you also take -1d to any resistance rolls against consequences from your action."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "The Devil's Footsteps",
+					"Description": "When you push yourself, choose one of the following additional benefits: perform a feat of athletics that verges on the superhuman—maneuver to confuse your enemies so they mistakenly attack each other."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Expertise",
+					"Description": "Choose one of your action ratings. When you lead a group action using that action, you can suffer only 1 stress at most regardless of the number of failed rolls."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ghost Veil",
+					"Description": "You may shift partially into the ghost field, becoming shadowy and insubstantial for a few moments. Take 2 stress when you shift, plus 1 stress for each extra feature: It lasts for a few minutes rather than moments—you are invisible rather than shadowy—you may float through the air like a ghost"
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Reflexes",
+					"Description": "When there's a question about who acts first, the answer is you (two characters with Reflexes act simultaneously)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Shadow",
+					"Description": "You may expend your special armor to resist a consequence from detection or security measures, or to push yourself for a feat of athletics or stealth."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Shady Friends",
+				"Friends": [
+					"Telda, a beggar",
+					"Darmot, a bluecoat",
+					"Frake, a locksmith",
+					"Roslyn Kellis, a noble",
+					"Petra, a city clerk"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 0,
+					"Name": "Fine lockpicks"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Fine shadow cloak"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Light climbing gear"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Silence potion vial"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Dark-sight goggles"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Spiritbane charm"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Prowl",
+					"Points": 2
+				},
+				{
+					"Action": "Finesse",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with stealth or evasion"
+		},
+		{
+			"Name": "Slide",
+			"Hook": "Slides are good at social situations and subterfuge. Play a Slide if you want to manipulate and deceive people.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Rook's Gambit",
+					"Description": "Take 2 stress to roll your best action rating while performing a different action. Say how you adapt your skill to this use."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Cloak & Dagger",
+					"Description": "When you use a disguise or other form of covert misdirection, you get +1d to rolls to confuse or deflect suspicion. When you throw off your disguise, the resulting surprise gives you the initiative in the situation."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ghost Voice",
+					"Description": "You know the secret method to interact with a ghost or demon as if it was a normal human, regardless of how wild or feral it appears. You gain potency when communicating with the supernatural."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Like Looking into a Mirror",
+					"Description": "You can always tell when someone is lying to you."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "A Little Something on the Side",
+					"Description": "At the end of each downtime phase, you earn +2 stash."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Mesmerism",
+					"Description": "When you Sway someone, you may cause them to forget that it's happened until they next interact with you."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Subterfuge",
+					"Description": "You may expend your special armor to resist a consequence from suspicion or persuasion, or to push yourself for subterfuge."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Trust in Me",
+					"Description": "You get +1d vs. a target with whom you have an intimate relationship."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Sly Friends",
+				"Friends": [
+					"Bryl, a drug dealer",
+					"Bazso Baz, a gang leader",
+					"Klyra, a tavern owner",
+					"Nyryx, a prostitute",
+					"Harker, a jail-bird"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 0,
+					"Name": "Fine clothes & jewelry"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Fine disguise kit"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Fine loaded dice, trick cards"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Trance powder"
+				},
+				{
+					"Bulk": 1,
+					"Name": "A cane-sword"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Spiritbane charm"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Sway",
+					"Points": 2
+				},
+				{
+					"Action": "Consort",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with deception or influence"
+		},
+		{
+			"Name": "Spider",
+			"Hook": "Spiders are good at masterminding maneuvers. Play a Spider if you want to assist teammates and deal with other factions.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Foresight",
+					"Description": "Two times per score you can assist a teammate without paying stress. Tell us how you prepared for this."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Calculating",
+					"Description": "Due to your careful planning, during downtime, you may give yourself or another crew member +1 downtime action."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Connected",
+					"Description": "During downtime, you get +1 result level when you acquire an asset or reduce heat."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Functioning Vice",
+					"Description": "When you indulge your vice, you may adjust the dice outcome by 1 or 2 (up or down). An ally who joins in your vice may do the same."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ghost Contract",
+					"Description": "When you shake on a deal, you and your partner—human or otherwise—both bear a mark of your oath. If either breaks the contract, they take level 3 harm, \"Cursed\"."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Jail Bird",
+					"Description": "When incarcerated, your wanted level counts as 1 less, your Tier as 1 more, and you gain +1 faction status with a faction you help on the inside (in addition to your incarceration roll)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Mastermind",
+					"Description": "You may expend your special armor to protect a teammate, or to push yourself when you gather information or work on a long-term project."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Weaving the Web",
+					"Description": "You gain +1d to Consort when you gather information on a target for a score. You get +1d to the engagement roll for that operation."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source."
+				}
+			],
+			"Rolodex": {
+				"Name": "Shrewd Friends",
+				"Friends": [
+					"Salia, an information broker",
+					"Augus, a master architect",
+					"Jennah, a servant",
+					"Riven, a chemist",
+					"Jeren, a bluecoat archivist"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 0,
+					"Name": "Fine cover identity"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Fine bottle of whiskey"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Blueprints"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Vial of slumber essence"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Concealed palm pistol"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Spiritbane charm"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Consort",
+					"Points": 2
+				},
+				{
+					"Action": "Study",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with calculation or conspiracy"
+		},
+		{
+			"Name": "Whisper",
+			"Hook": "Whispers are good at magical stuff and dealing with ghosts. Play whisper a Whisper if you want to meddle with arcane powers.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Compel",
+					"Description": "You can Attune to the ghost field to force a nearby ghost to appear and obey a command you give it. You are not supernaturally terrified by a ghost you summon or compel (though your allies may be)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ghost Mind",
+					"Description": "You’re always aware of supernatural entities in your presence. Take +1d when you gather info about the supernatural."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Iron Will",
+					"Description": "You're immune to the terror that some supernatural entities inflict on sight. Take +1d to resistance rolls with Resolve."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Occultist",
+					"Description": "You know the secret ways to Consort with ancient powers, forgotten gods or demons. Once you've consorted with one, you get +1d to command cultists who worship it."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ritual",
+					"Description": "You can Study an occult ritual (or create a new one) to summon a supernatural effect or being. You know the arcane methods to perform ritual sorcery. You begin with one ritual already learned."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Strange Methods",
+					"Description": "When you invent or craft a creation with arcane features, take +1 result level to your roll. You begin with one arcane design already known."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Tempest",
+					"Description": "You can push yourself to do one of the following: unleash a stroke of lightning as a weapon—summon a storm in your immediate vicinity (torrential rain, roaring winds, heavy fog, chilling frost/snow, etc.)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Warded",
+					"Description": "You may expend your special armor to resist a supernatural consequence, or to push yourself when you deal with arcane forces."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Veteran",
+					"Description": "Choose a special ability from another source"
+				}
+			],
+			"Rolodex": {
+				"Name": "Strange Friends",
+				"Friends": [
+					"Nyryx, a possessor ghost",
+					"Scurlock, a vampire",
+					"Setarra, a demon",
+					"Quellyn, a witch",
+					"Flint, a spirit trafficker"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 2,
+					"Name": "Fine lightning hook"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Fine spirit mask"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Electroplasm vials"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Spirit bottles (2)"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Ghost key"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Demonbane charm"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Attune",
+					"Points": 2
+				},
+				{
+					"Action": "Study",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "You addressed a challenge with calculation or conspiracy"
+		}
+	],
+	"Traumas": [
+		"Cold",
+		"Haunted",
+		"Obsessed",
+		"Paranoid",
+		"Reckless",
+		"Soft",
+		"Unstable",
+		"Vicious"
+	],
+	"Heritages": [
+		{
+			"Name": "Akoros",
+			"BlurbFlavor": "'round here in Akoros",
+			"Description": "Akoros is the largest and most industrialized land in the Imperium, and is home to the capitol city as well as Duskwall itself. They’re known as a diverse conglomeration of cultures that have grown together in close proximity for centuries, somewhat like Europe."
+		},
+		{
+			"Name": "The Dagger Isles",
+			"BlurbFlavor": "the Dagger Isles",
+			"Description": "If you want to be a rootless wanderer you could be from the Dagger Isles. People there often grow up on ships and travel a lot before settling down. They’re known as corsairs and merchants who live without lightning barriers—dealing with spirits in other ways."
+		},
+		{
+			"Name": "Iruvia",
+			"BlurbFlavor": "the desert kingdom of Iruvia",
+			"Description": "If you want to be from a culture considered “foreign” by the locals, you could be from Iruvia, a rich and powerful desert kingdom far to the south. It’s another diverse land of varying cultures similar to old Persia, Egypt, and India."
+		},
+		{
+			"Name": "Severos",
+			"BlurbFlavor": "the deathlands of Severos",
+			"Description": "If you want to be from a place considered “wild” by the rest of the empire, you could be from Severos. Outside the few Imperial settlements, most Severosi live in nomadic horse-tribes scattered across the blasted deathlands, surviving within the ruins of ancient arcane fortresses which still repel spirits."
+		},
+		{
+			"Name": "Skovlan",
+			"BlurbFlavor": "the colonized island of Skovlan",
+			"Description": "If you want to be from a marginalized people, you could be from Skovlan, the island kingdom just across the sea from Doskvol. Skovlan was last to be brought under Imperial rule, over the course of the 36-year Unity War (which ended only a few years ago). Many Skovlander refugees who lost their homes and jobs in the destruction of the war have come to Doskvol seeking new opportunities."
+		},
+		{
+			"Name": "Tycheros",
+			"BlurbFlavor": "the weird, distant land of Tycheros",
+			"Description": "If you want to be weird, you can be from Tycheros. It’s a semi-mythical place, far away beyond the northern Void Sea. Everyone says that the people there are part-demon. If you choose Tycherosi heritage, also create a demonic telltale (like black shark eyes, feathers instead of hair, etc.) that marks your character."
+		}
+	],
+	"Vices": [
+		{
+			"Name": "Faith",
+			"Description": "You’re dedicated to an unseen power, forgotten god, ancestor, etc.",
+			"Sources": [
+				"Mother Narya, House of the Weeping Lady, Six Towers.",
+				"Ilacille, the ruins of the Temple to forgotten gods, Coalridge.",
+				"Nelisanne, The Church of the Ecstasy of the Flesh, Brightstone.",
+				"Lord Penderyn, the Archive of Echoes, Charterhall."
+			]
+		},
+		{
+			"Name": "Gambling",
+			"Description": "You crave games of chance, betting on sporting events, etc.",
+			"Sources": [
+				"Spogg’s dice game, Crow’s Foot.",
+				"Grist, boxing, the Docks.",
+				"Helene, Silver Stag casino, Silkshore.",
+				"Master Vreen, hound racing, Nightmarket.",
+				"Lady Dusk, the Dusk Manor Club, Whitecrown.",
+				"Sergeant Velk, the fighting pits, Dunslough."
+			]
+		},
+		{
+			"Name": "Luxury",
+			"Description": "Expensive or ostentatious displays of opulence.",
+			"Sources": [
+				"Singer, bath house, Crow’s Foot.",
+				"Harvale Brogan, the Centuralia Club, Brightstone.",
+				"Traven’s smoke shop, Coalridge.",
+				"Dunridge & Sons fine fabrics and tailoring, Nightmarket.",
+				"Chef Roselle, the Golden Plum restaurant, Six Towers.",
+				"Maestro Helleren, Spiregarden theater, Whitecrown."
+			]
+		},
+		{
+			"Name": "Pleasure",
+			"Description": "Gratification from lovers, food, drink, drugs, art, theater, etc.",
+			"Sources": [
+				"Singer, bath house, Crow’s Foot.",
+				"Harvale Brogan, the Centuralia Club, Brightstone.",
+				"Traven’s smoke shop, Coalridge.",
+				"Dunridge & Sons fine fabrics and tailoring, Nightmarket.",
+				"Chef Roselle, the Golden Plum restaurant, Six Towers.",
+				"Maestro Helleren, Spiregarden theater, Whitecrown.",
+				"Mardin Gull, the Leaky Bucket, tavern, Crow’s Foot.",
+				"Pux Bolin, the Harping Monkey, tavern, Nightmarket.",
+				"Helene, Silver Stag casino, Silkshore.",
+				"Lady Freyla, the Emperor’s Cask, bar, Whitecrown.",
+				"Avrick, powder dealer, Barrowcleft.",
+				"Rolan Volaris, the Veil, social club, Nightmarket.",
+				"Madame Tesslyn, the Red Lamp, brothel, Silkshore.",
+				"Traven’s smoke shop, Coalridge.",
+				"Eldrin Prichard, the Silver Swan pleasure barge, Brightstone canals.",
+				"Jewel, Bird, and Shine, Catcrawl Alley, the Docks."
+			]
+		},
+		{
+			"Name": "Obligation",
+			"Description": "You're devoted to a family, a cause, an organization, a charity, etc.",
+			"Sources": [
+				"Family members (heritage).",
+				"Former co-workers (background).",
+				"Hutton, Skovlander Refugees/Revolutionaries, Charhollow.",
+				"The Circle of Flame, a secret society."
+			]
+		},
+		{
+			"Name": "Stupor",
+			"Description": "You seek oblivion in the abuse of drugs, drinking to excess, getting beaten to a pulp in the fighting pits, etc.",
+			"Sources": [
+				"Mardin Gull, the Leaky Bucket, tavern, Crow’s Foot.",
+				"Pux Bolin, the Harping Monkey, tavern, Nightmarket.",
+				"Helene, Silver Stag casino, Silkshore.",
+				"Lady Freyla, the Emperor’s Cask, bar, Whitecrown.",
+				"Avrick, powder dealer, Barrowcleft.",
+				"Rolan Volaris, the Veil, social club, Nightmarket.",
+				"Madame Tesslyn, the Red Lamp, brothel, Silkshore.",
+				"Traven’s smoke shop, Coalridge.",
+				"Eldrin Prichard, the Silver Swan pleasure barge, Brightstone canals.",
+				"Jewel, Bird, and Shine, Catcrawl Alley, the Docks."
+			]
+		},
+		{
+			"Name": "Weird",
+			"Description": "You experiment with strange essences, consort with rogue spirits, observe bizarre rituals or taboos, etc.",
+			"Sources": [
+				"The hooded proprietor of a half-flooded grotto tavern near the docks. ",
+				"Strange passageways lead to stranger chambers beyond.",
+				"Father Yoren, House of the Weeping Lady, Six Towers.",
+				"“Salia,” a spirit of the Reconciled, which moves from body to body at their whim.",
+				"Sister Thorn, deathlands scavenger gang, Gaddoc Station.",
+				"Ojak, Tycherosi rooftop market vendor, Silkshore.",
+				"Aranna the Blessed, cultist of a forgotten god, barge moored in Nightmarket."
+			]
+		}
+	],
+	"Backgrounds": [
+		{
+			"Name": "Academic",
+			"Example": "A scholar, a professor or student from Doskvol Academy, a philosopher or journalist, etc.",
+			"BlurbFlavor": "an academic"
+		},
+		{
+			"Name": "Labor",
+			"Example": "A servant, a factory worker, a coach driver, a docker, a sailor, a Rail Jack, etc.",
+			"BlurbFlavor": "a laborer"
+		},
+		{
+			"Name": "Law",
+			"Example": "An advocate or barrister, a Bluecoat or inspector (or even Spirit Warden), a prison guard from Ironhook, etc.",
+			"BlurbFlavor": "an \"incorruptible\" representative of the law"
+		},
+		{
+			"Name": "Trade",
+			"Example": "A shopkeeper, a merchant, a skilled crafts-person, a shipping agent, etc.",
+			"BlurbFlavor": "a trader"
+		},
+		{
+			"Name": "Military",
+			"Example": "An Imperial or Skovlander soldier, a mercenary, an intelligence operative, a strategist, a training instructor, etc.",
+			"BlurbFlavor": "an enlisted"
+		},
+		{
+			"Name": "Noble",
+			"Example": "A dilettante, a courtier, the scion of a fallen house, etc.",
+			"BlurbFlavor": "a noble"
+		},
+		{
+			"Name": "Underworld",
+			"Example": "A street urchin, gang member, young thug, or other outcast who grew up on the streets.",
+			"BlurbFlavor": "a \"law-abiding citizen\""
+		}
+	],
+	"Attributes": [
+		{
+			"Name": "Insight",
+			"Actions": [
+				{
+					"Name": "Hunt",
+					"ShortDescription": "When you Hunt, you carefully track a target.",
+					"LongDescription": "You might follow a target or discover their location. You might arrange an ambush. You might attack with precision shooting from a distance. You could try to bring your guns to bear in a melee (but Skirmishing might be better)."
+				},
+				{
+					"Name": "Study",
+					"ShortDescription": "When you Study, you scrutinize details and interpret evidence.",
+					"LongDescription": "You might gather information from documents, newspapers, and books. You might do research on an esoteric topic. You might closely analyze a person to detect lies or true feelings. You could try to examine events to understand a pressing situation (but Surveying might be better)."
+				},
+				{
+					"Name": "Survey",
+					"ShortDescription": "When you Survey, you observe the situation and anticipate outcomes.",
+					"LongDescription": "You might spot telltale signs of trouble before it happens. You might uncover opportunities or weaknesses. You might detect a person’s motivations or intentions. You could try to spot a good ambush point (but Hunting might be better)."
+				},
+				{
+					"Name": "Tinker",
+					"ShortDescription": "When you Tinker, you fiddle with devices and mechanisms.",
+					"LongDescription": "You might create a new gadget or alter an existing item. You might pick a lock or crack a safe. You might disable an alarm or trap. You might turn the clockwork devices around the city to your advantage. You could try to use your technical expertise to control a vehicle (but Finessing might be better)."
+				}
+			]
+		},
+		{
+			"Name": "Prowess",
+			"Actions": [
+				{
+					"Name": "Finesse",
+					"ShortDescription": "When you Finesse, you employ dextrous manipulation or subtle misdirection.",
+					"LongDescription": "You might pick someone’s pocket. You might handle the controls of a vehicle or direct a mount. You might formally duel an opponent with graceful fighting arts. You could try to employ those arts in a chaotic melee (but Skirmishing might be better). You could try to pick a lock (but Tinkering might be better)."
+				},
+				{
+					"Name": "Prowl",
+					"ShortDescription": "When you Prowl, you traverse skillfully and quietly.",
+					"LongDescription": "You might sneak past a guard or hide in the shadows. You might run and leap across the rooftops. You might attack someone from hiding with a back-stab or blackjack. You could try to waylay a victim in the midst of battle (but Skirmishing might be better)."
+				},
+				{
+					"Name": "Skirmish",
+					"ShortDescription": "When you Skirmish, you entangle a target in close combat so they can’t easily escape.",
+					"LongDescription": "You might brawl or wrestle with them. You might hack and slash. You might seize or hold a position in battle. You could try to fight in a formal duel (but Finessing might be better)."
+				},
+				{
+					"Name": "Wreck",
+					"ShortDescription": "When you Wreck, you unleash savage force.",
+					"LongDescription": "You might smash down a door or wall with a sledgehammer, or use an explosive to do the same. You might employ chaos or sabotage to create a distraction or overcome an obstacle. You could try to overwhelm an enemy with sheer force in battle (but Skirmishing might be better)."
+				}
+			]
+		},
+		{
+			"Name": "Resolve",
+			"Actions": [
+				{
+					"Name": "Attune",
+					"ShortDescription": "When you Attune, you open your mind to arcane power.",
+					"LongDescription": "You might communicate with a ghost. You could try to perceive beyond sight in order to better understand your situation (but Surveying might be better)."
+				},
+				{
+					"Name": "Command",
+					"ShortDescription": "When you Command, you compel swift obedience.",
+					"LongDescription": "You might intimidate or threaten to get what you want. You might lead a gang in a group action. You could try to order people around to persuade them (but Consorting might be better)."
+				},
+				{
+					"Name": "Consort",
+					"ShortDescription": "When you Consort, you socialize with friends and contacts.",
+					"LongDescription": "You might gain access to resources, information, people, or places. You might make a good impression or win someone over with your charm and style. You might make new friends or connect with your heritage or background. You could try to manipulate your friends with social pressure (but Sway might be better)."
+				},
+				{
+					"Name": "Sway",
+					"ShortDescription": "When you Sway, you influence with guile, charm, or argument.",
+					"LongDescription": "You might lie convincingly. You might persuade someone to do what you want. You might argue a compelling case that leaves no clear rebuttal. You could try to trick people into affection or obedience (but Consorting or Commanding might be better)."
+				}
+			]
+		}
+	],
+	"SharedItems": [
+		{
+			"Bulk": 1,
+			"Name": "A Blade or Two"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Throwing Knives"
+		},
+		{
+			"Bulk": 1,
+			"Name": "A Pistol"
+		},
+		{
+			"Bulk": 1,
+			"Name": "A 2nd Pistol"
+		},
+		{
+			"Bulk": 2,
+			"Name": "A Large Weapon"
+		},
+		{
+			"Bulk": 1,
+			"Name": "An Unusual Weapon"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Armor"
+		},
+		{
+			"Bulk": 3,
+			"Name": "+Heavy"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Burglary Gear"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Climbing Gear"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Arcane Implements"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Documents"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Subterfuge Supplies"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Demolition Tools"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Tinkering Tools"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Lantern"
+		},
+		{
+			"Bulk": 1,
+			"Name": "A Coin"
+		},
+		{
+			"Bulk": 2,
+			"Name": "2 Coin"
+		},
+		{
+			"Bulk": 3,
+			"Name": "3 Coin"
+		},
+		{
+			"Bulk": 4,
+			"Name": "4 Coin"
+		}
+	],
+	"Thesaurus": {
+		"Coin": "Coin",
+		"Bulk": "Bulk"
+	},
+	"RecoveryClockSize": 4,
+	"ActionPointMaximum": 4
+}
