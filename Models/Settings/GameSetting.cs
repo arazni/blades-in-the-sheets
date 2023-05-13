@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-
-namespace Models.Settings;
+﻿namespace Models.Settings;
 
 public record GameSetting
 (
@@ -97,8 +95,8 @@ public record ThesaurusSetting
 
 public record StartingAbilitySetting
 (
-	ImmutableDictionary<string, StartingSpecialAbilitySetting> AbilitiesByPlaybook,
-	ImmutableDictionary<string, StartingSpecialAbilitySetting> AbilitiesByHeritage
+	Dictionary<string, StartingSpecialAbilitySetting> AbilitiesByPlaybook,
+	Dictionary<string, StartingSpecialAbilitySetting> AbilitiesByHeritage
 );
 
 public record StartingSpecialAbilitySetting
