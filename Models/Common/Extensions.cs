@@ -32,7 +32,7 @@ public static class Extensions
 		!string.IsNullOrWhiteSpace(source);
 
 	public static string Join(this IEnumerable<string> source, string separator) =>
-		string.Join(separator, source)!;
+		string.Join(separator, source) ?? string.Empty;
 
 	public static string Join<T>(this IEnumerable<T> source, string separator) where T : notnull =>
 		string.Join(separator, source.Select(s => s.ToString()));

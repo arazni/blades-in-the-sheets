@@ -20,7 +20,7 @@ public class ServerFileReader : IFileReader
 			.FirstOrDefault(d => d.Name == "wwwroot")
 			?.EnumerateDirectories()
 			.FirstOrDefault(d => d.Name == "data")
-			?? throw new DirectoryNotFoundException($"Data is not a subdirectory of {directory.FullName}");
+			?? throw new DirectoryNotFoundException($"data is not a subdirectory of {directory.FullName}");
 
 		return directory.FullName;
 	}
