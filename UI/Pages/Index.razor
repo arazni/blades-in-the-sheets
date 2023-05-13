@@ -51,7 +51,7 @@
 			</MudCardHeader>
 			<MudCardContent>
 				<MudStack>
-					<MudSelect @bind-Value="SelectedGameFile" ToStringFunc="gameFile => gameFile.Name" Label="Select a Game">
+					<MudSelect @bind-Value="SelectedGameFile" ToStringFunc="gameFile => gameFile.Name" Label="Select a Game"  Style="max-width: 215px;">
 						@foreach (var gameFile in AvailableGameFiles)
 						{
 							<MudSelectItem T="GameFile" Value="gameFile">
