@@ -7,7 +7,7 @@
 				<MudTextField @bind-Value="Dossier.Name" HelperText="Name" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
 			</MudItem>
 			<MudItem xs="4">
-				<MudTextField @bind-Value="Dossier.Alias" HelperText="AliasSynonym" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+				<MudTextField @bind-Value="Dossier.Alias" HelperText="@AliasSynonym" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
 			</MudItem>
 		</MudGrid>
 		<MudStack>
