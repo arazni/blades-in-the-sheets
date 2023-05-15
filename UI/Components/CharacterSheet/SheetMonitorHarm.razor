@@ -5,8 +5,8 @@
 @implements IDisposable
 
 <MudStack>
+	<MudTextField @bind-Value="HarmDescription" Placeholder="@HarmPlaceholder" Clearable="true" Immediate="true" />
 	<MudStack Row="true" Class="flex-grow-1">
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="!CanAddHarm" OnClick="AddHarm" Style="@Constants.Buttons.ButtonDimensionStyle">Harm</MudButton>
 		<MudSelect @bind-Value="Intensity" Text="@Intensity?.ToString()">
 			@foreach (var intensity in Harm.AvailableIntensities)
 			{
@@ -15,8 +15,8 @@
 				</MudSelectItem>
 			}
 		</MudSelect>
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="!CanAddHarm" OnClick="AddHarm" Style="@Constants.Buttons.ButtonDimensionStyle">Harm</MudButton>
 	</MudStack>
-	<MudTextField @bind-Value="HarmDescription" Placeholder="@HarmPlaceholder" Clearable="true" Immediate="true" />
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Fatal" />
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Severe" />
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Moderate" />

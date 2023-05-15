@@ -4,7 +4,6 @@
 
 <MudStack>
 	<MudStack Row="true">
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle">Trauma</MudButton>
 		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect">
 			@foreach (var option in TraumaOptions)
 			{
@@ -13,6 +12,7 @@
 				</MudSelectItem>
 			}
 		</MudSelect>
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle">Trauma</MudButton>
 	</MudStack>
 	<MudStack Row="true">
 		@foreach (var option in Monitor.Trauma.Traumas)

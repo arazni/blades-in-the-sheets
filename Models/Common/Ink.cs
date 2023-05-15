@@ -16,7 +16,7 @@ public class Ink
 		set
 		{
 			if (!value.HasInk())
-				throw new ArgumentException(Value, nameof(Value));
+				throw new ArgumentException("Ink cannot be empty or whitespace", nameof(Value));
 
 			this.value = value.Trim();
 		}

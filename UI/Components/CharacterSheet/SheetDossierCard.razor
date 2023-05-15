@@ -2,20 +2,20 @@
 @using UI.Conveniences
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Dossier">
+	<MudStack>
 		<MudGrid>
 			<MudItem xs="8">
-				<MudTextField @bind-Value="Dossier.Name" HelperText="Name" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+				<MudTextField @bind-Value="Dossier.Name" id="Dossier.Name" Label="Name" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Variant="Variant" />
 			</MudItem>
 			<MudItem xs="4">
-				<MudTextField @bind-Value="Dossier.Alias" HelperText="@AliasSynonym" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" />
+				<MudTextField @bind-Value="Dossier.Alias" id="Dossier.Alias" Label="@AliasSynonym" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Variant="Variant" />
 			</MudItem>
 		</MudGrid>
-		<MudStack>
-			<MudTextField @bind-Value="Dossier.Background.Description" HelperText="@BackgroundHelperText" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" />
-			<MudTextField @bind-Value="Dossier.Heritage.Description" HelperText="@HeritageHelperText" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" />
-			<MudTextField @bind-Value="Dossier.Vice.Description" HelperText="@ViceHelperText" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" />
-			<MudTextField @bind-Value="Dossier.Look" HelperText="Look" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" />
-		</MudStack>
+		<MudTextField @bind-Value="Dossier.Background.Description" id="Dossier.Background.Description" Label="@BackgroundLabel" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" Variant="Variant" />
+		<MudTextField @bind-Value="Dossier.Heritage.Description" id="Dossier.Heritage.Description" Label="@HeritageLabel" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" Variant="Variant" />
+		<MudTextField @bind-Value="Dossier.Vice.Description" id="Dossier.Vice.Description" Label="@ViceLabel" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" Variant="Variant" />
+		<MudTextField @bind-Value="Dossier.Look" id="Dossier.Look" Label="Look" ReadOnly="!IsFixMode" DisableUnderLine="!IsFixMode" Lines="3" Variant="Variant" />
+	</MudStack>
 </SheetCard>
 
 @code
@@ -28,12 +28,16 @@
 
 	bool IsFixMode { get; set; } = false;
 
-	string BackgroundHelperText =>
+	string BackgroundLabel =>
 		$"Background: {Dossier.Background.Name}";
 
-	string HeritageHelperText =>
+	string HeritageLabel =>
 		$"Heritage: {Dossier.Heritage.Name}";
 
-	string ViceHelperText =>
+	string ViceLabel =>
 		$"Vice: {Dossier.Vice.Name}";
+
+	Variant Variant =>
+		IsFixMode ? Variant.Outlined
+		: Variant.Text;
 }
