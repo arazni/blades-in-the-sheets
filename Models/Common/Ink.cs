@@ -19,7 +19,11 @@ public class Ink
 		set
 		{
 			if (!value.HasInk())
+			{
+				// Would be nice to handle this better one day.
 				Console.WriteLine("Ink cannot be empty or whitespace; rejecting change.");
+				return;
+			}
 
 			this.value = value.Trim();
 		}
