@@ -8,11 +8,11 @@
 		<MudItem xs="12">
 			<MudStack Spacing="1">
 				<MudText Typo="Typo.caption">Satchel: </MudText>
-				<MudRating @bind-SelectedValue="Fund.Satchel.Coins" ReadOnly="!IsFixMode" MaxValue="Fund.Satchel.MaxCoins" FullIcon="@Icons.Material.Filled.Paid" EmptyIcon="@Icons.Material.Outlined.Paid" Color="Color.Primary" aria-label="@SatchelLabel" />
+				<MudRating @bind-SelectedValue="Fund.Satchel.Coins" ReadOnly="!IsFixMode" MaxValue="Fund.Satchel.MaxCoins" FullIcon="@Icons.Material.Filled.Paid" EmptyIcon="@Icons.Material.Outlined.Paid" Color="Color.Primary" aria-label="@SatchelLabel" id="fund-satchel-rating" />
 			</MudStack>
 		</MudItem>
 		<MudItem xs="12" lg="6">
-			<MudNumericField @bind-Value="Fund.Stash.Stash" Label="Stash" Disabled="!IsFixMode" Min="Fund.Stash.MinCoins" Max="Fund.Stash.MaxCoins" />
+			<MudNumericField @bind-Value="Fund.Stash.Stash" Label="Stash" Disabled="!IsFixMode" Min="Fund.Stash.MinCoins" Max="Fund.Stash.MaxCoins" id="fund-stash-coin" />
 		</MudItem>
 		<MudItem xs="6" lg="3">
 			<MudText Typo="Typo.caption">Lifestyle:</MudText>
@@ -23,7 +23,7 @@
 			<MudText Typo="Typo.body1">@Fund.Stash.Rating</MudText>
 		</MudItem>
 		<MudItem xs="12" lg="6">
-			<MudNumericField @bind-Value="CoinChangeInput" Label="@CoinChangeInputLabel" Min="Fund.MinCoins" Max="InputMaximum" />
+			<MudNumericField @bind-Value="CoinChangeInput" Label="@CoinChangeInputLabel" Min="Fund.MinCoins" Max="InputMaximum" id="fund-coin-change" />
 		</MudItem>
 		<MudItem xs="12" lg="6">
 			<MudButtonGroup Size="Size.Medium" Variant="Variant.Outlined" Style="width: 100%">

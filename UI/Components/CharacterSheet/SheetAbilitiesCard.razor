@@ -42,7 +42,7 @@
 
 	Playbook Playbook => Character.Playbook;
 
-	public bool IsFixMode { get; set; }
+	public bool IsFixMode { get; set; } = false;
 
 	IReadOnlyCollection<PlaybookSpecialAbility> KnownAbilities =>
 		Playbook.Abilities;

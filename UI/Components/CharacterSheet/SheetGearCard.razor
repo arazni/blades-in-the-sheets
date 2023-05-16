@@ -62,10 +62,10 @@
 			<MudText Typo="Typo.h6">Add Item</MudText>
 			<MudGrid>
 				<MudItem xs="4" sm="2">
-					<MudTextField @bind-Value=addableItem.Bulk Label="@BulkSynonym" />
+					<MudTextField @bind-Value=addableItem.Bulk Label="@BulkSynonym" id="gear-add-item-bulk" />
 				</MudItem>
 				<MudItem xs="8" sm="6">
-					<MudTextField @bind-Value=addableItem.Name Label="Name" />
+					<MudTextField @bind-Value=addableItem.Name Label="Name" id="gear-add-item-name" />
 				</MudItem>
 				<MudItem xs="12" sm="4">
 					<MudButton OnClick="AddItem" Disabled="!IsAddItemEnabled" Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" aria-label="Add new item">Add</MudButton>

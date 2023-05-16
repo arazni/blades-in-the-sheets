@@ -7,7 +7,7 @@
 	</MudCardHeader>
 	<MudCardContent>
 		<MudStack>
-			<MudSelect @bind-Value="Vice.Name" Label="Vice">
+			<MudSelect @bind-Value="Vice.Name" Label="Vice" id="select-vice">
 				@foreach (var option in ViceSettings)
 				{
 					<MudSelectItem T="string" Value="option.Name">
@@ -17,7 +17,7 @@
 				}
 			</MudSelect>
 			<MudText>@Elaboration()</MudText>
-			<MudTextField @bind-Value="Vice.Description" HelperText="@HelperText()" Placeholder="@ExamplePlaceholder()" aria-label="Vice description" />
+			<MudTextField @bind-Value="Vice.Description" HelperText="@HelperText()" Placeholder="@ExamplePlaceholder()" aria-label="Vice description" id="vice-description" />
 			@if (HasExamples)
 			{
 				<MudExpansionPanels>

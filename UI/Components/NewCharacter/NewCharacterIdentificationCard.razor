@@ -7,15 +7,9 @@
 	</MudCardHeader>
 	<MudCardContent>
 		<MudStack>
-			<MudTextField @bind-Value="Dossier.Name"
-				Label="Name"
-				Placeholder="Noggs Kessarin" />
-			<MudTextField @bind-Value="Dossier.Alias"
-				Label="Alias"
-				Placeholder="Thistle" />
-			<MudTextField @bind-Value="Dossier.Look"
-				Label="Look"
-				Placeholder="Ambiguously gendered, brooding, and weathered, in a signature heavy jacket and work boots" />
+			<MudTextField @bind-Value="Dossier.Name" Label="Name" Placeholder="Noggs Kessarin" id="dossier-name" />
+			<MudTextField @bind-Value="Dossier.Alias" Label="Alias" Placeholder="Thistle" id="dossier-alias" />
+			<MudTextField @bind-Value="Dossier.Look" Label="Look" Placeholder="Ambiguously gendered, brooding, and weathered, in a signature heavy jacket and work boots" id="dossier-look" />
 		</MudStack>
 	</MudCardContent>
 </MudCard>

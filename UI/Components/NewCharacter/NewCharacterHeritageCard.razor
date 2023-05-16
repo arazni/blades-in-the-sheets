@@ -7,7 +7,7 @@
 		<MudText Typo="Typo.h6">Choose a heritage</MudText>
 	</MudCardHeader>
 	<MudCardContent>
-		<MudSelect @bind-Value="Heritage.Name" Label="Heritage">
+		<MudSelect @bind-Value="Heritage.Name" Label="Heritage" id="select-heritage">
 			@foreach (var option in HeritageSettings)
 			{
 				<MudSelectItem T="string" Value="option.Name">
@@ -17,7 +17,7 @@
 			}
 		</MudSelect>
 		<MudText>@Elaboration()</MudText>
-		<MudTextField @bind-Value="Heritage.Description" HelperText="Share a detail about your family life" Placeholder="Exiled nobility, now maladjusted factory laborers" aria-label="Heritage description" />
+		<MudTextField @bind-Value="Heritage.Description" HelperText="Share a detail about your family life" Placeholder="Exiled nobility, now maladjusted factory laborers" aria-label="Heritage description" id="heritage-description" />
 	</MudCardContent>
 </MudCard>
 
