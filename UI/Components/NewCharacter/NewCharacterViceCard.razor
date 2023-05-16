@@ -17,7 +17,7 @@
 				}
 			</MudSelect>
 			<MudText>@Elaboration()</MudText>
-			<MudTextField @bind-Value="Vice.Description" HelperText="@HelperText()" Placeholder="@ExamplePlaceholder()" />
+			<MudTextField @bind-Value="Vice.Description" HelperText="@HelperText()" Placeholder="@ExamplePlaceholder()" aria-label="Vice description" />
 			@if (HasExamples)
 			{
 				<MudExpansionPanels>

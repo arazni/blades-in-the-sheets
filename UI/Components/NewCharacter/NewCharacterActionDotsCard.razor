@@ -31,11 +31,13 @@
 							<MudStack Row="true" AlignItems="AlignItems.Center">
 								<MudToggleIconButton Toggled="@action.IsDotOneFilled" ToggledChanged="@action.ToggleDotOne"
 									Disabled="!ViewModel.IsDotOneEnabled(action)"
-									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
+									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle"
+									aria-label="@DotLabel(action.Name, 1)" />
 								<MudDivider Vertical="true" FlexItem="true" />
 								<MudToggleIconButton Toggled="@action.IsDotTwoFilled" ToggledChanged="@action.ToggleDotTwo"
 									Disabled="!ViewModel.IsDotTwoEnabled(action)"
-									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" />
+									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" 
+									aria-label="@DotLabel(action.Name, 2)" />
 								<MudText>@action.Name</MudText>
 							</MudStack>
 						</TitleContent>
@@ -67,4 +69,7 @@
 
 		base.OnParametersSet();
 	}
+
+	static string DotLabel(string actionName, int dot) =>
+		$"{actionName} dot {dot}";
 }
