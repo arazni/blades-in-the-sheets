@@ -68,7 +68,7 @@
 					<MudTextField @bind-Value=addableItem.Name Label="Name" />
 				</MudItem>
 				<MudItem xs="12" sm="4">
-					<MudButton OnClick="AddItem" Disabled="!IsAddItemEnabled" Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle">Add</MudButton>
+					<MudButton OnClick="AddItem" Disabled="!IsAddItemEnabled" Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" aria-label="Add new item">Add</MudButton>
 				</MudItem>
 			</MudGrid>
 		}
@@ -139,11 +139,13 @@
 
 	RenderFragment RenderCommitmentText(GearItem item) => @<MudText>@item.Name (@item.Bulk)</MudText>;
 
-	RenderFragment RenderCommitmentButtons(GearItem item) => @<MudButton Style="margin: 5px; max-width: 400px" FullWidth="false" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveCircle" OnClick="() => UncommitGear(item)">@item.Name (@item.Bulk)</MudButton>;
+	RenderFragment RenderCommitmentButtons(GearItem item) => @<MudButton Style="margin: 5px; max-width: 400px" FullWidth="false" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveCircle" OnClick="() => UncommitGear(item)" aria-label="@CommitmentButtonLabel(item)">@item.Name (@item.Bulk)</MudButton>;
 
 	NewItem addableItem = new();
 
 	bool IsAddItemEnabled => addableItem.Name.HasInk() && Gear.CanAddAvailableItem(addableItem.Name);
+
+	string CommitmentButtonLabel(GearItem item) => $"Uncommit {item.Name} ({item.Bulk})";
 
 	void AddItem()
 	{

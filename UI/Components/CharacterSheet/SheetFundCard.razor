@@ -8,7 +8,7 @@
 		<MudItem xs="12">
 			<MudStack Spacing="1">
 				<MudText Typo="Typo.caption">Satchel: </MudText>
-				<MudRating @bind-SelectedValue="Fund.Satchel.Coins" ReadOnly="!IsFixMode" MaxValue="Fund.Satchel.MaxCoins" FullIcon="@Icons.Material.Filled.Paid" EmptyIcon="@Icons.Material.Outlined.Paid" Color="Color.Primary" />
+				<MudRating @bind-SelectedValue="Fund.Satchel.Coins" ReadOnly="!IsFixMode" MaxValue="Fund.Satchel.MaxCoins" FullIcon="@Icons.Material.Filled.Paid" EmptyIcon="@Icons.Material.Outlined.Paid" Color="Color.Primary" aria-label="@SatchelLabel" />
 			</MudStack>
 		</MudItem>
 		<MudItem xs="12" lg="6">
@@ -55,4 +55,6 @@
 	bool SpendButtonEnabled => Fund.CanSpend(CoinChangeInput) && CoinChangeInput > 0;
 
 	string ButtonStyle { get; } = Constants.Buttons.ButtonDimensionStyle + "width: 50%;";
+
+	string SatchelLabel => $"{CoinSynonym} on hand";
 }

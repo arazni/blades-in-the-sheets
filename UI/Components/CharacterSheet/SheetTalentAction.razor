@@ -7,14 +7,14 @@
 <MudStack Row="true">
 	@if (IsFixMode)
 	{
-		<MudRating Size="Size.Small" @bind-SelectedValue="FixModeRating" MaxValue="Action.MaxRating" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+		<MudRating Size="Size.Small" @bind-SelectedValue="FixModeRating" MaxValue="Action.MaxRating" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" aria-label="@RatingLabel" />
 		<MudText>@ActionName</MudText>
 	}
 	else
 	{
 		if (CanLevelUp)
 		{
-			<MudIconButton Title="@LevelUpTitle" Variant="Variant.Filled" Size="Size.Small" Disabled="Action.HasMaxRating" Icon="@Icons.Material.Filled.Add" OnClick="LevelUp" Color="Color.Primary" />
+			<MudIconButton Title="@LevelUpTitle" Variant="Variant.Filled" Size="Size.Small" Disabled="Action.HasMaxRating" Icon="@Icons.Material.Filled.Add" OnClick="LevelUp" Color="Color.Primary" aria-label="@LevelUpLabel" />
 		}
 		<MudText>@Text</MudText>
 	}
@@ -67,4 +67,10 @@
 
 	void Notify() =>
 		SheetJank.NotifyAttributeChanged(AttributeName);
+
+	string RatingLabel =>
+		$"Set {ActionName} rating";
+
+	string LevelUpLabel =>
+		$"Level up {ActionName}";
 }

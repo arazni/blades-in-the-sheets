@@ -4,7 +4,7 @@
 
 <MudStack>
 	<MudStack Row="true">
-		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect">
+		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect" aria-label="Select Trauma">
 			@foreach (var option in TraumaOptions)
 			{
 				<MudSelectItem T="string" Value="option">
@@ -12,14 +12,14 @@
 				</MudSelectItem>
 			}
 		</MudSelect>
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle">Trauma</MudButton>
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle" aria-label="Add Trauma">Trauma</MudButton>
 	</MudStack>
 	<MudStack Row="true">
 		@foreach (var option in Monitor.Trauma.Traumas)
 		{
 			@if (IsFixMode)
 			{
-				<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="(e => RemoveTrauma(option))">@option</MudButton>
+				<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="(e => RemoveTrauma(option))" aria-label="@RemoveTraumaAriaLabel(option)">@option</MudButton>
 			}
 			else
 			{
@@ -80,4 +80,7 @@
 	{
 		Monitor.Trauma.Remove(trauma);
 	}
+
+	string RemoveTraumaAriaLabel(string trauma) =>
+		$"Remove {trauma}";
 }

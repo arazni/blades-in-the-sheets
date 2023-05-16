@@ -10,7 +10,7 @@
 	{
 		@foreach (var description in HarmDescriptions)
 		{
-			<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(e => RemoveHarm(description))">@description</MudButton>
+			<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(e => RemoveHarm(description))" aria-label="@AriaLabel(description)">@description</MudButton>
 		}
 	}
 	else
@@ -47,4 +47,7 @@
 	{
 		Harm.RemoveHarm(description, Intensity);
 	}
+
+	string AriaLabel(string description) =>
+		"Remove " + description;
 }

@@ -5,9 +5,9 @@
 @implements IDisposable
 
 <MudStack>
-	<MudTextField @bind-Value="HarmDescription" Placeholder="@HarmPlaceholder" Clearable="true" Immediate="true" />
+	<MudTextField @bind-Value="HarmDescription" Placeholder="@HarmPlaceholder" Clearable="true" Immediate="true" aria-label="Describe harm" />
 	<MudStack Row="true" Class="flex-grow-1">
-		<MudSelect @bind-Value="Intensity" Text="@Intensity?.ToString()">
+		<MudSelect @bind-Value="Intensity" Text="@Intensity?.ToString()" aria-label="Harm intensity">
 			@foreach (var intensity in Harm.AvailableIntensities)
 			{
 				<MudSelectItem T="HarmIntensity?" Value="intensity">
@@ -15,7 +15,7 @@
 				</MudSelectItem>
 			}
 		</MudSelect>
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="!CanAddHarm" OnClick="AddHarm" Style="@Constants.Buttons.ButtonDimensionStyle">Harm</MudButton>
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="!CanAddHarm" OnClick="AddHarm" Style="@Constants.Buttons.ButtonDimensionStyle" aria-label="Add harm">Harm</MudButton>
 	</MudStack>
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Fatal" />
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Severe" />
