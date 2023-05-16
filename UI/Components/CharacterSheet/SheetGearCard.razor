@@ -13,13 +13,13 @@
 				<MudRadioGroup @bind-SelectedOption="Gear.Commitment.Commitment">
 					<MudRadio Option="LoadCommitmentOption.None" Disabled="!RadioCommitmentsEnabled">@LoadCommitmentOption.None</MudRadio>
 					<MudRadio Option="LoadCommitmentOption.Light" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Light) @LoadCommitmentOption.Light</MudRadio>
-						<MudRadio Option="LoadCommitmentOption.Normal" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</MudRadio>
-						<MudRadio Option="LoadCommitmentOption.Heavy" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</MudRadio>
-						<MudRadio Option="LoadCommitmentOption.Encumbered" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Encumbered) @LoadCommitmentOption.Encumbered</MudRadio>
-					</MudRadioGroup>
-				</MudItem>
-				<MudItem xs="12" sm="4">
-					@if (CommitmentLocked)
+					<MudRadio Option="LoadCommitmentOption.Normal" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</MudRadio>
+					<MudRadio Option="LoadCommitmentOption.Heavy" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</MudRadio>
+					<MudRadio Option="LoadCommitmentOption.Encumbered" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Encumbered) @LoadCommitmentOption.Encumbered</MudRadio>
+				</MudRadioGroup>
+			</MudItem>
+			<MudItem xs="12" sm="4">
+				@if (CommitmentLocked)
 				{
 					<MudButton FullWidth="true" Variant="Variant.Outlined" OnClick="() => { ClearCommitments(); CommitmentLocked = false; }">Reset</MudButton>
 				}
@@ -123,7 +123,8 @@
 		set
 		{
 			commitmentItemRenderer = value ? (i) => RenderCommitmentButtons(i)
-		: (i) => RenderCommitmentText(i);
+				: (i) => RenderCommitmentText(i);
+
 			isFixMode = value;
 		}
 	}
