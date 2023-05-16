@@ -1,4 +1,6 @@
-﻿namespace Models.Settings;
+﻿using Newtonsoft.Json;
+
+namespace Models.Settings;
 
 public record GameSetting
 (
@@ -26,7 +28,12 @@ public record PlaybookSetting
 	DefaultActionPointSetting[] DefaultActionPoints,
 	string ExperienceCondition,
 	string AliasSynonym = Constants.DefaultNames.Alias
-);
+)
+{
+	[JsonConstructor] // Annoying workaround for Newtonsoft
+	public PlaybookSetting(string Name, string Hook, SpecialAbilitySetting[] SpecialAbilities, RolodexSetting Rolodex, GearItemSetting[] Items, DefaultActionPointSetting[] DefaultActionPoints, string ExperienceCondition)
+	: this(Name, Hook, SpecialAbilities, Rolodex, Items, DefaultActionPoints, ExperienceCondition, Constants.DefaultNames.Alias) { }
+}
 
 public record SpecialAbilitySetting
 (

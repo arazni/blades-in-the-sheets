@@ -8,15 +8,15 @@
 		<MudText Typo="Typo.caption">Healing Project:</MudText>
 		@if (IsFixMode)
 		{
-			<MudRating @bind-SelectedValue="HealingClock.Time" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
+			<MudRating @bind-SelectedValue="HealingClock.Time" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" aria-label="Set recovery progress"/>
 		}
 		else
 		{
-			<MudRating SelectedValue="HealingClock.Time" ReadOnly="true" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
+			<MudRating SelectedValue="HealingClock.Time" ReadOnly="true" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" aria-label="Current recovery progress"/>
 		}
 		@if (HealingClock.Rollover > 0)
 		{
-			<MudRating SelectedValue="HealingClock.Rollover" ReadOnly="true" MaxValue="HealingClock.Rollover" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" />
+			<MudRating SelectedValue="HealingClock.Rollover" ReadOnly="true" MaxValue="HealingClock.Rollover" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" aria-label="Extra recovery progress" />
 		}
 		<MudButton Disabled="!Harm.CanHeal" OnClick="Heal" Variant="Variant.Outlined">Heal</MudButton>
 	</MudStack>
@@ -24,7 +24,7 @@
 	@if (!IsFixMode)
 	{
 		<MudStack Row="true">
-			<MudSelect @bind-Value="RecoveryAmount">
+			<MudSelect @bind-Value="RecoveryAmount" aria-label="Select recovery progress">
 				<MudSelectItem Value="1">
 					<MudIcon Icon="@Icons.Material.Filled.Add" />
 					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
@@ -49,7 +49,7 @@
 					<MudIcon Icon="@Icons.Material.Filled.Favorite" />
 				</MudSelectItem>
 			</MudSelect>
-			<MudButton Disabled="Harm.CanHeal" OnClick="(() => HealingClock.Progress(RecoveryAmount))" Variant="Variant.Outlined">Add</MudButton>
+			<MudButton Disabled="Harm.CanHeal" OnClick="(() => HealingClock.Progress(RecoveryAmount))" Variant="Variant.Outlined" aria-label="Add recovery progress">Add</MudButton>
 		</MudStack>
 	}
 

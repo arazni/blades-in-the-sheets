@@ -35,9 +35,9 @@ public class ServerFileReader : IFileReader
 			?? throw new FileNotFoundException($"games.json is missing from {this.directoryPath}");
 	}
 
-	public async Task<string> ReadFile(string fileName)
+	public async Task<string> ReadFile(string fileStem)
 	{
-		var path = Path.Combine(this.directoryPath, fileName);
+		var path = Path.Combine(this.directoryPath, fileStem + ".json");
 
 		var text = await File.ReadAllTextAsync(path);
 

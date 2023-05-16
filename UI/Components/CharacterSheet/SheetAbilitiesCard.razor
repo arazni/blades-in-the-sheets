@@ -9,10 +9,10 @@
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="@Playbook.Name.ToString()">
 	<MudStack>
-		<MudRating @bind-SelectedValue="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+		<MudRating @bind-SelectedValue="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" aria-label="Playbook experience points" />
 		<MudGrid>
 			<MudItem xs="12" sm="9">
-				<MudSelect @bind-Value="SelectedAbility" ToStringFunc="@converter">
+				<MudSelect @bind-Value="SelectedAbility" ToStringFunc="@converter" aria-label="Select playbook ability to learn">
 					@foreach (var ability in LearnableAbilities)
 					{
 						<MudSelectItem Value="ability" />
@@ -20,7 +20,7 @@
 				</MudSelect>
 			</MudItem>
 			<MudItem xs="12" sm="3">
-				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@UI.Constants.Buttons.ButtonDimensionStyle">Ability</MudButton>
+				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@UI.Constants.Buttons.ButtonDimensionStyle" aria-label="Learn ability">Ability</MudButton>
 			</MudItem>
 		</MudGrid>
 		<MudStack>
@@ -42,7 +42,7 @@
 
 	Playbook Playbook => Character.Playbook;
 
-	public bool IsFixMode { get; set; }
+	public bool IsFixMode { get; set; } = false;
 
 	IReadOnlyCollection<PlaybookSpecialAbility> KnownAbilities =>
 		Playbook.Abilities;

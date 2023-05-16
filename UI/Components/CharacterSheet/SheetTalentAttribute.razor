@@ -5,7 +5,7 @@
 @implements IDisposable
 
 <MudStack>
-	<MudRating @bind-SelectedValue="Attribute.Experience.Points" MaxValue="Attribute!.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+	<MudRating @bind-SelectedValue="Attribute.Experience.Points" MaxValue="Attribute.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
 	<MudText Typo="Typo.h6">@Attribute.Rating @Name</MudText>
 	@foreach (var actionByName in Attribute.ActionsByName)
 	{
@@ -41,4 +41,7 @@
 		if (attributeName == Name)
 			StateHasChanged();
 	}
+
+	string RatingLabel =>
+		$"Set {Name} experience points";
 }

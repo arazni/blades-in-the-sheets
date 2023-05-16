@@ -8,8 +8,8 @@
 
 @if (IsFixMode)
 {
-	<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="(e => RemoveAbility(Ability))">@Ability.LearnedTimesDisplayName()</MudButton>
-	<MudTextField @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Lines="5" Variant="Variant.Outlined" Label="@EditAbilityLabel" />
+	<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="(e => RemoveAbility(Ability))" aria-label="@RemoveAbilityLabel">@Ability.LearnedTimesDisplayName()</MudButton>
+	<MudTextField @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Lines="5" Variant="Variant.Outlined" Label="@EditAbilityLabel" id="@TextFieldId" />
 }
 else
 {
@@ -18,34 +18,41 @@ else
 }
 @code
 {
-		[Parameter, EditorRequired]
-		public bool IsFixMode { get; set; } = false;
+	[Parameter, EditorRequired]
+	public bool IsFixMode { get; set; } = false;
 
-		[Parameter, EditorRequired]
-		public Character? Character { get; set; }
+	[Parameter, EditorRequired]
+	public Character? Character { get; set; }
 
-		[Parameter, EditorRequired]
-		public PlaybookSpecialAbility? Ability { get; set; }
+	[Parameter, EditorRequired]
+	public PlaybookSpecialAbility? Ability { get; set; }
 
-		Playbook? Playbook => Character?.Playbook;
+	Playbook? Playbook => Character?.Playbook;
 
-		void OverwriteDescription(string description) 
-		{
-			var hadSpecialArmor = Character!.HasSpecialArmor;
-			var changed = Ability!.OverwriteDescription(description);
+	void OverwriteDescription(string description)
+	{
+		var hadSpecialArmor = Character!.HasSpecialArmor;
+		var changed = Ability!.OverwriteDescription(description);
 
-			if (!changed) 
-				return;
+		if (!changed)
+			return;
 
-			if (hadSpecialArmor != Character!.HasSpecialArmor)
-				SheetJank.NotifyAbilitiesChanged();
-		}
-
-		void RemoveAbility(PlaybookSpecialAbility ability)
-		{
-			Playbook!.RemoveAbility(ability);
+		if (hadSpecialArmor != Character!.HasSpecialArmor)
 			SheetJank.NotifyAbilitiesChanged();
-		}
+	}
 
-		string EditAbilityLabel => $"Edit {Ability!.Name} Description";
+	void RemoveAbility(PlaybookSpecialAbility ability)
+	{
+		Playbook!.RemoveAbility(ability);
+		SheetJank.NotifyAbilitiesChanged();
+	}
+
+	string EditAbilityLabel =>
+		$"Edit {Ability!.Name} Description";
+
+	string RemoveAbilityLabel =>
+		$"Unlearn {Ability!.Name}";
+
+	string TextFieldId =>
+		$"text-field-{Ability!.Name}";
 }

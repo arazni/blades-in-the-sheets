@@ -6,6 +6,9 @@ public class Ink
 
 	public Ink(string value)
 	{
+		if (!value.HasInk())
+			throw new ArgumentException("Ink cannot be empty or whitespace", nameof(value));
+
 		Value = value;
 		this.value = Value; // C# nullability silliness
 	}
@@ -16,7 +19,11 @@ public class Ink
 		set
 		{
 			if (!value.HasInk())
-				throw new ArgumentException(Value, nameof(Value));
+			{
+				// Would be nice to handle this better one day.
+				Console.WriteLine("Ink cannot be empty or whitespace; rejecting change.");
+				return;
+			}
 
 			this.value = value.Trim();
 		}

@@ -10,7 +10,7 @@
 	</MudCardHeader>
 	<MudCardContent>
 		<MudStack>
-			<MudSelect T="RolodexFriend" Label="Close Friend" Value="CloseFriend" ValueChanged="OnCloseFriendChanged">
+			<MudSelect T="RolodexFriend" Label="Close Friend" Value="CloseFriend" ValueChanged="OnCloseFriendChanged" id="select-close-friend">
 				@foreach (var friend in AvailableCloseFriends)
 				{
 					<MudSelectItem T="RolodexFriend" Value="friend">
@@ -18,7 +18,7 @@
 					</MudSelectItem>
 				}
 			</MudSelect>
-			<MudSelect T="RolodexFriend" Label="Rival" Value="Rival" ValueChanged="OnRivalChanged">
+			<MudSelect T="RolodexFriend" Label="Rival" Value="Rival" ValueChanged="OnRivalChanged" id="select-rival">
 				@foreach (var friend in AvailableRivals)
 				{
 					<MudSelectItem T="RolodexFriend" Value="friend">

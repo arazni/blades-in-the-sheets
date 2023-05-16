@@ -11,7 +11,7 @@
 		<MudStack>
 			<MudStack>
 				<MudText>If you're unsure which one to pick, the first is considered a good default choice.</MudText>
-				<MudSelect T="PlaybookSpecialAbility" Value="ChosenAbility" ValueChanged="OnChosenAbilityChanged" Label="Special Ability" ToStringFunc="a => a?.Name">
+				<MudSelect T="PlaybookSpecialAbility" Value="ChosenAbility" ValueChanged="OnChosenAbilityChanged" Label="Special Ability" ToStringFunc="a => a?.Name" id="select-playbook-ability">
 					@foreach (var ability in AvailableAbilities)
 					{
 						<MudSelectItem T="PlaybookSpecialAbility" Value="ability">
@@ -25,7 +25,7 @@
 			{
 				<MudStack>
 					<MudText>@GameSetting.Name also has unique starting abilities.</MudText>
-					<MudSelect T="PlaybookSpecialAbility" Value="ChosenStartingAbility" ValueChanged="OnChosenStartingAbilityChanged" Label="Starting Ability" ToStringFunc="a => a?.Name">
+					<MudSelect T="PlaybookSpecialAbility" Value="ChosenStartingAbility" ValueChanged="OnChosenStartingAbilityChanged" Label="Starting Ability" ToStringFunc="a => a?.Name" id="select-playbook-starting-ability">
 						@foreach (var ability in AvailableStartingAbilities)
 						{
 							<MudSelectItem T="PlaybookSpecialAbility" Value="ability">

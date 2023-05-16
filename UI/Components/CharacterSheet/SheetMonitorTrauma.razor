@@ -4,22 +4,22 @@
 
 <MudStack>
 	<MudStack Row="true">
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle">Trauma</MudButton>
-		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect">
-			@foreach (var option in TraumaOptions)
+		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect" aria-label="Select Trauma">
+			@foreach (var option in AvailableTraumaOptions)
 			{
 				<MudSelectItem T="string" Value="option">
 					<MudText>@option</MudText>
 				</MudSelectItem>
 			}
 		</MudSelect>
+		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle" aria-label="Add Trauma">Trauma</MudButton>
 	</MudStack>
 	<MudStack Row="true">
 		@foreach (var option in Monitor.Trauma.Traumas)
 		{
 			@if (IsFixMode)
 			{
-				<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="(e => RemoveTrauma(option))">@option</MudButton>
+				<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="(e => RemoveTrauma(option))" aria-label="@RemoveTraumaAriaLabel(option)">@option</MudButton>
 			}
 			else
 			{
@@ -40,6 +40,10 @@
 	[Parameter, EditorRequired]
 	public IReadOnlyCollection<string> TraumaOptions { get; set; } = Array.Empty<string>();
 
+	public IReadOnlyCollection<string> AvailableTraumaOptions =>
+		TraumaOptions.Except(Monitor.Trauma.Traumas)
+			.ToArray();
+
 	bool DisableTraumaSelect =>
 		Monitor.Stress.CurrentStress != MonitorStress.MaxStress
 		&& !IsFixMode;
@@ -52,7 +56,7 @@
 
 	string? SelectedTrauma
 	{
-		get => Monitor.Stress.CurrentStress != MonitorStress.MaxStress ? null
+		get => Monitor.Stress.CurrentStress != MonitorStress.MaxStress && !IsFixMode ? null
 			: selectedTrauma;
 		set => selectedTrauma = value;
 	}
@@ -80,4 +84,7 @@
 	{
 		Monitor.Trauma.Remove(trauma);
 	}
+
+	string RemoveTraumaAriaLabel(string trauma) =>
+		$"Remove {trauma}";
 }
