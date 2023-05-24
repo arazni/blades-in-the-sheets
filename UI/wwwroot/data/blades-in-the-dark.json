@@ -46,7 +46,7 @@
 					"Description": "You recover from harm faster. Permanently fill in one of your healing clock segments. Take +1d to healing treatment rolls."
 				},
 				{
-					"TimesTakeable": 3,
+					"TimesTakeable": 99,
 					"Name": "Veteran",
 					"Description": "Choose a special ability from another source."
 				}
@@ -54,11 +54,11 @@
 			"Rolodex": {
 				"Name": "Dangerous Friends",
 				"Friends": [
-					"Steiner, an assassin",
-					"Celene, a sentinel",
-					"Melvir, a physicker",
-					"Veleris, a spy",
-					"Casta, a bounty hunter"
+					"Marlane, a pugilist",
+					"Chael, a vicious thug",
+					"Mercy, a cold killer",
+					"Grace, an extortionist",
+					"Sawtooth, a physicker"
 				]
 			},
 			"Items": [
@@ -139,7 +139,7 @@
 					"Description": "You gain an additional xp trigger: You got payback against someone who harmed you or someone you care about. If your crew helped you get payback, also mark crew xp."
 				},
 				{
-					"TimesTakeable": 3,
+					"TimesTakeable": 99,
 					"Name": "Veteran",
 					"Description": "Choose a special ability from another source"
 				}
@@ -237,7 +237,7 @@
 					"Description": "Choose a drug or poison (from your bandolier stock) to which you have become immune. You can push yourself to secrete it through your skin or saliva or exhale it as a vapor."
 				},
 				{
-					"TimesTakeable": 3,
+					"TimesTakeable": 99,
 					"Name": "Veteran",
 					"Description": "Choose a special ability from another source"
 				}
@@ -343,7 +343,7 @@
 					"Description": "You may expend your special armor to resist a consequence from detection or security measures, or to push yourself for a feat of athletics or stealth."
 				},
 				{
-					"TimesTakeable": 3,
+					"TimesTakeable": 99,
 					"Name": "Veteran",
 					"Description": "Choose a special ability from another source"
 				}
@@ -441,7 +441,7 @@
 					"Description": "You get +1d vs. a target with whom you have an intimate relationship."
 				},
 				{
-					"TimesTakeable": 3,
+					"TimesTakeable": 99,
 					"Name": "Veteran",
 					"Description": "Choose a special ability from another source"
 				}
@@ -539,7 +539,7 @@
 					"Description": "You gain +1d to Consort when you gather information on a target for a score. You get +1d to the engagement roll for that operation."
 				},
 				{
-					"TimesTakeable": 3,
+					"TimesTakeable": 99,
 					"Name": "Veteran",
 					"Description": "Choose a special ability from another source."
 				}
@@ -637,7 +637,7 @@
 					"Description": "You may expend your special armor to resist a supernatural consequence, or to push yourself when you deal with arcane forces."
 				},
 				{
-					"TimesTakeable": 3,
+					"TimesTakeable": 99,
 					"Name": "Veteran",
 					"Description": "Choose a special ability from another source"
 				}
