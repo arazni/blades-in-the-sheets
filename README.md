@@ -62,3 +62,24 @@ If you're willing to help convert the game text into a json file, I'm typically 
 - Support dll trimming for hopefully a smaller payload. (JITerpreter stuff is coming out in .NET 8 at the end of the year and I'd like to see if that behaves better than AOT for most people.)
 
 - If you have any trouble with the app, loading your characters, or importing your character json files, please seek me out on reddit, the blades in the dark discord, or file an issue here!
+
+### Version 10
+
+- Working on increasing accessibility
+
+- Colors have somewhat changed for improved contrast
+
+- Aria-labels are being implemented more thoughtfully
+
+- Text used in place of icons more often (screenreaders seem to handle that better)
+
+- Identified some problem areas that still need work: Expansion Panels, "Ratings" (exp trackers)
+
+#### Version 10.1
+
+- More screen reader fixes
+
+- Cutter friend's list fix
+
+- Veteran says 99 times now for BitD (not S&V)--adding custom abilities and custom friends to come in future update
+

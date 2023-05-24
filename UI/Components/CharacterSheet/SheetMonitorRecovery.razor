@@ -6,7 +6,7 @@
 <MudStack>
 	<MudStack Row="true" Justify="Justify.SpaceBetween">
 		<MudStack Spacing="0">
-		<MudText Typo="Typo.caption">Healing Project</MudText>
+			<MudText Typo="Typo.caption">Healing Project</MudText>
 			@if (IsFixMode)
 			{
 				<MudRating @bind-SelectedValue="HealingClock.Time" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" aria-label="@SetRecoveryProgressLabel" />
@@ -27,32 +27,29 @@
 	{
 		<MudStack Row="true">
 			<MudSelect @bind-Value="RecoveryAmount" Label="Recovery progress" role="listbox" id="select-recovery-progress">
-				<MudSelectItem Value="1" role="option">
-					<MudText>1-3: +1</MudText>
-@*					<MudIcon Icon="@Icons.Material.Filled.Add" Title="Add 1" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 1" />*@
+				<MudSelectItem Value="1" role="option" aria-label="Add 1">
+					<MudStack Row=true>
+						<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 1" />
+						<MudText>1-3: +1</MudText>
+					</MudStack>
 				</MudSelectItem>
-				<MudSelectItem Value="2" role="option">
-					<MudText>4-5: +2</MudText>
-@*				<MudIcon Icon="@Icons.Material.Filled.Add" Title="Add 2" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 2" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 2" />*@
+				<MudSelectItem Value="2" role="option" aria-label="Add 2">
+					<MudStack Row=true>
+						<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 2" />
+						<MudText>4-5: +2</MudText>
+					</MudStack>
 				</MudSelectItem>
-				<MudSelectItem Value="3" role="option">
-					<MudText>6: +3</MudText>
-@*				<MudIcon Icon="@Icons.Material.Filled.Add" Title="Add 3" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 3" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 3" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 3" />*@
+				<MudSelectItem Value="3" role="option" aria-label="Add 3">
+					<MudStack Row=true>
+						<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 3" />
+						<MudText>6: +3</MudText>
+					</MudStack>
 				</MudSelectItem>
-				<MudSelectItem Value="5" role="option">
-					<MudText>Critical: +5</MudText>
-@*				<MudIcon Icon="@Icons.Material.Filled.Add" Title="Add 5" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 5" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 5" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 5" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 5" />
-					<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 5" />*@
+				<MudSelectItem Value="5" role="option" title="Add 5">
+					<MudStack Row=true>
+						<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 5" />
+						<MudText>Critical: +5</MudText>
+					</MudStack>
 				</MudSelectItem>
 			</MudSelect>
 			<MudButton Size="Size.Small" Disabled="Harm.CanHeal" OnClick="(() => HealingClock.Progress(RecoveryAmount))" Variant="Variant.Outlined" aria-label="Add recovery progress" Style="@Constants.Buttons.ButtonDimensionStyle">Recover</MudButton>
