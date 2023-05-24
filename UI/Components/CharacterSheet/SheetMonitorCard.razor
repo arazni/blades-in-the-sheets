@@ -9,7 +9,7 @@
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Health">
 	<MudGrid>
 		<MudItem xs="12">
-			<MudSlider @bind-Value="@Monitor.Stress.CurrentStress" Size="Size.Medium" TickMarks="true" TickMarkLabels="@StressLabels" Max="@MonitorStress.MaxStress" Variant="@Variant.Filled" Color="@StressColor" aria-label="Stress slider">
+			<MudSlider @bind-Value="@Monitor.Stress.CurrentStress" Size="Size.Medium" TickMarks="true" TickMarkLabels="@StressLabels" Max="@MonitorStress.MaxStress" Variant="@Variant.Filled" Color="@StressColor" aria-label="Stress">
 				Stress
 			</MudSlider>
 		</MudItem>

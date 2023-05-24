@@ -5,7 +5,7 @@
 @implements IDisposable
 
 <MudStack>
-	<MudRating @bind-SelectedValue="Attribute.Experience.Points" MaxValue="Attribute.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" />
+	<MudRating @bind-SelectedValue="Attribute.Experience.Points" MaxValue="Attribute.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" aria-label="@RatingLabel" />
 	<MudText Typo="Typo.h6">@Attribute.Rating @Name</MudText>
 	@foreach (var actionByName in Attribute.ActionsByName)
 	{
@@ -43,5 +43,5 @@
 	}
 
 	string RatingLabel =>
-		$"Set {Name} experience points";
+		$"{Name}: {Attribute.Experience.Points} of {Attribute.Experience.MaxPoints} experience points";
 }

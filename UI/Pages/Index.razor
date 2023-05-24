@@ -25,8 +25,8 @@
 						<MudLink Typo="Typo.h6" Href="@character.Link">@character.Alias the @character.Playbook</MudLink>
 					</CardHeaderContent>
 					<CardHeaderActions>
-						<MudButton Color="Color.Tertiary" OnClick="_ => Download(character)" Variant="Variant.Filled" Style="@DownloadModeStyle">Export</MudButton>
-						<MudButton Color="Color.Secondary" OnClick="_ => Delete(character.Id)" Variant="Variant.Filled" Style="@DeleteModeStyle">Delete</MudButton>
+						<MudButton Color="Color.Tertiary" OnClick="_ => Download(character)" Variant="Variant.Filled" Style="@DownloadModeStyle" aria-label="@DownloadCharacterLabel(character.Name)">Export</MudButton>
+						<MudButton Color="Color.Secondary" OnClick="_ => Delete(character.Id)" Variant="Variant.Filled" Style="@DeleteModeStyle" aria-label="@DeleteCharacterLabel(character.Name)">Delete</MudButton>
 					</CardHeaderActions>
 				</MudCardHeader>
 				<MudCardContent>
@@ -44,7 +44,7 @@
 				<CardHeaderActions>
 					@if (Characters.Any())
 					{
-						<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" @bind-Toggled="IsDownloadMode" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Download" ToggledIcon="@Icons.Material.Filled.FileDownloadOff" Title="Enable Download Mode" ToggledTitle="Disable Download Mode" />
+						<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" @bind-Toggled="IsDownloadMode" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Download" ToggledIcon="@Icons.Material.Filled.FileDownloadOff" Title="Enable Download Mode" ToggledTitle="Disable Download Mode" aria-label="@DownloadModeLabel" />
 						<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" @bind-Toggled="IsDeleteMode" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Delete" ToggledIcon="@Icons.Material.Filled.Cancel" Title="Enable Delete Mode" ToggledTitle="Disable Delete Mode" />
 					}
 				</CardHeaderActions>
@@ -179,4 +179,14 @@
 
 		return vCharacter.Blurb(gameSetting);
 	}
+
+	string DownloadModeLabel =>
+		IsDownloadMode ? "Disable download mode"
+		: "Enable download mode";
+
+	static string DownloadCharacterLabel(string characterName) =>
+		$"Export {characterName}";
+
+	static string DeleteCharacterLabel(string characterName) =>
+		$"Delete {characterName}";
 }
