@@ -1,4 +1,6 @@
-﻿namespace Models.Characters;
+﻿using Models.Common;
+
+namespace Models.Characters;
 
 public class Rolodex
 {
@@ -35,6 +37,23 @@ public class Rolodex
 
 	public void ReplaceFriends(RolodexCreation creation) =>
 		ReplaceFriends(creation.Friends);
+
+	public void AddFriend(RolodexFriend friend)
+	{
+		if (friend.Entry.In(Friends.Select(f => f.Entry)))
+			return;
+
+		this.friends.Add(friend);
+		return;
+	}
+
+	public void RemoveFriend(RolodexFriend friend)
+	{
+		if (!Friends.Contains(friend))
+			return;
+
+		this.friends.Remove(friend);
+	}
 
 	public bool HasCloseFriends =>
 		CloseFriends.Any();
