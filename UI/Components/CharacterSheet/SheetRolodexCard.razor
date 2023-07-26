@@ -10,22 +10,16 @@
 			{
 				if (friend.Closeness == FriendCloseness.CloseFriend)
 				{
-					<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="Rolodex.DowngradeCloseFriend" aria-label="@ButtonLabel(friend, "Estrange from")">Estrange</MudButton>
+					<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="() => Rolodex.DowngradeCloseFriend(friend)" aria-label="@ButtonLabel(friend, "Estrange from")">Estrange</MudButton>
 				}
 				else if (friend.Closeness == FriendCloseness.Rival)
 				{
-					<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="Rolodex.UpgradeRival" aria-label="@ButtonLabel(friend, "Reconcile with")">Reconcile</MudButton>
+					<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="() => Rolodex.UpgradeRival(friend)" aria-label="@ButtonLabel(friend, "Reconcile with")">Reconcile</MudButton>
 				}
 				else
 				{
-					if (Rolodex.IsMissingCloseFriend)
-					{
-						<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyCloseFriend(friend))" aria-label="@ButtonLabel(friend, "Bond with")">Bond</MudButton>
-					}
-					if (Rolodex.IsMissingRival)
-					{
-						<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="(e => Rolodex.AssignOnlyRival(friend))" aria-label="@ButtonLabel(friend, "Betray")">Betray</MudButton>
-					}
+					<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowUpward" Variant="Variant.Outlined" OnClick="() => Rolodex.UpgradeFriend(friend)" aria-label="@ButtonLabel(friend, "Bond with")">Bond</MudButton>
+					<MudButton Style="width: 120px;" Size="Size.Small" EndIcon="@Icons.Material.Filled.ArrowDownward" Variant="Variant.Outlined" OnClick="() => Rolodex.DowngradeFriend(friend)" aria-label="@ButtonLabel(friend, "Betray")">Betray</MudButton>
 				}
 			}
 		</MudStack>
