@@ -83,3 +83,6 @@ If you're willing to help convert the game text into a json file, I'm typically 
 
 - Veteran says 99 times now for BitD (not S&V)--adding custom abilities and custom friends to come in future update
 
+#### Version 10.2
+
+- Support for adding and removing friends from the friends list. (It's a bit awkward due to limited space, you need to upgrade to close friend or downgrade to rival first to expose the button. This should be discoverable though because people start with one of each type of friend.)

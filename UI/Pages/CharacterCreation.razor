@@ -18,7 +18,7 @@
 		<NewCharacterBackgroundCard BackgroundSettings="GameSetting.Backgrounds" Background="@Character.Dossier.Background" />
 		<NewCharacterActionDotsCard GameSetting="GameSetting" Character="Character" />
 		<NewCharacterSpecialAbilityCard GameSetting="GameSetting" Character="Character" />
-		<NewCharacterFriendsCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="Character.Rolodex" PlaybookName="@Character.Playbook.Name" />
+		<NewCharacterFriendsCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="RolodexCreation" PlaybookName="@Character.Playbook.Name" />
 		<NewCharacterViceCard ViceSettings="GameSetting.Vices" Vice="@Character.Dossier.Vice" />
 		<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
 		<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
@@ -44,6 +44,8 @@
 
 	public PlaybookSetting PlaybookSetting => GameSetting.GetPlaybookSetting(Character.Playbook.Name);
 
+	public RolodexCreation RolodexCreation = new();
+
 	protected override async Task OnParametersSetAsync()
 	{
 		GameSetting = await Loader.LoadSetting(GameName);
@@ -54,6 +56,8 @@
 
 	public async Task SaveAsync()
 	{
+		Character.Rolodex.ReplaceFriends(RolodexCreation);
+
 		await Storage.Save(Character);
 		Navigator.NavigateTo(Paths.Sheet(Character.Id));
 	}

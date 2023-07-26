@@ -144,9 +144,13 @@ public class SerializerTests
 		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Lurk.ToString());
 		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1));
 
-		character.Rolodex.ReplaceFriends(new[] { new RolodexFriend("Favorite"), new RolodexFriend("Rival"), new RolodexFriend("3") });
-		character.Rolodex.AssignOnlyCloseFriend(character.Rolodex.Friends.First(f => f.Entry == "Favorite"));
-		character.Rolodex.AssignOnlyRival(character.Rolodex.Friends.First(f => f.Entry == "Rival"));
+		RolodexCreation creation = new();
+
+		creation.ReplaceFriends(new[] { new RolodexFriend("Favorite"), new RolodexFriend("Rival"), new RolodexFriend("3") });
+		creation.AssignOnlyCloseFriend(creation.Friends.First(f => f.Entry == "Favorite"));
+		creation.AssignOnlyRival(creation.Friends.First(f => f.Entry == "Rival"));
+
+		character.Rolodex.ReplaceFriends(creation);
 
 		var id = character.Id;
 		var json = this.serializer.Serialize(character);
@@ -168,8 +172,8 @@ public class SerializerTests
 		character.Playbook.Experience.MaxPoints.Should().BeGreaterThan(0);
 		character.Talent.AttributesByName[AttributeName.Insight.ToString()].Experience.MaxPoints.Should().BeGreaterThan(0);
 		character.Rolodex.Friends.Should().HaveCountGreaterThan(0);
-		character.Rolodex.CloseFriend.Should().NotBeNull();
-		character.Rolodex.Rival.Should().NotBeNull();
+		character.Rolodex.HasCloseFriends.Should().BeTrue();
+		character.Rolodex.HasRivals.Should().BeTrue();
 	}
 
 	[Fact]

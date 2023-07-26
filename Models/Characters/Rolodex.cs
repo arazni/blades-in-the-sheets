@@ -1,4 +1,6 @@
-﻿namespace Models.Characters;
+﻿using Models.Common;
+
+namespace Models.Characters;
 
 public class Rolodex
 {
@@ -10,50 +12,52 @@ public class Rolodex
 		private set => ReplaceFriends(value);
 	}
 
-	public RolodexFriend? CloseFriend =>
-		Friends.FirstOrDefault(f => f.Closeness == FriendCloseness.CloseFriend);
+	public IReadOnlyCollection<RolodexFriend> CloseFriends =>
+		Friends.Where(f => f.Closeness == FriendCloseness.CloseFriend)
+			.ToList();
 
-	public RolodexFriend? Rival =>
-		Friends.FirstOrDefault(f => f.Closeness == FriendCloseness.Rival);
+	public IReadOnlyCollection<RolodexFriend> Rivals =>
+		Friends.Where(f => f.Closeness == FriendCloseness.Rival)
+			.ToList();
 
-	public void AssignOnlyCloseFriend(RolodexFriend closeFriend)
-	{
-		if (CloseFriend != null)
-			CloseFriend.Closeness = FriendCloseness.Friend;
+	public void UpgradeFriend(RolodexFriend friend) =>
+		Friends.Single(f => f == friend).Closeness = FriendCloseness.CloseFriend;
 
-		Friends.Single(f => f == closeFriend).Closeness = FriendCloseness.CloseFriend;
-	}
+	public void DowngradeFriend(RolodexFriend friend) =>
+		Friends.Single(f => f == friend).Closeness = FriendCloseness.Rival;
 
-	public void AssignOnlyRival(RolodexFriend rival)
-	{
-		if (Rival != null)
-			Rival.Closeness = FriendCloseness.Friend;
+	public void DowngradeCloseFriend(RolodexFriend closeFriend) =>
+		Friends.Single(f => f == closeFriend).Closeness = FriendCloseness.Friend;
 
-		Friends.Single(f => f == rival).Closeness = FriendCloseness.Rival;
-	}
-
-	public void DowngradeCloseFriend()
-	{
-		if (CloseFriend == null)
-			throw new InvalidOperationException(nameof(IsMissingCloseFriend));
-
-		CloseFriend.Closeness = FriendCloseness.Friend;
-	}
-
-	public void UpgradeRival()
-	{
-		if (Rival == null)
-			throw new InvalidOperationException(nameof(IsMissingRival));
-
-		Rival.Closeness = FriendCloseness.Friend;
-	}
+	public void UpgradeRival(RolodexFriend rival) =>
+		Friends.Single(f => f == rival).Closeness = FriendCloseness.Friend;
 
 	public void ReplaceFriends(IReadOnlyCollection<RolodexFriend> friends) =>
 		this.friends = friends.ToList();
 
-	public bool IsMissingCloseFriend =>
-		CloseFriend == null;
+	public void ReplaceFriends(RolodexCreation creation) =>
+		ReplaceFriends(creation.Friends);
 
-	public bool IsMissingRival =>
-		Rival == null;
+	public void AddFriend(RolodexFriend friend)
+	{
+		if (friend.Entry.In(Friends.Select(f => f.Entry)))
+			return;
+
+		this.friends.Add(friend);
+		return;
+	}
+
+	public void RemoveFriend(RolodexFriend friend)
+	{
+		if (!Friends.Contains(friend))
+			return;
+
+		this.friends.Remove(friend);
+	}
+
+	public bool HasCloseFriends =>
+		CloseFriends.Any();
+
+	public bool HasRivals =>
+		Rivals.Any();
 }
