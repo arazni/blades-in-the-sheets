@@ -5,14 +5,8 @@ public interface IEnvironmentInfo
 	string Revision { get; }
 	string Service { get; }
 }
-public class EnvironmentInfo : IEnvironmentInfo
+public class EnvironmentInfo(string service, string revision) : IEnvironmentInfo
 {
-	public EnvironmentInfo(string service, string revision)
-	{
-		Revision = revision;
-		Service = service;
-	}
-
-	public string Revision { get; private set; }
-	public string Service { get; private set; }
+	public string Revision { get; private set; } = revision;
+	public string Service { get; private set; } = service;
 }

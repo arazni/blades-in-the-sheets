@@ -1,43 +1,31 @@
 ﻿@using static UI.Constants;
+@using Microsoft.FluentUI.AspNetCore.Components
 @inherits LayoutComponentBase
 
-<MudThemeProvider IsDarkMode="true" Theme="BladesTheme"/>
-
-<MudLayout>
-	<MudAppBar Elevation="1">
-		<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" Title="App Bar Toggle" />
-		<MudText Typo="Typo.h5" Class="ml-3">Blades in the Sheets</MudText>
-		<MudImage Src="icon-192.png" ObjectFit="ObjectFit.ScaleDown" Alt="Icon of a blade piercing a character sheet" Style="@IconStyle" />
-	</MudAppBar>
-	<MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-		<MudText Style="display: flex; justify-content: right; margin-right: 10px" Typo="Typo.caption">Version 10.2</MudText>
-		<MudNavLink Href="">Home</MudNavLink>
-		<MudNavLink Href="@Paths.Tips">Tip Jar</MudNavLink>
-	</MudDrawer>
-	<MudMainContent>
+<FluentMainLayout NavMenuTitle="Navigation Menu">
+	<Header>
+		<h1 class="ml-3">Blades in the Sheets</h1>
+		<img src="icon-192.png" Alt="Icon of a blade piercing a character sheet" style="@IconStyle" />
+	</Header>
+	<Body>
 		@Body
-	</MudMainContent>
-</MudLayout>
+	</Body>
+	<NavMenuContent>
+		<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.Home())" Href="" Text="Home">Home</FluentNavLink>
+		<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.DrinkCoffee())" Href="@Paths.Tips">Tip Jar</FluentNavLink>
+	</NavMenuContent>
+</FluentMainLayout>
 
 @code
 {
-	bool _drawerOpen = false;
-
-	void DrawerToggle()
-	{
-		_drawerOpen = !_drawerOpen;
-	}
-
-	MudTheme BladesTheme { get; } = InitializeMudTheme();
-
-	private static MudTheme InitializeMudTheme()
+	@* 	private static MudTheme InitializeMudTheme()
 	{
 		var theme = new MudTheme();
 		theme.PaletteDark.Primary = Colors.DeepOrange.Lighten2;
 		theme.PaletteDark.Secondary = Colors.Red.Accent4;
 		theme.PaletteDark.Tertiary = Colors.DeepPurple.Accent2;
 		return theme;
-	}
+	} *@
 
-	private const string IconStyle = "margin-right: 10px; margin-left: auto; height: 80%";
+	private const string IconStyle = "object-fit: scale-down; margin-right: 10px; margin-left: auto; height: 80%";
 }
