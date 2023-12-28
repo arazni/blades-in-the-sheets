@@ -1,0 +1,12 @@
+﻿h2 {
+	margin: 20px 0;
+}
+
+::deep .character-link {
+	font-size: 20px;
+	padding: 6px 0;
+}
+
+::deep .button {
+	width: 250px;
+}

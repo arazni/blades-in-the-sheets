@@ -17,155 +17,50 @@
 @inject ILoader Loader
 @inject NavigationManager Navigator
 
-<FluentStack Orientation="Orientation.Vertical">
-	<h2 Style="margin: 20px 0;">@HeaderText</h2>
-	@foreach (var character in Characters)
-	{
-		<FluentCard>
-			<FluentGrid Justify="JustifyContent.SpaceAround">
-				<FluentGridItem xs="9">
-					<FluentAnchor Appearance="Appearance.Hypertext" Href="@character.Link">@character.Alias the @character.Playbook</FluentAnchor>
-					</FluentGridItem>
-					<FluentGridItem xs="3">
-						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Download(character)" Style="@DownloadModeStyle" aria-label="@DownloadCharacterLabel(character.Name)">Export</FluentButton>
-						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Delete(character.Id)" Style="@DeleteModeStyle" aria-label="@DeleteCharacterLabel(character.Name)" Color="Color.Error">Delete</FluentButton>
-					</FluentGridItem>
-				</FluentGrid>
+<div>
+	<FluentStack Orientation="Orientation.Vertical">
+		<h2>@HeaderText</h2>
+		@foreach (var character in Characters)
+		{
+			<FluentCard>
+				<div class="card-header">
+					<div class="card-header-left">
+						<FluentAnchor Appearance="Appearance.Hypertext" Href="@character.Link" Class="character-link">@character.Alias the @character.Playbook</FluentAnchor>
+					</div>
+					<div class="card-header-right">
+						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Download(character)" Class="@DownloadModeClass" aria-label="@DownloadCharacterLabel(character.Name)">Export</FluentButton>
+						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Delete(character.Id)" Class="@DeleteModeClass" aria-label="@DeleteCharacterLabel(character.Name)" Color="Color.Error">Delete</FluentButton>
+					</div>
+				</div>
 				<FluentStack Orientation="Orientation.Vertical">
 					<p>@Blurb(character)</p>
+				</FluentStack>
+			</FluentCard>
+		}
+		<FluentCard>
+			<div class="card-header">
+				<div class="card-header-left">
+					<h3>Roster</h3>
+				</div>
+				<div class="card-header-right">
+					@if (Characters.Any())
+					{
+						<FluentButton Title="Enable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownload())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = true" Class="@NotDownloadModeClass"></FluentButton>
+						<FluentButton Title="Disable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownloadOff())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = false" Class="@DownloadModeClass"></FluentButton>
+						<FluentButton Title="Enable Delete Mode" IconStart="@(new Icons.Filled.Size20.Delete())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = true" Class="@NotDeleteModeClass"></FluentButton>
+						<FluentButton Title="Disable Delete Mode" IconStart="@(new Icons.Filled.Size20.DeleteOff())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = false" Class="@DeleteModeClass"></FluentButton>
+					}
+				</div>
+			</div>
+			<FluentStack Orientation="Orientation.Vertical">
+				<FluentSelect TOption="GameFile" Items="AvailableGameFiles" @bind-SelectedOption="@SelectedGameFile" OptionText="gameFile => gameFile.Name" Label="Select a Game"></FluentSelect>
+				<FluentAnchor Href="@New()" Appearance="Appearance.Accent" Class="button">
+					Create a Character
+					<FluentIcon Value="@(new Icons.Regular.Size20.DocumentAdd())" Slot="start" Color="@Microsoft.FluentUI.AspNetCore.Components.Color.Fill"/>
+				</FluentAnchor>
+				<FluentInputFile AnchorId="ImportCharacters" DragDropZoneVisible="false" Mode="InputFileMode.Stream" Multiple="true" Accept=".json" OnFileUploaded="@UploadFiles" OnCompleted="@UploadComplete" />
+				<FluentButton Id="ImportCharacters" Appearance="Appearance.Accent" IconStart="@(new Icons.Regular.Size20.ArrowUpload())" Class="button">Import Characters</FluentButton>
 			</FluentStack>
 		</FluentCard>
-	}
-	<FluentCard>
-		<FluentGrid Justify="JustifyContent.SpaceAround">
-			<FluentGridItem xs="9">
-				<h6>Roster</h6>
-			</FluentGridItem>
-			<FluentGridItem xs="3">
-				@if (Characters.Any())
-				{
-					<FluentButton Title="Enable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownload())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = true" Style="@NotDownloadModeStyle"></FluentButton>
-					<FluentButton Title="Disable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownloadOff())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = false" Style="@DownloadModeStyle"></FluentButton>
-					<FluentButton Title="Enable Delete Mode" IconStart="@(new Icons.Filled.Size20.Delete())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = true" Style="@NotDeleteModeStyle"></FluentButton>
-					<FluentButton Title="Disable Delete Mode" IconStart="@(new Icons.Filled.Size20.DeleteOff())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = false" Style="@DeleteModeStyle"></FluentButton>
-				}
-			</FluentGridItem>
-		</FluentGrid>
-		<FluentStack Orientation="Orientation.Vertical">
-			<FluentSelect TOption="GameFile" Items="AvailableGameFiles" @bind-SelectedOption="@SelectedGameFile" OptionText="gameFile => gameFile.Name" Label="Select a Game" Style="width: 215px;"></FluentSelect>
-			<FluentAnchor Href="@New()" Appearance="Appearance.Accent" IconStart="@(new Icons.Regular.Size20.Add())" Style="width: 215px;">Create a Character</FluentAnchor>
-			<FluentInputFile AnchorId="ImportCharacters" DragDropZoneVisible="false" Mode="InputFileMode.Stream" Multiple="true" Accept=".json" OnFileUploaded="@UploadFiles" OnCompleted="@UploadComplete" />
-			<FluentButton Id="ImportCharacters" Appearance="Appearance.Accent" IconStart="@(new Icons.Regular.Size20.ArrowUpload())" Style="width: 215px;">Import Characters</FluentButton>
-		</FluentStack>
-	</FluentCard>
-</FluentStack>
-
-@code
-{
-	IJSObjectReference? module;
-
-	IReadOnlyCollection<VIndexCharacter> Characters { get; set; } = Array.Empty<VIndexCharacter>();
-
-	GameFile[] AvailableGameFiles { get; set; } = Array.Empty<GameFile>();
-
-	GameFile SelectedGameFile { get; set; } = new(Games.BladesInTheDark, Games.BladesInTheDarkStem);
-
-	IReadOnlyDictionary<string, GameSetting> GameSettingsByName = ImmutableDictionary<string, GameSetting>.Empty;
-
-	protected override async Task OnInitializedAsync()
-	{
-		await LoadCharacters();
-
-		AvailableGameFiles = await Loader.LoadGameFiles();
-
-		var gameSettingLoads = AvailableGameFiles.Select(gameFile => Loader.LoadSetting(gameFile));
-
-		var gameSettings = await Task.WhenAll(gameSettingLoads);
-
-		GameSettingsByName = gameSettings.ToImmutableDictionary
-		(
-			gameSetting => gameSetting.Name,
-			gameSetting => gameSetting
-		);
-
-		await base.OnInitializedAsync();
-	}
-
-	async Task LoadCharacters()
-	{
-		var characters = await Storage.LoadAll();
-
-		if (!characters.Any())
-			return;
-
-		Characters = characters.Select(character => new VIndexCharacter(character))
-			.OrderBy(c => (c.GameName, c.Alias))
-			.ToArray();
-	}
-
-	string HeaderText => Characters.Any() ? "Your scoundrels await:"
-		: "A Blades in the Dark Character Sheet App";
-
-	bool IsDeleteMode { get; set; }
-
-	bool IsDownloadMode { get; set; }
-
-	string DownloadModeStyle => UI.Constants.Classes.Display(IsDownloadMode);
-
-	string NotDownloadModeStyle => UI.Constants.Classes.Display(!IsDownloadMode);
-
-	string DeleteModeStyle => UI.Constants.Classes.Display(IsDeleteMode);
-
-	string NotDeleteModeStyle => UI.Constants.Classes.Display(!IsDeleteMode);
-
-	async Task Delete(string id)
-	{
-		await Storage.Delete(id);
-		await LoadCharacters();
-	}
-
-	async Task Download(VIndexCharacter character)
-	{
-		var json = await Storage.GetFile(character.Id);
-		var bytes = Encoding.Unicode.GetBytes(json);
-		var memory = new MemoryStream(bytes);
-		using var streamRef = new DotNetStreamReference(memory);
-
-		await module!.InvokeVoidAsync("downloadFileFromStream", $"{character.Name} BitS.json", streamRef);
-	}
-
-	async Task UploadFiles(FluentInputFileEventArgs fileEvent)
-	{
-		var buffer = new byte[fileEvent.Size];
-		await using var fs = fileEvent.Stream;
-		await fs!.ReadAsync(buffer);
-		var json = Encoding.Unicode.GetString(buffer);
-		await Storage.PutFile(json);
-	}
-
-	async Task UploadComplete()
-	{
-		await LoadCharacters();
-	}
-
-	string New() => SelectedGameFile == null ? ""
-		: Paths.NewCharacter(SelectedGameFile.Stem);
-
-	string Blurb(VIndexCharacter vCharacter)
-	{
-		if (!GameSettingsByName.TryGetValue(vCharacter.GameName, out var gameSetting))
-			return vCharacter.Blurb(EmptyGameSetting.Game());
-
-		return vCharacter.Blurb(gameSetting);
-	}
-
-	string DownloadModeLabel =>
-		IsDownloadMode ? "Disable download mode"
-		: "Enable download mode";
-
-	static string DownloadCharacterLabel(string characterName) =>
-		$"Export {characterName}";
-
-	static string DeleteCharacterLabel(string characterName) =>
-		$"Delete {characterName}";
-}
+	</FluentStack>
+</div>

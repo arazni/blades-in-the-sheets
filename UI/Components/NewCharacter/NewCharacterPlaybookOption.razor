@@ -1,36 +1,23 @@
-﻿@using Models.Characters
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+@using Models.Characters
 @using Models.Settings
 @using Persistence.Json
 @using UI.Services
 @using static UI.Constants
+@using Orientation = Microsoft.FluentUI.AspNetCore.Components.Orientation
 @inject NavigationManager Navigator
 
-<MudCard Outlined="true" Class="mx-4 my-1">
-	<MudCardHeader >
-		<MudText Typo="Typo.h4">@PlaybookName</MudText>
-	</MudCardHeader>
-	<MudCardContent>
-		<MudText Typo="Typo.body1" Class="my-2">@Hook[..(Hook.IndexOf(".")+1)]</MudText>
-		<MudText Typo="Typo.body1" Class="my-2">@Hook[(Hook.IndexOf(".")+1)..]</MudText>
-	</MudCardContent>
-	<MudCardActions>
-		<MudButton Color="Color.Primary" FullWidth="true" OnClick="CreateCharacter">Create @PlaybookName</MudButton>
-	</MudCardActions>
-</MudCard>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public string PlaybookName { get; set; } = string.Empty;
-
-	[Parameter, EditorRequired]
-	public string GameFileStem { get; set; } = string.Empty;
-
-	[Parameter, EditorRequired]
-	public string Hook { get; set; } = string.Empty;
-
-	public void CreateCharacter()
-	{
-		Navigator.NavigateTo(Paths.NewCharacter(GameFileStem, PlaybookName));
-	}
-}
+<FluentCard Width="max(min(300px, 100%), 500px)">
+	<div class="card-header">
+		<div class="card-header-left">
+			<h4>@PlaybookName</h4>
+		</div>
+	</div>
+	<FluentStack Orientation="Orientation.Vertical">
+		<p>@Hook[..(Hook.IndexOf(".") + 1)]</p>
+		<p>@Hook[(Hook.IndexOf(".") + 1)..]</p>
+	</FluentStack>
+	<div>
+		<FluentAnchor Appearance="Appearance.Accent" Href="@Path" Class="button-link">Create @PlaybookName</FluentAnchor>
+	</div>
+</FluentCard>

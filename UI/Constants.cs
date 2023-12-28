@@ -6,9 +6,9 @@ public static class Constants
 {
 	public static class Classes
 	{
-		public static string DisplayNone(bool isDisplayNone) => isDisplayNone ? "display: none;" : string.Empty;
+		public static string DisplayNone(bool isDisplayNone) => isDisplayNone ? "dn" : string.Empty;
 
-		public static string Display(bool isDisplay) => isDisplay ? string.Empty : "display: none;";
+		public static string Display(bool isDisplay) => isDisplay ? string.Empty : "dn";
 	}
 
 	public static class Paths

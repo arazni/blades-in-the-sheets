@@ -79,3 +79,14 @@ main {
         padding-right: 1.5rem !important;
     }
 }
+
+.layout-header-icon {
+	object-fit: scale-down;
+	margin-right: 10px;
+	margin-left: auto;
+	height: 80%
+}
+
+::deep .body-content {
+	overflow-y: hidden;
+}

@@ -2,19 +2,21 @@
 @using Microsoft.FluentUI.AspNetCore.Components
 @inherits LayoutComponentBase
 
-<FluentMainLayout NavMenuTitle="Navigation Menu">
-	<Header>
-		<h1 class="ml-3">Blades in the Sheets</h1>
-		<img src="icon-192.png" Alt="Icon of a blade piercing a character sheet" style="@IconStyle" />
-	</Header>
-	<Body>
-		@Body
-	</Body>
-	<NavMenuContent>
-		<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.Home())" Href="" Text="Home">Home</FluentNavLink>
-		<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.DrinkCoffee())" Href="@Paths.Tips">Tip Jar</FluentNavLink>
-	</NavMenuContent>
-</FluentMainLayout>
+<div>
+	<FluentMainLayout NavMenuTitle="Navigation Menu">
+		<Header>
+			<h1 class="ml-3">Blades in the Sheets</h1>
+			<img src="icon-192.png" Alt="Icon of a blade piercing a character sheet" class="layout-header-icon" />
+		</Header>
+		<Body>
+			@Body
+		</Body>
+		<NavMenuContent>
+			<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.Home())" Href="" Text="Home">Home</FluentNavLink>
+			<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.DrinkCoffee())" Href="@Paths.Tips">Tip Jar</FluentNavLink>
+		</NavMenuContent>
+	</FluentMainLayout>
+</div>
 
 @code
 {
@@ -26,6 +28,4 @@
 		theme.PaletteDark.Tertiary = Colors.DeepPurple.Accent2;
 		return theme;
 	} *@
-
-	private const string IconStyle = "object-fit: scale-down; margin-right: 10px; margin-left: auto; height: 80%";
 }
