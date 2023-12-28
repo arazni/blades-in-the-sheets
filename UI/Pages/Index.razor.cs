@@ -12,6 +12,8 @@ namespace UI.Pages;
 
 public partial class Index
 {
+	IJSObjectReference? module;
+
 	IReadOnlyCollection<VIndexCharacter> Characters { get; set; } = Array.Empty<VIndexCharacter>();
 
 	GameFile[] AvailableGameFiles { get; set; } = [];
@@ -19,6 +21,14 @@ public partial class Index
 	GameFile SelectedGameFile { get; set; } = new(Games.BladesInTheDark, Games.BladesInTheDarkStem);
 
 	ImmutableDictionary<string, GameSetting> GameSettingsByName = ImmutableDictionary<string, GameSetting>.Empty;
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+			module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/Index.razor.js");
+
+		await base.OnAfterRenderAsync(firstRender);
+	}
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -79,7 +89,7 @@ public partial class Index
 		var memory = new MemoryStream(bytes);
 		using var streamRef = new DotNetStreamReference(memory);
 
-		// await module!.InvokeVoidAsync("downloadFileFromStream", $"{character.Name} BitS.json", streamRef);
+		await module!.InvokeVoidAsync("downloadFileFromStream", $"{character.Name} BitS.json", streamRef);
 	}
 
 	async Task UploadFiles(FluentInputFileEventArgs fileEvent)
