@@ -79,3 +79,39 @@ a, .btn-link {
 .dn {
 	display: none;
 }
+
+.common-card-style {
+	width: max(min(500px, 100%), 300px);
+	margin: 5px;
+}
+
+.vertical-stack {
+	gap: 10px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.horizontal-stack {
+	gap: 10px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.aic {
+	align-items: center;
+}
+
+.aib {
+	align-items: baseline;
+}

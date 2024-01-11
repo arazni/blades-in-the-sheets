@@ -7,17 +7,15 @@
 @using Orientation = Microsoft.FluentUI.AspNetCore.Components.Orientation
 @inject NavigationManager Navigator
 
-<FluentCard Width="max(min(300px, 100%), 500px)">
+<FluentCard Class="common-card-style">
 	<div class="card-header">
 		<div class="card-header-left">
 			<h4>@PlaybookName</h4>
 		</div>
 	</div>
-	<FluentStack Orientation="Orientation.Vertical">
+	<div class="vertical-stack">
 		<p>@Hook[..(Hook.IndexOf(".") + 1)]</p>
 		<p>@Hook[(Hook.IndexOf(".") + 1)..]</p>
-	</FluentStack>
-	<div>
 		<FluentAnchor Appearance="Appearance.Accent" Href="@Path" Class="button-link">Create @PlaybookName</FluentAnchor>
 	</div>
 </FluentCard>

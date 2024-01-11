@@ -1,96 +1,18 @@
 ﻿@using Models.Characters
 @using Models.Common
-@using Models.Settings;
-@using Persistence.Json
-@inject ILoader Loader
+@using Models.Settings
 
-<MudCard Outlined="true">
-	<MudCardHeader>
-		<MudText Typo="Typo.h6">Choose a close friend and a rival from among your contacts</MudText>
-	</MudCardHeader>
-	<MudCardContent>
-		<MudStack>
-			<MudSelect T="RolodexFriend" Label="Close Friend" Value="CloseFriend" ValueChanged="OnCloseFriendChanged" id="select-close-friend">
-				@foreach (var friend in AvailableCloseFriends)
-				{
-					<MudSelectItem T="RolodexFriend" Value="friend">
-						<MudText>@friend.Entry</MudText>
-					</MudSelectItem>
-				}
-			</MudSelect>
-			<MudSelect T="RolodexFriend" Label="Rival" Value="Rival" ValueChanged="OnRivalChanged" id="select-rival">
-				@foreach (var friend in AvailableRivals)
-				{
-					<MudSelectItem T="RolodexFriend" Value="friend">
-						<MudText>@friend.Entry</MudText>
-					</MudSelectItem>
-				}
-			</MudSelect>
-			<MudText>Other friends:</MudText>
-			@foreach (var friend in RemainingFriends)
-			{
-				<MudText>@friend.Entry</MudText>
-			}
-		</MudStack>
-	</MudCardContent>
-</MudCard>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public RolodexCreation Rolodex { get; set; } = new();
-			
-	[Parameter, EditorRequired]
-	public string PlaybookName { get; set; } = string.Empty;
-
-	[Parameter, EditorRequired]
-	public RolodexSetting RolodexSetting { get; set; } = EmptyGameSetting.Rolodex();
-
-	private RolodexFriend? CloseFriend { get; set; }
-
-	private RolodexFriend? Rival { get; set; }
-
-	private RolodexFriend[] AvailableCloseFriends =>
-		Rolodex.Friends.Where(f => f.Closeness != FriendCloseness.Rival)
-			.ToArray();
-
-	private RolodexFriend[] AvailableRivals =>
-		Rolodex.Friends.Where(f => f.Closeness != FriendCloseness.CloseFriend)
-			.ToArray();
-
-	private RolodexFriend[] RemainingFriends =>
-		Rolodex.Friends.Where(f => !f.Closeness.In(FriendCloseness.Rival, FriendCloseness.CloseFriend))
-			.ToArray();
-
-	protected override void OnParametersSet()
-	{
-		if (!PlaybookName.HasInk())
-			return;
-
-		if (Rolodex.Friends.Any())
+<FluentCard AreaRestricted="false" Class="common-card-style">
+	<div class="card-header">
+		<h4>Choose a close friend and a rival from among your contacts</h4>
+	</div>
+	<div class="vertical-stack">
+		<FluentSelect Label="Close Friend" Items="AvailableFriendOptions" TOption="Option<RolodexFriend>" OptionDisabled="i => i.Value?.Closeness == FriendCloseness.Rival" OptionSelected="i => i.Value == null" OptionText="i => i.Value?.Entry ?? string.Empty" SelectedOptionChanged="OnCloseFriendChanged" Id="select-close-friend" />
+		<FluentSelect Label="Rival" Items="AvailableFriendOptions" TOption="Option<RolodexFriend>" OptionDisabled="i => i.Value?.Closeness == FriendCloseness.CloseFriend" OptionSelected="i => i.Value == null" OptionText="i => i.Value?.Entry ?? string.Empty" SelectedOptionChanged="OnRivalChanged" Id="select-rival" />
+		<p>Other friends:</p>
+		@foreach (var friend in RemainingFriends)
 		{
-			CloseFriend = Rolodex.CloseFriend;
-			Rival = Rolodex.Rival;
-			return;
+			<p>@friend.Entry</p>
 		}
-
-		var friends = RolodexSetting.Friends.Select(f => new RolodexFriend(f))
-			.ToArray();
-
-		Rolodex.ReplaceFriends(friends);
-
-		base.OnParametersSet();
-	}
-
-	private void OnCloseFriendChanged(RolodexFriend friend)
-	{
-		Rolodex.AssignOnlyCloseFriend(friend);
-		CloseFriend = Rolodex.CloseFriend;
-	}
-
-	private void OnRivalChanged(RolodexFriend rival)
-	{
-		Rolodex.AssignOnlyRival(rival);
-		Rival = Rolodex.Rival;
-	}
-}
+	</div>
+</FluentCard>

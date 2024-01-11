@@ -1,4 +1,4 @@
-@using Models.Characters
+@* @using Models.Characters
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Talents">
 	<CascadingValue Name="IsFixMode" Value="@IsFixMode">
@@ -19,4 +19,4 @@
 	public Talent Talent { get; set; } = Talent.Empty();
 
 	public bool IsFixMode { get; set; } = false;
-}
+} *@

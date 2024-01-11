@@ -1,21 +1,12 @@
 @using Models.Characters
 
-
-<MudCard Outlined="true">
-	<MudCardHeader>
-		<MudText>Finalize your identity</MudText>
-	</MudCardHeader>
-	<MudCardContent>
-		<MudStack>
-			<MudTextField @bind-Value="Dossier.Name" Label="Name" Placeholder="Noggs Kessarin" id="dossier-name" />
-			<MudTextField @bind-Value="Dossier.Alias" Label="Alias" Placeholder="Thistle" id="dossier-alias" />
-			<MudTextField @bind-Value="Dossier.Look" Label="Look" Placeholder="Ambiguously gendered, brooding, and weathered, in a signature heavy jacket and work boots" id="dossier-look" />
-		</MudStack>
-	</MudCardContent>
-</MudCard>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public Dossier Dossier { get; set; } = new();
-}
+<FluentCard Class="common-card-style">
+	<div class="card-header">
+		<h3>Finalize your identity</h3>
+	</div>
+	<div class="vertical-stack">
+		<FluentTextField @bind-Value="Dossier.Name" Label="Name" Placeholder="Noggs Kessarin" id="dossier-name" />
+		<FluentTextField @bind-Value="Dossier.Alias" Label="Alias" Placeholder="Thistle" id="dossier-alias" />
+		<FluentTextField @bind-Value="Dossier.Look" Label="Look" Placeholder="Ambiguously gendered, brooding, and weathered, in a signature heavy jacket and work boots" id="dossier-look" />
+	</div>
+</FluentCard>

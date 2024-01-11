@@ -5,20 +5,17 @@
 @using Persistence.Json
 @using UI.Components
 @using UI.Components.NewCharacter
-@using Orientation = Microsoft.FluentUI.AspNetCore.Components.Orientation
-@using HorizontalAlignment = Microsoft.FluentUI.AspNetCore.Components.HorizontalAlignment
-@using Justify = Microsoft.FluentUI.AspNetCore.Components.JustifyContent
 @inject ILoader Loader
 
-<FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
+<div class="vertical-stack aic">
 	<h2>@GameName</h2>
 	<h3>Choose a playbook.</h3>
 	<FluentGrid>
 		@foreach (var (book, hook) in options)
 		{
-			<FluentGridItem xs="12" Justify="Justify.Center">
+			<FluentGridItem xs="12" Justify="JustifyContent.Center">
 				<NewCharacterPlaybookOption GameFileStem="@GameFileStem" PlaybookName="@book" Hook="@hook" />
 			</FluentGridItem>
 		}
 	</FluentGrid>
-</FluentStack>
+</div>

@@ -16,6 +16,18 @@ public class RolodexCreation
 	public RolodexFriend? Rival =>
 		Friends.FirstOrDefault(f => f.Closeness == FriendCloseness.Rival);
 
+	public void RemoveCloseFriends()
+	{
+		foreach (var friend in Friends.Where(f => f.Closeness == FriendCloseness.CloseFriend))
+			friend.Closeness = FriendCloseness.Friend;
+	}
+
+	public void RemoveRivals()
+	{
+		foreach (var friend in Friends.Where(f => f.Closeness == FriendCloseness.Rival))
+			friend.Closeness = FriendCloseness.Friend;
+	}
+
 	public void AssignOnlyCloseFriend(RolodexFriend closeFriend)
 	{
 		if (CloseFriend != null)
@@ -33,7 +45,7 @@ public class RolodexCreation
 	}
 
 	public void ReplaceFriends(IReadOnlyCollection<RolodexFriend> friends) =>
-		this.friends = friends.ToList();
+		this.friends = [.. friends];
 
 	public bool IsMissingCloseFriend =>
 		CloseFriend == null;

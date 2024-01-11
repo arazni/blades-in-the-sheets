@@ -66,20 +66,13 @@ public class V4ActionDots
 	public static V4ActionDots Empty() => new();
 }
 
-public class VTalentAttribute
+public class VTalentAttribute(TalentAttribute attribute, string name, IReadOnlyCollection<VTalentAction> actions)
 {
-	public VTalentAttribute(TalentAttribute attribute, string name, IReadOnlyCollection<VTalentAction> actions)
-	{
-		Attribute = attribute;
-		Name = name;
-		Actions = actions;
-	}
+	public TalentAttribute Attribute { get; } = attribute;
 
-	public TalentAttribute Attribute { get; }
+	public string Name { get; } = name;
 
-	public string Name { get; }
-
-	public IReadOnlyCollection<VTalentAction> Actions { get; }
+	public IReadOnlyCollection<VTalentAction> Actions { get; } = actions;
 }
 
 public class VTalentAction

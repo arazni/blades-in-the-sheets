@@ -24,5 +24,5 @@ public partial class NewCharacter
 		await base.OnParametersSetAsync();
 	}
 
-	private (string, string)[] options = Array.Empty<(string, string)>();
+	private (string, string)[] options = [];
 }

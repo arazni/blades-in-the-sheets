@@ -3,14 +3,9 @@ using System.ComponentModel;
 
 namespace Models.Characters;
 
-public class RolodexFriend
+public class RolodexFriend(string entry)
 {
-	private readonly Ink entry;
-
-	public RolodexFriend(string entry)
-	{
-		this.entry = new(entry);
-	}
+	private readonly Ink entry = new(entry);
 
 	public string Entry
 	{

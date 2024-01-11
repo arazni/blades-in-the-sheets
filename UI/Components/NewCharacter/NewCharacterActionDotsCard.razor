@@ -1,75 +1,49 @@
 ﻿@using Models.Characters
-@using Models.Settings;
+@using Models.Settings
 @using UI.Conveniences
+@using static UI.Constants
 
-<MudCard Outlined="true">
-	<MudCardHeader>
-		<MudText Typo="Typo.h6">Assign 4 action dots (@ViewModel.RemainingDots left)</MudText>
-	</MudCardHeader>
-	<MudCardContent>
-		<MudStack>
-			<MudExpansionPanels>
-				<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's heritage.">
-					<MudText>@ViewModel.Heritage: @ViewModel.HeritageDescription</MudText>
-				</MudExpansionPanel>
-				<MudExpansionPanel Text="Put one dot in any action that you feel reflects your character's background.">
-					<MudText>@ViewModel.Background: @ViewModel.BackgroundDescription</MudText>
-				</MudExpansionPanel>
-				<MudExpansionPanel Text="Assign two more dots as you please. Some are already assigned according to your playbook.">
-					<MudText>Each action dot represents your skill in that action. Mechanically, this translates to one die to roll per action dot when using that action.</MudText>
-					<MudText>The first action dot in each skill contributes to your attribute. An attribute is often used in Resistance rolls to resist negative consequences.</MudText>
-				</MudExpansionPanel>
-			</MudExpansionPanels>
-			@foreach (var talentAttribute in ViewModel.Attributes)
+<FluentCard AreaRestricted="false" Class="common-card-style">
+	<div class="card-header">
+		<h4>Assign 4 action dots (@ViewModel.RemainingDots left)</h4>
+	</div>
+	<div class="vertical-stack">
+		<FluentAccordion>
+			<FluentAccordionItem Heading="Put one dot in any action that you feel reflects your character's heritage." HeadingLevel="6">
+				<p>@ViewModel.Heritage: @ViewModel.HeritageDescription</p>
+			</FluentAccordionItem>
+			<FluentAccordionItem Heading="Put one dot in any action that you feel reflects your character's background." HeadingLevel="6">
+				<p>@ViewModel.Background: @ViewModel.BackgroundDescription</p>
+			</FluentAccordionItem>
+			<FluentAccordionItem Heading="Assign two more dots as you please. Some are already assigned according to your playbook." HeadingLevel="6">
+				<p>Each action dot represents your skill in that action. Mechanically, this translates to one die to roll per action dot when using that action.</p>
+				<p>The first action dot in each skill contributes to your attribute. An attribute is often used in Resistance rolls to resist negative consequences.</p>
+			</FluentAccordionItem>
+		</FluentAccordion>
+		@foreach (var talentAttribute in ViewModel.Attributes)
+		{
+			<h6>@talentAttribute.Name: @talentAttribute.Attribute.Rating</h6>
+			@foreach (var action in talentAttribute.Actions)
 			{
-				<MudText>@talentAttribute.Name: @talentAttribute.Attribute.Rating</MudText>
-				<MudExpansionPanels>
-				@foreach (var action in talentAttribute.Actions)
-				{
-					<MudExpansionPanel>
-						<TitleContent>
-							<MudStack Row="true" AlignItems="AlignItems.Center">
-								<MudToggleIconButton Toggled="@action.IsDotOneFilled" ToggledChanged="@action.ToggleDotOne"
-									Disabled="!ViewModel.IsDotOneEnabled(action)"
-									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle"
-									aria-label="@DotLabel(action.Name, 1)" />
-								<MudDivider Vertical="true" FlexItem="true" />
-								<MudToggleIconButton Toggled="@action.IsDotTwoFilled" ToggledChanged="@action.ToggleDotTwo"
-									Disabled="!ViewModel.IsDotTwoEnabled(action)"
-									Icon="@Icons.Material.Filled.Circle" ToggledIcon="@Icons.Material.Filled.CheckCircle" 
-									aria-label="@DotLabel(action.Name, 2)" />
-								<MudText>@action.Name</MudText>
-							</MudStack>
-						</TitleContent>
-						<ChildContent>
-							<MudText>@action.ShortDescription</MudText>
-							<MudText>@action.LongDescription</MudText>
-						</ChildContent>
-					</MudExpansionPanel>
-				}
-				</MudExpansionPanels>
+				<div class="horizontal-stack aib">
+					<div class="row">
+						<FluentButton Title="@DotLabel(action.Name, 1)" IconStart="new Icons.Regular.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotOne(true)" Disabled="!ViewModel.IsDotOneEnabled(action)" Class="@Classes.DisplayNone(action.IsDotOneFilled)" />
+						<FluentButton Title="@DotLabel(action.Name, 1)" IconStart="new Icons.Filled.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotOne(false)" Disabled="!ViewModel.IsDotOneEnabled(action)" Class="@Classes.Display(action.IsDotOneFilled)" />
+						<FluentButton Title="@DotLabel(action.Name, 2)" IconStart="new Icons.Regular.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotTwo(true)" Disabled="!ViewModel.IsDotTwoEnabled(action)" Class="@Classes.DisplayNone(action.IsDotTwoFilled)" />
+						<FluentButton Title="@DotLabel(action.Name, 2)" IconStart="new Icons.Filled.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotTwo(false)" Disabled="!ViewModel.IsDotTwoEnabled(action)" Class="@Classes.Display(action.IsDotTwoFilled)" />
+					</div>
+					<FluentAccordion Class="w100">
+						<FluentAccordionItem Heading="@action.Name" HeadingLevel="6">
+							<div class="vertical-stack">
+								<p>@action.ShortDescription</p>
+								<p>@action.LongDescription</p>
+							</div>
+						</FluentAccordionItem>
+					</FluentAccordion>
+				</div>
 			}
-		</MudStack>
-	</MudCardContent>
-</MudCard>
+		}
+	</div>
+</FluentCard>
 
-@code
-{
-	[Parameter, EditorRequired]
-	public Character Character { get; set; } = Character.Empty();
 
-	[Parameter, EditorRequired]
-	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
-
-	private V4ActionDots ViewModel { get; set; } = V4ActionDots.Empty();
-
-	protected override void OnParametersSet()
-	{
-		ViewModel = new(Character, GameSetting, Character.Playbook.Name);
-
-		base.OnParametersSet();
-	}
-
-	static string DotLabel(string actionName, int dot) =>
-		$"{actionName} dot {dot}";
-}

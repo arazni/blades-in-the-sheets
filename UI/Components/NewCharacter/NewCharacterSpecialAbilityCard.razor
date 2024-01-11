@@ -1,107 +1,31 @@
 ﻿@using Models.Characters
 @using Models.Settings
-@using Persistence.Json
-@inject ILoader Loader
+@using UI.Services
+@implements IDisposable
+@inject CreationJank CreationJank
 
-<MudCard Outlined="true">
-	<MudCardHeader>
-		<MudText Typo="Typo.h6">Choose a special ability</MudText>
-	</MudCardHeader>
-	<MudCardContent>
-		<MudStack>
-			<MudStack>
-				<MudText>If you're unsure which one to pick, the first is considered a good default choice.</MudText>
-				<MudSelect T="PlaybookSpecialAbility" Value="ChosenAbility" ValueChanged="OnChosenAbilityChanged" Label="Special Ability" ToStringFunc="a => a?.Name" id="select-playbook-ability">
-					@foreach (var ability in AvailableAbilities)
-					{
-						<MudSelectItem T="PlaybookSpecialAbility" Value="ability">
-							<MudText>@DisplayText(ability)</MudText>
-							<MudText>@ability.Description</MudText>
-						</MudSelectItem>
-					}
-				</MudSelect>
-			</MudStack>
-			@if (HasStartingAbilities)
-			{
-				<MudStack>
-					<MudText>@GameSetting.Name also has unique starting abilities.</MudText>
-					<MudSelect T="PlaybookSpecialAbility" Value="ChosenStartingAbility" ValueChanged="OnChosenStartingAbilityChanged" Label="Starting Ability" ToStringFunc="a => a?.Name" id="select-playbook-starting-ability">
-						@foreach (var ability in AvailableStartingAbilities)
-						{
-							<MudSelectItem T="PlaybookSpecialAbility" Value="ability">
-								<MudText>@DisplayText(ability)</MudText>
-								<MudText>@ability.Description</MudText>
-							</MudSelectItem>
-						}
-					</MudSelect>
-				</MudStack>
-			}
-			@foreach (var ability in Playbook.Abilities)
-			{
-				<MudStack>
-					<MudText>@ability.Name</MudText>
-					<MudText>@ability.Description</MudText>
-				</MudStack>
-			}
-		</MudStack>
-	</MudCardContent>
-</MudCard>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public Character Character { get; set; } = Character.Empty();
-
-	[Parameter, EditorRequired]
-	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
-
-	Playbook Playbook => Character.Playbook;
-
-	PlaybookSpecialAbility[] AvailableAbilities { get; set; } = Array.Empty<PlaybookSpecialAbility>();
-
-	PlaybookSpecialAbility? ChosenAbility { get; set; }
-
-	PlaybookSpecialAbility[] AvailableStartingAbilities =>
-		GameSetting.GetAvailableStartingAbilities(Character.Dossier.Heritage.Name, Character.Playbook.Name);
-
-	PlaybookSpecialAbility? ChosenStartingAbility { get; set; }
-
-	bool HasStartingAbilities => AvailableStartingAbilities.Any();
-
-	private void OnChosenAbilityChanged(PlaybookSpecialAbility value)
-	{
-		Playbook.ClearAbilities();
-
-		if (ChosenStartingAbility != null)
-			Playbook.TakeAbility(ChosenStartingAbility);
-
-		ChosenAbility = value;
-		Playbook.TakeAbility(ChosenAbility);
-	}
-
-	private void OnChosenStartingAbilityChanged(PlaybookSpecialAbility value)
-	{
-		Playbook.ClearAbilities();
-
-		ChosenStartingAbility = value;
-		Playbook.TakeAbility(ChosenStartingAbility);
-
-		if (ChosenAbility != null)
-			Playbook.TakeAbility(ChosenAbility);
-	}
-
-	protected override void OnParametersSet()
-	{
-		AvailableAbilities = GameSetting.GetPlaybookSetting(Playbook.Name)
-			.GetAvailableAbilities();
-
-		if (ChosenStartingAbility == null && ChosenAbility == null && HasStartingAbilities)
-			OnChosenStartingAbilityChanged(AvailableStartingAbilities.First());
-
-		base.OnParametersSet();
-	}
-
-	private static string DisplayText(PlaybookSpecialAbility ability) =>
-		ability.TimesTakeable == 1 ? ability.Name
-		: $"{ability.Name} (take once of {ability.TimesTakeable} possible times)";
-}
+<FluentCard AreaRestricted="false" Class="common-card-style">
+	<div class="card-header">
+		<h4>Choose a special ability</h4>
+	</div>
+	<div class="vertical-stack">
+		<div class="vertical-stack">
+			<p>If you're unsure which one to pick, the first is considered a good default choice.</p>
+			<FluentSelect Label="Special Ability" TOption="PlaybookSpecialAbility" Items="AvailableAbilities" OptionValue="i => i.Name" OptionText="@(i => $"{DisplayText(i)} - {i.Description}")" SelectedOption="ChosenAbility" SelectedOptionChanged="OnChosenAbilityChanged" Id="select-playbook-ability" />
+		</div>
+		@if (HasStartingAbilities)
+		{
+			<div class="vertical-stack">
+				<p>@GameSetting.Name also has unique starting abilities.</p>
+				<FluentSelect Label="Starting Ability" TOption="PlaybookSpecialAbility" Items="AvailableStartingAbilities" OptionValue="i => i.Name" OptionText="@(i => $"{DisplayText(i)} - {i.Description}")" SelectedOption="ChosenStartingAbility" SelectedOptionChanged="OnChosenStartingAbilityChanged" Id="select-playbook-starting-ability" />
+			</div>
+		}
+		@foreach (var ability in Playbook.Abilities)
+		{
+			<div class="vertical-stack">
+				<strong>@ability.Name</strong>
+				<p>@ability.Description</p>
+			</div>
+		}
+	</div>
+</FluentCard>

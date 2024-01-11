@@ -53,9 +53,13 @@ public static class GameSettingExtensions
 		if (gameSetting == EmptyGameSetting.Game() || gameSetting.StartingAbility == null)
 			return EmptyGameSetting.PlaybookSpecialAbilities();
 
+		Console.WriteLine("heritageName: " + heritageName);
+		Console.WriteLine("playbookName: " + playbookName);
 		var abilities = new StartingSpecialAbilitySetting?[2];
 		gameSetting.StartingAbility.AbilitiesByPlaybook.TryGetValue(playbookName, out abilities[0]);
 		gameSetting.StartingAbility.AbilitiesByHeritage.TryGetValue(heritageName, out abilities[1]);
+
+		foreach (var x in abilities) Console.WriteLine(x);
 
 		return abilities.Where(setting => setting != null)
 			.Select(setting => new PlaybookSpecialAbility(setting!.Name, setting.Description, 1))
