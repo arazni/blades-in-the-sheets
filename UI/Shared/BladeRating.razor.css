@@ -1,3 +1,13 @@
-﻿::deep .blade-rating-box {
+﻿.rating {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+
+::deep .blade-rating-box {
 	display: inline-grid;
+}
+
+::deep .spacing {
+	margin-right: 5px;
 }

@@ -19,20 +19,17 @@
 	}
 	<div class="horizontal-stack aic jsb">
 		<div class="horizontal-stack">
-		@if (IsFixMode)
-		{
-			<BladeRating @bind-Value="HealingClock.Time" MaxValue="MaxRecovery" CheckboxAriaLabelSuffix="Recovery Progress" />
-		}
-		else
-		{
+			@if (IsFixMode)
+			{
+				<BladeRating @bind-Value="HealingClock.Time" MaxValue="MaxRecovery" CheckboxAriaLabelSuffix="Recovery Progress" />
+			}
 			<FluentProgressRing Value="HealingClock.Time" Max="MaxRecovery" aria-label="@CurrentRecoveryProgressLabel" />
 			@* <MudRating SelectedValue="HealingClock.Time" ReadOnly="true" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" aria-label="@CurrentRecoveryProgressLabel" /> *@
-		}
-		@if (HealingClock.Rollover > 0)
-		{
-			@* <MudRating SelectedValue="HealingClock.Rollover" ReadOnly="true" MaxValue="HealingClock.Rollover" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" aria-label="@ExtraRecoveryProgressLabel" /> *@
-			<FluentProgressRing Value="HealingClock.Rollover" Max="MaxRecovery" aria-label="@ExtraRecoveryProgressLabel" />
-		}
+			@if (HealingClock.Rollover > 0)
+			{
+				@* <MudRating SelectedValue="HealingClock.Rollover" ReadOnly="true" MaxValue="HealingClock.Rollover" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" aria-label="@ExtraRecoveryProgressLabel" /> *@
+				<FluentProgressRing Value="HealingClock.Rollover" Max="MaxRecovery" aria-label="@ExtraRecoveryProgressLabel" />
+			}
 		</div>
 		<FluentButton Class="min-button" Disabled="!Harm.CanHeal" OnClick="Heal" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size24.Heart()">Heal</FluentButton>
 	</div>

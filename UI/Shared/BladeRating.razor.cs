@@ -38,7 +38,9 @@ public partial class BladeRating
 		base.OnParametersSet();
 	}
 
-	public string CheckboxLabel(int index) => $"{index + 1} of {MaxValue} {CheckboxAriaLabelSuffix}";
+	public string CheckboxLabel(int index) => $"{index + 1} of {MaxValue} currently {Value} {CheckboxAriaLabelSuffix}";
+
+	public string CheckboxClass(int index) => " blade-rating-box " + (MaxValue > 5 && (index + 1) % 3 == 0 ? " spacing " : string.Empty);
 
 	public async Task CheckboxChanged(int index)
 	{
