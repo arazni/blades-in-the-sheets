@@ -1,80 +1,18 @@
-﻿@* @using Models.Characters
+﻿@using Models.Characters
 @using Models.Common
 @using UI.Services
 @inject SheetJank SheetJank
 @implements IDisposable
 
-<MudStack>
-	<MudTextField @bind-Value="HarmDescription" Placeholder="@HarmPlaceholder" Clearable="true" Immediate="true" aria-label="Describe harm" />
-	<MudStack Row="true" Class="flex-grow-1">
-		<MudSelect @bind-Value="Intensity" Text="@Intensity?.ToString()" aria-label="Harm intensity">
-			@foreach (var intensity in Harm.AvailableIntensities)
-			{
-				<MudSelectItem T="HarmIntensity?" Value="intensity">
-					<MudText>Level @((int)intensity) @intensity</MudText>
-				</MudSelectItem>
-			}
-		</MudSelect>
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="!CanAddHarm" OnClick="AddHarm" Style="@Constants.Buttons.ButtonDimensionStyle" aria-label="Add harm">Harm</MudButton>
-	</MudStack>
+<div class="vertical-stack">
+	<h5>Harm</h5>
+	<FluentTextField @bind-Value="HarmDescription" Placeholder="@HarmPlaceholder" AriaLabel="Describe harm" />
+	<div class="horizontal-stack jsb">
+		<FluentSelect TOption="HarmIntensity" Items="Harm.AvailableIntensities" @bind-SelectedOption="Intensity" AriaLabel="Harm intensity" OptionText="@(i => $"Level {(int)i} {i}")" />
+		<FluentButton IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Disabled="!CanAddHarm" OnClick="AddHarm" Class="min-button" Title="Add harm">Harm</FluentButton>
+	</div>
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Fatal" />
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Severe" />
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Moderate" />
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Lesser" />
-</MudStack>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public bool IsFixMode { get; set; }
-
-	[Parameter, EditorRequired]
-	public MonitorHarm Harm { get; set; } = MonitorHarm.Empty();
-
-	string HarmDescription { get; set; } = string.Empty;
-
-	HarmIntensity? Intensity { get; set; } = null; // on init, first available harm
-
-	protected override void OnInitialized()
-	{
-		Intensity = Harm.AvailableIntensities.FirstOrDefault();
-
-		SheetJank.HarmChanged += StateHasChanged;
-
-		base.OnInitialized();
-	}
-
-	string HarmPlaceholder => Intensity switch
-	{
-		HarmIntensity.Fatal => "Electrocuted, Drowned, or Stabbed in the Heart.",
-		HarmIntensity.Severe => "Impaled, Broken Leg, Shot in Chest, Badly Burned, or Terrified.",
-		HarmIntensity.Moderate => "Exhausted, Deep Cut to Arm, Concussion, Panicked, or Seduced.",
-		HarmIntensity.Lesser => "Battered, Drained, Distracted, Scared, Confused.",
-		_ => "Choose a harm severity above"
-	};
-
-	bool CanAddHarm =>
-		HarmDescription.HasInk()
-		&& Intensity != null;
-
-	void AddHarm()
-	{
-		var intensity = Intensity ?? throw new InvalidOperationException($"{nameof(AddHarm)}() called without setting {nameof(Intensity)} first");
-
-		Harm.AddHarm(HarmDescription, intensity);
-
-		ResetAddHarm();
-	}
-
-	void ResetAddHarm()
-	{
-		HarmDescription = string.Empty;
-		Intensity = Harm.AvailableIntensities.FirstOrDefault();
-	}
-
-	public void Dispose()
-	{
-		SheetJank.HarmChanged -= StateHasChanged;
-	}
-}
- *@
+</div>

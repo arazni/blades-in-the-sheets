@@ -2,7 +2,7 @@
 @using Microsoft.FluentUI.AspNetCore.Components
 @inherits LayoutComponentBase
 
-<div>
+<main>
 	<FluentMainLayout NavMenuTitle="Navigation Menu">
 		<Header>
 			<h1 class="ml-3">Blades in the Sheets</h1>
@@ -16,7 +16,8 @@
 			<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.DrinkCoffee())" Href="@Paths.Tips">Tip Jar</FluentNavLink>
 		</NavMenuContent>
 	</FluentMainLayout>
-</div>
+	<FluentToastProvider MaxToastCount="2" />
+</main>
 
 @code
 {

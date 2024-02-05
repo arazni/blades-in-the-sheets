@@ -27,13 +27,4 @@ public static class Constants
 
 		public static string Sheet(string id) => $"{Sheets}/{id}";
 	}
-
-	public static class Buttons
-	{
-		public const string MinWidth = "125px";
-
-		public const string MinHeight = "54px";
-
-		public static string ButtonDimensionStyle => $"min-width: {MinWidth}; min-height: {MinHeight};";
-	}
 }

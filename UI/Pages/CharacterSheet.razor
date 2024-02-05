@@ -1,4 +1,4 @@
-﻿@* @page "/sheets/{Id}"
+﻿@page "/sheets/{Id}"
 @using Models.Characters
 @using Models.Settings;
 @using Persistence.Json;
@@ -7,62 +7,24 @@
 @using UI.Services
 @inject IStorageService Storage
 @inject ILoader Loader
+@inject IToastService Toaster
 
-<MudContainer MaxWidth="MaxWidth.ExtraLarge">
-	<MudGrid>
-		<MudItem xs="12" lg="6">
-			<MudStack>
-				<SheetDossierCard Dossier="Character.Dossier" AliasSynonym="@PlaybookSetting.AliasSynonym" />
-				<SheetMonitorCard GameSetting="GameSetting" Character="Character" />
-				<SheetTalentCard Talent="Character.Talent" />
-				<SheetAbilitiesCard GameSetting="GameSetting" Character="Character" />
-			</MudStack>
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<MudStack>
-				<SheetRolodexCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="Character.Rolodex" />
-				<SheetGearCard Character="Character" BulkSynonym="@GameSetting.Thesaurus.Bulk" />
-				<SheetFundCard Fund="Character.Fund" CoinSynonym="@GameSetting.Thesaurus.Coin" />
-				<SheetNotebookCard GameSetting="GameSetting" Character="Character" />
-			</MudStack>
-		</MudItem>
-	</MudGrid>
-	<MudFab Color="SaveButtonColor" StartIcon="@SaveIcon" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
-</MudContainer>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public string Id { get; set; } = string.Empty;
-
-	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
-
-	public Character Character { get; set; } = Character.Empty();
-
-	PlaybookSetting PlaybookSetting => GameSetting.GetPlaybookSetting(Character.Playbook.Name);
-
-	private bool isSaving = false;
-
-	Color SaveButtonColor => isSaving ? Color.Success
-		: Color.Tertiary;
-
-	string SaveIcon => isSaving ? Icons.Material.Filled.CheckCircle
-		: Icons.Material.Filled.Save;
-
-	protected override async Task OnParametersSetAsync()
-	{
-		Character = await Storage.Load(Id);
-		GameSetting = await Loader.LoadSetting(Character.GameName);
-
-		await base.OnParametersSetAsync();
-	}
-
-	async Task Save()
-	{
-		isSaving = true;
-		await Storage.Save(Character!);
-		await Task.Delay(1000);
-		isSaving = false;
-	}
-}
- *@
+<FluentGrid Justify="JustifyContent.Center">
+	<FluentGridItem xs="12" lg="6">
+		<div class="vertical-stack aic">
+ 			<SheetDossierCard Dossier="Character.Dossier" AliasSynonym="@PlaybookSetting.AliasSynonym" GameSetting="GameSetting" />
+			<SheetMonitorCard GameSetting="GameSetting" Character="Character" />
+			@*<SheetTalentCard Talent="Character.Talent" />
+			<SheetAbilitiesCard GameSetting="GameSetting" Character="Character" /> *@
+		</div>
+	</FluentGridItem>
+	<FluentGridItem xs="12" lg="6">
+		<div class="vertical-stack aic">
+@* 			<SheetRolodexCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="Character.Rolodex" />
+			<SheetGearCard Character="Character" BulkSynonym="@GameSetting.Thesaurus.Bulk" />
+			<SheetFundCard Fund="Character.Fund" CoinSynonym="@GameSetting.Thesaurus.Coin" /> *@
+			@* <SheetNotebookCard GameSetting="GameSetting" Character="Character" />  *@
+		</div>
+	</FluentGridItem>
+	<FluentButton IconStart="@SaveIcon" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
+</FluentGrid>

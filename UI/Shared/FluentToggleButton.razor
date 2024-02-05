@@ -1,29 +1,5 @@
 ﻿@using Microsoft.FluentUI.AspNetCore.Components
 @using Icons = Microsoft.FluentUI.AspNetCore.Components.Icons
 
-<FluentButton Title="@ToggleOnTitle" IconStart="ToggleOnIcon" Appearance="Appearance.Accent" OnClick="_ => IsToggledOn = true" Class="@ToggledOffClass"></FluentButton>
-<FluentButton Title="@ToggleOffTitle" IconStart="ToggleOffIcon" Appearance="Appearance.Accent" OnClick="_ => IsToggledOn = false" Class="@ToggledOnClass"></FluentButton>
-
-@code {
-	[EditorRequired, Parameter]
-	public string ToggleOnTitle { get; set; } = string.Empty;
-
-	[EditorRequired, Parameter]
-	public string ToggleOffTitle { get; set; } = string.Empty;
-
-	[EditorRequired, Parameter]
-	public Icon? ToggleOnIcon { get; set; }
-
-	[EditorRequired, Parameter]
-	public Icon? ToggleOffIcon { get; set; }
-
-	[EditorRequired, Parameter]
-	public virtual bool IsToggledOn { get; set; } = false;
-
-	[Parameter]
-	public virtual EventCallback<bool> IsToggledOnChanged { get; set; }
-
-	string ToggledOnClass => UI.Constants.Classes.Display(IsToggledOn);
-
-	string ToggledOffClass => UI.Constants.Classes.DisplayNone(IsToggledOn);
-}
+<FluentButton Title="@ToggleOnTitle" IconStart="ToggleOnIcon" Appearance="Appearance.Accent" OnClick="_ => IsToggledOn = true" Class="@ToggledOffClass" />
+<FluentButton Title="@ToggleOffTitle" IconStart="ToggleOffIcon" Appearance="Appearance.Accent" OnClick="_ => IsToggledOn = false" Class="@ToggledOnClass" />

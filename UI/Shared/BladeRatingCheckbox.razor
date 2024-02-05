@@ -1,0 +1,9 @@
+﻿@inherits FluentCheckbox
+
+@{
+	base.BuildRenderTree(__builder);
+}
+
+@code {
+	public void HackStateChanged() => StateHasChanged();
+}

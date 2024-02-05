@@ -115,3 +115,12 @@ a, .btn-link {
 .aib {
 	align-items: baseline;
 }
+
+.min-button {
+	min-height: 54px;
+	min-width: 125px;
+}
+
+.jsb {
+	justify-content: space-between;
+}

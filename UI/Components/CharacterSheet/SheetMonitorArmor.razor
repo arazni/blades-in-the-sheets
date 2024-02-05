@@ -1,64 +1,19 @@
-﻿@* @using Models.Characters
+﻿@using Models.Characters
 @using UI.Services
 @inject SheetJank SheetJank
 @implements IDisposable
 
-<MudGrid Spacing="0">
-	<MudItem xs="6" sm="4">
-		<MudCheckBox Checked="Character.IsStandardArmorUsed" Disabled="!Character.HasArmor" Label="Armor" T="bool" CheckedChanged="@((b) => StandardArmorChecked(b))" />
-	</MudItem>
-	<MudItem xs="6" sm="4">
-		<MudCheckBox Checked="Character.IsHeavyArmorUsed" Disabled="!Character.HasHeavyArmor" Label="Heavy Armor" T="bool" CheckedChanged="@((b) => HeavyArmorChecked(b))" />
-	</MudItem>
+<FluentGrid Spacing="0">
+	<FluentGridItem xs="6" sm="4">
+		<FluentCheckbox Value="Character.IsStandardArmorUsed" Disabled="!Character.HasArmor" Label="Armor" ValueChanged="b => StandardArmorChecked(b)" />
+	</FluentGridItem>
+	<FluentGridItem xs="6" sm="4">
+		<FluentCheckbox Value="Character.IsHeavyArmorUsed" Disabled="!Character.HasHeavyArmor" Label="Heavy Armor" ValueChanged="b => HeavyArmorChecked(b)" />
+	</FluentGridItem>
 	@if (Character.HasSpecialArmor)
 	{
-		<MudItem xs="12" sm="4">
-			<MudCheckBox Checked="Character.IsSpecialArmorUsed" Label="Special Armor" T="bool" CheckedChanged="@((b) => SpecialArmorChecked(b))" />
-		</MudItem>
+		<FluentGridItem xs="12" sm="4">
+			<FluentCheckbox Value="Character.IsSpecialArmorUsed" Label="Special Armor" ValueChanged="b => SpecialArmorChecked(b)" />
+		</FluentGridItem>
 	}
-</MudGrid>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public Character Character { get; set; } = Character.Empty();
-
-	protected override void OnInitialized()
-	{
-		SheetJank.GearChanged += StateHasChanged;
-		SheetJank.AbilitiesChanged += StateHasChanged;
-
-		base.OnInitialized();
-	}
-
-	void StandardArmorChecked(bool isChecked)
-	{
-		if (isChecked)
-			Character.UseStandardArmor();
-		else
-			Character.RestoreStandardArmor();
-	}
-
-	void HeavyArmorChecked(bool isChecked)
-	{
-		if (isChecked)
-			Character.UseHeavyArmor();
-		else
-			Character.RestoreHeavyArmor();
-	}
-
-	void SpecialArmorChecked(bool isChecked)
-	{
-		if (isChecked)
-			Character.UseSpecialArmor();
-		else
-			Character.RestoreSpecialArmor();
-	}
-
-	public void Dispose()
-	{
-		SheetJank.GearChanged -= StateHasChanged;
-		SheetJank.AbilitiesChanged -= StateHasChanged;
-	}
-}
- *@
+</FluentGrid>
