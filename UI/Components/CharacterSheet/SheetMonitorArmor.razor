@@ -5,15 +5,15 @@
 
 <FluentGrid Spacing="0">
 	<FluentGridItem xs="6" sm="4">
-		<FluentCheckbox Value="Character.IsStandardArmorUsed" Disabled="!Character.HasArmor" Label="Armor" ValueChanged="b => StandardArmorChecked(b)" />
+		<FluentCheckbox Value="Character.IsStandardArmorUsed" Disabled="!Character.HasArmor" Label="Armor" ValueChanged="StandardArmorChecked" />
 	</FluentGridItem>
 	<FluentGridItem xs="6" sm="4">
-		<FluentCheckbox Value="Character.IsHeavyArmorUsed" Disabled="!Character.HasHeavyArmor" Label="Heavy Armor" ValueChanged="b => HeavyArmorChecked(b)" />
+		<FluentCheckbox Value="Character.IsHeavyArmorUsed" Disabled="!Character.HasHeavyArmor" Label="Heavy Armor" ValueChanged="HeavyArmorChecked" />
 	</FluentGridItem>
 	@if (Character.HasSpecialArmor)
 	{
 		<FluentGridItem xs="12" sm="4">
-			<FluentCheckbox Value="Character.IsSpecialArmorUsed" Label="Special Armor" ValueChanged="b => SpecialArmorChecked(b)" />
+			<FluentCheckbox Value="Character.IsSpecialArmorUsed" Label="Special Armor" ValueChanged="SpecialArmorChecked" />
 		</FluentGridItem>
 	}
 </FluentGrid>

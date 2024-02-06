@@ -15,10 +15,10 @@ public sealed partial class SheetMonitorRecovery
 
 	RecoverySelectable[] RecoverySelectables { get; } =
 	[
-		new(1, "1-3: +1"),
-		new(2, "4-5: +2"),
-		new(3, "6: +3"),
-		new(5, "Critical: +5")
+		new(1, "1-3: +1 Tick"),
+		new(2, "4-5: +2 Ticks"),
+		new(3, "6: +3 Ticks"),
+		new(5, "Critical: +5 Ticks")
 	];
 
 	MonitorHarm Harm =>

@@ -27,14 +27,7 @@ public partial class SheetMonitorTrauma
 		DisableTraumaSelect
 		|| SelectedTrauma == null;
 
-	private string? selectedTrauma;
-
-	string? SelectedTrauma
-	{
-		get => Monitor.Stress.CurrentStress != MonitorStress.MaxStress && !IsFixMode ? null
-			: selectedTrauma;
-		set => selectedTrauma = value;
-	}
+	string SelectedTrauma { get; set; } = string.Empty;
 
 	void AddTrauma()
 	{
@@ -52,7 +45,7 @@ public partial class SheetMonitorTrauma
 			SheetJank.NotifyTraumaChanged();
 		}
 
-		SelectedTrauma = null;
+		SelectedTrauma = TraumaOptions.First();
 	}
 
 	void RemoveTrauma(string trauma)
