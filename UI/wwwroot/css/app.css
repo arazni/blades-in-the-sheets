@@ -81,7 +81,7 @@ a, .btn-link {
 }
 
 .common-card-style {
-	width: max(min(500px, 100%), 300px);
+	width: max(min(600px, 100%), 300px);
 	margin: 5px;
 }
 
@@ -123,4 +123,8 @@ a, .btn-link {
 
 .jsb {
 	justify-content: space-between;
+}
+
+.margin-vertical-center {
+	margin: auto 0;
 }

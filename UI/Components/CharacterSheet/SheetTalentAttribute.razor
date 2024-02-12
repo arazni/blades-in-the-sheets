@@ -1,48 +1,14 @@
-﻿@* @using Models.Characters
+﻿@using Models.Characters
 @using System.Diagnostics.CodeAnalysis
 @using UI.Services
 @inject SheetJank SheetJank;
 @implements IDisposable
 
-<MudStack>
-	<MudRating @bind-SelectedValue="Attribute.Experience.Points" MaxValue="Attribute.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" aria-label="@RatingLabel" />
-	<MudText Typo="Typo.h6">@Attribute.Rating @Name</MudText>
+<div class="vertical-stack">
+	<BladeRating @bind-Value="Attribute.Experience.Points" MaxValue="Attribute.Experience.MaxPoints" CheckboxAriaLabelSuffix="@RatingLabel" />
+	<h5>@Attribute.Rating @Name</h5>
 	@foreach (var actionByName in Attribute.ActionsByName)
 	{
 		<SheetTalentAction Attribute="Attribute" AttributeName="@Name" ActionName="@actionByName.Key" Action="actionByName.Value" />
 	}
-</MudStack>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public TalentAttribute Attribute { get; set; } = TalentAttribute.Empty();
-
-	[Parameter, EditorRequired]
-	public string Name { get; set; } = string.Empty;
-
-	[CascadingParameter(Name = "IsFixMode")]
-	public bool IsFixMode { get; set; }
-
-	protected override void OnInitialized()
-	{
-		SheetJank.AttributeChanged += AttributeHasChanged;
-
-		base.OnInitialized();
-	}
-
-	public void Dispose()
-	{
-		SheetJank.AttributeChanged -= AttributeHasChanged;
-	}
-
-	private void AttributeHasChanged(string attributeName)
-	{
-		if (attributeName == Name)
-			StateHasChanged();
-	}
-
-	string RatingLabel =>
-		$"{Name}: {Attribute.Experience.Points} of {Attribute.Experience.MaxPoints} experience points";
-}
- *@
+</div>
