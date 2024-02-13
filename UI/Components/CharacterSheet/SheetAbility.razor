@@ -5,17 +5,17 @@
 @inject SheetJank SheetJank
 
 @if (Ability == null || Playbook == null) { return; }
-
-@if (IsFixMode)
-{
-	<h5>
-		<FluentButton Class="min-button" IconEnd="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="(e => RemoveAbility(Ability))" Title="@RemoveAbilityLabel">@Ability.LearnedTimesDisplayName()</FluentButton>
-	</h5>
-	<FluentTextArea @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Rows="5" Appearance="FluentInputAppearance.Outline" AriaLabel="@EditAbilityLabel" Id="@TextFieldId" />
-}
-else
-{
-	<h5>@Ability.LearnedTimesDisplayName()</h5>
-	<p>@Ability.Description</p>
-}
-
+<div>
+	@if (IsFixMode)
+	{
+		<h5>
+			<FluentButton Class="min-button" IconEnd="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="(e => RemoveAbility(Ability))" Title="@RemoveAbilityLabel">@Ability.LearnedTimesDisplayName()</FluentButton>
+		</h5>
+		<FluentTextArea @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Rows="5" Appearance="FluentInputAppearance.Outline" AriaLabel="@EditAbilityLabel" Id="@TextFieldId" />
+	}
+	else
+	{
+		<h5>@Ability.LearnedTimesDisplayName()</h5>
+		<p>@Ability.Description</p>
+	}
+</div>

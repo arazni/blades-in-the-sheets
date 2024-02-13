@@ -39,6 +39,8 @@ public sealed partial class SheetAbilitiesCard
 	{
 		AvailableAbilities = GameSetting.GetPlaybookSetting(Playbook.Name)
 			.GetAvailableAbilities();
+
+		SelectedAbility = LearnableAbilities.FirstOrDefault();
 	}
 
 	protected override void OnInitialized()
@@ -61,18 +63,22 @@ public sealed partial class SheetAbilitiesCard
 
 	void AddAbility()
 	{
+		Console.WriteLine(SelectedAbility?.Name);
 		if (SelectedAbility == null)
 			return;
 
 		var success = Playbook.TakeAbility(SelectedAbility);
 
+		Console.WriteLine(success);
 		if (!success)
 			return;
 
 		if (!IsFixMode)
 			Playbook.Experience.Clear();
 
-		SelectedAbility = null;
+		//SelectedAbility = null;
+		SelectedAbility = LearnableAbilities.FirstOrDefault();
 		SheetJank.NotifyAbilitiesChanged();
+		Console.WriteLine(SelectedAbility?.Name);
 	}
 }

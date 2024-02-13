@@ -7,10 +7,8 @@
 @using static Constants.Classes;
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Health">
-	<div class="vertical-stack">
-		<SheetMonitorTrauma IsFixMode="IsFixMode" Monitor="Monitor" TraumaOptions="GameSetting.Traumas" />
-		<SheetMonitorHarm IsFixMode="IsFixMode" Harm="Monitor.Harm" />
-		<SheetMonitorArmor Character="Character" />
-		<SheetMonitorRecovery IsFixMode="IsFixMode" Monitor="Monitor" />
-	</div>
+	<SheetMonitorTrauma IsFixMode="IsFixMode" Monitor="Monitor" TraumaOptions="GameSetting.Traumas" />
+	<SheetMonitorHarm IsFixMode="IsFixMode" Harm="Monitor.Harm" />
+	<SheetMonitorArmor Character="Character" />
+	<SheetMonitorRecovery IsFixMode="IsFixMode" Monitor="Monitor" />
 </SheetCard>

@@ -2,41 +2,39 @@
 @using Models.Settings;
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="@RolodexSetting.Name">
-	<div class="vertical-stack">
-		@foreach (var friend in Rolodex.Friends)
-		{
-			<div class="horizontal-stack">
-				<FluentTextField Class="fg1" @bind-Value="friend.Entry" ReadOnly="!IsFixMode" Appearance="FluentInputAppearance.Outline" AriaLabel="@friend.Entry">
-					<FluentIcon Value="GetFriendIcon(friend)" Title="@GetAdornmentLabel(friend)" Slot="start" />
-				</FluentTextField>
-				@if (IsFixMode)
-				{
-					<div class="row fg0">
-						@if (friend.Closeness == FriendCloseness.CloseFriend)
-						{
-							<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.ArrowDown()" Appearance="Appearance.Accent" OnClick="() => Rolodex.DowngradeCloseFriend(friend)" Title="@ButtonLabel(friend, "Estrange from")" />
-							<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="() => Rolodex.RemoveFriend(friend)" Title="@ButtonLabel(friend, "Remove")" />
-						}
-						else if (friend.Closeness == FriendCloseness.Rival)
-						{
-							<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.ArrowUp()" Appearance="Appearance.Accent" OnClick="() => Rolodex.UpgradeRival(friend)" Title="@ButtonLabel(friend, "Reconcile with")" />
-							<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="() => Rolodex.RemoveFriend(friend)" Title="@ButtonLabel(friend, "Remove")" />
-						}
-						else
-						{
-							<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.ArrowUp()" Appearance="Appearance.Accent" OnClick="() => Rolodex.UpgradeFriend(friend)" Title="@ButtonLabel(friend, "Bond with")" />
-							<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.ArrowDown()" Appearance="Appearance.Accent" OnClick="() => Rolodex.DowngradeFriend(friend)" Title="@ButtonLabel(friend, "Betray")" />
-						}
-					</div>
-				}
-			</div>
-		}
-		@if (IsFixMode)
-		{
-			<div class="horizontal-stack">
-				<FluentTextField Class="fg1" @bind-Value="@AddableContactName" AriaLabel="Addable Contact Name" Placeholder="Addable Contact" Id="addable-contact-name" />
-				<FluentButton Class="add-contact-button" IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" OnClick="AddFriend">Add</FluentButton>
-			</div>
-		}
-	</div>
+	@foreach (var friend in Rolodex.Friends)
+	{
+		<div class="horizontal-stack">
+			<FluentTextField Class="fg1" @bind-Value="friend.Entry" ReadOnly="!IsFixMode" Appearance="FluentInputAppearance.Outline" AriaLabel="@friend.Entry">
+				<FluentIcon Value="GetFriendIcon(friend)" Title="@GetAdornmentLabel(friend)" Slot="start" />
+			</FluentTextField>
+			@if (IsFixMode)
+			{
+				<div class="row fg0">
+					@if (friend.Closeness == FriendCloseness.CloseFriend)
+					{
+						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.ArrowDown()" Appearance="Appearance.Accent" OnClick="() => Rolodex.DowngradeCloseFriend(friend)" Title="@ButtonLabel(friend, "Estrange from")" />
+						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="() => Rolodex.RemoveFriend(friend)" Title="@ButtonLabel(friend, "Remove")" />
+					}
+					else if (friend.Closeness == FriendCloseness.Rival)
+					{
+						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.ArrowUp()" Appearance="Appearance.Accent" OnClick="() => Rolodex.UpgradeRival(friend)" Title="@ButtonLabel(friend, "Reconcile with")" />
+						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="() => Rolodex.RemoveFriend(friend)" Title="@ButtonLabel(friend, "Remove")" />
+					}
+					else
+					{
+						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.ArrowUp()" Appearance="Appearance.Accent" OnClick="() => Rolodex.UpgradeFriend(friend)" Title="@ButtonLabel(friend, "Bond with")" />
+						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.ArrowDown()" Appearance="Appearance.Accent" OnClick="() => Rolodex.DowngradeFriend(friend)" Title="@ButtonLabel(friend, "Betray")" />
+					}
+				</div>
+			}
+		</div>
+	}
+	@if (IsFixMode)
+	{
+		<div class="horizontal-stack">
+			<FluentTextField Class="fg1" @bind-Value="@AddableContactName" AriaLabel="Addable Contact Name" Placeholder="Addable Contact" Id="addable-contact-name" />
+			<FluentButton Class="add-contact-button" IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" OnClick="AddFriend">Add</FluentButton>
+		</div>
+	}
 </SheetCard>

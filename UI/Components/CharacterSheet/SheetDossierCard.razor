@@ -4,17 +4,25 @@
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Dossier">
 	<FluentGrid>
-		<FluentGridItem xs="8">
-			<FluentTextField @bind-Value="Dossier.Name" Id="dossier-name" Label="Name" ReadOnly="!IsFixMode" />
+		<FluentGridItem xs="12" sm="8">
+			<FluentTextField @bind-Value="Dossier.Name" Id="dossier-name" Label="Name" />
 		</FluentGridItem>
-		<FluentGridItem xs="4">
-			<FluentTextField @bind-Value="Dossier.Alias" Id="dossier-alias" Label="@AliasSynonym" ReadOnly="!IsFixMode" />
+		<FluentGridItem xs="12" sm="4">
+			<FluentTextField @bind-Value="Dossier.Alias" Id="dossier-alias" Label="@AliasSynonym" />
 		</FluentGridItem>
 	</FluentGrid>
-	<FluentTextArea @bind-Value="Dossier.Background.Description" Id="dossier-background-description" Label="@BackgroundLabel" Resize="TextAreaResize.Vertical" Rows="3" />
-	<FluentTextArea @bind-Value="Dossier.Heritage.Description" Id="dossier-heritage-description" Label="@HeritageLabel" Resize="TextAreaResize.Vertical" Rows="3" />
-	<FluentTextArea @bind-Value="Dossier.Vice.Description" Id="dossier-vice-description" Label="@ViceLabel" Resize="TextAreaResize.Vertical" Rows="3" />
-	<FluentTextArea @bind-Value="Dossier.Look" Id="dossier-look" Label="Look" Resize="TextAreaResize.Vertical" Rows="3" />
+	<div>
+		<FluentTextArea @bind-Value="Dossier.Background.Description" Id="dossier-background-description" Label="@BackgroundLabel" Resize="TextAreaResize.Vertical" Rows="3" />
+	</div>
+	<div>
+		<FluentTextArea @bind-Value="Dossier.Heritage.Description" Id="dossier-heritage-description" Label="@HeritageLabel" Resize="TextAreaResize.Vertical" Rows="3" />
+	</div>
+	<div>
+		<FluentTextArea @bind-Value="Dossier.Vice.Description" Id="dossier-vice-description" Label="@ViceLabel" Resize="TextAreaResize.Vertical" Rows="3" />
+	</div>
+	<div>
+		<FluentTextArea @bind-Value="Dossier.Look" Id="dossier-look" Label="Look" Resize="TextAreaResize.Vertical" Rows="3" />
+	</div>
 	@if (IsFixMode)
 	{
 		<FluentSelect TOption="BackgroundSetting" Items="GameSetting.Backgrounds" @bind-Value="Dossier.Background.Name" OptionValue="i => i.Name" OptionText="i => i.Name" Label="Background" Id="select-background" />
