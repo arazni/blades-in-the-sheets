@@ -6,7 +6,7 @@
 		<h4>@HeaderText()</h4>
 	</div>
 	<div class="vertical-stack">
-		<FluentSelect Label="Vice" TOption="ViceSetting" Items="ViceSettings" @bind-Value="Vice.Name" OptionValue="i => i.Name" OptionText="i => i.Name" OptionSelected="i => i == ViceSettings.First()" Id="select-vice" />
+		<FluentSelect Label="Vice" TOption="ViceSetting" Items="ViceSettings" @bind-Value="Vice.Name" OptionValue="i => i.Name" OptionText="@(i => $"{i.Name} - {i.Description}")" OptionSelected="i => i == ViceSettings.First()" Id="select-vice" Class="big-select" />
 		<p>@Elaboration()</p>
 		<FluentTextField @bind-Value="Vice.Description" Label="@HelperText()" Placeholder="@ExamplePlaceholder()" AriaLabel="Vice description" Id="vice-description" />
 		@if (HasExamples)

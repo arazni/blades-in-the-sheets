@@ -7,7 +7,7 @@
 		<h4>Choose a background</h4>
 	</div>
 	<div class="vertical-stack">
-		<FluentSelect TOption="BackgroundSetting" Items="BackgroundSettings" @bind-Value="Background.Name" OptionValue="i => i.Name" OptionText="@(i => $"{i.Name} - {i.Example}")" OptionSelected="i => i == BackgroundSettings.First()" Label="Background" Id="select-background" />
+		<FluentSelect TOption="BackgroundSetting" Items="BackgroundSettings" @bind-Value="Background.Name" OptionValue="i => i.Name" OptionText="@(i => $"{i.Name} - {i.Example}")" OptionSelected="i => i == BackgroundSettings.First()" Label="Background" Id="select-background" Class="big-select" />
 		<p>@Example()</p>
 		<FluentTextField @bind-Value="Background.Description" Label="What did you do before joining the crew?" Placeholder="A snoozing, indebted student" AriaLabel="Background description" Id="describe-background"/>
 	</div>

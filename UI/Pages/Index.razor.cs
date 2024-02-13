@@ -35,6 +35,7 @@ public partial class Index
 		await LoadCharacters();
 
 		AvailableGameFiles = await Loader.LoadGameFiles();
+		SelectedGameFile = AvailableGameFiles.First();
 
 		var gameSettingLoads = AvailableGameFiles.Select(gameFile => Loader.LoadSetting(gameFile));
 

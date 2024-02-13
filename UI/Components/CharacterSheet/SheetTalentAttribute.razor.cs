@@ -33,5 +33,5 @@ public sealed partial class SheetTalentAttribute
 	}
 
 	string RatingLabel =>
-		$"{Name}: {Attribute.Experience.Points} of {Attribute.Experience.MaxPoints} experience points";
+		$"{Name} experience points";
 }

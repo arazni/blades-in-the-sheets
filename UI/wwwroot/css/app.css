@@ -66,14 +66,18 @@ a, .btn-link {
 
 .card-header {
 	display: flex;
+	margin-bottom: 20px;
 }
 
 .card-header-left {
-	flex: 1 1 auto;
+	/*flex: 1 1 auto;*/
+	display: flex;
+	flex-grow: 1;
 }
 
 .card-header-right {
-	flex: 0 0 auto;
+	/*flex: 0 0 auto;*/
+	flex-grow: 0;
 }
 
 .dn {
@@ -81,7 +85,9 @@ a, .btn-link {
 }
 
 .common-card-style {
-	width: max(min(600px, 100%), 300px);
+	max-width: 600px;
+	min-width: 300px;
+	width: 100%;
 	margin: 5px;
 }
 
@@ -127,4 +133,22 @@ a, .btn-link {
 
 .margin-vertical-center {
 	margin: auto 0;
+}
+
+fluent-select {
+	width: 50%;
+	min-width: 175px;
+}
+
+fluent-select.big-select::part(listbox) {
+	width: 200%;
+	max-width: 600px;
+	min-width: 175px;
+}
+
+fluent-select.big-select > fluent-option {
+	white-space: break-spaces;
+	height: auto;
+	padding: 5px 10px;
+	width: 100%;
 }

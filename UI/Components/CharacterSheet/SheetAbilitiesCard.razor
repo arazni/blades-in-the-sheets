@@ -1,4 +1,4 @@
-@* @using Models.Characters
+@using Models.Characters
 @using Models.Settings;
 @using Persistence.Json
 @using UI.Conveniences
@@ -8,103 +8,17 @@
 @inject SheetJank SheetJank
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="@Playbook.Name.ToString()">
-	<MudStack>
-		<MudRating @bind-SelectedValue="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" aria-label="Playbook experience points" />
-		<MudGrid>
-			<MudItem xs="12" sm="9">
-				<MudSelect @bind-Value="SelectedAbility" ToStringFunc="@converter" aria-label="Select playbook ability to learn">
-					@foreach (var ability in LearnableAbilities)
-					{
-						<MudSelectItem Value="ability" />
-					}
-				</MudSelect>
-			</MudItem>
-			<MudItem xs="12" sm="3">
-				<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="CannotAddAbility" OnClick="AddAbility" Style="@UI.Constants.Buttons.ButtonDimensionStyle" aria-label="Learn ability">Ability</MudButton>
-			</MudItem>
-		</MudGrid>
-		<MudStack>
+	<div class="vertical-stack">
+		<BladeRating @bind-Value="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" CheckboxAriaLabelSuffix="Playbook experience points" />
+		<div class="horizontal-stack jsb">
+			<FluentSelect TOption="PlaybookSpecialAbility" Items="LearnableAbilities" @bind-SelectedOption="SelectedAbility" OptionValue="a => a.Name" OptionText="@(a => ($"{a.Name}: {a.Description}"))" AriaLabel="Select playbook ability to learn" Class="big-select" />
+			<FluentButton IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Disabled="CannotAddAbility" OnClick="AddAbility" Class="min-button" Title="Learn ability">Ability</FluentButton>
+		</div>
+		<div class="vertical-stack">
 			@foreach (var ability in KnownAbilities)
 			{
 				<SheetAbility Character="Character" Ability="ability" IsFixMode="IsFixMode" />
 			}
-		</MudStack>
-	</MudStack>
+		</div>
+	</div>
 </SheetCard>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public Character Character { get; set; } = Character.Empty();
-
-	[Parameter, EditorRequired]
-	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
-
-	Playbook Playbook => Character.Playbook;
-
-	public bool IsFixMode { get; set; } = false;
-
-	IReadOnlyCollection<PlaybookSpecialAbility> KnownAbilities =>
-		Playbook.Abilities;
-
-	IReadOnlyCollection<PlaybookSpecialAbility> AvailableAbilities = Array.Empty<PlaybookSpecialAbility>();
-
-	IReadOnlyCollection<PlaybookSpecialAbility> LearnableAbilities =>
-		AvailableAbilities.Where
-		(
-			ability =>
-			{
-				if (!Playbook.AbilitiesByName.TryGetValue(ability.Name, out var knownAbility))
-					return true;
-
-				return !knownAbility.IsCompletelyLearned;
-			}
-		).ToArray();
-
-	PlaybookSpecialAbility? SelectedAbility { get; set; }
-
-	protected override void OnParametersSet()
-	{
-		AvailableAbilities = GameSetting.GetPlaybookSetting(Playbook.Name)
-			.GetAvailableAbilities();
-	}
-
-	protected override void OnInitialized()
-	{
-		SheetJank.AbilitiesChanged += StateHasChanged;
-
-		base.OnInitialized();
-	}
-
-	public void Dispose()
-	{
-		SheetJank.AbilitiesChanged -= StateHasChanged;
-	}
-
-	bool CanAddAbility =>
-		IsFixMode || Playbook.Experience.CanLevelUp;
-
-	bool CannotAddAbility =>
-		!CanAddAbility;
-
-	void AddAbility()
-	{
-		if (SelectedAbility == null)
-			return;
-
-		var success = Playbook.TakeAbility(SelectedAbility);
-
-		if (!success)
-			return;
-
-		if (!IsFixMode)
-			Playbook.Experience.Clear();
-
-		SelectedAbility = null;
-		SheetJank.NotifyAbilitiesChanged();
-	}
-
-	Func<PlaybookSpecialAbility?, string> converter = psa =>
-		psa != null ? $"{psa.Name}: {psa.Description}"
-			: string.Empty;
-} *@
