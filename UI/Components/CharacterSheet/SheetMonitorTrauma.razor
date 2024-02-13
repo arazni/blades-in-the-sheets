@@ -14,17 +14,20 @@
 		<FluentSelect @bind-Value="SelectedTrauma" Items="AvailableTraumaOptions" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect" AriaLabel="Select Trauma" TOption="string" />
 		<FluentButton IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Disabled="DisableAddTrauma" OnClick="AddTrauma" Class="min-button" Title="Add Trauma">Trauma</FluentButton>
 	</div>
-	<div class="horizontal-stack">
-		@foreach (var option in Monitor.Trauma.Traumas)
-		{
-			@if (IsFixMode)
+	@if (Monitor.Trauma.Traumas.Any())
+	{
+		<div class="horizontal-stack">
+			@foreach (var option in Monitor.Trauma.Traumas)
 			{
-				<FluentButton IconEnd="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" Color="Color.Secondary" OnClick="(_ => RemoveTrauma(option))" Title="@RemoveTraumaAriaLabel(option)">@option</FluentButton>
+				@if (IsFixMode)
+				{
+					<FluentButton IconEnd="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" Color="Color.Secondary" OnClick="(_ => RemoveTrauma(option))" Title="@RemoveTraumaAriaLabel(option)">@option</FluentButton>
+				}
+				else
+				{
+					<p>@option</p>
+				}
 			}
-			else
-			{
-				<p>@option</p>
-			}
-		}
-	</div>
+		</div>
+	}
 </div>

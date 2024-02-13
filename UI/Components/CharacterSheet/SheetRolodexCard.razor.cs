@@ -16,17 +16,17 @@ public partial class SheetRolodexCard
 
 	string AddableContactName = string.Empty;
 
-	static readonly Icon closeFriendIcon = new Icons.Filled.Size20.Heart();
+	static Icon CloseFriendIcon => new Icons.Filled.Size20.Heart();
 
-	static readonly Icon rivalIcon = new Icons.Filled.Size20.Warning();
+	static Icon RivalIcon => new Icons.Filled.Size20.Warning();
 
-	static readonly Icon contactIcon = new Icons.Filled.Size20.Chat();
+	static Icon ContactIcon => new Icons.Filled.Size20.Chat();
 
 	static Icon GetFriendIcon(RolodexFriend friend) => friend.Closeness switch
 	{
-		FriendCloseness.CloseFriend => closeFriendIcon,
-		FriendCloseness.Rival => rivalIcon,
-		_ => contactIcon
+		FriendCloseness.CloseFriend => CloseFriendIcon,
+		FriendCloseness.Rival => RivalIcon,
+		_ => ContactIcon
 	};
 
 	//static Color GetFriendIconColor(RolodexFriend friend) => friend.Closeness switch

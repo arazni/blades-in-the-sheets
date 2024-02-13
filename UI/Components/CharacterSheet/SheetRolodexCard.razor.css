@@ -9,3 +9,11 @@
 	height: 40px;
 	margin-left: 5px;
 }
+
+::deep .contact {
+	flex-grow: 1;
+}
+
+::deep .contact::part(root) {
+	height: 40px;
+}

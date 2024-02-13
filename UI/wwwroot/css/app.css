@@ -90,7 +90,7 @@ a, .btn-link {
 }
 
 .vertical-stack {
-	gap: 10px;
+	gap: 20px;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
