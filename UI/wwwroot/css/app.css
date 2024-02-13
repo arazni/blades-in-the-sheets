@@ -70,13 +70,11 @@ a, .btn-link {
 }
 
 .card-header-left {
-	/*flex: 1 1 auto;*/
 	display: flex;
 	flex-grow: 1;
 }
 
 .card-header-right {
-	/*flex: 0 0 auto;*/
 	flex-grow: 0;
 }
 
@@ -129,6 +127,14 @@ a, .btn-link {
 
 .jsb {
 	justify-content: space-between;
+}
+
+.fg0 {
+	flex-grow: 0;
+}
+
+.fg1 {
+	flex-grow: 1;
 }
 
 .margin-vertical-center {
