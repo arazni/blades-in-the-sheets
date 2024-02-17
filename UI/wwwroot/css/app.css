@@ -141,6 +141,10 @@ a, .btn-link {
 	min-width: 125px;
 }
 
+.min-button::part(control) {
+	justify-content: start;
+}
+
 .jsb {
 	justify-content: space-between;
 }

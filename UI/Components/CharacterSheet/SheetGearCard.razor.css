@@ -1,3 +1,19 @@
 ﻿::deep .gear-button {
-	margin: 5px;
+	min-height: 40px;
+	min-width: max-content;
+	width: 50%;
+	padding-left: 5px;
+	flex-grow: 1;
+}
+
+::deep .gear-button::part(control) {
+	justify-content: start;
+}
+
+.gear-row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	row-gap: 10px;
+	margin-left: -5px;
 }

@@ -17,7 +17,7 @@
 		</FluentRadioGroup>
 		@if (CommitmentLocked)
 		{
-			<FluentButton Appearance="Appearance.Accent" OnClick="() => { ClearCommitments(); CommitmentLocked = false; }">Reset</FluentButton>
+			<FluentButton Class="min-button" Appearance="Appearance.Accent" OnClick="() => { ClearCommitments(); CommitmentLocked = false; }">Reset</FluentButton>
 		}
 		else
 		{
@@ -49,7 +49,7 @@
 		<h5>Available Gear</h5>
 		<p>@BulkSynonym Remaining: @Character.AvailableBulk</p>
 	</div>
-	<div>
+	<div class="gear-row">
 		@foreach (var item in Gear.UncommittedGear)
 		{
 			@if (!IsFixMode)
