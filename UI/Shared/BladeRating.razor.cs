@@ -14,6 +14,10 @@ public partial class BladeRating
 
 	[Parameter] public EventCallback<int> ValueChanged { get; set; }
 
+	[Parameter] public bool ReadOnly { get; set; } = false;
+
+	[Parameter] public string Id { get; set; } = string.Empty;
+
 	protected bool[] ButtonsAreChecked { get; set; } = [];
 
 	protected BladeRatingCheckbox?[] Buttons { get; set; } = [];

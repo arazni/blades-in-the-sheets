@@ -108,6 +108,14 @@ a, .btn-link {
 	flex-direction: row;
 }
 
+.wrap-horizontal-stack {
+	column-gap: 10px;
+	row-gap: 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
 .row {
 	display: flex;
 	flex-direction: row;
@@ -136,6 +144,10 @@ a, .btn-link {
 	align-items: baseline;
 }
 
+.aie {
+	align-items: end;
+}
+
 .min-button {
 	min-height: 40px;
 	min-width: 125px;
@@ -147,6 +159,10 @@ a, .btn-link {
 
 .jsb {
 	justify-content: space-between;
+}
+
+.je {
+	justify-content: end;
 }
 
 .fg0 {

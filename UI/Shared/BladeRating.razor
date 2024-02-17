@@ -1,6 +1,6 @@
-﻿<div class="rating">
+﻿<div class="rating" id="@Id">
 	@foreach(var i in Enumerable.Range(0, MaxValue))
 	{
-		<BladeRatingCheckbox @ref="Buttons[i]" AriaLabel="@CheckboxLabel(i)" Value="ButtonsAreChecked[i]" ValueChanged="_ => CheckboxChanged(i)" Class="@CheckboxClass(i)" />
+		<BladeRatingCheckbox @ref="Buttons[i]" AriaLabel="@CheckboxLabel(i)" Value="ButtonsAreChecked[i]" ValueChanged="_ => CheckboxChanged(i)" Class="@CheckboxClass(i)" ReadOnly="ReadOnly" />
 	}
 </div>

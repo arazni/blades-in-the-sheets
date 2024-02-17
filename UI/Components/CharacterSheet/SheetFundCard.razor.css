@@ -1,0 +1,24 @@
+﻿.fund-item {
+	min-width: max-content;
+	width: 50%;
+	padding-left: 5px;
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.control-item {
+	min-width: max-content;
+	width: 50%;
+	padding-left: 5px;
+	flex-grow: 1;
+}
+
+.fund-row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	row-gap: 20px;
+	margin-left: -5px;
+}
