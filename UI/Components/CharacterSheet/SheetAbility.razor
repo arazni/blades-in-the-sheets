@@ -11,7 +11,7 @@
 		<h5>
 			<FluentButton Class="min-button" IconEnd="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="(e => RemoveAbility(Ability))" Title="@RemoveAbilityLabel">@Ability.LearnedTimesDisplayName()</FluentButton>
 		</h5>
-		<FluentTextArea @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Rows="5" Appearance="FluentInputAppearance.Outline" AriaLabel="@EditAbilityLabel" Id="@TextFieldId" />
+		<FluentTextArea Class="w100" @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Rows="5" Appearance="FluentInputAppearance.Outline" AriaLabel="@EditAbilityLabel" Id="@TextFieldId" />
 	}
 	else
 	{

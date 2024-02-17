@@ -1,4 +1,4 @@
-﻿@* @using Models.Characters
+﻿@using Models.Characters
 @using Models.Common;
 @using Models.Settings;
 @using UI.Conveniences
@@ -7,167 +7,72 @@
 @inject SheetJank SheetJank
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Gear">
-	<MudStack>
-		<MudGrid>
-			<MudItem xs="12" md="8">
-				<MudRadioGroup @bind-SelectedOption="Gear.Commitment.Commitment">
-					<MudRadio Option="LoadCommitmentOption.None" Disabled="!RadioCommitmentsEnabled">@LoadCommitmentOption.None</MudRadio>
-					<MudRadio Option="LoadCommitmentOption.Light" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Light) @LoadCommitmentOption.Light</MudRadio>
-					<MudRadio Option="LoadCommitmentOption.Normal" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</MudRadio>
-					<MudRadio Option="LoadCommitmentOption.Heavy" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</MudRadio>
-					<MudRadio Option="LoadCommitmentOption.Encumbered" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Encumbered) @LoadCommitmentOption.Encumbered</MudRadio>
-				</MudRadioGroup>
-			</MudItem>
-			<MudItem xs="12" sm="4">
-				@if (CommitmentLocked)
-				{
-					<MudButton FullWidth="true" Variant="Variant.Outlined" OnClick="() => { ClearCommitments(); CommitmentLocked = false; }">Reset</MudButton>
-				}
-				else
-				{
-					<MudButton FullWidth="true" Variant="Variant.Outlined" OnClick="() => CommitmentLocked = true">Commit</MudButton>
-				}
-			</MudItem>
-		</MudGrid>
-		<MudText Typo="Typo.h6">Loadout</MudText>
-		<MudStack>
-			@foreach (var item in Gear.Loadout)
-			{
-				@commitmentItemRenderer!(item)
-			}
-			@if (Gear.HasCommittedBandolier)
-			{
-				<MudText>Bandolier items: Alcahest, Binding Oil, Drift Oil, Drown Powder, Eyeblind Poison, Fire Oil, Grenade, Quicksilver, Skullfire Poison, Smoke Bomb, Spark (drug), Standstill Poison, Trance Powder</MudText>
-			}
-		</MudStack>
-		<MudStack Row="true" Justify="Justify.SpaceBetween">
-			<MudText Typo="Typo.h6">Available Gear</MudText>
-			<MudText Typo="Typo.h6">@BulkSynonym Remaining: @Character.AvailableBulk</MudText>
-		</MudStack>
-		<MudContainer>
-			@foreach (var item in Gear.UncommittedGear)
-			{
-				@if (!IsFixMode)
-				{
-					<MudButton Style="margin: 5px;" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.AddCircle" Disabled="!Character.CanCommitGear(item) || !CommitmentLocked" OnClick="() => CommitGear(item)">@item.Display()</MudButton>
-				}
-				else
-				{
-					<MudButton Style="margin: 5px;" Variant="Variant.Filled" Color="Color.Secondary" EndIcon="@Icons.Material.Filled.Delete" OnClick="() => Gear.RemoveAvailableItem(item)">@item.Display()</MudButton>
-				}
-			}
-		</MudContainer>
+	<div class="horizontal-stack jsb">
+		<FluentRadioGroup Class="wrap-row jsb" @bind-Value="Gear.Commitment.Commitment">
+			<FluentRadio Value="LoadCommitmentOption.None" Disabled="!RadioCommitmentsEnabled">@LoadCommitmentOption.None</FluentRadio>
+			<FluentRadio Value="LoadCommitmentOption.Light" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Light) @LoadCommitmentOption.Light</FluentRadio>
+			<FluentRadio Value="LoadCommitmentOption.Normal" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</FluentRadio>
+			<FluentRadio Value="LoadCommitmentOption.Heavy" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</FluentRadio>
+			<FluentRadio Value="LoadCommitmentOption.Encumbered" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Encumbered) @LoadCommitmentOption.Encumbered</FluentRadio>
+		</FluentRadioGroup>
+		@if (CommitmentLocked)
+		{
+			<FluentButton Appearance="Appearance.Accent" OnClick="() => { ClearCommitments(); CommitmentLocked = false; }">Reset</FluentButton>
+		}
+		else
+		{
+			<FluentButton Class="min-button" IconStart="new Icons.Filled.Size20.LockClosed()" Appearance="Appearance.Accent" OnClick="() => CommitmentLocked = true">Commit</FluentButton>
+		}
+	</div>
+	<h5>Loadout</h5>
+	<div>
 		@if (IsFixMode)
 		{
-			<MudText Typo="Typo.h6">Add Item</MudText>
-			<MudGrid>
-				<MudItem xs="8" sm="6">
-					<MudTextField @bind-Value=addableItem.Name Label="Name" id="gear-add-item-name" />
-				</MudItem>
-				<MudItem xs="4" sm="2">
-					<MudTextField @bind-Value=addableItem.Bulk Label="@BulkSynonym" id="gear-add-item-bulk" />
-				</MudItem>
-				<MudItem xs="12" sm="4">
-					<MudButton OnClick="AddItem" Disabled="!IsAddItemEnabled" Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddCircle" aria-label="Add new item">Add</MudButton>
-				</MudItem>
-			</MudGrid>
+			@foreach (var item in Gear.Loadout)
+			{
+				<FluentButton Class="gear-button" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size20.Eraser()" OnClick="() => UncommitGear(item)" Title="@CommitmentButtonLabel(item)">@item.Name (@item.Bulk)</FluentButton>
+			}
 		}
-	</MudStack>
+		else
+		{
+			foreach (var item in Gear.Loadout)
+			{
+				<p>@item.Name (@item.Bulk)</p>
+			}
+		}
+	</div>
+	@if (Gear.HasCommittedBandolier)
+	{
+		<p>Bandolier items: Alcahest, Binding Oil, Drift Oil, Drown Powder, Eyeblind Poison, Fire Oil, Grenade, Quicksilver, Skullfire Poison, Smoke Bomb, Spark (drug), Standstill Poison, Trance Powder</p>
+	}
+	<div class="row jsb">
+		<h5>Available Gear</h5>
+		<p>@BulkSynonym Remaining: @Character.AvailableBulk</p>
+	</div>
+	<div>
+		@foreach (var item in Gear.UncommittedGear)
+		{
+			@if (!IsFixMode)
+			{
+				<FluentButton Class="gear-button" Appearance="Appearance.Outline" IconStart="new Icons.Regular.Size20.AddCircle()" Disabled="!Character.CanCommitGear(item) || !CommitmentLocked" OnClick="() => CommitGear(item)" Title="@($"Commit {@item.Display()}")">@item.Display()</FluentButton>
+			}
+			else
+			{
+				<FluentButton Class="gear-button" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size20.Delete()" OnClick="() => Gear.RemoveAvailableItem(item)" Title="@($"Delete {@item.Display()}")">@item.Display()</FluentButton>
+			}
+		}
+	</div>
+	@if (IsFixMode)
+	{
+		<h5>Add Item</h5>
+		<div class="wrap-row jsb">
+			<div>
+				<FluentTextField @bind-Value=AddableItem.Name Label="Name" Id="gear-add-item-name" />
+			</div>
+			<div>
+				<FluentNumberField Style="width: 60px;" @bind-Value=AddableItem.Bulk Label="@BulkSynonym" Id="gear-add-item-bulk" Step="1" Min="0" Max="9" />
+			</div>
+			<FluentButton Class="min-button" OnClick="AddItem" Disabled="!IsAddItemEnabled" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size20.AddCircle()" Title="Add new item">Add</FluentButton>
+		</div>
+	}
 </SheetCard>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public Character Character { get; set; } = Character.Empty();
-
-	[Parameter]
-	public string BulkSynonym { get; set; } = Models.Settings.Constants.DefaultNames.Bulk;
-
-	public Gear Gear => Character.Gear;
-
-	bool CommitmentLocked { get; set; } = false;
-
-	bool RadioCommitmentsEnabled => IsFixMode || !CommitmentLocked;
-
-	public void CommitGear(GearItem item)
-	{
-		var isSuccessful = Character.CommitGear(item);
-
-		if (isSuccessful)
-			SheetJank.NotifyGearChanged();
-	}
-
-	public void ClearCommitments()
-	{
-		var isSuccessful = Character.ClearCommitments();
-
-		if (isSuccessful)
-			SheetJank.NotifyGearChanged();
-	}
-
-	public void UncommitGear(GearItem item)
-	{
-		var isSuccessful = Character.UncommitGear(item);
-
-		if (isSuccessful)
-			SheetJank.NotifyGearChanged();
-	}
-
-	// Dynamic Rendering Demo. Unrecommended use case.
-
-	bool isFixMode = false;
-
-	bool IsFixMode
-	{
-		get => isFixMode;
-		set
-		{
-			commitmentItemRenderer = value ? (i) => RenderCommitmentButtons(i)
-				: (i) => RenderCommitmentText(i);
-
-			isFixMode = value;
-		}
-	}
-
-	protected override void OnInitialized()
-	{
-		commitmentItemRenderer = (i) => RenderCommitmentText(i);
-
-		base.OnInitialized();
-	}
-
-	Func<GearItem, RenderFragment>? commitmentItemRenderer;
-
-	RenderFragment RenderCommitmentText(GearItem item) => @<MudText>@item.Name (@item.Bulk)</MudText>;
-
-	RenderFragment RenderCommitmentButtons(GearItem item) => @<MudButton Style="margin: 5px; max-width: 400px" FullWidth="false" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.RemoveCircle" OnClick="() => UncommitGear(item)" aria-label="@CommitmentButtonLabel(item)">@item.Name (@item.Bulk)</MudButton>;
-
-	NewItem addableItem = new();
-
-	bool IsAddItemEnabled => addableItem.Name.HasInk() && Gear.CanAddAvailableItem(addableItem.Name);
-
-	string CommitmentButtonLabel(GearItem item) => $"Uncommit {item.Name} ({item.Bulk})";
-
-	void AddItem()
-	{
-		if (!IsAddItemEnabled)
-			return;
-
-		var item = new GearItem(addableItem.Bulk, addableItem.Name);
-		Gear.AddAvailableItem(item);
-		addableItem.Reset();
-	}
-
-	private class NewItem
-	{
-		public int Bulk { get; set; } = 0;
-		public string Name { get; set; } = string.Empty;
-
-		public void Reset()
-		{
-			Bulk = 0;
-			Name = string.Empty;
-		}
-	}
-}
- *@

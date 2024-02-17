@@ -33,7 +33,7 @@
 	@if (IsFixMode)
 	{
 		<div class="horizontal-stack">
-			<FluentTextField Class="fg1" @bind-Value="@AddableContactName" AriaLabel="Addable Contact Name" Placeholder="Addable Contact" Id="addable-contact-name" />
+			<FluentTextField Class="contact" @bind-Value="@AddableContactName" AriaLabel="Addable Contact Name" Placeholder="Addable Contact" Id="addable-contact-name" />
 			<FluentButton Class="add-contact-button" IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" OnClick="AddFriend">Add</FluentButton>
 		</div>
 	}

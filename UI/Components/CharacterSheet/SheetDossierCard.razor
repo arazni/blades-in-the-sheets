@@ -3,14 +3,14 @@
 @using UI.Conveniences
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Dossier">
-	<FluentGrid>
-		<FluentGridItem xs="12" sm="8">
-			<FluentTextField @bind-Value="Dossier.Name" Id="dossier-name" Label="Name" />
-		</FluentGridItem>
-		<FluentGridItem xs="12" sm="4">
+	<div class="wrap-row">
+		<div class="fg1">
+			<FluentTextField  @bind-Value="Dossier.Name" Id="dossier-name" Label="Name" />
+		</div>
+		<div class="fg1">
 			<FluentTextField @bind-Value="Dossier.Alias" Id="dossier-alias" Label="@AliasSynonym" />
-		</FluentGridItem>
-	</FluentGrid>
+		</div>
+	</div>
 	<div>
 		<FluentTextArea @bind-Value="Dossier.Background.Description" Id="dossier-background-description" Label="@BackgroundLabel" Resize="TextAreaResize.Vertical" Rows="3" Class="w100" />
 	</div>
