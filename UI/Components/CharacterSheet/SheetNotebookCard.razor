@@ -1,24 +1,23 @@
-﻿@* @using Models.Characters;
+﻿@using Models.Characters;
 @using Models.Settings;
 @using UI.Conveniences;
 
 <SheetCard HasFixMode="false" Header="Reminders">
-	<div class="vertical-stack">
+	<div>
 		<p>Every time you roll a desperate action, mark xp in that action's attribute.</p>
 		<p>At the end of each session, for each item below, mark 1 xp (in your playbook or an attribute) or 2 xp if that item occurred multiple times.</p>
-		<div class="row aic">
-			<MudRating @bind-SelectedValue="Character.Session.PlaybookExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" aria-label="Playbook roleplay experience earned" />
-			<p>@PlaybookExperienceCondition.</p>
-		</div>
-		<div class="row aic">
-			<MudRating @bind-SelectedValue="Character.Session.CharacterExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" aria-label="Character roleplay experience earned" />
-			<p>You expressed your beliefs, drives, heritage, or background.</p>
-		</div>
-		<p class="row aic">
-			<MudRating @bind-SelectedValue="Character.Session.StruggleExpressions" MaxValue="Session.MaxExpressions" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" aria-label="Struggle roleplay experience earned" />
-			<p>You struggled with issues from your vice or traumas during the session.</p>
-		</p>
 	</div>
-	<MudTextField Label="Notes" @bind-Value="Character.Notebook" Lines="10" id="notebook-notes" />
+	<div class="horizontal-stack aic">
+		<BladeRating @bind-Value="Character.Session.PlaybookExpressions" MaxValue="Session.MaxExpressions" CheckboxAriaLabelSuffix="Playbook roleplay experience earned" />
+		<label>@PlaybookExperienceCondition.</label>
+	</div>
+	<div class="horizontal-stack aic">
+		<BladeRating @bind-Value="Character.Session.CharacterExpressions" MaxValue="Session.MaxExpressions" CheckboxAriaLabelSuffix="Character roleplay experience earned" />
+		<label>You expressed your beliefs, drives, heritage, or background.</label>
+	</div>
+	<div class="horizontal-stack aic">
+		<BladeRating @bind-Value="Character.Session.StruggleExpressions" MaxValue="Session.MaxExpressions" CheckboxAriaLabelSuffix="Struggle roleplay experience earned" />
+		<label>You struggled with issues from your vice or traumas during the session.</label>
+	</div>
+	<FluentTextArea Label="Notes" @bind-Value="Character.Notebook" Rows="10" Id="notebook-notes" />
 </SheetCard>
- *@

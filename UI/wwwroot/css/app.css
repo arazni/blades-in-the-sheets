@@ -71,7 +71,6 @@ a, .btn-link {
 
 .card-header {
 	display: flex;
-	margin-bottom: 20px;
 }
 
 .card-header-left {
@@ -81,6 +80,10 @@ a, .btn-link {
 
 .card-header-right {
 	flex-grow: 0;
+}
+
+.card-body {
+	margin-top: 20px;
 }
 
 .dn {

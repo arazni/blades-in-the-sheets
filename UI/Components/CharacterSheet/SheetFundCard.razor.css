@@ -10,7 +10,6 @@
 
 .control-item {
 	min-width: max-content;
-	width: 50%;
 	padding-left: 5px;
 	flex-grow: 1;
 }
