@@ -5,10 +5,14 @@
 	<div class="card-header">
 		<h4>@HeaderText()</h4>
 	</div>
-	<div class="vertical-stack">
-		<FluentSelect Label="Vice" TOption="ViceSetting" Items="ViceSettings" @bind-Value="Vice.Name" OptionValue="i => i.Name" OptionText="@(i => $"{i.Name} - {i.Description}")" OptionSelected="i => i == ViceSettings.First()" Id="select-vice" Class="big-select" />
+	<div class="vertical-stack card-body">
+		<div>
+			<FluentSelect Label="Vice" TOption="ViceSetting" Items="ViceSettings" @bind-Value="Vice.Name" OptionValue="i => i.Name" OptionText="@(i => $"{i.Name} - {i.Description}")" OptionSelected="i => i == ViceSettings.First()" Id="select-vice" Class="big-select" />
+		</div>
 		<p>@Elaboration()</p>
-		<FluentTextField @bind-Value="Vice.Description" Label="@HelperText()" Placeholder="@ExamplePlaceholder()" AriaLabel="Vice description" Id="vice-description" />
+		<div>
+			<FluentTextField @bind-Value="Vice.Description" Label="@HelperText()" Placeholder="@ExamplePlaceholder()" AriaLabel="Vice description" Class="w100" Id="vice-description" />
+		</div>
 		@if (HasExamples)
 		{
 			<FluentAccordion>

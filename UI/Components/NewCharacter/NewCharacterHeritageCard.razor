@@ -7,9 +7,13 @@
 	<div class="card-header">
 		<h4>Choose a heritage</h4>
 	</div>
-	<div class="vertical-stack">
-		<FluentSelect TOption="HeritageSetting" Items="HeritageSettings" @bind-Value="Heritage.Name" OptionValue="i => i.Name" OptionText="@(i => $"{i.Name} - {i.Description}")" SelectedOptionChanged="_ => CreationJank.NotifyHeritageChanged()" Label="Heritage" Id="select-heritage" Class="big-select" />
+	<div class="vertical-stack card-body">
+		<div>
+			<FluentSelect TOption="HeritageSetting" Items="HeritageSettings" @bind-Value="Heritage.Name" OptionValue="i => i.Name" OptionText="@(i => $"{i.Name} - {i.Description}")" SelectedOptionChanged="_ => CreationJank.NotifyHeritageChanged()" Label="Heritage" Id="select-heritage" Class="big-select" />
+		</div>
 		<p>@Elaboration()</p>
-		<FluentTextField @bind-Value="Heritage.Description" Label="Share a detail about your family life" Placeholder="Exiled nobility, now maladjusted factory laborers" AriaLabel="Heritage description" Id="heritage-description" />
+		<div>
+			<FluentTextField @bind-Value="Heritage.Description" Label="Share a detail about your family life" Placeholder="Exiled nobility, now maladjusted factory laborers" AriaLabel="Heritage description" Id="heritage-description" Class="w100" />
+		</div>
 	</div>
 </FluentCard>

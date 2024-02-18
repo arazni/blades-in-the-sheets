@@ -23,14 +23,14 @@
 			<div class="card-header">
 				<div class="card-header-left">
 					<FluentAnchor Appearance="Appearance.Hypertext" Href="@character.Link" Class="character-link">@character.Alias the @character.Playbook</FluentAnchor>
+					</div>
+					<div class="card-header-right">
+						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Download(character)" Class="@DownloadModeClass" aria-label="@DownloadCharacterLabel(character.Name)">Export</FluentButton>
+						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Delete(character.Id)" Class="@DeleteModeClass" aria-label="@DeleteCharacterLabel(character.Name)" Color="Color.Error">Delete</FluentButton>
+					</div>
 				</div>
-				<div class="card-header-right">
-					<FluentButton Appearance="Appearance.Accent" OnClick="_ => Download(character)" Class="@DownloadModeClass" aria-label="@DownloadCharacterLabel(character.Name)">Export</FluentButton>
-					<FluentButton Appearance="Appearance.Accent" OnClick="_ => Delete(character.Id)" Class="@DeleteModeClass" aria-label="@DeleteCharacterLabel(character.Name)" Color="Color.Error">Delete</FluentButton>
-				</div>
-			</div>
-			<div class="vertical-stack">
-				<p>@Blurb(character)</p>
+				<div class="vertical-stack card-body">
+					<p>@Blurb(character)</p>
 			</div>
 		</FluentCard>
 	}
@@ -49,14 +49,16 @@
 				}
 			</div>
 		</div>
-		<div class="vertical-stack" style="width:250px;">
-			<FluentSelect TOption="GameFile" Items="AvailableGameFiles" @bind-SelectedOption="@SelectedGameFile" OptionText="gameFile => gameFile.Name" Label="Select a Game"></FluentSelect>
-			<FluentAnchor Href="@New()" Appearance="Appearance.Accent" Class="button">
+		<div class="vertical-stack card-body w50" style="min-width: 200px;">
+			<div>
+				<FluentSelect TOption="GameFile" Items="AvailableGameFiles" @bind-SelectedOption="@SelectedGameFile" OptionText="gameFile => gameFile.Name" Label="Select a Game" Class="w100"></FluentSelect>
+			</div>
+			<FluentAnchor Href="@New()" Appearance="Appearance.Accent" Class="min-button">
 				Create a Character
 				<FluentIcon Value="@(new Icons.Regular.Size20.DocumentAdd())" Slot="start" Color="@Microsoft.FluentUI.AspNetCore.Components.Color.Fill" />
 			</FluentAnchor>
 			<FluentInputFile AnchorId="ImportCharacters" DragDropZoneVisible="false" Mode="InputFileMode.Stream" Multiple="true" Accept=".json" OnFileUploaded="@UploadFiles" OnCompleted="@UploadComplete" />
-			<FluentButton Id="ImportCharacters" Appearance="Appearance.Accent" IconStart="@(new Icons.Regular.Size20.ArrowUpload())" Class="button">Import Characters</FluentButton>
+			<FluentButton Id="ImportCharacters" Appearance="Appearance.Accent" IconStart="@(new Icons.Regular.Size20.ArrowUpload())" Class="min-button">Import Characters</FluentButton>
 		</div>
 	</FluentCard>
 </div>

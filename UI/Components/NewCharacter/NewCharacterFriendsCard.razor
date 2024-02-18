@@ -6,13 +6,19 @@
 	<div class="card-header">
 		<h4>Choose a close friend and a rival from among your contacts</h4>
 	</div>
-	<div class="vertical-stack">
-		<FluentSelect Label="Close Friend" Items="AvailableFriendOptions" TOption="Option<RolodexFriend>" OptionDisabled="i => i.Value?.Closeness == FriendCloseness.Rival" OptionSelected="i => i.Value == null" OptionText="i => i.Value?.Entry ?? string.Empty" SelectedOptionChanged="OnCloseFriendChanged" Id="select-close-friend" />
-		<FluentSelect Label="Rival" Items="AvailableFriendOptions" TOption="Option<RolodexFriend>" OptionDisabled="i => i.Value?.Closeness == FriendCloseness.CloseFriend" OptionSelected="i => i.Value == null" OptionText="i => i.Value?.Entry ?? string.Empty" SelectedOptionChanged="OnRivalChanged" Id="select-rival" />
-		<p>Other friends:</p>
-		@foreach (var friend in RemainingFriends)
-		{
-			<p>@friend.Entry</p>
-		}
+	<div class="vertical-stack card-body">
+		<div>
+			<FluentSelect Label="Close Friend" Items="AvailableFriendOptions" TOption="Option<RolodexFriend>" OptionDisabled="i => i.Value?.Closeness == FriendCloseness.Rival" OptionSelected="i => i.Value == null" OptionText="i => i.Value?.Entry ?? string.Empty" SelectedOptionChanged="OnCloseFriendChanged" Id="select-close-friend" />
+		</div>
+		<div>
+			<FluentSelect Label="Rival" Items="AvailableFriendOptions" TOption="Option<RolodexFriend>" OptionDisabled="i => i.Value?.Closeness == FriendCloseness.CloseFriend" OptionSelected="i => i.Value == null" OptionText="i => i.Value?.Entry ?? string.Empty" SelectedOptionChanged="OnRivalChanged" Id="select-rival" />
+		</div>
+		<div>
+			<p>Other friends:</p>
+			@foreach (var friend in RemainingFriends)
+			{
+				<p>@friend.Entry</p>
+			}
+		</div>
 	</div>
 </FluentCard>

@@ -10,12 +10,8 @@
 <div class="vertical-stack aic">
 	<h2>@GameName</h2>
 	<h3>Choose a playbook.</h3>
-	<FluentGrid>
-		@foreach (var (book, hook) in options)
-		{
-			<FluentGridItem xs="12" Justify="JustifyContent.Center">
-				<NewCharacterPlaybookOption GameFileStem="@GameFileStem" PlaybookName="@book" Hook="@hook" />
-			</FluentGridItem>
-		}
-	</FluentGrid>
+	@foreach (var (book, hook) in options)
+	{
+		<NewCharacterPlaybookOption GameFileStem="@GameFileStem" PlaybookName="@book" Hook="@hook" />
+	}
 </div>

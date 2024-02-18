@@ -13,9 +13,11 @@
 			<h4>@PlaybookName</h4>
 		</div>
 	</div>
-	<div class="vertical-stack">
-		<p>@Hook[..(Hook.IndexOf(".") + 1)]</p>
-		<p>@Hook[(Hook.IndexOf(".") + 1)..]</p>
+	<div class="vertical-stack card-body">
+		<div>
+			<p>@Hook[..(Hook.IndexOf(".") + 1)]</p>
+			<p>@Hook[(Hook.IndexOf(".") + 1)..]</p>
+		</div>
 		<FluentAnchor Appearance="Appearance.Accent" Href="@Path" Class="button-link">Create @PlaybookName</FluentAnchor>
 	</div>
 </FluentCard>
