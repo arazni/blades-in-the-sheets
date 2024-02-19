@@ -201,3 +201,18 @@ fluent-select {
 		padding: 5px 10px;
 		width: 100%;
 	}
+
+/* https://webaim.org/techniques/css/invisiblecontent/ */
+.screen-reader-only {
+	position: absolute;
+	left: -10000px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.header-gutters {
+	margin: 5px 10px !important;
+	justify-content: space-between;
+}

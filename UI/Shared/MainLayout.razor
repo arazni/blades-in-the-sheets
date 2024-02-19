@@ -3,24 +3,37 @@
 @inherits LayoutComponentBase
 
 <main>
-	<FluentMainLayout NavMenuTitle="Navigation Menu">
-		<Header>
+	<FluentLayout NavMenuTitle="Navigation Menu">
+		<FluentHeader>
+			<FluentButton Title="Show Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Accent" OnClick="_ => IsNavMenuOpen = true" Class="@OpenNavButtonClass" />
+			<FluentButton Title="Hide Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Neutral" OnClick="_ => IsNavMenuOpen = false" Class="@CloseNavButtonClass" />
 			<h1 class="bits">Blades in the Sheets</h1>
 			<img src="icon-192.png" Alt="Icon of a blade piercing a character sheet" class="layout-header-icon" />
-		</Header>
-		<Body>
-			@Body
-		</Body>
-@* 		<NavMenuContent>
-			<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.Home())" Href="/" Text="Home">Home</FluentNavLink>
-			<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.DrinkCoffee())" Href="@Paths.Tips">Tip Jar</FluentNavLink>
-		</NavMenuContent> *@
-	</FluentMainLayout>
+		</FluentHeader>
+		<div class="horizontal-stack">
+			<FluentNavMenu Class="@("nav " + @NavMenuClass)">
+				<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.Home())" Href="/">Home</FluentNavLink>
+				<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.DrinkCoffee())" Href="@Paths.Tips">Tip Jar</FluentNavLink>
+			</FluentNavMenu>
+			<FluentBodyContent>
+				@Body
+			</FluentBodyContent>
+		</div>
+	</FluentLayout>
 	<FluentToastProvider MaxToastCount="2" />
 </main>
 
 @code
 {
+	public bool IsNavMenuOpen { get; set; } = false;
+
+	public string NavMenuClass => IsNavMenuOpen ? ""
+		: "dn";
+
+	public string OpenNavButtonClass => IsNavMenuOpen ? "dn" : string.Empty;
+
+	public string CloseNavButtonClass => IsNavMenuOpen ? string.Empty : "dn";
+
 	@* 	private static MudTheme InitializeMudTheme()
 	{
 		var theme = new MudTheme();
