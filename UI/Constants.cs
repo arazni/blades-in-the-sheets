@@ -19,6 +19,8 @@ public static class Constants
 
 		public const string Tips = "tip-jar";
 
+		public const string Theme = "theme";
+
 		public static string NewCharacter(GameFile gameFile) => NewCharacter(gameFile.Stem);
 
 		public static string NewCharacter(string gameFileStem) => $"{New}/{gameFileStem}";

@@ -1,0 +1,18 @@
+﻿@page "/theme"
+@using Models.Common
+
+<div class="vertical-stack aic">
+	<FluentCard Class="common-card-style">
+		<div class="card-header">
+			<div class="card-header-left">
+				<h4>Theme Changer</h4>
+			</div>
+		</div>
+		<div class="vertical-stack card-body">
+			<FluentButton @ref="ButtonDefault" Appearance="Appearance.Accent" OnClick="_ => ThemeSettingService.SetGlobalTheme(ThemeSettingService.DefaultTheme)">Apply Default Theme</FluentButton>
+			<FluentButton @ref="ButtonLight" Appearance="Appearance.Accent" OnClick="_ => ThemeSettingService.SetGlobalTheme(ThemeSettingService.LightTheme)">Apply Light Theme</FluentButton>
+			<FluentButton @ref="ButtonBlades" Appearance="Appearance.Accent" OnClick="_ => ThemeSettingService.SetGlobalTheme(ThemeSettingService.BladesTheme)">Apply Blades in the Dark Theme</FluentButton>
+			<FluentButton @ref="ButtonScum" Appearance="Appearance.Accent" OnClick="_ => ThemeSettingService.SetGlobalTheme(ThemeSettingService.ScumTheme)">Apply Scum and Villainy Theme</FluentButton>
+		</div>
+	</FluentCard>
+</div>

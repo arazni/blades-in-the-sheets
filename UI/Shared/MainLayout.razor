@@ -1,45 +1,30 @@
 ﻿@using static UI.Constants;
 @using Microsoft.FluentUI.AspNetCore.Components
+@using UI.Services
 @inherits LayoutComponentBase
+@implements IDisposable
+@inject IThemeSettingService ThemeSettingService
 
 <main>
-	<FluentLayout NavMenuTitle="Navigation Menu">
-		<FluentHeader>
-			<FluentButton Title="Show Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Accent" OnClick="_ => IsNavMenuOpen = true" Class="@OpenNavButtonClass" />
-			<FluentButton Title="Hide Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Neutral" OnClick="_ => IsNavMenuOpen = false" Class="@CloseNavButtonClass" />
-			<h1 class="bits">Blades in the Sheets</h1>
-			<img src="icon-192.png" Alt="Icon of a blade piercing a character sheet" class="layout-header-icon" />
-		</FluentHeader>
-		<div class="horizontal-stack">
-			<FluentNavMenu Class="@("nav " + @NavMenuClass)">
-				<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.Home())" Href="/">Home</FluentNavLink>
-				<FluentNavLink Icon="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size20.DrinkCoffee())" Href="@Paths.Tips">Tip Jar</FluentNavLink>
-			</FluentNavMenu>
-			<FluentBodyContent>
-				@Body
-			</FluentBodyContent>
-		</div>
-	</FluentLayout>
-	<FluentToastProvider MaxToastCount="2" />
+	<FluentDesignSystemProvider @ref="ThemeProvider" AccentBaseColor="@ThemeSettingService.GetGlobalAccentBaseColor()" NeutralBaseColor="@ThemeSettingService.GetGlobalNeutralBaseColor()" BaseLayerLuminance="@ThemeSettingService.GetGlobalBaseLayerLuminence()">
+		<FluentLayout NavMenuTitle="Navigation Menu">
+			<FluentHeader>
+				<FluentButton Title="Show Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Accent" OnClick="_ => IsNavMenuOpen = true" Class="@OpenNavButtonClass" />
+				<FluentButton Title="Hide Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Neutral" OnClick="_ => IsNavMenuOpen = false" Class="@CloseNavButtonClass" />
+				<h1 class="bits">Blades in the Sheets</h1>
+				<img src="icon-192.png" Alt="Icon of a blade piercing a character sheet" class="layout-header-icon" />
+			</FluentHeader>
+			<div class="horizontal-stack">
+				<FluentNavMenu Class="@("nav " + @NavMenuClass)">
+					<FluentNavLink Icon="new Icons.Filled.Size20.Home()" Href="/">Home</FluentNavLink>
+					<FluentNavLink Icon="new Icons.Filled.Size20.DrinkCoffee()" Href="@Paths.Tips">Tip Jar</FluentNavLink>
+					<FluentNavLink Icon="new Icons.Filled.Size20.PaintBrush()" Href="@Paths.Theme">Theme</FluentNavLink>
+				</FluentNavMenu>
+				<FluentBodyContent @onmouseenter="_ => IsNavMenuOpen = false" @onfocusin="_ => IsNavMenuOpen = false">
+					@Body
+				</FluentBodyContent>
+			</div>
+		</FluentLayout>
+		<FluentToastProvider MaxToastCount="2" />
+	</FluentDesignSystemProvider>
 </main>
-
-@code
-{
-	public bool IsNavMenuOpen { get; set; } = false;
-
-	public string NavMenuClass => IsNavMenuOpen ? ""
-		: "dn";
-
-	public string OpenNavButtonClass => IsNavMenuOpen ? "dn" : string.Empty;
-
-	public string CloseNavButtonClass => IsNavMenuOpen ? string.Empty : "dn";
-
-	@* 	private static MudTheme InitializeMudTheme()
-	{
-		var theme = new MudTheme();
-		theme.PaletteDark.Primary = Colors.DeepOrange.Lighten2;
-		theme.PaletteDark.Secondary = Colors.Red.Accent4;
-		theme.PaletteDark.Tertiary = Colors.DeepPurple.Accent2;
-		return theme;
-	} *@
-}

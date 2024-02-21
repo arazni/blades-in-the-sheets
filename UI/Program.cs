@@ -20,6 +20,7 @@ builder.Services.AddTransient<IMigrationHandler, MigrationHandler>();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddSingleton<SheetJank>();
 builder.Services.AddSingleton<CreationJank>();
+builder.Services.AddSingleton<IThemeSettingService, ThemeSettingService>();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddFluentUIComponents();
 
