@@ -6,19 +6,20 @@
 @inject IThemeSettingService ThemeSettingService
 
 <main>
+	@* FluentDesignSystemProvider must be first child for js to work *@
 	<FluentDesignSystemProvider @ref="ThemeProvider" AccentBaseColor="@ThemeSettingService.GetGlobalAccentBaseColor()" NeutralBaseColor="@ThemeSettingService.GetGlobalNeutralBaseColor()" BaseLayerLuminance="@ThemeSettingService.GetGlobalBaseLayerLuminence()">
 		<FluentLayout NavMenuTitle="Navigation Menu">
 			<FluentHeader>
 				<FluentButton Title="Show Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Accent" OnClick="_ => IsNavMenuOpen = true" Class="@OpenNavButtonClass" />
 				<FluentButton Title="Hide Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Neutral" OnClick="_ => IsNavMenuOpen = false" Class="@CloseNavButtonClass" />
 				<h1 class="bits">Blades in the Sheets</h1>
-				<img src="icon-192.png" Alt="Icon of a blade piercing a character sheet" class="layout-header-icon" />
+				<img src="icon-192.png" alt="Icon of a blade piercing a character sheet" class="layout-header-icon" />
 			</FluentHeader>
 			<div class="horizontal-stack">
 				<FluentNavMenu Class="@("nav " + @NavMenuClass)">
 					<FluentNavLink Icon="new Icons.Filled.Size20.Home()" Href="/">Home</FluentNavLink>
 					<FluentNavLink Icon="new Icons.Filled.Size20.DrinkCoffee()" Href="@Paths.Tips">Tip Jar</FluentNavLink>
-					<FluentNavLink Icon="new Icons.Filled.Size20.PaintBrush()" Href="@Paths.Theme">Theme</FluentNavLink>
+					<FluentNavLink Icon="new Icons.Filled.Size20.PaintBrush()" Href="@Paths.Theme">Theme (beta)</FluentNavLink>
 				</FluentNavMenu>
 				<FluentBodyContent @onmouseenter="_ => IsNavMenuOpen = false" @onfocusin="_ => IsNavMenuOpen = false">
 					@Body
