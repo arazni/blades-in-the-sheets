@@ -59,7 +59,7 @@ public class ThemeSettingService(NeutralBaseColor neutralBaseColor, AccentBaseCo
 
 	public ThemeSetting ScumTheme => new()
 	{
-		AccentBaseColor = "#DA70D6", //631ca6
+		AccentBaseColor = "#631ca6", //"#DA70D6", //631ca6
 		NeutralBaseColor = "#4682B4",
 		BaseLayerLuminence = 1f
 	};

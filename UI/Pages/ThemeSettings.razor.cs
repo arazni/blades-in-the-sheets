@@ -14,22 +14,28 @@ public partial class ThemeSettings
 
 	IJSObjectReference? module = default;
 
-	FluentButton? ButtonDefault { get; set; }
+	ThemeButtonData[] ButtonDatas { get; set; } = [];
 
-	FluentButton? ButtonLight { get; set; }
+	protected override void OnInitialized()
+	{
+		ButtonDatas =
+		[
+			new(ThemeSettingService.DefaultTheme, "Default Theme"),
+			new(ThemeSettingService.LightTheme, "Light Theme"),
+			new(ThemeSettingService.BladesTheme, "Blades in the Dark Theme"),
+			new(ThemeSettingService.ScumTheme, "Scum and Villainy Theme")
+		];
 
-	FluentButton? ButtonBlades { get; set; }
-
-	FluentButton? ButtonScum { get; set; }
+		base.OnInitialized();
+	}
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		if (firstRender)
 		{
-			await ThemeSettingService.SetElementTheme(ButtonDefault!.Element, ThemeSettingService.DefaultTheme);
-			await ThemeSettingService.SetElementTheme(ButtonLight!.Element, ThemeSettingService.LightTheme);
-			await ThemeSettingService.SetElementTheme(ButtonBlades!.Element, ThemeSettingService.BladesTheme);
-			await ThemeSettingService.SetElementTheme(ButtonScum!.Element, ThemeSettingService.ScumTheme);
+			foreach (var buttonData in ButtonDatas)
+				await ThemeSettingService.SetElementTheme(buttonData.FluentButton!.Element, buttonData.ThemeSetting);
+
 			module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/ThemeSettings.razor.js");
 		}
 
@@ -41,5 +47,16 @@ public partial class ThemeSettings
 		ThemeSettingService.SetGlobalTheme(themeSetting);
 		await Task.Delay(1); // hacky trick learned from microsoft's blazor fluent ui team
 		await module!.InvokeVoidAsync("fixBodyBackgroundColor");
+	}
+
+	class ThemeButtonData(ThemeSetting themeSetting, string text)
+	{
+		public FluentButton? FluentButton { get; set; }
+
+		public ThemeSetting ThemeSetting { get; set; } = themeSetting;
+
+		public string Text { get; set; } = text;
+
+		public string Class => ThemeSetting.BaseLayerLuminence < .5f ? "black-text" : string.Empty;
 	}
 }
