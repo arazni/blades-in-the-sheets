@@ -38,7 +38,8 @@ public class ThemeSettingService(NeutralBaseColor neutralBaseColor, AccentBaseCo
 	{
 		AccentBaseColor = "#0078d4",
 		NeutralBaseColor = "#808080",
-		BaseLayerLuminence = 0.15f
+		BaseLayerLuminence = 0.15f,
+		ScareColor = "#E9835E"
 	};
 
 	public ThemeSetting DefaultTheme => Default;
@@ -47,20 +48,23 @@ public class ThemeSettingService(NeutralBaseColor neutralBaseColor, AccentBaseCo
 	{
 		AccentBaseColor = "#0078d4",
 		NeutralBaseColor = "#808080",
-		BaseLayerLuminence = 0.98f
+		BaseLayerLuminence = 0.98f,
+		ScareColor = "#BC2F32"
 	};
 
 	public ThemeSetting BladesTheme => new()
 	{
 		AccentBaseColor = "#e75b06",
 		NeutralBaseColor = "#ffffff",
-		BaseLayerLuminence = 0.15f
+		BaseLayerLuminence = 0.15f,
+		ScareColor = "#E9835E"
 	};
 
 	public ThemeSetting ScumTheme => new()
 	{
-		AccentBaseColor = "#631ca6", //"#DA70D6", //631ca6
+		AccentBaseColor = "#631ca6", //"#DA70D6"
 		NeutralBaseColor = "#4682B4",
-		BaseLayerLuminence = 1f
+		BaseLayerLuminence = 1f,
+		ScareColor = "#BC2F32"
 	};
 }

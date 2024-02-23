@@ -39,7 +39,7 @@ public sealed partial class MainLayout
 		if (firstRender)
 		{
 			module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/ThemeSettings.razor.js");
-			await module.InvokeVoidAsync("fixBodyBackgroundColor");
+			await module.InvokeVoidAsync("fixBodyBackgroundColor", ThemeSettingService.DefaultTheme.ScareColor);
 		}
 
 		await base.OnAfterRenderAsync(firstRender);

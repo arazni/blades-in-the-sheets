@@ -10,7 +10,7 @@
 	{
 		@foreach (var description in HarmDescriptions)
 		{
-			<FluentButton IconEnd="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="_ => RemoveHarm(description)" Title="@AriaLabel(description)">@description</FluentButton>
+			<FluentButton IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="_ => RemoveHarm(description)" Title="@AriaLabel(description)" BackgroundColor="var(--scare-color)">@description</FluentButton>
 		}
 	}
 	else

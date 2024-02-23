@@ -14,12 +14,12 @@
 					@if (friend.Closeness == FriendCloseness.CloseFriend)
 					{
 						<FluentButton Class="contact-button" IconStart="ContactIcon" Appearance="Appearance.Accent" OnClick="() => Rolodex.DowngradeCloseFriend(friend)" Title="@ButtonLabel(friend, "Estrange from")" />
-						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="() => Rolodex.RemoveFriend(friend)" Title="@ButtonLabel(friend, "Remove")" />
+						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="() => Rolodex.RemoveFriend(friend)" Title="@ButtonLabel(friend, "Remove")" BackgroundColor="var(--scare-color)" />
 					}
 					else if (friend.Closeness == FriendCloseness.Rival)
 					{
 						<FluentButton Class="contact-button" IconStart="ContactIcon" Appearance="Appearance.Accent" OnClick="() => Rolodex.UpgradeRival(friend)" Title="@ButtonLabel(friend, "Reconcile with")" />
-						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="() => Rolodex.RemoveFriend(friend)" Title="@ButtonLabel(friend, "Remove")" />
+						<FluentButton Class="contact-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="() => Rolodex.RemoveFriend(friend)" Title="@ButtonLabel(friend, "Remove")" BackgroundColor="var(--scare-color)" />
 					}
 					else
 					{

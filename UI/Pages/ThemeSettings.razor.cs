@@ -46,7 +46,7 @@ public partial class ThemeSettings
 	{
 		ThemeSettingService.SetGlobalTheme(themeSetting);
 		await Task.Delay(1); // hacky trick learned from microsoft's blazor fluent ui team
-		await module!.InvokeVoidAsync("fixBodyBackgroundColor");
+		await module!.InvokeVoidAsync("fixBodyBackgroundColor", themeSetting.ScareColor);
 	}
 
 	class ThemeButtonData(ThemeSetting themeSetting, string text)

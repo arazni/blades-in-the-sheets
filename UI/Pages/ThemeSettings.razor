@@ -11,6 +11,9 @@
 					<div class="card-header-left">
 						<h4>@buttonData.Text</h4>
 					</div>
+					<div class="card-header-right">
+						<FluentButton Appearance="Appearance.Accent" BackgroundColor="var(--scare-color)" Style="@($"--scare-color: {buttonData.ThemeSetting.ScareColor}")" Class="@buttonData.Class" Title="Button does nothing" IconStart="new Icons.Filled.Size20.Delete()">Warning Color</FluentButton>
+					</div>
 				</div>
 				<div class="vertical-stack card-body">
 					<FluentButton @ref="buttonData.FluentButton" Appearance="Appearance.Accent" OnClick="_ => SetGlobalTheme(buttonData.ThemeSetting)" Class="@buttonData.Class">Apply @buttonData.Text</FluentButton>

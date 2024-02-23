@@ -9,7 +9,7 @@
 	@if (IsFixMode)
 	{
 		<h5>
-			<FluentButton Class="min-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="(e => RemoveAbility(Ability))" Title="@RemoveAbilityLabel" BackgroundColor="var(--warning)">@Ability.LearnedTimesDisplayName()</FluentButton>
+			<FluentButton Class="min-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="(e => RemoveAbility(Ability))" Title="@RemoveAbilityLabel" BackgroundColor="var(--scare-color)">@Ability.LearnedTimesDisplayName()</FluentButton>
 		</h5>
 		<FluentTextArea Class="w100" @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Rows="5" Appearance="FluentInputAppearance.Outline" AriaLabel="@EditAbilityLabel" Id="@TextFieldId" />
 	}

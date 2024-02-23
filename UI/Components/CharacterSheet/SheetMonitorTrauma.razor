@@ -21,7 +21,7 @@
 			{
 				@if (IsFixMode)
 				{
-					<FluentButton IconEnd="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" Color="Color.Secondary" OnClick="(_ => RemoveTrauma(option))" Title="@RemoveTraumaAriaLabel(option)">@option</FluentButton>
+					<FluentButton IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" Color="Color.Secondary" OnClick="(_ => RemoveTrauma(option))" Title="@RemoveTraumaAriaLabel(option)" BackgroundColor="var(--scare-color)">@option</FluentButton>
 				}
 				else
 				{

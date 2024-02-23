@@ -58,7 +58,7 @@
 			}
 			else
 			{
-				<FluentButton Class="gear-button" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size20.Delete()" OnClick="() => Gear.RemoveAvailableItem(item)" Title="@($"Delete {@item.Display()}")">@item.Display()</FluentButton>
+				<FluentButton Class="gear-button" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size20.Delete()" OnClick="() => Gear.RemoveAvailableItem(item)" Title="@($"Delete {@item.Display()}")" BackgroundColor="var(--scare-color)">@item.Display()</FluentButton>
 			}
 		}
 	</div>

@@ -26,7 +26,7 @@
 					</div>
 					<div class="card-header-right">
 						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Download(character)" Class="@DownloadModeClass" aria-label="@DownloadCharacterLabel(character.Name)">Export</FluentButton>
-						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Delete(character.Id)" Class="@DeleteModeClass" aria-label="@DeleteCharacterLabel(character.Name)" Color="Color.Error">Delete</FluentButton>
+						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Delete(character.Id)" Class="@DeleteModeClass" aria-label="@DeleteCharacterLabel(character.Name)" BackgroundColor="var(--scare-color)">Delete</FluentButton>
 					</div>
 				</div>
 				<div class="vertical-stack card-body">
@@ -42,10 +42,10 @@
 			<div class="card-header-right">
 				@if (Characters.Any())
 				{
-					<FluentButton Title="Enable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownload())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = true" Class="@NotDownloadModeClass"></FluentButton>
-					<FluentButton Title="Disable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownloadOff())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = false" Class="@DownloadModeClass"></FluentButton>
-					<FluentButton Title="Enable Delete Mode" IconStart="@(new Icons.Filled.Size20.Delete())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = true" Class="@NotDeleteModeClass"></FluentButton>
-					<FluentButton Title="Disable Delete Mode" IconStart="@(new Icons.Filled.Size20.DeleteOff())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = false" Class="@DeleteModeClass"></FluentButton>
+					<FluentButton Title="Enable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownload())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = true" Class="@NotDownloadModeClass" />
+					<FluentButton Title="Disable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownloadOff())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = false" Class="@DownloadModeClass" />
+					<FluentButton Title="Enable Delete Mode" IconStart="@(new Icons.Filled.Size20.Delete())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = true" Class="@NotDeleteModeClass" BackgroundColor="var(--scare-color)" />
+					<FluentButton Title="Disable Delete Mode" IconStart="@(new Icons.Filled.Size20.DeleteOff())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = false" Class="@DeleteModeClass" />
 				}
 			</div>
 		</div>
