@@ -1,8 +1,11 @@
 using Microsoft.FluentUI.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace UI.Shared;
 public sealed partial class MainLayout
 {
+	IJSObjectReference? module = default;
+
 	public bool IsNavMenuOpen { get; set; } = false;
 
 	public string NavMenuClass => IsNavMenuOpen ? ""
@@ -29,6 +32,17 @@ public sealed partial class MainLayout
 	public void Dispose()
 	{
 		ThemeSettingService.ThemeChanged -= OnThemeChanged;
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/ThemeSettings.razor.js");
+			await module.InvokeVoidAsync("fixBodyBackgroundColor");
+		}
+
+		await base.OnAfterRenderAsync(firstRender);
 	}
 
 	//	private static MudTheme InitializeMudTheme()
