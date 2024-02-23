@@ -5,7 +5,7 @@
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Dossier">
 	<div class="wrap-row">
 		<div class="fg1">
-			<FluentTextField  @bind-Value="Dossier.Name" Id="dossier-name" Label="Name" />
+			<FluentTextField @bind-Value="Dossier.Name" Id="dossier-name" Label="Name" />
 		</div>
 		<div class="fg1">
 			<FluentTextField @bind-Value="Dossier.Alias" Id="dossier-alias" Label="@AliasSynonym" />
@@ -25,8 +25,14 @@
 	</div>
 	@if (IsFixMode)
 	{
-		<FluentSelect TOption="BackgroundSetting" Items="GameSetting.Backgrounds" @bind-Value="Dossier.Background.Name" OptionValue="i => i.Name" OptionText="i => i.Name" Label="Background" Id="select-background" />
-		<FluentSelect TOption="HeritageSetting" Items="GameSetting.Heritages" @bind-Value="Dossier.Heritage.Name" OptionValue="i => i.Name" OptionText="i => i.Name" Label="Heritage" Id="select-heritage" />
-		<FluentSelect TOption="ViceSetting" Items="GameSetting.Vices" @bind-Value="Dossier.Vice.Name" OptionValue="i => i.Name" OptionText="i => i.Name" Label="Vice" Id="select-vice" />
+		<div>
+			<FluentSelect TOption="BackgroundSetting" Items="GameSetting.Backgrounds" @bind-Value="Dossier.Background.Name" OptionValue="i => i.Name" OptionText="i => i.Name" Label="Background" Id="select-background" />
+		</div>
+		<div>
+			<FluentSelect TOption="HeritageSetting" Items="GameSetting.Heritages" @bind-Value="Dossier.Heritage.Name" OptionValue="i => i.Name" OptionText="i => i.Name" Label="Heritage" Id="select-heritage" />
+		</div>
+		<div>
+			<FluentSelect TOption="ViceSetting" Items="GameSetting.Vices" @bind-Value="Dossier.Vice.Name" OptionValue="i => i.Name" OptionText="i => i.Name" Label="Vice" Id="select-vice" />
+		</div>
 	}
 </SheetCard>

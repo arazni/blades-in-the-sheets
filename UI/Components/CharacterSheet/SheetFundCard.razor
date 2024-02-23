@@ -10,7 +10,14 @@
 			<BladeRating @bind-Value="Fund.Satchel.Coins" MaxValue="Fund.Satchel.MaxCoins" CheckboxAriaLabelSuffix="@SatchelLabel" Id="fund-satchel" />
 		</div>
 		<div class="fund-item">
-			<FluentNumberField Style="width: 70px;" @bind-Value="Fund.Stash.Stash" Label="Stash:" ReadOnly="!IsFixMode" Min="@Fund.Stash.MinCoins.ToString()" Max="@Fund.Stash.MaxCoins.ToString()" />
+			@if (IsFixMode)
+			{
+				<FluentNumberField Style="width: 70px;" @bind-Value="Fund.Stash.Stash" Label="Stash:" ReadOnly="!IsFixMode" Min="@Fund.Stash.MinCoins.ToString()" Max="@Fund.Stash.MaxCoins.ToString()" />
+			}
+			else
+			{
+				<label>Stash: @Fund.Stash.Stash</label>
+			}
 		</div>
 	</div>
 	<div class="fund-row">

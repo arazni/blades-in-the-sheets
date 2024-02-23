@@ -17,8 +17,8 @@ public partial class CharacterSheet
 
 	private bool isSaving = false;
 
-	Icon SaveIcon => isSaving ? new Icons.Filled.Size20.CheckmarkCircle()
-		: new Icons.Filled.Size20.Save();
+	Icon SaveIcon => isSaving ? new Icons.Filled.Size32.CheckmarkCircle()
+		: new Icons.Filled.Size28.Save();
 
 	protected override async Task OnParametersSetAsync()
 	{

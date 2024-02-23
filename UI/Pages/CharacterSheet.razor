@@ -9,7 +9,7 @@
 @inject ILoader Loader
 @inject IToastService Toaster
 
-<FluentGrid Justify="JustifyContent.Center">
+<FluentGrid Justify="JustifyContent.Center" Style="padding-bottom: 40px;">
 	<FluentGridItem xs="12" lg="6">
 		<div class="vertical-stack aic">
  			<SheetDossierCard Dossier="Character.Dossier" AliasSynonym="@PlaybookSetting.AliasSynonym" GameSetting="GameSetting" />
@@ -26,5 +26,5 @@
 			<SheetNotebookCard GameSetting="GameSetting" Character="Character" />
 		</div>
 	</FluentGridItem>
-	<FluentButton IconStart="@SaveIcon" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
+	<FluentButton IconStart="@SaveIcon" Appearance="Appearance.Accent" OnClick="Save" Style="position: fixed; right: 20px; bottom: 20px;" Title="Save Character" />
 </FluentGrid>
