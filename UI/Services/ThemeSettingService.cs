@@ -57,7 +57,7 @@ public class ThemeSettingService(NeutralBaseColor neutralBaseColor, AccentBaseCo
 		AccentBaseColor = "#e75b06",
 		NeutralBaseColor = "#ffffff",
 		BaseLayerLuminence = 0.15f,
-		ScareColor = "#E9835E"
+		ScareColor = "#FF6432"
 	};
 
 	public ThemeSetting ScumTheme => new()
