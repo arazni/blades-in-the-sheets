@@ -12,7 +12,8 @@
 						<h4>@buttonData.Text</h4>
 					</div>
 					<div class="card-header-right">
-						<FluentButton Appearance="Appearance.Accent" BackgroundColor="var(--scare-color)" Style="@($"--scare-color: {buttonData.ThemeSetting.ScareColor}")" Class="@buttonData.Class" Title="Button does nothing" IconStart="new Icons.Filled.Size20.Delete()">Warning Color</FluentButton>
+						<FluentCheckbox AriaLabel="Button does nothing, just demos color" />
+						<FluentButton Appearance="Appearance.Accent" BackgroundColor="var(--scare-color)" Style="@($"--scare-color: {buttonData.ThemeSetting.ScareColor}")" Class="@buttonData.Class" Title="Button does nothing, just demos color" IconStart="new Icons.Filled.Size20.Delete()">Warning Color</FluentButton>
 					</div>
 				</div>
 				<div class="vertical-stack card-body">
