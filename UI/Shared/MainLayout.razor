@@ -20,7 +20,7 @@
 				<FluentNavMenu Class="@("nav " + @NavMenuClass)">
 					<FluentNavLink Icon="new Icons.Filled.Size20.Home()" Href="/">Home</FluentNavLink>
 					<FluentNavLink Icon="new Icons.Filled.Size20.DrinkCoffee()" Href="@Paths.Tips">Tip Jar</FluentNavLink>
-					<FluentNavLink Icon="new Icons.Filled.Size20.PaintBrush()" Href="@Paths.Theme">Theme (beta)</FluentNavLink>
+					<FluentNavLink Icon="new Icons.Filled.Size20.PaintBrush()" Href="@Paths.Theme">Theme</FluentNavLink>
 				</FluentNavMenu>
 				<FluentBodyContent @onmouseenter="_ => IsNavMenuOpen = false" @onfocusin="_ => IsNavMenuOpen = false">
 					@Body

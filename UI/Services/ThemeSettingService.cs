@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.FluentUI.AspNetCore.Components.DesignTokens;
+using Models.Settings;
 
 namespace UI.Services;
 
-public class ThemeSettingService(NeutralBaseColor neutralBaseColor, AccentBaseColor accentBaseColor, BaseLayerLuminance baseLayerLuminance) : IThemeSettingService
+public class ThemeSettingService(NeutralBaseColor neutralBaseColor, AccentBaseColor accentBaseColor, BaseLayerLuminance baseLayerLuminance, IThemeStorageService themeStorageService) : IThemeSettingService
 {
-	private readonly NeutralBaseColor neutralBaseColor = neutralBaseColor;
-	private readonly AccentBaseColor accentBaseColor = accentBaseColor;
-	private readonly BaseLayerLuminance baseLayerLuminance = baseLayerLuminance;
+	readonly NeutralBaseColor neutralBaseColor = neutralBaseColor;
+	readonly AccentBaseColor accentBaseColor = accentBaseColor;
+	readonly BaseLayerLuminance baseLayerLuminance = baseLayerLuminance;
+	readonly IThemeStorageService themeStorageService = themeStorageService;
 
 	private ThemeSetting GlobalTheme { get; set; } = Default;
 
@@ -21,10 +23,19 @@ public class ThemeSettingService(NeutralBaseColor neutralBaseColor, AccentBaseCo
 
 	public float GetGlobalBaseLayerLuminence() => GlobalTheme.BaseLayerLuminence;
 
-	public void SetGlobalTheme(ThemeSetting theme)
+	public string GetGlobalThemeScareColor() => GlobalTheme.ScareColor;
+
+	public async Task SetGlobalTheme(ThemeSetting theme)
 	{
 		GlobalTheme = theme;
+		await this.themeStorageService.SaveGlobalTheme(GlobalTheme);
 		NotifyGlobalThemeChanged();
+	}
+
+	public async Task LoadGlobalTheme()
+	{
+		GlobalTheme = await this.themeStorageService.LoadGlobalTheme()
+			?? DefaultTheme;
 	}
 
 	public async Task SetElementTheme(ElementReference element, ThemeSetting theme)
@@ -55,7 +66,7 @@ public class ThemeSettingService(NeutralBaseColor neutralBaseColor, AccentBaseCo
 	public ThemeSetting BladesTheme => new()
 	{
 		AccentBaseColor = "#e75b06",
-		NeutralBaseColor = "#ffffff",
+		NeutralBaseColor = "#808080",
 		BaseLayerLuminence = 0.15f,
 		ScareColor = "#FF6432"
 	};

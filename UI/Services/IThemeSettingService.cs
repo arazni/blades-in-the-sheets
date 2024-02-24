@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Models.Settings;
 
 namespace UI.Services;
 public interface IThemeSettingService
@@ -13,17 +14,8 @@ public interface IThemeSettingService
 	string GetGlobalAccentBaseColor();
 	float GetGlobalBaseLayerLuminence();
 	string GetGlobalNeutralBaseColor();
+	string GetGlobalThemeScareColor();
+	Task LoadGlobalTheme();
 	Task SetElementTheme(ElementReference element, ThemeSetting theme);
-	void SetGlobalTheme(ThemeSetting theme);
-}
-
-public class ThemeSetting
-{
-	public required string NeutralBaseColor { get; set; }
-
-	public required string AccentBaseColor { get; set; }
-
-	public required float BaseLayerLuminence { get; set; }
-
-	public required string ScareColor { get; set; }
+	Task SetGlobalTheme(ThemeSetting theme);
 }

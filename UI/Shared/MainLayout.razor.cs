@@ -29,6 +29,12 @@ public sealed partial class MainLayout
 		base.OnInitialized();
 	}
 
+	protected override async Task OnInitializedAsync()
+	{
+		await ThemeSettingService.LoadGlobalTheme();
+		await base.OnInitializedAsync();
+	}
+
 	public void Dispose()
 	{
 		ThemeSettingService.ThemeChanged -= OnThemeChanged;
@@ -39,7 +45,7 @@ public sealed partial class MainLayout
 		if (firstRender)
 		{
 			module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/ThemeSettings.razor.js");
-			await module.InvokeVoidAsync("fixBodyBackgroundColor", ThemeSettingService.DefaultTheme.ScareColor);
+			await module.InvokeVoidAsync("fixBodyBackgroundColor", ThemeSettingService.GetGlobalThemeScareColor());
 		}
 
 		await base.OnAfterRenderAsync(firstRender);

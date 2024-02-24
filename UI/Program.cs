@@ -17,10 +17,14 @@ builder.Services.AddTransient<ILoader, Loader>();
 builder.Services.AddTransient<IFileReader, HttpFileReader>();
 builder.Services.AddTransient<ICharacterCoordinator, CharacterCoordinator>();
 builder.Services.AddTransient<IMigrationHandler, MigrationHandler>();
+builder.Services.AddTransient<IThemeStorageService, ThemeStorageService>();
+
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddScoped<IThemeSettingService, ThemeSettingService>();
+
 builder.Services.AddSingleton<SheetJank>();
 builder.Services.AddSingleton<CreationJank>();
-builder.Services.AddSingleton<IThemeSettingService, ThemeSettingService>();
+
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddFluentUIComponents();
 

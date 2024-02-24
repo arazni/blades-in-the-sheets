@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Models.Settings;
 using UI.Services;
 
 namespace UI.Pages;
@@ -44,7 +45,7 @@ public partial class ThemeSettings
 
 	async Task SetGlobalTheme(ThemeSetting themeSetting)
 	{
-		ThemeSettingService.SetGlobalTheme(themeSetting);
+		await ThemeSettingService.SetGlobalTheme(themeSetting);
 		await Task.Delay(1); // hacky trick learned from microsoft's blazor fluent ui team
 		await module!.InvokeVoidAsync("fixBodyBackgroundColor", themeSetting.ScareColor);
 	}
