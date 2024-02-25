@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
 using Models.Characters;
 using Models.Settings;
+using Toolbelt.Blazor.HotKeys2;
 
 namespace UI.Pages;
 public partial class CharacterSheet
@@ -17,8 +18,18 @@ public partial class CharacterSheet
 
 	private bool isSaving = false;
 
+	private HotKeysContext? hotKeysContext;
+
 	Icon SaveIcon => isSaving ? new Icons.Filled.Size32.CheckmarkCircle()
 		: new Icons.Filled.Size28.Save();
+
+	protected override void OnInitialized()
+	{
+		this.hotKeysContext = Hotkeys.CreateContext()
+			.Add(ModCode.Ctrl, Code.S, HackSave, "Save character sheet");
+
+		base.OnInitialized();
+	}
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -27,6 +38,8 @@ public partial class CharacterSheet
 
 		await base.OnParametersSetAsync();
 	}
+
+	async ValueTask HackSave() => await Save();
 
 	async Task Save()
 	{
@@ -45,5 +58,11 @@ public partial class CharacterSheet
 
 		Toaster.ShowSuccess("Saved!");
 		isSaving = false;
+	}
+
+	public void Dispose()
+	{
+		this.hotKeysContext?.Dispose();
+		GC.SuppressFinalize(this);
 	}
 }

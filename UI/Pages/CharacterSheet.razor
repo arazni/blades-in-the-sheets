@@ -2,12 +2,15 @@
 @using Models.Characters
 @using Models.Settings;
 @using Persistence.Json;
+@using Toolbelt.Blazor.HotKeys2
 @using UI.Components
 @using UI.Components.CharacterSheet
 @using UI.Services
 @inject IStorageService Storage
 @inject ILoader Loader
 @inject IToastService Toaster
+@inject HotKeys Hotkeys
+@implements IDisposable
 
 <FluentGrid Justify="JustifyContent.Center" Style="padding-bottom: 40px;">
 	<FluentGridItem xs="12" lg="6">

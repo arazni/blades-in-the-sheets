@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.FluentUI.AspNetCore.Components;
 using Persistence.Json;
 using Persistence.Json.Migrations;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 using UI;
 using UI.Services;
 
@@ -29,5 +30,6 @@ builder.Services.AddSingleton<CreationJank>();
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddFluentUIComponents();
+builder.Services.AddHotKeys2();
 
 await builder.Build().RunAsync();
