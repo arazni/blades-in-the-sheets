@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Models.Characters;
+using Models.Common;
 using UI.Services;
 using Monitor = Models.Characters.Monitor;
 
@@ -15,23 +16,34 @@ public partial class SheetMonitorTrauma
 	[Parameter, EditorRequired]
 	public IReadOnlyCollection<string> TraumaOptions { get; set; } = Array.Empty<string>();
 
-	public IReadOnlyCollection<string> AvailableTraumaOptions =>
-		TraumaOptions.Except(Monitor.Trauma.Traumas)
-			.ToArray();
-
 	bool DisableTraumaSelect =>
 		Monitor.Stress.CurrentStress != MonitorStress.MaxStress
-		&& !IsFixMode;
+		&& !IsFixMode
+		|| Monitor.Trauma.IsRetired;
 
 	bool DisableAddTrauma =>
 		DisableTraumaSelect
-		|| SelectedTrauma == null;
+		|| !SelectedTrauma.HasInk()
+		|| Monitor.Trauma.IsRetired;
 
 	string SelectedTrauma { get; set; } = string.Empty;
 
+	protected override void OnParametersSet()
+	{
+		if (TraumaOptions.Any())
+			ResetTraumaSelect();
+
+		base.OnParametersSet();
+	}
+
+	private void ResetTraumaSelect()
+	{
+		SelectedTrauma = TraumaOptions.Except(Monitor.Trauma.Traumas).First();
+	}
+
 	void AddTrauma()
 	{
-		if (SelectedTrauma == null)
+		if (!SelectedTrauma.HasInk())
 			return;
 
 		var success = Monitor.Trauma.Add(SelectedTrauma);
@@ -45,7 +57,7 @@ public partial class SheetMonitorTrauma
 			SheetJank.NotifyTraumaChanged();
 		}
 
-		SelectedTrauma = TraumaOptions.First();
+		ResetTraumaSelect();
 	}
 
 	void RemoveTrauma(string trauma)

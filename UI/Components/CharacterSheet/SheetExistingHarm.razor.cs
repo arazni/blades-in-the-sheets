@@ -18,7 +18,7 @@ public partial class SheetExistingHarm
 		HarmIntensity.Lesser => "Reduce effect",
 		HarmIntensity.Moderate => "-1 to dice pool",
 		HarmIntensity.Severe => "Incapacitated",
-		HarmIntensity.Fatal => "Catastrophic or fatal:",
+		HarmIntensity.Fatal => "Catastrophic or fatal",
 		_ => throw new NotImplementedException()
 	};
 

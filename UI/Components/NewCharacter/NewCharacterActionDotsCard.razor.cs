@@ -21,6 +21,6 @@ public partial class NewCharacterActionDotsCard
 		base.OnParametersSet();
 	}
 
-	static string DotLabel(string actionName, int dot) =>
-		$"{actionName} dot {dot}";
+	static string DotLabel(string actionName, int dot, bool isFilled) =>
+		$"{actionName} dot {dot} {(isFilled ? "filled" : "unfilled")}";
 }

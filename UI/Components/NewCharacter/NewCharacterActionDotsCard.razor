@@ -27,10 +27,10 @@
 			{
 				<div class="horizontal-stack aib">
 					<div class="row">
-						<FluentButton Title="@DotLabel(action.Name, 1)" IconStart="new Icons.Regular.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotOne(true)" Disabled="!ViewModel.IsDotOneEnabled(action)" Class="@Classes.DisplayNone(action.IsDotOneFilled)" />
-						<FluentButton Title="@DotLabel(action.Name, 1)" IconStart="new Icons.Filled.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotOne(false)" Disabled="!ViewModel.IsDotOneEnabled(action)" Class="@Classes.Display(action.IsDotOneFilled)" />
-						<FluentButton Title="@DotLabel(action.Name, 2)" IconStart="new Icons.Regular.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotTwo(true)" Disabled="!ViewModel.IsDotTwoEnabled(action)" Class="@Classes.DisplayNone(action.IsDotTwoFilled)" />
-						<FluentButton Title="@DotLabel(action.Name, 2)" IconStart="new Icons.Filled.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotTwo(false)" Disabled="!ViewModel.IsDotTwoEnabled(action)" Class="@Classes.Display(action.IsDotTwoFilled)" />
+						<FluentButton Title="@DotLabel(action.Name, 1, false)" IconStart="new Icons.Regular.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotOne(true)" Disabled="!ViewModel.IsDotOneEnabled(action)" Class="@Classes.DisplayNone(action.IsDotOneFilled)" />
+						<FluentButton Title="@DotLabel(action.Name, 1, true)" IconStart="new Icons.Filled.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotOne(false)" Disabled="!ViewModel.IsDotOneEnabled(action)" Class="@Classes.Display(action.IsDotOneFilled)" />
+						<FluentButton Title="@DotLabel(action.Name, 2, false)" IconStart="new Icons.Regular.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotTwo(true)" Disabled="!ViewModel.IsDotTwoEnabled(action)" Class="@Classes.DisplayNone(action.IsDotTwoFilled)" />
+						<FluentButton Title="@DotLabel(action.Name, 2, true)" IconStart="new Icons.Filled.Size20.Square()" Appearance="Appearance.Lightweight" OnClick="_ => action.ToggleDotTwo(false)" Disabled="!ViewModel.IsDotTwoEnabled(action)" Class="@Classes.Display(action.IsDotTwoFilled)" />
 					</div>
 					<FluentAccordion Class="w100">
 						<FluentAccordionItem Heading="@action.Name" HeadingLevel="6">

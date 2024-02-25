@@ -6,7 +6,7 @@
 	<h5>Stress</h5>
 	<BladeRating @bind-Value="@Monitor.Stress.CurrentStress" MaxValue="@MonitorStress.MaxStress" CheckboxAriaLabelSuffix="Stress" />
 	<div class="horizontal-stack jsb">
-		<FluentSelect @bind-Value="SelectedTrauma" Items="AvailableTraumaOptions" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect" AriaLabel="Select Trauma" TOption="string" />
+		<FluentSelect @bind-Value="SelectedTrauma" Items="TraumaOptions" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect" AriaLabel="Select Trauma" TOption="string" OptionDisabled="t => Monitor.Trauma.Traumas.Contains(t)" />
 		<FluentButton IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Disabled="DisableAddTrauma" OnClick="AddTrauma" Class="min-button" Title="Add Trauma">Trauma</FluentButton>
 	</div>
 	@if (Monitor.Trauma.Traumas.Any())

@@ -21,5 +21,5 @@ public class MonitorTrauma
 
 	public bool Remove(string trauma) => TraumaSet.Remove(trauma);
 
-	internal bool IsRetired => Traumas.Count == MaxTraumas;
+	public bool IsRetired => Traumas.Count == MaxTraumas;
 }
