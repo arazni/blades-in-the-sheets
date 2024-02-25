@@ -18,9 +18,9 @@ public partial class SheetFundCard
 
 	int InputMaximum => Math.Max(Fund.CoinSpaceRemaining, Fund.MaxAffordable);
 
-	bool GainButtonEnabled => Fund.CanGain(CoinChangeInput) && CoinChangeInput > 0;
+	bool GainButtonEnabled => Fund.CanGain(CoinChangeInput) && CoinChangeInput > 0 && !IsFixMode;
 
-	bool SpendButtonEnabled => Fund.CanSpend(CoinChangeInput) && CoinChangeInput > 0;
+	bool SpendButtonEnabled => Fund.CanSpend(CoinChangeInput) && CoinChangeInput > 0 && !IsFixMode;
 
 	string SatchelLabel => $"{CoinSynonym} on hand";
 }

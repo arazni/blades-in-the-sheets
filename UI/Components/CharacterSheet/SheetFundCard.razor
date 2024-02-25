@@ -26,7 +26,7 @@
 	</div>
 	<div class="fund-row aie">
 		<div class="control-item">
-			<FluentNumberField Style="width: 70px;" @bind-Value="CoinChangeInput" Label="@CoinChangeInputLabel" Min="@Fund.MinCoins.ToString()" Max="@InputMaximum.ToString()" id="fund-coin-change" />
+			<FluentNumberField Disabled="IsFixMode" Style="width: 70px;" @bind-Value="CoinChangeInput" Label="@CoinChangeInputLabel" Min="@Fund.MinCoins.ToString()" Max="@InputMaximum.ToString()" Id="fund-coin-change" />
 		</div>
 		<div class="fund-item je">
 			<FluentButton Class="min-button" Disabled="!GainButtonEnabled" OnClick="() => Fund.Gain(CoinChangeInput)" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size20.Savings()">Gain</FluentButton>
