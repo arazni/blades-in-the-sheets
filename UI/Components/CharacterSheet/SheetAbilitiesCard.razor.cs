@@ -63,13 +63,11 @@ public sealed partial class SheetAbilitiesCard
 
 	void AddAbility()
 	{
-		Console.WriteLine(SelectedAbility?.Name);
 		if (SelectedAbility == null)
 			return;
 
 		var success = Playbook.TakeAbility(SelectedAbility);
 
-		Console.WriteLine(success);
 		if (!success)
 			return;
 
@@ -79,6 +77,5 @@ public sealed partial class SheetAbilitiesCard
 		//SelectedAbility = null;
 		SelectedAbility = LearnableAbilities.FirstOrDefault();
 		SheetJank.NotifyAbilitiesChanged();
-		Console.WriteLine(SelectedAbility?.Name);
 	}
 }

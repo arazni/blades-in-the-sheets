@@ -38,4 +38,11 @@ public class Serializer : ISerializer
 	public ThemeSetting DeserializeTheme(string json) =>
 		JsonConvert.DeserializeObject<ThemeSetting>(json, this.serializerSettings)
 		?? throw new ArgumentException("Could not deserialize: " + json, nameof(json));
+
+	public string Serialize(AccessibilitySetting accessibilitySetting) =>
+		JsonConvert.SerializeObject(accessibilitySetting, this.serializerSettings);
+
+	public AccessibilitySetting DeserializeAccessibility(string json) =>
+		JsonConvert.DeserializeObject<AccessibilitySetting>(json, this.serializerSettings)
+		?? throw new ArgumentException("Could not deserialize: " + json, nameof(json));
 }

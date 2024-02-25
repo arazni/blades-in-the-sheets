@@ -21,6 +21,8 @@ public static class Constants
 
 		public const string Theme = "theme";
 
+		public const string Accessibility = "accessibility";
+
 		public static string NewCharacter(GameFile gameFile) => NewCharacter(gameFile.Stem);
 
 		public static string NewCharacter(string gameFileStem) => $"{New}/{gameFileStem}";

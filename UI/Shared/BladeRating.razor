@@ -1,5 +1,19 @@
-﻿<div class="rating" id="@Id">
-	@foreach(var i in Enumerable.Range(0, MaxValue))
+﻿@using UI.Services
+@using Models.Settings
+@implements IDisposable
+@inject IAccessibilitySettingService AccessibilityService
+
+<div class="rating" id="@Id">
+	@if(RatingImplementation == AccessibilitySetting.RatingImplementation.Slider)
+	{
+		<FluentSlider TValue="int" Value="Value" ValueChanged="SliderChanged" Min="0" Max="MaxValue" Step="1" AriaLabel="@CheckboxAriaLabelSuffix" Style="@($"min-width: {SliderMinimumPixelWidth}px; margin-bottom: 30px;")">
+			@foreach (var i in Enumerable.Range(0, MaxValue + 1))
+			{
+				<FluentSliderLabel Position="i">@i</FluentSliderLabel>
+			}
+		</FluentSlider>
+	}
+	else foreach(var i in Enumerable.Range(0, MaxValue))
 	{
 		<BladeRatingCheckbox @ref="Buttons[i]" AriaLabel="@CheckboxLabel(i)" Value="ButtonsAreChecked[i]" ValueChanged="_ => CheckboxChanged(i)" Class="@CheckboxClass(i)" ReadOnly="ReadOnly" />
 	}

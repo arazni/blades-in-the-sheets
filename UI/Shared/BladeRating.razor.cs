@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Components;
+using Models.Settings;
 
 namespace UI.Shared;
 
 public partial class BladeRating
 {
-	[Parameter] public int MinValue { get; set; } = 0;
-
 	[Parameter, EditorRequired] public int MaxValue { get; set; }
 
 	[Parameter, EditorRequired] public string CheckboxAriaLabelSuffix { get; set; } = string.Empty;
@@ -24,7 +23,24 @@ public partial class BladeRating
 
 	protected int previousMaxValue = -1;
 
+	protected AccessibilitySetting.RatingImplementation RatingImplementation { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		InitializeButtons();
+		RatingImplementation = await AccessibilityService.GetRatingImplementation();
+		AccessibilityService.SettingChanged += OnImplementationChanged;
+		await base.OnInitializedAsync();
+	}
+
 	protected override void OnParametersSet()
+	{
+		InitializeButtons();
+
+		base.OnParametersSet();
+	}
+
+	private void InitializeButtons()
 	{
 		if (this.previousMaxValue != MaxValue)
 		{
@@ -38,8 +54,12 @@ public partial class BladeRating
 		ButtonsAreChecked = Enumerable.Range(0, MaxValue)
 			.Select(i => i < Value)
 			.ToArray();
+	}
 
-		base.OnParametersSet();
+	void OnImplementationChanged(AccessibilitySetting setting)
+	{
+		RatingImplementation = setting.Rating;
+		StateHasChanged();
 	}
 
 	public string CheckboxLabel(int index) => $"{index + 1} of {MaxValue} currently {Value} {CheckboxAriaLabelSuffix}";
@@ -62,5 +82,24 @@ public partial class BladeRating
 			await ValueChanged.InvokeAsync(Value);
 
 		Buttons[index]!.HackStateChanged();
+	}
+
+	public async Task SliderChanged(int value)
+	{
+		Value = value;
+
+		if (ValueChanged.HasDelegate)
+			await ValueChanged.InvokeAsync(Value);
+	}
+
+	int SliderMinimumPixelWidth =>
+		MaxValue * 20
+		+ (MaxValue - 1) * 5
+		+ (MaxValue / 3) * 10;
+
+	public void Dispose()
+	{
+		AccessibilityService.SettingChanged -= OnImplementationChanged;
+		GC.SuppressFinalize(this);
 	}
 }

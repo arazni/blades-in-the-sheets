@@ -1,0 +1,22 @@
+﻿@page "/accessibility"
+@using UI.Services
+@inject IAccessibilitySettingService SettingService
+
+<div class="vertical-stack aic mb20">
+	<FluentCard Class="common-card-style">
+		<div class="card-header">
+			<h4>Checkboxes vs. Sliders</h4>
+		</div>
+		<div class="vertical-stack card-body">
+			<p>Action dots and experience trackers on the character sheet pages are implemented with a row of checkboxes by default. This makes linguistic sense because the language used is frequently to "mark a point" of something.</p>
+			<p>However, some users may find a slider component easier to use with keyboard navigation and less repetitive while using screen readers.</p>
+			<FluentSwitch Label="Desired Component" Value="UseSlider" ValueChanged="RatingSwitchValueChanged">
+				<span slot="checked-message">Slider</span>
+				<span slot="unchecked-message">Checkboxes</span>
+			</FluentSwitch>
+			<div style="max-width: 165px;">
+				<BladeRating MaxValue="6" CheckboxAriaLabelSuffix="Testable" Value="RatingSwitchValue" />
+			</div>
+		</div>
+	</FluentCard>
+</div>
