@@ -431,12 +431,12 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Daredevil",
-					"Description": "When you make a desperate roll, you may take +1d. If you do so, do not mark xp in that action s attribute."
+					"Description": "When you make a desperate roll, you may take +1d. If you do so, do not mark xp in that action's attribute."
 				},
 				{
 					"TimesTakeable": 1,
 					"Name": "Shoot First",
-					"Description": "When you attack from hiding or spring a trap, take +1d. When there s a question about who acts first, the answer is you (two characters with Shoot First act simultaneously)."
+					"Description": "When you attack from hiding or spring a trap, take +1d. When there's a question about who acts first, the answer is you (two characters with Shoot First act simultaneously)."
 				},
 				{
 					"TimesTakeable": 1,
@@ -821,12 +821,12 @@
 				{
 					"Name": "Doctor",
 					"ShortDescription": "When you doctor, you attend to the needs of another by lending aid and comfort, or you look scientifically at the world.",
-					"LongDescription": "You might treat someone s injuries. You might analyze a substance s composition to learn how it functions. You might comfort someone in distress (but consort might be better)."
+					"LongDescription": "You might treat someone's injuries. You might analyze a substance's composition to learn how it functions. You might comfort someone in distress (but consort might be better)."
 				},
 				{
 					"Name": "Hack",
 					"ShortDescription": "When you hack, you breach the security systems of computers or override their controls.",
-					"LongDescription": "You might access a data console to find a captive being held somewhere on the station. You might scramble a drone s control systems to keep it from firing on you. You might override a door s controls to get it to open (though rig might be better)."
+					"LongDescription": "You might access a data console to find a captive being held somewhere on the station. You might scramble a drone's control systems to keep it from firing on you. You might override a door's controls to get it to open (though rig might be better)."
 				},
 				{
 					"Name": "Rig",
@@ -836,7 +836,7 @@
 				{
 					"Name": "Study",
 					"ShortDescription": "When you study, you scrutinize details and interpret evidence.",
-					"LongDescription": "You might gather information from documents, newspapers, and books. You might do research on an esoteric topic. You might closely analyze a person to detect lies or true feelings. You could deduce a person s intention to kill you (but attune might be better)."
+					"LongDescription": "You might gather information from documents, newspapers, and books. You might do research on an esoteric topic. You might closely analyze a person to detect lies or true feelings. You could deduce a person's intention to kill you (but attune might be better)."
 				}
 			]
 		},
@@ -886,7 +886,7 @@
 				{
 					"Name": "Sway",
 					"ShortDescription": "When you sway, you influence someone with guile, charm, or logic.",
-					"LongDescription": "You might outright lie to someone s face. You might persuade a sucker to believe you. You might argue the facts with an officer. You could try to trick people into affection or obedience (but consort or command might be better)."
+					"LongDescription": "You might outright lie to someone's face. You might persuade a sucker to believe you. You might argue the facts with an officer. You could try to trick people into affection or obedience (but consort or command might be better)."
 				}
 			]
 		}

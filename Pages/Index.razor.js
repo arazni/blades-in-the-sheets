@@ -1,4 +1,4 @@
-﻿// https://learn.microsoft.com/en-us/aspnet/core/blazor/file-downloads?view=aspnetcore-7.0
+// https://learn.microsoft.com/en-us/aspnet/core/blazor/file-downloads?view=aspnetcore-8.0
 export async function downloadFileFromStream(fileName, contentStreamReference) {
 	const arrayBuffer = await contentStreamReference.arrayBuffer();
 	const blob = new Blob([arrayBuffer]);
