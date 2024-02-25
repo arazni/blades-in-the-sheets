@@ -16,6 +16,8 @@ public sealed partial class SheetMonitorHarm
 
 	HarmIntensity Intensity { get; set; } = HarmIntensity.Lesser;
 
+	HarmIntensity[] AvailableIntensities { get; } = [HarmIntensity.Lesser, HarmIntensity.Moderate, HarmIntensity.Severe, HarmIntensity.Fatal];
+
 	protected override void OnInitialized()
 	{
 		SheetJank.HarmChanged += StateHasChanged;
@@ -36,7 +38,7 @@ public sealed partial class SheetMonitorHarm
 		HarmIntensity.Severe => "Impaled, Broken Leg, Shot in Chest, Badly Burned, or Terrified.",
 		HarmIntensity.Moderate => "Exhausted, Deep Cut to Arm, Concussion, Panicked, or Seduced.",
 		HarmIntensity.Lesser => "Battered, Drained, Distracted, Scared, Confused.",
-		_ => "Choose a harm severity above"
+		_ => "Choose a harm severity below"
 	};
 
 	bool CanAddHarm =>

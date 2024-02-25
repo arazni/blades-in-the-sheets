@@ -5,7 +5,7 @@
 	@foreach (var friend in Rolodex.Friends)
 	{
 		<div class="horizontal-stack">
-			<FluentTextField Class="contact" @bind-Value="friend.Entry" ReadOnly="!IsFixMode" Appearance="FluentInputAppearance.Outline" AriaLabel="@friend.Entry">
+			<FluentTextField Class="contact" @bind-Value="friend.Entry" ReadOnly="!IsFixMode" Appearance="FluentInputAppearance.Outline" AriaLabel="@GetAdornmentLabel(friend)">
 				<FluentIcon Value="GetFriendIcon(friend)" Title="@GetAdornmentLabel(friend)" Slot="start" />
 			</FluentTextField>
 			@if (IsFixMode)
