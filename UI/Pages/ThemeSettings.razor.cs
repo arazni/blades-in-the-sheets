@@ -21,10 +21,10 @@ public partial class ThemeSettings
 	{
 		ButtonDatas =
 		[
-			new(ThemeSettingService.DefaultTheme, "Default Theme"),
-			new(ThemeSettingService.LightTheme, "Light Theme"),
-			new(ThemeSettingService.BladesTheme, "Blades in the Dark Theme"),
-			new(ThemeSettingService.ScumTheme, "Scum and Villainy Theme")
+			new(ThemeSettingService.DefaultTheme, "Default", "Default Theme"),
+			new(ThemeSettingService.LightTheme, "Light", "Light Theme"),
+			new(ThemeSettingService.BladesTheme, "Blades", "Blades in the Dark Theme"),
+			new(ThemeSettingService.ScumTheme, "Scum", "Scum and Villainy Theme")
 		];
 
 		base.OnInitialized();
@@ -50,11 +50,13 @@ public partial class ThemeSettings
 		await module!.InvokeVoidAsync("fixBodyBackgroundColor", themeSetting.ScareColor);
 	}
 
-	class ThemeButtonData(ThemeSetting themeSetting, string text)
+	class ThemeButtonData(ThemeSetting themeSetting, string header, string text)
 	{
 		public FluentButton? FluentButton { get; set; }
 
 		public ThemeSetting ThemeSetting { get; set; } = themeSetting;
+
+		public string Header { get; set; } = header;
 
 		public string Text { get; set; } = text;
 
