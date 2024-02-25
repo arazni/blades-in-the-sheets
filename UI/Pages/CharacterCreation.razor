@@ -12,53 +12,17 @@
 @inject NavigationManager Navigator
 @inject ILoader Loader
 
-<MudContainer MaxWidth="MaxWidth.Medium">
-	<MudStack>
-		<NewCharacterHeritageCard HeritageSettings="GameSetting.Heritages" Heritage="@Character.Dossier.Heritage" />
-		<NewCharacterBackgroundCard BackgroundSettings="GameSetting.Backgrounds" Background="@Character.Dossier.Background" />
-		<NewCharacterActionDotsCard GameSetting="GameSetting" Character="Character" />
-		<NewCharacterSpecialAbilityCard GameSetting="GameSetting" Character="Character" />
-		<NewCharacterFriendsCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="RolodexCreation" PlaybookName="@Character.Playbook.Name" />
-		<NewCharacterViceCard ViceSettings="GameSetting.Vices" Vice="@Character.Dossier.Vice" />
-		<NewCharacterIdentificationCard Dossier="@Character.Dossier" />
-		<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" FullWidth="true" OnClick="SaveAsync">
+<div class="vertical-stack aic mb20">
+	<NewCharacterHeritageCard HeritageSettings="GameSetting.Heritages" Heritage="Character.Dossier.Heritage" />
+	<NewCharacterBackgroundCard BackgroundSettings="GameSetting.Backgrounds" Background="Character.Dossier.Background" />
+	<NewCharacterActionDotsCard GameSetting="GameSetting" Character="Character" />
+	<NewCharacterSpecialAbilityCard GameSetting="GameSetting" Character="Character" />
+	<NewCharacterFriendsCard RolodexSetting="PlaybookSetting.Rolodex" Rolodex="RolodexCreation" PlaybookName="Character.Playbook.Name" />
+	<NewCharacterViceCard ViceSettings="GameSetting.Vices" Vice="Character.Dossier.Vice" />
+	<NewCharacterIdentificationCard Dossier="Character.Dossier" />
+	<div class="common-card-style">
+		<FluentButton Class="w100" Appearance="Appearance.Accent" Type="ButtonType.Submit" Color="Color.Primary" OnClick="SaveAsync">
 			Finish Your @PlaybookName
-		</MudButton>
-	</MudStack>
-</MudContainer>
-
-@code
-{
-	[Parameter]
-	public string Id { get; set; } = string.Empty;
-
-	[Parameter]
-	public string GameName { get; set; } = string.Empty;
-
-	[Parameter]
-	public string PlaybookName { get; set; } = string.Empty;
-
-	public Character Character { get; private set; } = Character.Empty();
-
-	public GameSetting GameSetting { get; private set; } = EmptyGameSetting.Game();
-
-	public PlaybookSetting PlaybookSetting => GameSetting.GetPlaybookSetting(Character.Playbook.Name);
-
-	public RolodexCreation RolodexCreation = new();
-
-	protected override async Task OnParametersSetAsync()
-	{
-		GameSetting = await Loader.LoadSetting(GameName);
-		Character = Coordinator.InitializeCharacter(GameSetting, PlaybookName);
-
-		await base.OnParametersSetAsync();
-	}
-
-	public async Task SaveAsync()
-	{
-		Character.Rolodex.ReplaceFriends(RolodexCreation);
-
-		await Storage.Save(Character);
-		Navigator.NavigateTo(Paths.Sheet(Character.Id));
-	}
-}
+		</FluentButton>
+	</div>
+</div>

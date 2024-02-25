@@ -4,57 +4,33 @@
 @inject SheetJank SheetJank;
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Fund">
-	<MudGrid Style="align-items: end;">
-		<MudItem xs="12">
-			<MudStack Spacing="1">
-				<MudText Typo="Typo.caption">Satchel: </MudText>
-				<MudRating @bind-SelectedValue="Fund.Satchel.Coins" ReadOnly="!IsFixMode" MaxValue="Fund.Satchel.MaxCoins" FullIcon="@Icons.Material.Filled.Paid" EmptyIcon="@Icons.Material.Outlined.Paid" Color="Color.Primary" aria-label="@SatchelLabel" id="fund-satchel-rating" />
-			</MudStack>
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<MudNumericField @bind-Value="Fund.Stash.Stash" Label="Stash" Disabled="!IsFixMode" Min="Fund.Stash.MinCoins" Max="Fund.Stash.MaxCoins" id="fund-stash-coin" />
-		</MudItem>
-		<MudItem xs="6" lg="3">
-			<MudText Typo="Typo.caption">Lifestyle:</MudText>
-			<MudText Typo="Typo.body1">@Fund.Lifestyle.Description()</MudText>
-		</MudItem>
-		<MudItem xs="6" lg="3">
-			<MudText Typo="Typo.caption">Rating:</MudText>
-			<MudText Typo="Typo.body1">@Fund.Stash.Rating</MudText>
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<MudNumericField @bind-Value="CoinChangeInput" Label="@CoinChangeInputLabel" Min="Fund.MinCoins" Max="InputMaximum" id="fund-coin-change" />
-		</MudItem>
-		<MudItem xs="12" lg="6">
-			<MudButtonGroup Size="Size.Medium" Variant="Variant.Outlined" Style="width: 100%">
-				<MudButton Disabled="!GainButtonEnabled" OnClick="() => Fund.Gain(CoinChangeInput)" Style="@ButtonStyle" Variant="Variant.Outlined">Gain</MudButton>
-				<MudButton Disabled="!SpendButtonEnabled" OnClick="() => Fund.Spend(CoinChangeInput)" Style="@ButtonStyle" Variant="Variant.Outlined">Spend</MudButton>
-			</MudButtonGroup>
-		</MudItem>
-	</MudGrid>
+	<div class="fund-row">
+		<div class="fund-item">
+			<label for="fund-satchel">Satchel: </label>
+			<BladeRating @bind-Value="Fund.Satchel.Coins" MaxValue="Fund.Satchel.MaxCoins" CheckboxAriaLabelSuffix="@SatchelLabel" Id="fund-satchel" />
+		</div>
+		<div class="fund-item">
+			@if (IsFixMode)
+			{
+				<FluentNumberField Style="width: 70px;" @bind-Value="Fund.Stash.Stash" Label="Stash:" ReadOnly="!IsFixMode" Min="@Fund.Stash.MinCoins.ToString()" Max="@Fund.Stash.MaxCoins.ToString()" />
+			}
+			else
+			{
+				<label>Stash: @Fund.Stash.Stash</label>
+			}
+		</div>
+	</div>
+	<div class="fund-row">
+		<p class="fund-item">Lifestyle: @Fund.Lifestyle.Description()</p>
+		<p class="fund-item">Rating: @Fund.Stash.Rating</p>
+	</div>
+	<div class="fund-row aie">
+		<div class="control-item">
+			<FluentNumberField Disabled="IsFixMode" Style="width: 70px;" @bind-Value="CoinChangeInput" Label="@CoinChangeInputLabel" Min="@Fund.MinCoins.ToString()" Max="@InputMaximum.ToString()" Id="fund-coin-change" />
+		</div>
+		<div class="fund-item je">
+			<FluentButton Class="min-button" Disabled="!GainButtonEnabled" OnClick="() => Fund.Gain(CoinChangeInput)" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size20.Savings()">Gain</FluentButton>
+			<FluentButton Class="min-button" Disabled="!SpendButtonEnabled" OnClick="() => Fund.Spend(CoinChangeInput)" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size20.MoneyHand()">Spend</FluentButton>
+		</div>
+	</div>
 </SheetCard>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public Fund Fund { get; set; } = new();
-
-	[Parameter]
-	public string CoinSynonym { get; set; } = Models.Settings.Constants.DefaultNames.Coin;
-
-	bool IsFixMode { get; set; } = false;
-
-	int CoinChangeInput { get; set; } = 0;
-
-	string CoinChangeInputLabel => $"{CoinSynonym} to change";
-
-	int InputMaximum => Math.Max(Fund.CoinSpaceRemaining, Fund.MaxAffordable);
-
-	bool GainButtonEnabled => Fund.CanGain(CoinChangeInput) && CoinChangeInput > 0;
-
-	bool SpendButtonEnabled => Fund.CanSpend(CoinChangeInput) && CoinChangeInput > 0;
-
-	string ButtonStyle { get; } = Constants.Buttons.ButtonDimensionStyle + "width: 50%;";
-
-	string SatchelLabel => $"{CoinSynonym} on hand";
-}

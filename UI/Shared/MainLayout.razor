@@ -1,43 +1,34 @@
 ﻿@using static UI.Constants;
+@using Microsoft.FluentUI.AspNetCore.Components
+@using UI.Services
 @inherits LayoutComponentBase
+@implements IDisposable
+@inject IThemeSettingService ThemeSettingService
+@inject IJSRuntime JS
 
-<MudThemeProvider IsDarkMode="true" Theme="BladesTheme"/>
-
-<MudLayout>
-	<MudAppBar Elevation="1">
-		<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" Title="App Bar Toggle" />
-		<MudText Typo="Typo.h5" Class="ml-3">Blades in the Sheets</MudText>
-		<MudImage Src="icon-192.png" ObjectFit="ObjectFit.ScaleDown" Alt="Icon of a blade piercing a character sheet" Style="@IconStyle" />
-	</MudAppBar>
-	<MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-		<MudText Style="display: flex; justify-content: right; margin-right: 10px" Typo="Typo.caption">Version 10.2</MudText>
-		<MudNavLink Href="">Home</MudNavLink>
-		<MudNavLink Href="@Paths.Tips">Tip Jar</MudNavLink>
-	</MudDrawer>
-	<MudMainContent>
-		@Body
-	</MudMainContent>
-</MudLayout>
-
-@code
-{
-	bool _drawerOpen = false;
-
-	void DrawerToggle()
-	{
-		_drawerOpen = !_drawerOpen;
-	}
-
-	MudTheme BladesTheme { get; } = InitializeMudTheme();
-
-	private static MudTheme InitializeMudTheme()
-	{
-		var theme = new MudTheme();
-		theme.PaletteDark.Primary = Colors.DeepOrange.Lighten2;
-		theme.PaletteDark.Secondary = Colors.Red.Accent4;
-		theme.PaletteDark.Tertiary = Colors.DeepPurple.Accent2;
-		return theme;
-	}
-
-	private const string IconStyle = "margin-right: 10px; margin-left: auto; height: 80%";
-}
+<main>
+	@* FluentDesignSystemProvider must be first child for js to work *@
+	<FluentDesignSystemProvider @ref="ThemeProvider" AccentBaseColor="@ThemeSettingService.GetGlobalAccentBaseColor()" NeutralBaseColor="@ThemeSettingService.GetGlobalNeutralBaseColor()" BaseLayerLuminance="@ThemeSettingService.GetGlobalBaseLayerLuminence()">
+		<FluentLayout NavMenuTitle="Navigation Menu">
+			<FluentHeader>
+				<FluentButton Title="Show Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Accent" OnClick="_ => IsNavMenuOpen = true" Class="@OpenNavButtonClass" />
+				<FluentButton Title="Hide Navigation Menu" IconStart="new Icons.Filled.Size20.Navigation()" Appearance="Appearance.Neutral" OnClick="_ => IsNavMenuOpen = false" Class="@CloseNavButtonClass" />
+				<h1 class="bits">Blades in the Sheets</h1>
+				<img src="icon-192.png" alt="Icon of a blade piercing a character sheet" class="layout-header-icon" />
+			</FluentHeader>
+			<div class="horizontal-stack">
+				<FluentNavMenu Class="@("nav " + @NavMenuClass)">
+					<FluentNavLink Icon="new Icons.Filled.Size20.Home()" Href="/">Home</FluentNavLink>
+					<FluentNavLink Icon="new Icons.Filled.Size20.PaintBrush()" Href="@Paths.Theme">Theme</FluentNavLink>
+					<FluentNavLink Icon="new Icons.Filled.Size20.Accessibility()" Href="@Paths.Accessibility">Accessibility</FluentNavLink>
+					<FluentNavLink Icon="new Icons.Filled.Size20.DrinkCoffee()" Href="@Paths.Tips">Tip Jar</FluentNavLink>
+					<p style="text-align: right;">Version 11</p>
+				</FluentNavMenu>
+				<FluentBodyContent @onmouseenter="_ => IsNavMenuOpen = false" @onfocusin="_ => IsNavMenuOpen = false">
+					@Body
+				</FluentBodyContent>
+			</div>
+		</FluentLayout>
+		<FluentToastProvider MaxToastCount="2" />
+	</FluentDesignSystemProvider>
+</main>

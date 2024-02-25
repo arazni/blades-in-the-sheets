@@ -688,7 +688,7 @@
 					"Points": 1
 				}
 			],
-			"ExperienceCondition": "You addressed a challenge with calculation or conspiracy"
+			"ExperienceCondition": "You addressed a challenge with knowldge or arcane power"
 		}
 	],
 	"Traumas": [
@@ -820,8 +820,7 @@
 			"Name": "Weird",
 			"Description": "You experiment with strange essences, consort with rogue spirits, observe bizarre rituals or taboos, etc.",
 			"Sources": [
-				"The hooded proprietor of a half-flooded grotto tavern near the docks. ",
-				"Strange passageways lead to stranger chambers beyond.",
+				"The hooded proprietor of a half-flooded grotto tavern near the docks. Strange passageways lead to stranger chambers beyond.",
 				"Father Yoren, House of the Weeping Lady, Six Towers.",
 				"“Salia,” a spirit of the Reconciled, which moves from body to body at their whim.",
 				"Sister Thorn, deathlands scavenger gang, Gaddoc Station.",

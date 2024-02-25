@@ -2,89 +2,27 @@
 @using UI.Services;
 @inject SheetJank SheetJank;
 
-<MudStack>
-	<MudStack Row="true">
-		<MudSelect @bind-Value="SelectedTrauma" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect" aria-label="Select Trauma">
-			@foreach (var option in AvailableTraumaOptions)
-			{
-				<MudSelectItem T="string" Value="option">
-					<MudText>@option</MudText>
-				</MudSelectItem>
-			}
-		</MudSelect>
-		<MudButton StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" Variant="Variant.Outlined" Disabled="DisableAddTrauma" OnClick="AddTrauma" Style="@Constants.Buttons.ButtonDimensionStyle" aria-label="Add Trauma">Trauma</MudButton>
-	</MudStack>
-	<MudStack Row="true">
-		@foreach (var option in Monitor.Trauma.Traumas)
-		{
-			@if (IsFixMode)
-			{
-				<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="(e => RemoveTrauma(option))" aria-label="@RemoveTraumaAriaLabel(option)">@option</MudButton>
-			}
-			else
-			{
-				<MudText>@option</MudText>
-			}
-		}
-	</MudStack>
-</MudStack>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public bool IsFixMode { get; set; }
-
-	[Parameter, EditorRequired]
-	public Monitor Monitor { get; set; } = Monitor.Empty();
-
-	[Parameter, EditorRequired]
-	public IReadOnlyCollection<string> TraumaOptions { get; set; } = Array.Empty<string>();
-
-	public IReadOnlyCollection<string> AvailableTraumaOptions =>
-		TraumaOptions.Except(Monitor.Trauma.Traumas)
-			.ToArray();
-
-	bool DisableTraumaSelect =>
-		Monitor.Stress.CurrentStress != MonitorStress.MaxStress
-		&& !IsFixMode;
-
-	bool DisableAddTrauma =>
-		DisableTraumaSelect
-		|| SelectedTrauma == null;
-
-	private string? selectedTrauma;
-
-	string? SelectedTrauma
+<div class="vertical-stack">
+	<h5>Stress</h5>
+	<BladeRating @bind-Value="@Monitor.Stress.CurrentStress" MaxValue="@MonitorStress.MaxStress" CheckboxAriaLabelSuffix="Stress" />
+	<div class="horizontal-stack jsb">
+		<FluentSelect @bind-Value="SelectedTrauma" Items="AvailableTraumaOptions" Disabled="DisableTraumaSelect" Required="!DisableTraumaSelect" AriaLabel="Select Trauma" TOption="string" />
+		<FluentButton IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Disabled="DisableAddTrauma" OnClick="AddTrauma" Class="min-button" Title="Add Trauma">Trauma</FluentButton>
+	</div>
+	@if (Monitor.Trauma.Traumas.Any())
 	{
-		get => Monitor.Stress.CurrentStress != MonitorStress.MaxStress && !IsFixMode ? null
-			: selectedTrauma;
-		set => selectedTrauma = value;
+		<div class="horizontal-stack">
+			@foreach (var option in Monitor.Trauma.Traumas)
+			{
+				@if (IsFixMode)
+				{
+					<FluentButton IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" Color="Color.Secondary" OnClick="(_ => RemoveTrauma(option))" Title="@RemoveTraumaAriaLabel(option)" BackgroundColor="var(--scare-color)">@option</FluentButton>
+				}
+				else
+				{
+					<p>@option</p>
+				}
+			}
+		</div>
 	}
-
-	void AddTrauma()
-	{
-		if (SelectedTrauma == null)
-			return;
-
-		var success = Monitor.Trauma.Add(SelectedTrauma);
-
-		if (!success)
-			return;
-
-		if (!IsFixMode)
-		{
-			Monitor.Stress.CurrentStress = 0;
-			SheetJank.NotifyTraumaChanged();
-		}
-
-		SelectedTrauma = null;
-	}
-
-	void RemoveTrauma(string trauma)
-	{
-		Monitor.Trauma.Remove(trauma);
-	}
-
-	string RemoveTraumaAriaLabel(string trauma) =>
-		$"Remove {trauma}";
-}
+</div>

@@ -5,54 +5,17 @@
 @inject SheetJank SheetJank
 
 @if (Ability == null || Playbook == null) { return; }
-
-@if (IsFixMode)
-{
-	<MudButton Size="Size.Medium" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="(e => RemoveAbility(Ability))" aria-label="@RemoveAbilityLabel">@Ability.LearnedTimesDisplayName()</MudButton>
-	<MudTextField @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Lines="5" Variant="Variant.Outlined" Label="@EditAbilityLabel" id="@TextFieldId" />
-}
-else
-{
-	<MudText Typo="Typo.h6">@Ability.LearnedTimesDisplayName()</MudText>
-	<MudText>@Ability.Description</MudText>
-}
-@code
-{
-	[Parameter, EditorRequired]
-	public bool IsFixMode { get; set; } = false;
-
-	[Parameter, EditorRequired]
-	public Character? Character { get; set; }
-
-	[Parameter, EditorRequired]
-	public PlaybookSpecialAbility? Ability { get; set; }
-
-	Playbook? Playbook => Character?.Playbook;
-
-	void OverwriteDescription(string description)
+<div>
+	@if (IsFixMode)
 	{
-		var hadSpecialArmor = Character!.HasSpecialArmor;
-		var changed = Ability!.OverwriteDescription(description);
-
-		if (!changed)
-			return;
-
-		if (hadSpecialArmor != Character!.HasSpecialArmor)
-			SheetJank.NotifyAbilitiesChanged();
+		<h5>
+			<FluentButton Class="min-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="(e => RemoveAbility(Ability))" Title="@RemoveAbilityLabel" BackgroundColor="var(--scare-color)">@Ability.LearnedTimesDisplayName()</FluentButton>
+		</h5>
+		<FluentTextArea Class="w100" @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Rows="5" Appearance="FluentInputAppearance.Outline" AriaLabel="@EditAbilityLabel" Id="@TextFieldId" />
 	}
-
-	void RemoveAbility(PlaybookSpecialAbility ability)
+	else
 	{
-		Playbook!.RemoveAbility(ability);
-		SheetJank.NotifyAbilitiesChanged();
+		<h5>@Ability.LearnedTimesDisplayName()</h5>
+		<p>@Ability.Description</p>
 	}
-
-	string EditAbilityLabel =>
-		$"Edit {Ability!.Name} Description";
-
-	string RemoveAbilityLabel =>
-		$"Unlearn {Ability!.Name}";
-
-	string TextFieldId =>
-		$"text-field-{Ability!.Name}";
-}
+</div>

@@ -1,4 +1,5 @@
 ﻿using Models.Characters;
+using Models.Settings;
 using Newtonsoft.Json;
 using Persistence.Json.Converters;
 
@@ -29,5 +30,19 @@ public class Serializer : ISerializer
 
 	public Character Deserialize(string json) =>
 		JsonConvert.DeserializeObject<Character>(json, this.serializerSettings)
+		?? throw new ArgumentException("Could not deserialize: " + json, nameof(json));
+
+	public string Serialize(ThemeSetting themeSetting) =>
+		JsonConvert.SerializeObject(themeSetting, this.serializerSettings);
+
+	public ThemeSetting DeserializeTheme(string json) =>
+		JsonConvert.DeserializeObject<ThemeSetting>(json, this.serializerSettings)
+		?? throw new ArgumentException("Could not deserialize: " + json, nameof(json));
+
+	public string Serialize(AccessibilitySetting accessibilitySetting) =>
+		JsonConvert.SerializeObject(accessibilitySetting, this.serializerSettings);
+
+	public AccessibilitySetting DeserializeAccessibility(string json) =>
+		JsonConvert.DeserializeObject<AccessibilitySetting>(json, this.serializerSettings)
 		?? throw new ArgumentException("Could not deserialize: " + json, nameof(json));
 }

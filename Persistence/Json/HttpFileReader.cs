@@ -23,6 +23,6 @@ public class HttpFileReader : IFileReader
 		var raw = await response.Content.ReadAsStringAsync();
 
 		return JsonConvert.DeserializeObject<GameFile[]>(raw)
-			?? Array.Empty<GameFile>();
+			?? [];
 	}
 }

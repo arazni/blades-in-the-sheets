@@ -4,50 +4,17 @@
 @if (!Harm.HasHarmAtIntensity(Intensity))
 	return;
 
-<MudStack Row="true">
-	<MudText>@PrefixText:</MudText>
+<div class="horizontal-stack">
+	<p>@PrefixText:</p>
 	@if (IsFixMode)
 	{
 		@foreach (var description in HarmDescriptions)
 		{
-			<MudButton Size="Size.Small" EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(e => RemoveHarm(description))" aria-label="@AriaLabel(description)">@description</MudButton>
+			<FluentButton IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="_ => RemoveHarm(description)" Title="@AriaLabel(description)" BackgroundColor="var(--scare-color)">@description</FluentButton>
 		}
 	}
 	else
 	{
-		<MudText>@HarmDescriptions.Join(", ")</MudText>
+		<p>@HarmDescriptions.Join("; ")</p>
 	}
-</MudStack>
-
-
-@code
-{
-	[Parameter, EditorRequired]
-	public bool IsFixMode { get; set; }
-
-	[Parameter, EditorRequired]
-	public MonitorHarm Harm { get; set; } = MonitorHarm.Empty();
-
-	[Parameter, EditorRequired]
-	public HarmIntensity Intensity { get; set; }
-
-	string PrefixText => Intensity switch
-	{
-		HarmIntensity.Lesser => "Reduce effect",
-		HarmIntensity.Moderate => "-1 to dice pool",
-		HarmIntensity.Severe => "Incapacitated",
-		HarmIntensity.Fatal => "Catastrophic or fatal:",
-		_ => throw new NotImplementedException()
-	};
-
-	IReadOnlyCollection<string> HarmDescriptions =>
-		Harm.HarmsAtIntensity(Intensity);
-
-	void RemoveHarm(string description)
-	{
-		Harm.RemoveHarm(description, Intensity);
-	}
-
-	string AriaLabel(string description) =>
-		"Remove " + description;
-}
+</div>

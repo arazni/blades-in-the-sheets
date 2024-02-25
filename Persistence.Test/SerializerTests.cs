@@ -28,20 +28,43 @@ public class SerializerTests
 		this.migrationHandler = new MigrationHandler();
 	}
 
-	[Fact]
-	public async Task<(string, string)> Serializer_Serializes_EmptyCharacter()
+	private async Task<(string, string)> EmptyCharacter()
 	{
 		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Lurk.ToString());
 		var id = character.Id;
 		var json = this.serializer.Serialize(character);
-		json.Should().NotBeNullOrWhiteSpace();
 		return (id, json);
+	}
+
+	private async Task<(string, string)> LurkCharacter()
+	{
+		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Lurk.ToString());
+		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1));
+
+		RolodexCreation creation = new();
+
+		creation.ReplaceFriends(new[] { new RolodexFriend("Favorite"), new RolodexFriend("Rival"), new RolodexFriend("3") });
+		creation.AssignOnlyCloseFriend(creation.Friends.First(f => f.Entry == "Favorite"));
+		creation.AssignOnlyRival(creation.Friends.First(f => f.Entry == "Rival"));
+
+		character.Rolodex.ReplaceFriends(creation);
+
+		var id = character.Id;
+		var json = this.serializer.Serialize(character);
+		return (id, json);
+	}
+
+	[Fact]
+	public async Task Serializer_Serializes_EmptyCharacter()
+	{
+		var (_, json) = await EmptyCharacter();
+		json.Should().NotBeNullOrWhiteSpace();
 	}
 
 	[Fact]
 	public async Task Serializer_Deserializes_EmptyCharacter()
 	{
-		var (id, json) = await Serializer_Serializes_EmptyCharacter();
+		var (id, json) = await EmptyCharacter();
 
 		var character = this.serializer.Deserialize(json);
 		character.Should().NotBeNull();
@@ -139,29 +162,16 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public async Task<(string, string)> Serializer_Serializes_LurkCharacter()
+	public async Task Serializer_Serializes_LurkCharacter()
 	{
-		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Lurk.ToString());
-		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1));
-
-		RolodexCreation creation = new();
-
-		creation.ReplaceFriends(new[] { new RolodexFriend("Favorite"), new RolodexFriend("Rival"), new RolodexFriend("3") });
-		creation.AssignOnlyCloseFriend(creation.Friends.First(f => f.Entry == "Favorite"));
-		creation.AssignOnlyRival(creation.Friends.First(f => f.Entry == "Rival"));
-
-		character.Rolodex.ReplaceFriends(creation);
-
-		var id = character.Id;
-		var json = this.serializer.Serialize(character);
+		var (_, json) = await LurkCharacter();
 		json.Should().NotBeNullOrWhiteSpace();
-		return (id, json);
 	}
 
 	[Fact]
 	public async Task Serializer_Deserializes_LurkCharacter()
 	{
-		var (_, json) = await Serializer_Serializes_LurkCharacter();
+		var (_, json) = await LurkCharacter();
 		json.Should().NotBeNullOrWhiteSpace();
 
 		var character = this.serializer.Deserialize(json);

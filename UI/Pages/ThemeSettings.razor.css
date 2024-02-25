@@ -1,0 +1,15 @@
+﻿::deep fluent-design-system-provider {
+	width: 100%;
+	max-width: 600px;
+	min-width: 300px;
+	display: flex;
+	align-items: center;
+	padding: 20px;
+	border: solid;
+	border-width: medium;
+	border-color: var(--accent-fill-rest);
+}
+
+::deep .black-text::part(control) {
+	color: black;
+}

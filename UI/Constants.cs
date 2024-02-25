@@ -6,9 +6,9 @@ public static class Constants
 {
 	public static class Classes
 	{
-		public static string DisplayNone(bool isDisplayNone) => isDisplayNone ? "display: none;" : string.Empty;
+		public static string DisplayNone(bool isDisplayNone) => isDisplayNone ? "dn" : string.Empty;
 
-		public static string Display(bool isDisplay) => isDisplay ? string.Empty : "display: none;";
+		public static string Display(bool isDisplay) => isDisplay ? string.Empty : "dn";
 	}
 
 	public static class Paths
@@ -19,6 +19,10 @@ public static class Constants
 
 		public const string Tips = "tip-jar";
 
+		public const string Theme = "theme";
+
+		public const string Accessibility = "accessibility";
+
 		public static string NewCharacter(GameFile gameFile) => NewCharacter(gameFile.Stem);
 
 		public static string NewCharacter(string gameFileStem) => $"{New}/{gameFileStem}";
@@ -26,14 +30,5 @@ public static class Constants
 		public static string NewCharacter(string gameFileStem, string playbookName) => $"{NewCharacter(gameFileStem)}/{playbookName}";
 
 		public static string Sheet(string id) => $"{Sheets}/{id}";
-	}
-
-	public static class Buttons
-	{
-		public const string MinWidth = "125px";
-
-		public const string MinHeight = "54px";
-
-		public static string ButtonDimensionStyle => $"min-width: {MinWidth}; min-height: {MinHeight};";
 	}
 }

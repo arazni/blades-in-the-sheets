@@ -3,62 +3,11 @@
 @using Models.Settings;
 @using UI.Services;
 @inject SheetJank SheetJank;
-@implements IDisposable;
 @using static Constants.Classes;
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Health">
-	<MudGrid>
-		<MudItem xs="12">
-			<MudSlider @bind-Value="@Monitor.Stress.CurrentStress" Size="Size.Medium" TickMarks="true" TickMarkLabels="@StressLabels" Max="@MonitorStress.MaxStress" Variant="@Variant.Filled" Color="@StressColor" aria-label="Stress">
-				Stress
-			</MudSlider>
-		</MudItem>
-		<MudItem xs="12">
-			<SheetMonitorTrauma IsFixMode="IsFixMode" Monitor="Monitor" TraumaOptions="GameSetting.Traumas" />
-		</MudItem>
-		<MudItem xs="12">
-			<SheetMonitorHarm IsFixMode="IsFixMode" Harm="Monitor.Harm" />
-		</MudItem>
-		<MudItem xs="12">
-			<SheetMonitorArmor Character="Character" />
-		</MudItem>
-		<MudItem xs="12">
-			<SheetMonitorRecovery IsFixMode="IsFixMode" Monitor="Monitor" />
-		</MudItem>
-	</MudGrid>
+	<SheetMonitorTrauma IsFixMode="IsFixMode" Monitor="Monitor" TraumaOptions="GameSetting.Traumas" />
+	<SheetMonitorHarm IsFixMode="IsFixMode" Harm="Monitor.Harm" />
+	<SheetMonitorArmor Character="Character" />
+	<SheetMonitorRecovery IsFixMode="IsFixMode" Monitor="Monitor" />
 </SheetCard>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public Character Character { get; set; } = Character.Empty();
-
-	[Parameter, EditorRequired]
-	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
-
-	public Monitor Monitor => Character.Monitor;
-
-	bool IsFixMode { get; set; } = false;
-
-	string[] StressLabels { get; } =
-		Enumerable.Range(0, 10)
-			.Select(i => i.ToString())
-			.ToArray();
-
-	Color StressColor =>
-		Monitor.Stress.CurrentStress > 6 ? Color.Error
-		: Monitor.Stress.CurrentStress > 3 ? Color.Warning
-		: Color.Primary;
-
-	protected override void OnInitialized()
-	{
-		SheetJank.TraumaChanged += StateHasChanged;
-
-		base.OnInitialized();
-	}
-
-	public void Dispose()
-	{
-		SheetJank.TraumaChanged -= StateHasChanged;
-	}
-}

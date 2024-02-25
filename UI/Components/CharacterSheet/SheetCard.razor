@@ -1,43 +1,16 @@
-﻿
-<MudCard>
-	<MudCardHeader>
-		<CardHeaderContent>
-			<MudText Typo="Typo.h4">@Header</MudText>
-		</CardHeaderContent>
-		<CardHeaderActions>
-			<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Fix Mode" ToggledTitle="Disable Fix Mode" Icon="@Icons.Material.Filled.EditOff" ToggledIcon="@Icons.Material.Filled.Edit" @bind-Toggled="@IsFixMode" @bind-Toggled:after="UpdateIsFixMode" Style="@FixModeStyle" />
-			<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" Variant="Variant.Filled" Title="Enable Hide Mode" ToggledTitle="Disable Hide Mode" Icon="@Icons.Material.Filled.RemoveRedEye" ToggledIcon="@Icons.Material.Filled.HideImage" @bind-Toggled="@IsHideMode" />
-		</CardHeaderActions>
-	</MudCardHeader>
-	<MudCardContent Style="@HideModeStyle">
+﻿<FluentCard Class="common-card-style" AreaRestricted="false">
+	<div class="card-header">
+		<div class="card-header-left">
+			<h4 class="margin-vertical-center">@Header</h4>
+		</div>
+		<div class="card-header-right">
+			<FluentButton Title="Enable Fix Mode" IconStart="new Icons.Filled.Size20.EditOff()" OnClick="EnableFixMode" Style="@EnableFixModeStyle" Appearance="Appearance.Accent" />
+			<FluentButton Title="Disable Fix Mode" IconStart="new Icons.Filled.Size20.Edit()" OnClick="DisableFixMode" Style="@DisableFixModeStyle" Appearance="Appearance.Accent" />
+			<FluentButton Title="Enable Hide Mode" IconStart="new Icons.Filled.Size20.Eye()" OnClick="_ => IsHideMode = true" Style="@EnableHideModeStyle" Appearance="Appearance.Accent" />
+			<FluentButton Title="Disable Hide Mode" IconStart="new Icons.Filled.Size20.EyeOff()" OnClick="_ => IsHideMode = false" Style="@DisableHideModeStyle" Appearance="Appearance.Accent" />
+		</div>
+	</div>
+	<div class="vertical-stack card-body" style="@HideModeStyle">
 		@ChildContent
-	</MudCardContent>
-</MudCard>
-
-@code
-{
-	[Parameter]
-	public bool HasFixMode { get; set; } = true;
-
-	[Parameter]
-	public bool IsFixMode { get; set; } = false;
-
-	[Parameter, EditorRequired]
-	public string Header { get; set; } = string.Empty;
-
-	[Parameter, EditorRequired]
-	public RenderFragment? ChildContent { get; set; }
-
-	[Parameter]
-	public EventCallback<bool> IsFixModeChanged { get; set; }
-
-	bool IsHideMode { get; set; } = false;
-
-	string HideModeStyle => IsHideMode ? DisplayNone : string.Empty;
-
-	string FixModeStyle => IsHideMode || !HasFixMode ? DisplayNone : string.Empty;
-
-	const string DisplayNone = "display: none;";
-
-	private async Task UpdateIsFixMode() => await IsFixModeChanged.InvokeAsync(IsFixMode);
-}
+	</div>
+</FluentCard>

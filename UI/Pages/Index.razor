@@ -4,189 +4,61 @@
 @using Persistence.Json
 @using System.Text
 @using System.Linq
-@using Persistence.Json.DataModels;
-@using System.Collections.Immutable;
+@using Persistence.Json.DataModels
+@using System.Collections.Immutable
 @using UI.Services
-@using static Models.Settings.Constants;
-@using static UI.Constants;
+@using Microsoft.FluentUI.AspNetCore.Components
+@using static Models.Settings.Constants
+@using static UI.Constants
 @inject IStorageService Storage
 @inject IJSRuntime JS
 @inject ILoader Loader
 @inject NavigationManager Navigator
 
-<MudContainer>
-	<MudStack>
-		<MudText Typo=Typo.h3 Style="margin: 20px 0;">@HeaderText</MudText>
-		@foreach (var character in Characters)
-		{
-			<MudCard>
-				<MudCardHeader>
-					<CardHeaderContent>
-						<MudLink Typo="Typo.h6" Href="@character.Link">@character.Alias the @character.Playbook</MudLink>
-					</CardHeaderContent>
-					<CardHeaderActions>
-						<MudButton Color="Color.Tertiary" OnClick="_ => Download(character)" Variant="Variant.Filled" Style="@DownloadModeStyle" aria-label="@DownloadCharacterLabel(character.Name)">Export</MudButton>
-						<MudButton Color="Color.Secondary" OnClick="_ => Delete(character.Id)" Variant="Variant.Filled" Style="@DeleteModeStyle" aria-label="@DeleteCharacterLabel(character.Name)">Delete</MudButton>
-					</CardHeaderActions>
-				</MudCardHeader>
-				<MudCardContent>
-					<MudStack>
-						<MudText>@Blurb(character)</MudText>
-					</MudStack>
-				</MudCardContent>
-			</MudCard>
-		}
-		<MudCard>
-			<MudCardHeader>
-				<CardHeaderContent>
-					<MudText Typo="Typo.h6">Roster</MudText>
-				</CardHeaderContent>
-				<CardHeaderActions>
-					@if (Characters.Any())
-					{
-						<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" @bind-Toggled="IsDownloadMode" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Download" ToggledIcon="@Icons.Material.Filled.FileDownloadOff" Title="Enable Download Mode" ToggledTitle="Disable Download Mode" aria-label="@DownloadModeLabel" />
-						<MudToggleIconButton Color="Color.Tertiary" ToggledColor="Color.Secondary" @bind-Toggled="IsDeleteMode" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Delete" ToggledIcon="@Icons.Material.Filled.Cancel" Title="Enable Delete Mode" ToggledTitle="Disable Delete Mode" />
-					}
-				</CardHeaderActions>
-			</MudCardHeader>
-			<MudCardContent>
-				<MudStack>
-					<MudSelect @bind-Value="SelectedGameFile" ToStringFunc="gameFile => gameFile.Name" Label="Select a Game"  Style="max-width: 215px;" id="select-a-game">
-						@foreach (var gameFile in AvailableGameFiles)
-						{
-							<MudSelectItem T="GameFile" Value="gameFile">
-								<MudText>@gameFile.Name</MudText>
-							</MudSelectItem>
-						}
-					</MudSelect>
-					<MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Add" OnClick="New" Style="width: 215px;">Create a Character</MudButton>
-					<MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFiles" Accept=".json">
-						<ButtonTemplate>
-							<MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.Upload" for="@context" Style="width: 215px;">Import Characters</MudButton>
-						</ButtonTemplate>
-					</MudFileUpload>
-				</MudStack>
-			</MudCardContent>
-		</MudCard>
-	</MudStack>
-</MudContainer>
-
-@code
-{
-	IJSObjectReference? module;
-
-	IReadOnlyCollection<VIndexCharacter> Characters { get; set; } = Array.Empty<VIndexCharacter>();
-
-	GameFile[] AvailableGameFiles { get; set; } = Array.Empty<GameFile>();
-
-	GameFile SelectedGameFile { get; set; } = new(Games.BladesInTheDark, Games.BladesInTheDarkStem);
-
-	IReadOnlyDictionary<string, GameSetting> GameSettingsByName = ImmutableDictionary<string, GameSetting>.Empty;
-
-	protected override async Task OnInitializedAsync()
+<div class="vertical-stack aic mb20">
+	<h2>@HeaderText</h2>
+	@foreach (var character in Characters)
 	{
-		await LoadCharacters();
-
-		AvailableGameFiles = await Loader.LoadGameFiles();
-
-		var gameSettingLoads = AvailableGameFiles.Select(gameFile => Loader.LoadSetting(gameFile));
-
-		var gameSettings = await Task.WhenAll(gameSettingLoads);
-
-		GameSettingsByName = gameSettings.ToImmutableDictionary
-		(
-			gameSetting => gameSetting.Name,
-			gameSetting => gameSetting
-		);
-
-		await base.OnInitializedAsync();
+		<FluentCard Class="common-card-style">
+			<div class="card-header">
+				<div class="card-header-left">
+					<FluentAnchor Appearance="Appearance.Hypertext" Href="@character.Link" Class="character-link">@character.Alias the @character.Playbook</FluentAnchor>
+					</div>
+					<div class="card-header-right">
+						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Download(character)" Class="@DownloadModeClass" aria-label="@DownloadCharacterLabel(character.Name)">Export</FluentButton>
+						<FluentButton Appearance="Appearance.Accent" OnClick="_ => Delete(character.Id)" Class="@DeleteModeClass" aria-label="@DeleteCharacterLabel(character.Name)" BackgroundColor="var(--scare-color)">Delete</FluentButton>
+					</div>
+				</div>
+				<div class="vertical-stack card-body">
+					<p>@Blurb(character)</p>
+			</div>
+		</FluentCard>
 	}
-
-	protected override async Task OnAfterRenderAsync(bool firstRender)
-	{
-		if (firstRender)
-			module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/Index.razor.js");
-
-		await base.OnAfterRenderAsync(firstRender);
-	}
-
-	async Task LoadCharacters()
-	{
-		var characters = await Storage.LoadAll();
-
-		if (!characters.Any())
-			return;
-
-		Characters = characters.Select(character => new VIndexCharacter(character))
-			.OrderBy(c => (c.GameName, c.Alias))
-			.ToArray();
-	}
-
-	string HeaderText => Characters.Any() ? "Your scoundrels await:"
-		: "A Blades in the Dark Character Sheet App";
-
-	bool IsDeleteMode { get; set; }
-
-	bool IsDownloadMode { get; set; }
-
-	string DownloadModeStyle => UI.Constants.Classes.Display(IsDownloadMode);
-
-	string DeleteModeStyle => UI.Constants.Classes.Display(IsDeleteMode);
-
-	string DeleteModeButtonText => IsDeleteMode ? "Cancel Delete Mode"
-		: "Delete Mode";
-
-	Color DeleteModeColor => IsDeleteMode ? Color.Tertiary
-		: Color.Secondary;
-
-	void ToggleDeleteMode() => IsDeleteMode = !IsDeleteMode;
-
-	async Task Delete(string id)
-	{
-		await Storage.Delete(id);
-		await LoadCharacters();
-	}
-
-	async Task Download(VIndexCharacter character)
-	{
-		var json = await Storage.GetFile(character.Id);
-		var bytes = Encoding.Unicode.GetBytes(json);
-		var memory = new MemoryStream(bytes);
-		using var streamRef = new DotNetStreamReference(memory);
-
-		await module!.InvokeVoidAsync("downloadFileFromStream", $"{character.Name} BitS.json", streamRef);
-	}
-
-	async Task UploadFiles(IReadOnlyList<IBrowserFile> files)
-	{
-		foreach (var file in files)
-		{
-			var buffer = new byte[file.Size];
-			await file.OpenReadStream().ReadAsync(buffer);
-			var json = Encoding.Unicode.GetString(buffer);
-			await Storage.PutFile(json);
-		}
-
-		await LoadCharacters();
-	}
-
-	void New() => Navigator.NavigateTo(Paths.NewCharacter(SelectedGameFile.Stem));
-
-	string Blurb(VIndexCharacter vCharacter)
-	{
-		if (!GameSettingsByName.TryGetValue(vCharacter.GameName, out var gameSetting))
-			return vCharacter.Blurb(EmptyGameSetting.Game());
-
-		return vCharacter.Blurb(gameSetting);
-	}
-
-	string DownloadModeLabel =>
-		IsDownloadMode ? "Disable download mode"
-		: "Enable download mode";
-
-	static string DownloadCharacterLabel(string characterName) =>
-		$"Export {characterName}";
-
-	static string DeleteCharacterLabel(string characterName) =>
-		$"Delete {characterName}";
-}
+	<FluentCard Class="common-card-style">
+		<div class="card-header">
+			<div class="card-header-left">
+				<h3>Roster</h3>
+			</div>
+			<div class="card-header-right">
+				@if (Characters.Any())
+				{
+					<FluentButton Title="Enable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownload())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = true" Class="@NotDownloadModeClass" />
+					<FluentButton Title="Disable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownloadOff())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = false" Class="@DownloadModeClass" />
+					<FluentButton Title="Enable Delete Mode" IconStart="@(new Icons.Filled.Size20.Delete())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = true" Class="@NotDeleteModeClass" BackgroundColor="var(--scare-color)" />
+					<FluentButton Title="Disable Delete Mode" IconStart="@(new Icons.Filled.Size20.DeleteOff())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = false" Class="@DeleteModeClass" />
+				}
+			</div>
+		</div>
+		<div class="vertical-stack card-body w50" style="min-width: 200px;">
+			<div>
+				<FluentSelect TOption="GameFile" Items="AvailableGameFiles" @bind-SelectedOption="@SelectedGameFile" OptionText="gameFile => gameFile.Name" Label="Select a Game" Class="w100"></FluentSelect>
+			</div>
+			<FluentAnchor Href="@New()" Appearance="Appearance.Accent" Class="min-button">
+				Create a Character
+				<FluentIcon Value="@(new Icons.Regular.Size20.DocumentAdd())" Slot="start" Color="@Microsoft.FluentUI.AspNetCore.Components.Color.Fill" />
+			</FluentAnchor>
+			<FluentInputFile AnchorId="ImportCharacters" DragDropZoneVisible="false" Mode="InputFileMode.Stream" Multiple="true" Accept=".json" OnFileUploaded="@UploadFiles" OnCompleted="@UploadComplete" />
+			<FluentButton Id="ImportCharacters" Appearance="Appearance.Accent" IconStart="@(new Icons.Regular.Size20.ArrowUpload())" Class="min-button">Import Characters</FluentButton>
+		</div>
+	</FluentCard>
+</div>

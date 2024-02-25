@@ -2,21 +2,13 @@
 
 <SheetCard @bind-IsFixMode="IsFixMode" Header="Talents">
 	<CascadingValue Name="IsFixMode" Value="@IsFixMode">
-		<MudGrid>
+		<FluentGrid Justify="JustifyContent.SpaceBetween">
 			@foreach(var attributeByName in Talent.AttributesByName)
 			{
-				<MudItem Class="flex-grow-1">
+				<FluentGridItem Class="flex-grow-1">
 					<SheetTalentAttribute Attribute="attributeByName.Value" Name="@attributeByName.Key" />
-				</MudItem>
+				</FluentGridItem>
 			}
-		</MudGrid>
+		</FluentGrid>
 	</CascadingValue>
 </SheetCard>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public Talent Talent { get; set; } = Talent.Empty();
-
-	public bool IsFixMode { get; set; } = false;
-}

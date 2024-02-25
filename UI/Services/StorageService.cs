@@ -33,7 +33,8 @@ public class StorageService : IStorageService
 	public async Task<Character> Load(string id)
 	{
 		var key = CharacterKey(id);
-		var json = await this.storageService.GetItemAsStringAsync(key);
+		var json = await this.storageService.GetItemAsStringAsync(key)
+		?? throw new FileNotFoundException($"Failed to find {CharacterKey(id)} in local storage");
 
 		json = this.migrator.Migrate(json);
 
@@ -49,7 +50,7 @@ public class StorageService : IStorageService
 		var characterJsons = new List<string>(all.Length);
 
 		foreach (var key in all)
-			characterJsons.Add(await this.storageService.GetItemAsStringAsync(key));
+			characterJsons.Add((await this.storageService.GetItemAsStringAsync(key))!);
 
 		return characterJsons
 			.Select(this.migrator.Migrate)
@@ -62,7 +63,8 @@ public class StorageService : IStorageService
 
 	public async Task<string> GetFile(string id)
 	{
-		var json = await this.storageService.GetItemAsStringAsync(CharacterKey(id));
+		var json = await this.storageService.GetItemAsStringAsync(CharacterKey(id))
+		?? throw new FileNotFoundException($"Failed to find {CharacterKey(id)} in local storage");
 
 		return this.migrator.Migrate(json);
 	}

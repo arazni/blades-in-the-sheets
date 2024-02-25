@@ -3,92 +3,32 @@
 @using UI.Services
 @inject SheetJank SheetJank
 
-<MudStack>
-	<MudStack Row="true" Justify="Justify.SpaceBetween">
-		<MudStack Spacing="0">
-			<MudText Typo="Typo.caption">Healing Project</MudText>
-			@if (IsFixMode)
-			{
-				<MudRating @bind-SelectedValue="HealingClock.Time" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" aria-label="@SetRecoveryProgressLabel" />
-			}
-			else
-			{
-				<MudRating SelectedValue="HealingClock.Time" ReadOnly="true" MaxValue="MaxRecovery" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" aria-label="@CurrentRecoveryProgressLabel" />
-			}
-			@if (HealingClock.Rollover > 0)
-			{
-				<MudRating SelectedValue="HealingClock.Rollover" ReadOnly="true" MaxValue="HealingClock.Rollover" FullIcon="@Icons.Material.Filled.Favorite" EmptyIcon="@Icons.Material.Filled.FavoriteBorder" aria-label="@ExtraRecoveryProgressLabel" />
-			}
-		</MudStack>
-		<MudButton Size="Size.Small" Style="@(Constants.Buttons.ButtonDimensionStyle + "max-height: 54px;")" Disabled="!Harm.CanHeal" OnClick="Heal" Variant="Variant.Outlined">Heal</MudButton>
-	</MudStack>
-
+<div class="vertical-stack">
+	<h5>Healing Project Clock</h5>
 	@if (!IsFixMode)
 	{
-		<MudStack Row="true">
-			<MudSelect @bind-Value="RecoveryAmount" Label="Recovery progress" role="listbox" id="select-recovery-progress">
-				<MudSelectItem Value="1" role="option" aria-label="Add 1">
-					<MudStack Row=true>
-						<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 1" />
-						<MudText>1-3: +1</MudText>
-					</MudStack>
-				</MudSelectItem>
-				<MudSelectItem Value="2" role="option" aria-label="Add 2">
-					<MudStack Row=true>
-						<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 2" />
-						<MudText>4-5: +2</MudText>
-					</MudStack>
-				</MudSelectItem>
-				<MudSelectItem Value="3" role="option" aria-label="Add 3">
-					<MudStack Row=true>
-						<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 3" />
-						<MudText>6: +3</MudText>
-					</MudStack>
-				</MudSelectItem>
-				<MudSelectItem Value="5" role="option" title="Add 5">
-					<MudStack Row=true>
-						<MudIcon Icon="@Icons.Material.Filled.Favorite" Title="Add 5" />
-						<MudText>Critical: +5</MudText>
-					</MudStack>
-				</MudSelectItem>
-			</MudSelect>
-			<MudButton Size="Size.Small" Disabled="Harm.CanHeal" OnClick="(() => HealingClock.Progress(RecoveryAmount))" Variant="Variant.Outlined" aria-label="Add recovery progress" Style="@Constants.Buttons.ButtonDimensionStyle">Recover</MudButton>
-		</MudStack>
+		<div class="horizontal-stack jsb">
+			<FluentSelect TOption="RecoverySelectable" Items="RecoverySelectables" SelectedOptionChanged="i => RecoveryAmount = i.Value" AriaLabel="Recovery Progress" Id="select-recovery-progress">
+				<OptionTemplate>
+					<FluentIcon Value="new Icons.Filled.Size24.Clock()" Slot="start" />
+					@context.Text
+				</OptionTemplate>
+			</FluentSelect>
+			<FluentButton IconStart="new Icons.Filled.Size24.Clock()" Disabled="Harm.CanHeal" OnClick="(() => HealingClock.Progress(RecoveryAmount))" Appearance="Appearance.Accent" Title="Add recovery progress" Class="min-button">Recover</FluentButton>
+		</div>
 	}
-
-</MudStack>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public Monitor Monitor { get; set; } = Monitor.Empty();
-
-	[Parameter, EditorRequired]
-	public bool IsFixMode { get; set; }
-
-	MonitorHarm Harm =>
-		Monitor.Harm;
-
-	RolloverClock HealingClock =>
-		Harm.HealingClock;
-
-	int MaxRecovery =>
-		HealingClock.Size;
-
-	int RecoveryAmount = 1;
-
-	void Heal()
-	{
-		Harm.Heal();
-		SheetJank.NotifyHarmChanged();
-	}
-
-	string CurrentRecoveryProgressLabel =>
-		$"Current recovery progress {HealingClock.Time} of {HealingClock.Size}";
-
-	string SetRecoveryProgressLabel =>
-		$"Set recovery progress {HealingClock.Time} of {HealingClock.Size}";
-
-	string ExtraRecoveryProgressLabel =>
-		$"Rollover recovery progress: {HealingClock.Rollover}";
-}
+	<div class="horizontal-stack aic jsb">
+		<div class="horizontal-stack">
+			@if (IsFixMode)
+			{
+				<BladeRating @bind-Value="HealingClock.Time" MaxValue="MaxRecovery" CheckboxAriaLabelSuffix="Recovery Progress" />
+			}
+			<FluentProgressRing Value="HealingClock.Time" Max="MaxRecovery" aria-label="@CurrentRecoveryProgressLabel" />
+			@if (HealingClock.Rollover > 0)
+			{
+				<FluentProgressRing Value="HealingClock.Rollover" Max="MaxRecovery" aria-label="@ExtraRecoveryProgressLabel" />
+			}
+		</div>
+		<FluentButton Class="min-button" Disabled="!Harm.CanHeal" OnClick="Heal" Appearance="Appearance.Accent" IconStart="new Icons.Filled.Size24.Heart()">Heal</FluentButton>
+	</div>
+</div>

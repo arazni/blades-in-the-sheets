@@ -4,73 +4,18 @@
 @using UI.Services
 @inject SheetJank SheetJank
 
-<MudStack Row="true">
+<div class="horizontal-stack">
 	@if (IsFixMode)
 	{
-		<MudRating Size="Size.Small" @bind-SelectedValue="FixModeRating" MaxValue="Action.MaxRating" FullIcon="@Icons.Material.Filled.CheckBox" EmptyIcon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="Color.Primary" aria-label="@RatingLabel" />
-		<MudText>@ActionName</MudText>
+		<BladeRating @bind-Value="FixModeRating" MaxValue="Action.MaxRating" CheckboxAriaLabelSuffix="@RatingLabel" />
+		<p class="margin-vertical-center">@ActionName</p>
 	}
 	else
 	{
 		if (CanLevelUp)
 		{
-			<MudIconButton Title="@LevelUpTitle" Variant="Variant.Filled" Size="Size.Small" Disabled="Action.HasMaxRating" Icon="@Icons.Material.Filled.Add" OnClick="LevelUp" Color="Color.Primary" aria-label="@LevelUpLabel" />
+			<FluentButton Title="@LevelUpTitle" Appearance="Appearance.Accent" Disabled="Action.HasMaxRating" IconStart="new Icons.Filled.Size20.Add()" OnClick="LevelUp" Color="Color.Primary" />
 		}
-		<MudText>@Text</MudText>
+		<p class="margin-vertical-center">@Text</p>
 	}
-</MudStack>
-
-@code
-{
-	[Parameter, EditorRequired]
-	public string AttributeName { get; set; } = string.Empty;
-
-	[Parameter, EditorRequired]
-	public TalentAttribute Attribute { get; set; } = TalentAttribute.Empty();
-
-	[Parameter, EditorRequired]
-	public string ActionName { get; set; } = string.Empty;
-
-	[Parameter, EditorRequired]
-	public TalentAction Action { get; set; } = TalentAction.Empty();
-
-	[CascadingParameter(Name = "IsFixMode")]
-	public bool IsFixMode { get; set; }
-
-	string LevelUpTitle =>
-		$"Level up {ActionName}";
-
-	bool CanLevelUp =>
-		Attribute!.Experience.CanLevelUp
-		|| IsFixMode;
-
-	string Text =>
-		$"{Action.Rating} {ActionName}";
-
-	void LevelUp()
-	{
-		if (!Attribute.LevelUp(ActionName))
-			return;
-
-		Notify();
-	}
-
-	int FixModeRating
-	{
-		get => Action.Rating;
-		set
-		{
-			Action.Rating = value;
-			Notify();
-		}
-	}
-
-	void Notify() =>
-		SheetJank.NotifyAttributeChanged(AttributeName);
-
-	string RatingLabel =>
-		$"Set {ActionName} rating";
-
-	string LevelUpLabel =>
-		$"Level up {ActionName}";
-}
+</div>
