@@ -41,7 +41,7 @@ public partial class CharacterSheet
 
 	async ValueTask HackSave() => await Save();
 
-	async Task Save()
+	protected async virtual Task Save()
 	{
 		isSaving = true;
 		try

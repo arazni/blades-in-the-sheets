@@ -1,0 +1,309 @@
+{
+	"Id": "c46ba7cb-993b-4fc7-974d-fb95eacd5446",
+	"GameName": "Blades in the Dark",
+	"Version": 2,
+	"Dossier": {
+		"Name": "Brenda Hilton",
+		"CrewId": "",
+		"Alias": "Webweaver",
+		"Look": "Professional, upkept attire, always ready to impress any contacts I meet",
+		"Notes": "",
+		"Background": {
+			"Name": "Military",
+			"Description": "Ex-mercenary sailor, ostracized by many members of my family for working with people antagonistic to them"
+		},
+		"Heritage": {
+			"Name": "The Dagger Isles",
+			"Description": "My family are well-known pirates"
+		},
+		"Vice": {
+			"Name": "Obligation",
+			"Description": "I donate spare coin to my family whenever possible to compensate for my guilt in betraying them."
+		}
+	},
+	"Monitor": {
+		"Stress": {
+			"CurrentStress": 0
+		},
+		"Trauma": {
+			"TraumaSet": [
+				"Haunted",
+				"Paranoid"
+			]
+		},
+		"Harm": {
+			"BoundedLesserHarms": {
+				"Items": [
+					"Ashamed",
+					null
+				]
+			},
+			"BoundedModerateHarms": {
+				"Items": [
+					null,
+					null
+				]
+			},
+			"BoundedSevereHarms": {
+				"Items": [
+					null
+				]
+			},
+			"BoundedFatalHarms": {
+				"Items": [
+					null
+				]
+			},
+			"HealingClock": {
+				"Time": 1,
+				"Rollover": 0,
+				"Size": 4
+			}
+		}
+	},
+	"Talent": {
+		"AttributesByName": {
+			"Insight": {
+				"ActionsByName": {
+					"Hunt": {
+						"MaxRating": 4,
+						"Rating": 1
+					},
+					"Study": {
+						"MaxRating": 4,
+						"Rating": 1
+					},
+					"Survey": {
+						"MaxRating": 4,
+						"Rating": 1
+					},
+					"Tinker": {
+						"MaxRating": 4,
+						"Rating": 0
+					}
+				},
+				"Experience": {
+					"Points": 3,
+					"MaxPoints": 6
+				}
+			},
+			"Prowess": {
+				"ActionsByName": {
+					"Finesse": {
+						"MaxRating": 4,
+						"Rating": 0
+					},
+					"Prowl": {
+						"MaxRating": 4,
+						"Rating": 1
+					},
+					"Skirmish": {
+						"MaxRating": 4,
+						"Rating": 0
+					},
+					"Wreck": {
+						"MaxRating": 4,
+						"Rating": 0
+					}
+				},
+				"Experience": {
+					"Points": 3,
+					"MaxPoints": 6
+				}
+			},
+			"Resolve": {
+				"ActionsByName": {
+					"Attune": {
+						"MaxRating": 4,
+						"Rating": 0
+					},
+					"Command": {
+						"MaxRating": 4,
+						"Rating": 0
+					},
+					"Consort": {
+						"MaxRating": 4,
+						"Rating": 2
+					},
+					"Sway": {
+						"MaxRating": 4,
+						"Rating": 1
+					}
+				},
+				"Experience": {
+					"Points": 1,
+					"MaxPoints": 6
+				}
+			}
+		}
+	},
+	"Playbook": {
+		"AbilitiesByName": {
+			"Foresight": {
+				"Name": "Foresight",
+				"Description": "Two times per score you can assist a teammate without paying stress. Tell us how you prepared for this.",
+				"TimesTaken": 1
+			},
+			"Mastermind": {
+				"Name": "Mastermind",
+				"Description": "You may expend your special armor to protect a teammate, or to push yourself when you gather information or work on a long-term project.",
+				"TimesTaken": 1
+			}
+		},
+		"Experience": {
+			"Points": 7,
+			"MaxPoints": 8
+		},
+		"Name": "Spider"
+	},
+	"Gear": {
+		"LoadoutByName": {},
+		"AvailableGearByName": {
+			"Fine cover identity": {
+				"Bulk": 0,
+				"Name": "Fine cover identity"
+			},
+			"Fine bottle of whiskey": {
+				"Bulk": 1,
+				"Name": "Fine bottle of whiskey"
+			},
+			"Blueprints": {
+				"Bulk": 1,
+				"Name": "Blueprints"
+			},
+			"Vial of slumber essence": {
+				"Bulk": 0,
+				"Name": "Vial of slumber essence"
+			},
+			"Concealed palm pistol": {
+				"Bulk": 0,
+				"Name": "Concealed palm pistol"
+			},
+			"Spiritbane charm": {
+				"Bulk": 0,
+				"Name": "Spiritbane charm"
+			},
+			"A Blade or Two": {
+				"Bulk": 1,
+				"Name": "A Blade or Two"
+			},
+			"Throwing Knives": {
+				"Bulk": 1,
+				"Name": "Throwing Knives"
+			},
+			"A Pistol": {
+				"Bulk": 1,
+				"Name": "A Pistol"
+			},
+			"A 2nd Pistol": {
+				"Bulk": 1,
+				"Name": "A 2nd Pistol"
+			},
+			"A Large Weapon": {
+				"Bulk": 2,
+				"Name": "A Large Weapon"
+			},
+			"An Unusual Weapon": {
+				"Bulk": 1,
+				"Name": "An Unusual Weapon"
+			},
+			"Armor": {
+				"Bulk": 2,
+				"Name": "Armor"
+			},
+			"+Heavy": {
+				"Bulk": 3,
+				"Name": "+Heavy"
+			},
+			"Burglary Gear": {
+				"Bulk": 1,
+				"Name": "Burglary Gear"
+			},
+			"Climbing Gear": {
+				"Bulk": 2,
+				"Name": "Climbing Gear"
+			},
+			"Arcane Implements": {
+				"Bulk": 1,
+				"Name": "Arcane Implements"
+			},
+			"Documents": {
+				"Bulk": 1,
+				"Name": "Documents"
+			},
+			"Subterfuge Supplies": {
+				"Bulk": 1,
+				"Name": "Subterfuge Supplies"
+			},
+			"Demolition Tools": {
+				"Bulk": 2,
+				"Name": "Demolition Tools"
+			},
+			"Tinkering Tools": {
+				"Bulk": 1,
+				"Name": "Tinkering Tools"
+			},
+			"Lantern": {
+				"Bulk": 1,
+				"Name": "Lantern"
+			},
+			"A Coin": {
+				"Bulk": 1,
+				"Name": "A Coin"
+			},
+			"2 Coin": {
+				"Bulk": 2,
+				"Name": "2 Coin"
+			},
+			"3 Coin": {
+				"Bulk": 3,
+				"Name": "3 Coin"
+			},
+			"4 Coin": {
+				"Bulk": 4,
+				"Name": "4 Coin"
+			}
+		},
+		"Commitment": {
+			"Commitment": 0
+		}
+	},
+	"Fund": {
+		"Satchel": {
+			"Coins": 4
+		},
+		"Stash": {
+			"Stash": 11
+		}
+	},
+	"Rolodex": {
+		"Friends": [
+			{
+				"Entry": "Salia, an information broker",
+				"Closeness": 0
+			},
+			{
+				"Entry": "Augus, a master architect",
+				"Closeness": 0
+			},
+			{
+				"Entry": "Jennah, a servant",
+				"Closeness": 2
+			},
+			{
+				"Entry": "Riven, a chemist",
+				"Closeness": 1
+			},
+			{
+				"Entry": "Jeren, a bluecoat archivist",
+				"Closeness": 0
+			}
+		]
+	},
+	"Session": {
+		"PlaybookExpressions": 1,
+		"CharacterExpressions": 2,
+		"StruggleExpressions": 1
+	},
+	"Notebook": ""
+}

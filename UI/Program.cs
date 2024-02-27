@@ -20,6 +20,7 @@ builder.Services.AddTransient<ICharacterCoordinator, CharacterCoordinator>();
 builder.Services.AddTransient<IMigrationHandler, MigrationHandler>();
 builder.Services.AddTransient<IThemeStorageService, ThemeStorageService>();
 builder.Services.AddTransient<IAccessibilityStorageService, AccessibilityStorageService>();
+builder.Services.AddTransient<IHttpDemoReader, HttpDemoReader>();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped<IThemeSettingService, ThemeSettingService>();
