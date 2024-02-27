@@ -53,6 +53,10 @@
       "url": "data\/blades-in-the-dark.json"
     },
     {
+      "hash": "sha256-caFgpKU6XHS2Aajwz0Nb8FM2C0zGLrS+a8aFalXKgwo=",
+      "url": "data\/demo-character.json"
+    },
+    {
       "hash": "sha256-lUsurU8HeK6ywUSzpYKkFSHFd9yYNaeqzja355CfDKI=",
       "url": "data\/game-settings-schema.json"
     },
@@ -77,11 +81,11 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-+mACeg29nfZ0Wi5UxmakZzeMmWFl\/J767e1Pp9CaePo=",
+      "hash": "sha256-PdpIxFXQmdvbCEi4mfTLjwzgTH4FOlfS3jNWaJcjE\/0=",
       "url": "index.html"
     },
     {
-      "hash": "sha256-DY62sGI4Xh2jXPtPZwZgtAdD8cZ68Ab8VKjClJ86sQQ=",
+      "hash": "sha256-Z2UJeGZrFiR7+RieEAdkxgfTlsPkiswIBB9aVJHtBb0=",
       "url": "manifest.webmanifest"
     },
     {
@@ -101,7 +105,7 @@
       "url": "_framework\/dotnet.runtime.8.0.2.xpxg2k6ml2.js"
     },
     {
-      "hash": "sha256-9sHl6Jtn3E4mPIQ1Namdv5\/xFhSAdBRLTxOHb9lw7fo=",
+      "hash": "sha256-kJ0G33j6IHik8iK88RzDYWhXI4qlhlFNaY8KyvUMPS8=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -109,7 +113,7 @@
       "url": "_framework\/dotnet.native.8.0.2.yvjziv1s2t.js"
     },
     {
-      "hash": "sha256-LAHRiCs5Cb6Qh8wiJLlaZNuy29BAwglrpGUtbocNjRI=",
+      "hash": "sha256-dEUpgcIgZdDUXqY1oKrQ+ORIi\/qEOEucYnbfqKk+Mqc=",
       "url": "_framework\/dotnet.native.wasm.br"
     },
     {
@@ -177,7 +181,7 @@
       "url": "_framework\/Microsoft.Extensions.Primitives.wasm.br"
     },
     {
-      "hash": "sha256-hgzv1lAhZmkjJfLoOl5\/ElDsxdRVgiy6wjiVF8Hl520=",
+      "hash": "sha256-Ke1TCbaFjzhAw5A5oeQ9dq8zKZgkF8vh\/yIxBLaqcZw=",
       "url": "_framework\/Microsoft.FluentUI.AspNetCore.Components.Icons.wasm.br"
     },
     {
@@ -193,7 +197,7 @@
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.wasm.br"
     },
     {
-      "hash": "sha256-WgHsMQufVF\/wdTLo3rLG2FxmQJto7YWClIjXCcQJEss=",
+      "hash": "sha256-RaYiqsge6tfYwYhfyjOt\/phr7JHRZfJ19TpiFxrS2s8=",
       "url": "_framework\/Models.wasm.br"
     },
     {
@@ -205,7 +209,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm.br"
     },
     {
-      "hash": "sha256-D\/zGazgUGMdiszeb2xMs3kxRoC3pfJRY6QAEAilpLrQ=",
+      "hash": "sha256-PyUGNdfNSEOhP50RZJgnEl9OP1EsSuuhJrAtfOBjBdM=",
       "url": "_framework\/Persistence.wasm.br"
     },
     {
@@ -413,7 +417,7 @@
       "url": "_framework\/Toolbelt.Blazor.HotKeys2.wasm.br"
     },
     {
-      "hash": "sha256-Kx4oO7k+3gAPtuv2vxPhH6x\/EoHCbf8yn5yUiqWiEfk=",
+      "hash": "sha256-9+UuXK4y42yjMBgidv\/NscCjTrl18GanIh4EKSgn5es=",
       "url": "_framework\/UI.wasm.br"
     },
     {
@@ -549,5 +553,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "IRuekni9"
+  "version": "UDIuIRMS"
 };
