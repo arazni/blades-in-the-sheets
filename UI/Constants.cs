@@ -23,6 +23,8 @@ public static class Constants
 
 		public const string Accessibility = "accessibility";
 
+		public const string Help = "help";
+
 		public static string NewCharacter(GameFile gameFile) => NewCharacter(gameFile.Stem);
 
 		public static string NewCharacter(string gameFileStem) => $"{New}/{gameFileStem}";
