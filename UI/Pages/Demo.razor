@@ -1,0 +1,15 @@
+﻿@page "/demo"
+@using Persistence.Json
+@inherits CharacterSheet
+@inject IToastService Toaster
+@inject ILoader Loader
+@inject IHttpDemoReader DemoReader
+
+<div class="vertical-stack">
+	<h2>Character Sheet Demo</h2>
+	<p>Feel free to play around here and see if you like the character sheets. The save button only pretends to work during the demo, so you're welcome to goof around and it'll pop back to normal next time you visit the page.</p>
+</div>
+
+@{
+	base.BuildRenderTree(__builder);
+}
