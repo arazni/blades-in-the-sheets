@@ -77,11 +77,11 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-OuUxyFFErTTx8H6Km3KoJh51X7Z1TbtmBXNPlQHDaxs=",
+      "hash": "sha256-+mACeg29nfZ0Wi5UxmakZzeMmWFl\/J767e1Pp9CaePo=",
       "url": "index.html"
     },
     {
-      "hash": "sha256-Gr69BhW6Tl0TidPYau+\/8wtTi3aAYt2+E242UP2fUl0=",
+      "hash": "sha256-DY62sGI4Xh2jXPtPZwZgtAdD8cZ68Ab8VKjClJ86sQQ=",
       "url": "manifest.webmanifest"
     },
     {
@@ -101,7 +101,7 @@
       "url": "_framework\/dotnet.runtime.8.0.2.xpxg2k6ml2.js"
     },
     {
-      "hash": "sha256-KJeeJ78XahYoTO2c1dsLFCGAqSLPS1UrF3uLMx0Lhis=",
+      "hash": "sha256-9sHl6Jtn3E4mPIQ1Namdv5\/xFhSAdBRLTxOHb9lw7fo=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -109,7 +109,7 @@
       "url": "_framework\/dotnet.native.8.0.2.yvjziv1s2t.js"
     },
     {
-      "hash": "sha256-50mmPIGDy3VYqHfLMxNdiz+uXHpQXQsLGQGg7LaXy\/U=",
+      "hash": "sha256-LAHRiCs5Cb6Qh8wiJLlaZNuy29BAwglrpGUtbocNjRI=",
       "url": "_framework\/dotnet.native.wasm.br"
     },
     {
@@ -177,7 +177,7 @@
       "url": "_framework\/Microsoft.Extensions.Primitives.wasm.br"
     },
     {
-      "hash": "sha256-IKLCFlmFJnGmeY86DR1KEPdh3VKtIZd8gBjbAMhrXEk=",
+      "hash": "sha256-hgzv1lAhZmkjJfLoOl5\/ElDsxdRVgiy6wjiVF8Hl520=",
       "url": "_framework\/Microsoft.FluentUI.AspNetCore.Components.Icons.wasm.br"
     },
     {
@@ -193,7 +193,7 @@
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.wasm.br"
     },
     {
-      "hash": "sha256-S0\/wArrfwGl4oAKr5B5y9ROxGZzeh79TUxbhcfenbTQ=",
+      "hash": "sha256-WgHsMQufVF\/wdTLo3rLG2FxmQJto7YWClIjXCcQJEss=",
       "url": "_framework\/Models.wasm.br"
     },
     {
@@ -205,7 +205,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm.br"
     },
     {
-      "hash": "sha256-Xvh3XfQuMpdUIt6Z8nphXdyo06v22VeYwINAUfoZWJg=",
+      "hash": "sha256-D\/zGazgUGMdiszeb2xMs3kxRoC3pfJRY6QAEAilpLrQ=",
       "url": "_framework\/Persistence.wasm.br"
     },
     {
@@ -413,7 +413,7 @@
       "url": "_framework\/Toolbelt.Blazor.HotKeys2.wasm.br"
     },
     {
-      "hash": "sha256-OSwe4hDIMgXGiJh3axtwY+cD3m7IuXSG\/VPDPw6d8Qg=",
+      "hash": "sha256-Kx4oO7k+3gAPtuv2vxPhH6x\/EoHCbf8yn5yUiqWiEfk=",
       "url": "_framework\/UI.wasm.br"
     },
     {
@@ -549,5 +549,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "XaGcnlSP"
+  "version": "IRuekni9"
 };
