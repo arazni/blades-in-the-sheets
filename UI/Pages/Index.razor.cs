@@ -55,7 +55,10 @@ public partial class Index
 		var characters = await Storage.LoadAll();
 
 		if (!characters.Any())
+		{
+			Characters = [];
 			return;
+		}
 
 		Characters = characters.Select(character => new VIndexCharacter(character))
 			.OrderBy(c => (c.GameName, c.Alias))
