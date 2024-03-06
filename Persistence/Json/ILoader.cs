@@ -6,6 +6,7 @@ namespace Persistence.Json;
 public interface ILoader
 {
 	Task<GameFile[]> LoadGameFiles();
-	Task<GameSetting> LoadSetting(string gameName);
+	Task<GameSetting> LoadSetting(string gameStem);
+	Task<GameSetting> LoadSetting(string gameName, string language);
 	Task<GameSetting> LoadSetting(GameFile gameFile);
 }

@@ -1,5 +1,6 @@
 {
 	"Name": "Scum and Villainy",
+	"Language": "English",
 	"Playbooks": [
 		{
 			"Name": "Mechanic",
@@ -711,32 +712,32 @@
 	"Heritages": [
 		{
 			"Name": "Imperial",
-			"BlurbFlavor": "among the Hegemony",
+			"BlurbFlavor": "from among the Hegemony",
 			"Description": "Those with imperial heritage hail from Warren or the Core worlds. You were brought up educated in ways of the Hegemony, through a Guild vocational education, Cult teachings, or Noble family tutors."
 		},
 		{
 			"Name": "Spacer",
-			"BlurbFlavor": "the creaking ships of space",
+			"BlurbFlavor": "from the creaking ships of space",
 			"Description": "If you'd rather be more at home on a creaking ship, you could be from a spacer family. Ice miners, station mechanics, and most merchants are born, grow old, and die in space—and may or may not view your terrestrial ventures with suspicion."
 		},
 		{
 			"Name": "Colonist",
-			"BlurbFlavor": "a colonized planet",
+			"BlurbFlavor": "from a colonized planet",
 			"Description": "The exact opposite are colonist families. Farmers, miners, and terraformers form the backbone of the Hegemony. Fighting for a living on the borders of planets, these folks deal with alien beasts and odd Precursor ruins more than most."
 		},
 		{
 			"Name": "Manufactured",
-			"BlurbFlavor": "a facility",
+			"BlurbFlavor": "from a facility",
 			"Description": "Manufactured \"families\" are fundamentally controlled in some way by the Guilds. For example, a Yaru clone who's escaped from a facility or a Urbot that's avoided routine memory wipes. You may often have to hide your origin and independence."
 		},
 		{
 			"Name": "Wanderer",
-			"BlurbFlavor": "anywhere and everywhere",
+			"BlurbFlavor": "from anywhere and everywhere",
 			"Description": "If you want to be without a planet to call home, you could be from a wanderer heritage. A small but notable portion of the Hegemony move from planet to planet, as opportunities emerge and galactic economic cycles shift. Or just follow where the Way takes you."
 		},
 		{
 			"Name": "Xeno",
-			"BlurbFlavor": "a strange home",
+			"BlurbFlavor": "from a strange home",
 			"Description": "Xeno families are as diverse as the countless kinds of Xenos in the galaxy. You were raised in a non-human culture. Xenos struggle to find acceptance in the Hegemony, and many of their practices are seen as strange or unusual."
 		}
 	],

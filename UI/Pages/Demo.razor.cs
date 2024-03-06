@@ -10,7 +10,7 @@ public partial class Demo : CharacterSheet
 	protected override async Task OnParametersSetAsync()
 	{
 		Character = await DemoReader.GetDemoCharacter();
-		GameSetting = await Loader.LoadSetting(Character.GameName);
+		GameSetting = await Loader.LoadSetting(Character.GameName, Character.Language);
 		Id = Character.Id;
 	}
 }

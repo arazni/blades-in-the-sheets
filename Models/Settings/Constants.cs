@@ -9,6 +9,12 @@ public static class Constants
 		public const string ScumAndVillainy = "Scum and Villainy";
 	}
 
+	public static class Languages
+	{
+		public const string English = "English";
+		public const string French = "Français";
+	}
+
 	public static class DefaultNames
 	{
 		public const string Alias = "Alias";

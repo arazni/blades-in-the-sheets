@@ -41,9 +41,9 @@
 			}
 		}
 	</div>
-	@if (Gear.HasCommittedBandolier)
+	@foreach (var description in Gear.GetExtraGearDescriptions(GearWithExtraDescriptions))
 	{
-		<p>Bandolier items: Alcahest, Binding Oil, Drift Oil, Drown Powder, Eyeblind Poison, Fire Oil, Grenade, Quicksilver, Skullfire Poison, Smoke Bomb, Spark (drug), Standstill Poison, Trance Powder</p>
+		<p>@description</p>
 	}
 	<div class="row jsb">
 		<h5>Available Gear</h5>

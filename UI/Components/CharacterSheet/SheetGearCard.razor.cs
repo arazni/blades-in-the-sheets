@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Models.Characters;
 using Models.Common;
+using Models.Settings;
 using UI.Services;
 
 namespace UI.Components.CharacterSheet;
@@ -10,10 +11,15 @@ public partial class SheetGearCard
 	[Parameter, EditorRequired]
 	public Character Character { get; set; } = Character.Empty();
 
-	[Parameter]
-	public string BulkSynonym { get; set; } = Models.Settings.Constants.DefaultNames.Bulk;
+	[Parameter, EditorRequired]
+	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
 	public Gear Gear => Character.Gear;
+
+	public string BulkSynonym => GameSetting.Thesaurus.Bulk;
+
+	public GearExtraDescriptionSetting[] GearWithExtraDescriptions => GameSetting.ExtraDescription?.GearDescriptions
+		?? EmptyGameSetting.ExtraDescription().GearDescriptions;
 
 	public bool IsFixMode { get; set; }
 

@@ -1,10 +1,17 @@
 [
 	{
 		"Name": "Blades in the Dark",
-		"Stem": "blades-in-the-dark"
+		"Stem": "blades-in-the-dark",
+		"Language": "English"
 	},
 	{
 		"Name": "Scum and Villainy",
-		"Stem": "scum-and-villainy"
+		"Stem": "scum-and-villainy",
+		"Language": "English"
+	},
+	{
+		"Name": "Blades in the Dark",
+		"Stem": "français-blades-in-the-dark",
+		"Language": "Français"
 	}
 ]

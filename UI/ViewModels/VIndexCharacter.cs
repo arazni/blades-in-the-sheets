@@ -4,34 +4,25 @@ using static UI.Constants;
 
 namespace UI.ViewModels;
 
-public class VIndexCharacter
+public class VIndexCharacter(Character character)
 {
-	public VIndexCharacter(Character character)
-	{
-		Id = character.Id;
-		Name = character.Dossier.Name;
-		Alias = character.Dossier.Alias;
-		Playbook = character.Playbook.Name;
-		GameName = character.GameName;
-		Background = character.Dossier.Background.Name;
-		Heritage = character.Dossier.Heritage.Name;
-	}
+	public string Id { get; } = character.Id;
 
-	public string Id { get; }
+	public string Name { get; } = character.Dossier.Name;
 
-	public string Name { get; }
+	public string Alias { get; } = character.Dossier.Alias;
 
-	public string Alias { get; }
+	public string Playbook { get; } = character.Playbook.Name;
 
-	public string Playbook { get; }
+	public string GameName { get; } = character.GameName;
 
-	public string GameName { get; }
+	public string Language { get; } = character.Language;
 
-	public string Background { get; }
+	public string Background { get; } = character.Dossier.Background.Name;
 
-	public string Heritage { get; }
+	public string Heritage { get; } = character.Dossier.Heritage.Name;
 
-	public string Blurb(GameSetting gameSetting) => $"{Name}, {gameSetting.GetBackground(Background).BlurbFlavor} from {gameSetting.GetHeritage(Heritage).BlurbFlavor}";
+	public string Blurb(GameSetting gameSetting) => $"{Name}, {gameSetting.GetBackground(Background).BlurbFlavor} {gameSetting.GetHeritage(Heritage).BlurbFlavor}";
 
 	public string Link => Paths.Sheet(Id);
 }
