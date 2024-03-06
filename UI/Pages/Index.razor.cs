@@ -1,8 +1,8 @@
 ﻿using Microsoft.FluentUI.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Models.Common;
 using Models.Settings;
 using Persistence.Json.DataModels;
-using System.Collections.Immutable;
 using System.Text;
 using UI.ViewModels;
 using static Models.Settings.Constants;
@@ -18,9 +18,15 @@ public partial class Index
 
 	GameFile[] AvailableGameFiles { get; set; } = [];
 
-	GameFile SelectedGameFile { get; set; } = new(Games.BladesInTheDark, Games.BladesInTheDarkStem);
+	GameFile[] SelectableGameFiles { get; set; } = [];
 
-	ImmutableDictionary<string, GameSetting> GameSettingsByName = ImmutableDictionary<string, GameSetting>.Empty;
+	string[] AvailableLanguages { get; set; } = [];
+
+	GameFile SelectedGameFile { get; set; } = new(Games.BladesInTheDark, Games.BladesInTheDarkStem, Languages.English);
+
+	string SelectedLanguage { get; set; } = Languages.English;
+
+	GameSetting[] GameSettings { get; set; } = [];
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
@@ -35,17 +41,17 @@ public partial class Index
 		await LoadCharacters();
 
 		AvailableGameFiles = await Loader.LoadGameFiles();
-		SelectedGameFile = AvailableGameFiles.First();
+		Console.WriteLine("available count: " + AvailableGameFiles.Length);
 
-		var gameSettingLoads = AvailableGameFiles.Select(gameFile => Loader.LoadSetting(gameFile));
+		AvailableLanguages = AvailableGameFiles.Select(gf => gf.Language)
+			.Distinct()
+			.ToArray();
 
-		var gameSettings = await Task.WhenAll(gameSettingLoads);
+		var gameSettingLoads = AvailableGameFiles.Select(Loader.LoadSetting);
 
-		GameSettingsByName = gameSettings.ToImmutableDictionary
-		(
-			gameSetting => gameSetting.Name,
-			gameSetting => gameSetting
-		);
+		GameSettings = await Task.WhenAll(gameSettingLoads);
+
+		OnSelectedLanguageChanged(Languages.English);
 
 		await base.OnInitializedAsync();
 	}
@@ -115,10 +121,17 @@ public partial class Index
 
 	string Blurb(VIndexCharacter vCharacter)
 	{
-		if (!GameSettingsByName.TryGetValue(vCharacter.GameName, out var gameSetting))
+		var gameNameMatches = GameSettings.Where(gf => gf.Name.Like(vCharacter.GameName));
+
+		if (gameNameMatches.IsNullOrEmpty())
 			return vCharacter.Blurb(EmptyGameSetting.Game());
 
-		return vCharacter.Blurb(gameSetting);
+		var languageMatch = gameNameMatches.FirstOrDefault(gf => gf.Language.Like(vCharacter.Language));
+
+		if (languageMatch is not null)
+			return vCharacter.Blurb(languageMatch);
+
+		return vCharacter.Blurb(gameNameMatches.First());
 	}
 
 	string DownloadModeLabel =>
@@ -130,4 +143,15 @@ public partial class Index
 
 	static string DeleteCharacterLabel(string characterName) =>
 		$"Delete {characterName}";
+
+	void OnSelectedLanguageChanged(string language)
+	{
+		SelectedLanguage = language;
+
+		if (!AvailableGameFiles.Any())
+			return;
+
+		SelectableGameFiles = AvailableGameFiles.Where(gf => gf.Language.Like(language)).ToArray();
+		SelectedGameFile = SelectableGameFiles.First();
+	}
 }

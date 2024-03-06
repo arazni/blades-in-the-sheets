@@ -23,9 +23,9 @@ public class CharacterCoordinator : ICharacterCoordinator
 		return character;
 	}
 
-	public async Task<Character> InitializeCharacter(string gameName, string playbookOption)
+	public async Task<Character> InitializeCharacter(string gameName, string language, string playbookOption)
 	{
-		var gameSetting = await this.loader.LoadSetting(gameName);
+		var gameSetting = await this.loader.LoadSetting(gameName, language);
 		return InitializeCharacter(gameSetting, playbookOption);
 	}
 

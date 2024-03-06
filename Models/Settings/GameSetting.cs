@@ -5,6 +5,7 @@ namespace Models.Settings;
 public record GameSetting
 (
 	string Name,
+	string Language,
 	PlaybookSetting[] Playbooks,
 	string[] Traumas,
 	HeritageSetting[] Heritages,
@@ -15,7 +16,8 @@ public record GameSetting
 	ThesaurusSetting Thesaurus,
 	int RecoveryClockSize,
 	int ActionPointMaximum,
-	StartingAbilitySetting? StartingAbility = null
+	StartingAbilitySetting? StartingAbility = null,
+	ExtraDescriptionSetting? ExtraDescription = null
 );
 
 public record PlaybookSetting
@@ -110,4 +112,15 @@ public record StartingSpecialAbilitySetting
 (
 	string Name,
 	string Description
+);
+
+public record GearExtraDescriptionSetting
+(
+	string Name,
+	string Description
+);
+
+public record ExtraDescriptionSetting
+(
+	GearExtraDescriptionSetting[] GearDescriptions
 );

@@ -12,6 +12,7 @@ public partial class Character
 		Talent = Talent.Empty();
 		Monitor = Monitor.Empty();
 		GameName = string.Empty;
+		Language = string.Empty;
 	}
 
 	public Character(GameSetting game, string playbookName, int version)
@@ -25,12 +26,15 @@ public partial class Character
 		);
 		Monitor = new(game.RecoveryClockSize);
 		GameName = game.Name;
+		Language = game.Language;
 		Version = version;
 	}
 
 	public string Id { get; private set; } = Guid.NewGuid().ToString();
 
 	public string GameName { get; private set; }
+
+	public string Language { get; private set; }
 
 	public int Version { get; private set; }
 

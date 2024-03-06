@@ -30,7 +30,7 @@ public class SerializerTests
 
 	private async Task<(string, string)> EmptyCharacter()
 	{
-		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Lurk.ToString());
+		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Lurk.ToString());
 		var id = character.Id;
 		var json = this.serializer.Serialize(character);
 		return (id, json);
@@ -38,7 +38,7 @@ public class SerializerTests
 
 	private async Task<(string, string)> LurkCharacter()
 	{
-		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Lurk.ToString());
+		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Lurk.ToString());
 		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1));
 
 		RolodexCreation creation = new();
@@ -77,7 +77,7 @@ public class SerializerTests
 	[Fact]
 	public async void Serializer_Serializes_CoordinatorCharacter()
 	{
-		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
+		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
 		model.Playbook.Name.Should().Be(PlaybookOption.Leech.ToString());
 		model.Gear.AvailableGear.Should().NotBeEmpty();
@@ -97,7 +97,7 @@ public class SerializerTests
 	[Fact]
 	public async void Serializer_Serializes_Experience()
 	{
-		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
+		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
 		model.Playbook.Experience.Points = 5;
 		model.Talent.AttributesByName[AttributeName.Resolve.ToString()].Experience.Points = 1;
@@ -121,7 +121,7 @@ public class SerializerTests
 	[Fact]
 	public async void Serializer_Serializes_MonitorHarm()
 	{
-		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
+		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
 		model.Monitor.Harm.AddHarm("lesser", HarmIntensity.Lesser);
 		model.Monitor.Harm.AddHarm("lesser 2", HarmIntensity.Lesser);
@@ -145,7 +145,7 @@ public class SerializerTests
 	[Fact]
 	public async void Serializer_Serializes_RolloverClock()
 	{
-		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, PlaybookOption.Leech.ToString());
+		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
 		model.Monitor.Harm.HealingClock.Progress(5);
 		model.Monitor.Harm.HealingClock.Time.Should().Be(4);

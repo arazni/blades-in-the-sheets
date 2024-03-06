@@ -21,6 +21,7 @@ public static class EmptyGameSetting
 		string.Empty
 	);
 	private static readonly ThesaurusSetting thesaurus = new();
+	private static readonly ExtraDescriptionSetting extraDescription = new([]);
 
 	public static ActionSetting Action() => action;
 
@@ -54,8 +55,11 @@ public static class EmptyGameSetting
 
 	public static ThesaurusSetting Thesaurus() => thesaurus;
 
+	public static ExtraDescriptionSetting ExtraDescription() => extraDescription;
+
 	public static GameSetting Game() => new
 	(
+		string.Empty,
 		string.Empty,
 		Playbooks(),
 		Traumas(),
@@ -66,6 +70,8 @@ public static class EmptyGameSetting
 		GearItems(),
 		Thesaurus(),
 		4,
-		4
+		4,
+		null,
+		null
 	);
 }

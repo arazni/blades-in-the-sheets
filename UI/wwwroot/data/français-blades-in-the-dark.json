@@ -1,0 +1,1035 @@
+﻿{
+	"Name": "Blades in the Dark",
+	"Language": "Français",
+	"Playbooks": [
+		{
+			"Name": "Surineur (Cutter)",
+			"Hook": "Un homme de main redoutable et intimidant. Lorsque vous incarnez un Surineur, vous gagnez de l’expérience quand vous relevez un défi en utilisant la force ou la violence.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Guerrier né",
+					"Description": "Vous pouvez cocher votre armure spéciale pour réduire une blessure causée par une attaque en combat ou pour vous dépasser durant un combat."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Garde du corps",
+					"Description": "Quand vous protégez un coéquipier, vous gagnez +1 dé à votre jet de résistance. Quand vous recueillez des informations afin d’anticiper de possibles menaces, vous obtenez +1 effet."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Combattant spectral",
+					"Description": "Vous pouvez imprégner d’énergie spirituelle vos mains, vos armes de mêlée ou vos outils. Vous bénéficiez d’un effet puissant lorsque vous affrontez le surnaturel."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Meneur",
+					"Description": "Quand vous Commandez vos comparses au combat, ils continuent à se battre même s’ils devaient se disperser (ils ne sont pas mis hors de combat par une blessure de niveau 3). Ils bénéficient en outre de +1 effet et 1 armure."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Mule",
+					"Description": "Vos limites de charge augmentent. Légère : 5. Standard : 7. Lourde : 8."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "A ne pas prendre à la légère",
+					"Description": "Vous pouvez vous dépasser pour : soit accomplir un tour de force physique proche du surhumain, soit affronter en combat rapproché un petit groupe (jusqu’à six personnes) à jeu égal."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Féroce",
+					"Description": "Vos déchaînements de violence vous rendent particulièrement effrayant. Quand vous Commandez une cible effrayée, gagnez +1 dé à votre jet."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Vigoureux",
+					"Description": "Vous guérissez plus rapidement. Cochez de manière permanente un segment de votre compteur de guérison. Gagnez +1 dé aux jets de récupération."
+				},
+				{
+					"TimesTakeable": 99,
+					"Name": "Vétéran",
+					"Description": "Choisissez une capacité spéciale d'un autre type de personnage."
+				}
+			],
+			"Rolodex": {
+				"Name": "Connexions dangereuses",
+				"Friends": [
+					"Marlane, une pugiliste",
+					"Chael, une brute vicieuse",
+					"Mercy, une tueuse de sang-froid",
+					"Grace, une extorqueuse",
+					"Sawtooth, un chirurgien de fortune"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Arme à une main de qualité"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Arme lourde de qualité"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Arme ou outil effrayant"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Menottes et chaîne"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Potion de rage"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Affronter",
+					"Points": 2
+				},
+				{
+					"Action": "Commander",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "Vous avez relevé un défi en utilisant la force ou la violence"
+		},
+
+		{
+			"Name": "Traqueur (Hound)",
+			"Hook": "Un tireur d’élite et un chasseur d’hommes. Lorsque vous incarnez un Traqueur, vous gagnez de l’expérience quand vous relevez un défi en utilisant le pistage ou la violence.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Tireur d’élite",
+					"Description": "Vous pouvez vous dépasser pour : soit tirer au-delà de la portée normale de votre arme, soit faire un tir de barrage pour neutraliser l’ennemi."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Concentration",
+					"Description": "Vous pouvez dépenser votre armure spéciale pour résister à une conséquence liée à la surprise ou au mental (la peur, la confusion, la perte de la piste de votre cible) ou pour vous dépasser en combat à distance ou en cours de traque."
+				},
+				{
+					"TimesTakeable": 3,
+					"Name": "Chasseur spectral",
+					"Description": "Votre animal de compagnie est imprégné d’énergie spirituelle. Cela le rend puissant lorsqu’il piste ou combat des entités surnaturelles, et lui confère une capacité occulte au choix : forme spectrale, lien mental ou rapide comme l’éclair. Choisissez cette capacité plusieurs fois pour conférer une capacité occulte supplémentaire à votre animal."
+					// The French version makes it sound like you can take this any number of times
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Éclaireur",
+					"Description": "Quand vous recueillez des informations pour découvrir la localisation d’une cible, vous obtenez +1 effet. Quand vous vous mettez à l’affût ou vous camouflez, vous gagnez +1 dé aux jets pour éviter d’être repéré."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Survivant",
+					"Description": "Que ce soit grâce à l’expérience chèrement acquise ou à un rituel occulte, vous êtes immunisé contre les miasmes empoisonnés des terres mortes, ce qui vous permet de survivre en vous nourrissant de l’étrange faune et flore qu’on peut y trouver. Vous gagnez en outre +1 case de stress."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Dur à cuire",
+					"Description": "Les pénalités que vous subissez en raison de vos blessures sont réduites d’un niveau. Une blessure de niveau 4 demeure cependant fatale."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Vengeur",
+					"Description": "Vous gagnez un critère de gain d’expérience supplémentaire : « Vous avez pu rendre la pareille à quelqu’un qui vous a causé du tort, à vous ou à une personne qui vous est chère ». Si la bande vous a aidé, elle gagne aussi 1 XP."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Vigoureux",
+					"Description": "Vous guérissez plus rapidement. Cochez de manière permanente un segment de votre compteur de guérison. Gagnez +1 dé aux jets de récupération."
+				},
+				{
+					"TimesTakeable": 99,
+					"Name": "Vétéran",
+					"Description": "Choisissez une capacité spéciale d'un autre type de personnage."
+				}
+			],
+			"Rolodex": {
+				"Name": "Connexions mortelles",
+				"Friends": [
+					"Steiner, un assassin",
+					"Celene, une sentinelle",
+					"Melvir, un médecin",
+					"Veleris, un espion",
+					"Casta, une chasseuse de prime"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Paire de pistolets de qualité"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Fusil long de qualité"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Cartouches électroplasmiques"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Animal dressé pour la chasse"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Longue-vue"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Chasser",
+					"Points": 2
+				},
+				{
+					"Action": "Observer",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "Vous avez relevé un défi en utilisant le pistage ou la violence"
+		},
+
+		{
+			"Name": "Forceur (Leech)",
+			"Hook": "Un saboteur et un touche-à-tout de génie. Lorsque vous incarnez un Traqueur, vous gagnez de l’expérience quand vous relevez un défi en utilisant une compétence technique ou en semant le chaos.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Alchimiste",
+					"Description": "Quand vous inventez ou fabriquez une formule alchimique, vous obtenez +1 niveau de résultat à votre jet. Vous débutez avec une formule déjà connue."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Analyste",
+					"Description": "Pendant un temps mort, vous cochez deux segments à distribu- er dans tout compteur de projet à long terme qui implique une investigation, l’apprentissage d’une nouvelle formule ou la conception d’une nouvelle invention."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Artificier",
+					"Description": "Quand vous inventez ou fabriquez une création électro-plasmique, vous obtenez +1 niveau de résultat à votre jet. Vous débutez avec une invention déjà connue."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Force d’âme",
+					"Description": "Vous pouvez dépenser votre armure spéciale pour résister à une conséquence liée à la fatigue, la faiblesse ou les effets chimiques, ou pour vous dépasser dans un domaine technique ou quand vous manipulez des pro- duits alchimiques."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Sceau spectral",
+					"Description": "Quand vous Démolissez un lieu à l’aide de substances occultes, le ruinant pour toute autre utilisation, l’endroit devient, à votre guise, un lieu attirant ou au contraire repoussant pour les esprits."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Toubib",
+					"Description": "Vous êtes capable de Bricoler les os fracturés, de transfuser du sang ou d’autres fluides corporels, de recoudre les plaies et de stabiliser les mourants. Vous pouvez Étudier une maladie ou un cadavre. Tous les mem- bres de votre bande (vous inclus) gagnent +1 dé sur les jets de guérison."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Saboteur",
+					"Description": "Quand vous Démolissez, c’est beaucoup plus silencieux que ça ne devrait l’être et les dégâts ne sont pas décelables par une inspection de routine."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Venimeux",
+					"Description": "Choisissez une drogue ou un poison (de ceux que vous pouvez emporter dans votre bandoulière). Vous êtes immunisé contre cette substance. Vous pouvez vous dépasser pour la sécréter par les pores de votre peau, la concentrer dans votre salive ou l’exhaler sous la forme d’une vapeur."
+				},
+				{
+					"TimesTakeable": 99,
+					"Name": "Vétéran",
+					"Description": "Choisissez une capacité spéciale d’un autre type de personnage."
+				}
+			],
+			"Rolodex": {
+				"Name": "Connexions roublardes",
+				"Friends": [
+					"Stazia, un apothicaire",
+					"Veldren, une psychonaute",
+					"Eckerd, un détrousseur de cadavres",
+					"Jul, un trafiquant de sang",
+					"Malista, une prêtresse"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 1,
+					"Name": "Outils de bricolage de qualité"
+				},
+				{
+					"Bulk": 2,
+					"Name": "Outils de démolition de qualité"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Sarbacane, fléchettes et seringues"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Bandoulière (3 utilisations)"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Seconde bandoulière (3 utilisations)"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Un gadget"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Un autre gadget"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Encore un gadget"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Bricoler",
+					"Points": 2
+				},
+				{
+					"Action": "Démolir",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "Vous avez relevé un défi en utilisant une compétence technique ou en semant le chaos"
+		},
+		{
+			"Name": "Ombre (Lurk)",
+			"Hook": "Un discret infiltrateur et cambrioleur. Lorsque vous incarnez une Ombre, vous gagnez de l’expérience quand vous relevez un défi par la furtivité ou l’évasion.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Infiltré",
+					"Description": "Vous n’êtes pas affecté par la qualité ou le rang des mesures de sécurité."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Embuscade",
+					"Description": "Quand vous passez à l’attaque depuis une cachette ou dé- clenchez un piège, vous gagnez +1 dé à votre jet."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Casse-cou",
+					"Description": "Quand vous êtes en position désespérée, vous gagnez +1 dé à votre jet d’action si vous prenez -1 dé au jet de résistance contre les consé- quences de l’action."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Le diable au corps",
+					"Description": "Vous pouvez vous dépasser pour : accomplir un exploit athlétique proche du surhumain ou vous déplacer de façon à semer la confusion chez vos ennemis, au point qu’ils s’aﬀrontent mutuellement par erreur."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Expertise",
+					"Description": "Choisissez l’une de vos valeurs d’action. Quand vous menez une action de groupe utilisant cette action, vous ne subissez au maximum qu’un point de stress, peu importe le nombre de jets ratés."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Voile spectral",
+					"Description": "Vous pouvez transférer partiellement votre essence dans le champ spectral, et devenir l’espace de quelques instants fantomatique et immatériel. Vous subissez 2 stress au moment du passage, plus 1 stress pour chacun des bénéfices ci-après : cela dure quelques minutes au lieu de quelques instants ; vous êtes invisible ; vous pouvez flotter dans l’air tel un fantôme."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Réflexes",
+					"Description": "Vous agissez toujours en premier."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Ombre",
+					"Description": "Vous pouvez dépenser votre armure spéciale pour résister à une conséquence en rapport avec la détection ou les mesures de sécurité, ou vous dépasser pour réaliser un exploit d’athlétisme ou de discrétion."
+				},
+				{
+					"TimesTakeable": 99,
+					"Name": "Vétéran",
+					"Description": "Choisissez une capacité spéciale d’un autre type de personnage."
+				}
+			],
+			"Rolodex": {
+				"Name": "Connaissances louches",
+				"Friends": [
+					"Telda, une mendiante",
+					"Darmot, un bluecoat",
+					"Frake, un serrurier",
+					"Roslyn Kellis, une noble",
+					"Petra, une secrétaire municipale"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 0,
+					"Name": "Passe-partout de qualité"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Cape noire de qualité"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Matériel d'escalade léger'"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Potion de silence"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Lunettes de vision nocturne"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Infiltrer",
+					"Points": 2
+				},
+				{
+					"Action": "Manipuler",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "Vous avez relevé un défi par la furtivité ou l’évasion"
+		},
+		{
+			"Name": "Arnaqueur (Slide)",
+			"Hook": "Un espion et un manipulateur subtil. Lorsque vous incarnez un Arnaqueur, vous gagnez de l'expérience quand vous relevez un défi par la tromperie ou l’influence.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Gambit",
+					"Description": "Prenez 2 points de stress pour utiliser votre meilleure valeur d’action alors que vous accomplissez une autre action. Expliquez comment vous adaptez cette compétence à un tout autre domaine."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Bas les masques",
+					"Description": "Lorsque vous usez d’un déguisement ou d’un autre artifice, vous gagnez +1 dé sur vos jets visant à provoquer la confusion ou éviter la suspicion. Quand finalement vous tombez le masque, l’effet de surprise qui en résulte vous confère l’initiative."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Voix spectrale",
+					"Description": "Vous êtes initié aux mystères permettant de converser avec un fantôme ou un démon comme s’il s’agissait d’un être humain ordi- naire, aussi terrifiant ou sauvage qu’il apparaisse. Vous êtes puissant quand vous communiquez avec les entités surnaturelles."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "De l'autre côté du miroir",
+					"Description": "Vous savez toujours quand quelqu’un vous ment."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Petit à-côté",
+					"Description": "À la fin de chaque temps mort, vous gagnez +2 magot."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Magnétisme",
+					"Description": "Quand vous Influencez quelqu’un, vous pouvez lui ôter tout souvenir de ce qui vient de se passer jusqu’à votre prochaine interaction avec lui."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Subterfuge",
+					"Description": "Vous pouvez dépenser votre armure spéciale pour résister à une conséquence en rapport avec la suspicion ou la persuasion, ou pour vous dépasser afin de mettre en œuvre un subterfuge."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Aie confiance",
+					"Description": "Vous gagnez +1 dé pour toute action impliquant une cible avec laquelle vous avez une relation d’intimité."
+				},
+				{
+					"TimesTakeable": 99,
+					"Name": "Vétéran",
+					"Description": "Choisissez une capacité spéciale d’un autre type de personnage."
+				}
+			],
+			"Rolodex": {
+				"Name": "Connexions sournoises",
+				"Friends": [
+					"Bryl, un dealer",
+					"Bazso Baz, un chef de gang",
+					"Klyra, une aubergiste",
+					"Nyryx, une prostituée",
+					"Harker, un taulard"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 0,
+					"Name": "Vêtements et bijoux de qualité"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Déguisement de qualité"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Dés pipés et cartes marquées de qualité"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Poudre hypnotique"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Canne-épée"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Influencer",
+					"Points": 2
+				},
+				{
+					"Action": "Conspirer",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "Vous avez relevé un défi par la tromperie ou l’influence"
+		},
+		{
+			"Name": "Cerveau (Spider)",
+			"Hook": "Un génie du crime retors. Lorsque vous incarnez un Cerveau, vous gagnez de l'expérience quand vous relevez un défi par le complot ou les machinations.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Anticipation",
+					"Description": "Two times per score you can assist a teammate without paying stress. Tell us how you prepared for this."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Calculateur",
+					"Description": "Due to your careful planning, during downtime, you may give yourself or another crew member +1 downtime action."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Influent",
+					"Description": "During downtime, you get +1 result level when you acquire an asset or reduce heat."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Vice caché",
+					"Description": "When you indulge your vice, you may adjust the dice outcome by 1 or 2 (up or down). An ally who joins in your vice may do the same."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Contrat spectral",
+					"Description": "When you shake on a deal, you and your partner—human or otherwise—both bear a mark of your oath. If either breaks the contract, they take level 3 harm, \"Cursed\"."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Taulier",
+					"Description": "Lorsque vous êtes incarcéré, votre niveau d’avis de recherche est comptabilisé comme inférieur d’un degré, votre rang comme supérieur d’un degré et vous gagnez +1 relation avec une faction que vous aiderez durant votre incarcération, en plus de ce que vous obtiendrez sur votre jet d’incarcération."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Tête pensante",
+					"Description": "Vous pouvez dépenser votre armure spéciale pour protéger un coéquipier, ou pour vous dépasser quand vous recueillez des informations ou travaillez sur un projet à long terme."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Tisseur de toile",
+					"Description": "Vous gagnez +1 dé pour Conspirer si vous recueillez des informations sur une cible pour un casse, et +1 dé au jet d’engagement pour cette opération."
+				},
+				{
+					"TimesTakeable": 99,
+					"Name": "Vétéran",
+					"Description": "Choisissez une capacité spéciale d’un autre type de personnage."
+				}
+			],
+			"Rolodex": {
+				"Name": "Connexions rusées",
+				"Friends": [
+					"Salia, une courtière en informations",
+					"Augus, un maître-architecte",
+					"Jennah, une domestique",
+					"Riven, un chimiste",
+					"Jeren, un archiviste bluecoat"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 0,
+					"Name": "Fausse identité de qualité"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Whisky de qualité"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Plans et schémas"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Potion de sommeil"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Pistolet de poche"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Conspirer",
+					"Points": 2
+				},
+				{
+					"Action": "Etudier",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "Vous avez relevé un défi par le complot ou les machinations"
+		},
+		{
+			"Name": "Murmure (Whisper)",
+			"Hook": "Un médium adepte des arts occultes. Lorsque vous incarnez un Murmure, vous gagnez de l'expérience quand vous relevez un défi par la connaissance ou l’usage des arts occultes.",
+			"SpecialAbilities": [
+				{
+					"TimesTakeable": 1,
+					"Name": "Domination",
+					"Description": "Vous pouvez Invoquer le champ spectral pour contraindre un fantôme proche à se manifester et à obéir à votre ordre. Vous n’êtes pas terrifié par un fantôme que vous invoquez ou tentez de contraindre (mais vos alliés risquent de l’être)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Sens spectral",
+					"Description": "Vous êtes toujours conscient des entités surnaturelles qui vous entourent. Vous gagnez +1 dé quand vous recueillez des informations sur le surnaturel."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Volonté de fer",
+					"Description": "Vous êtes insensible à la terreur que provoque la vue de certaines entités surnaturelles. Quand vous faites un jet de résistance avec votre Volonté, vous obtenez un dé supplémentaire."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Spirite",
+					"Description": "Vous connaissez les secrets permettant de Conspirer avec les puissances primordiales, les dieux oubliés ou les démons. Une fois que vous avez conspiré avec l’une d’elles, vous gagnez +1 dé pour Commander aux sectateurs qui la vénèrent."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Rituel",
+					"Description": "Vous connaissez les méthodes arcaniques de la sorcellerie rituelle. Vous pouvez Étudier un rituel occulte (ou en créer un nouveau) pour invo- quer un effet ou un être surnaturel. Vous débutez avec un rituel déjà connu."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Inspiration mystique",
+					"Description": "Quand vous inventez ou fabriquez quelque chose d’occulte, vous obtenez +1 niveau de résultat à votre jet."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Tempête",
+					"Description": "Vous pouvez vous dépasser pour : soit faire s’abattre la foudre, utilisée comme une arme – soit invoquer une tempête à proximité immédiate (pluie torrentielle, vents hurlants, brouillard épais, givre glacial et neige, etc.)."
+				},
+				{
+					"TimesTakeable": 1,
+					"Name": "Paré",
+					"Description": "Vous pouvez dépenser votre armure spéciale pour résister à une conséquence surnaturelle, ou pour vous dépasser quand vous affrontez ou maniez des forces occultes."
+				},
+				{
+					"TimesTakeable": 99,
+					"Name": "Vétéran",
+					"Description": "Choisissez une capacité spéciale d’un autre type de personnage."
+				}
+			],
+			"Rolodex": {
+				"Name": "Connaissances étranges",
+				"Friends": [
+					"Nyryx, un esprit frappeur",
+					"Scurlock, un vampire",
+					"Setarra, une démone",
+					"Quellyn, une sorcière",
+					"Flint, un traffiquant d’esprits"
+				]
+			},
+			"Items": [
+				{
+					"Bulk": 2,
+					"Name": "Harpon à éclair de qualité"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Marque spirite de qualité"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Fioles d’électroplasme"
+				},
+				{
+					"Bulk": 1,
+					"Name": "Flacons à esprits"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Clé fantôme"
+				},
+				{
+					"Bulk": 0,
+					"Name": "Amulette contre les démons"
+				}
+			],
+			"DefaultActionPoints": [
+				{
+					"Action": "Invoquer",
+					"Points": 2
+				},
+				{
+					"Action": "Etudier",
+					"Points": 1
+				}
+			],
+			"ExperienceCondition": "Vous avez relevé un défi par la connaissance ou l’usage des arts occultes"
+		}
+	],
+	"Traumas": [
+		"Détaché",
+		"Hanté",
+		"Obsédé",
+		"Paranoïaque",
+		"Irresponsable",
+		"Sentimental",
+		"Instable",
+		"Vicieux"
+	],
+	"Heritages": [
+		{
+			"Name": "Akoros",
+			"BlurbFlavor": "d'ici en Akoros",
+			"Description": "Akoros est la nation la plus vaste et la plus avancée de tout l’Impérium. Elle abrite la capitale, mais aussi Doskvol elle-même. Akoros est un agrégat de diverses cultures ayant étroitement cohabité depuis plusieurs siècles, à l’image de l’Europe."
+		},
+		{
+			"Name": "Iles de la Dague",
+			"BlurbFlavor": "des Iles de la Dague",
+			"Description": "Iles recouvertes de jungles dont les habitants sont de grands marins, réputés comme corsaires et marchands. Leurs autochtones vivent sans barrières d’éclairs — affrontant les esprits par des moyens inconnus."
+		},
+		{
+			"Name": "Iruvia",
+			"BlurbFlavor": "du Royaume des sables d’Iruvia",
+			"Description": "Un riche et puissant royaume au grand raffinement, érigé au milieu des sables d’un désert du sud lointain. C’est une autre nation cosmopolite, dont les cultures sont similaires à celles de la Perse antique, l’Égypte et l’Inde."
+		},
+		{
+			"Name": "Severos",
+			"BlurbFlavor": "des steppes désolées de Severos",
+			"Description": "Steppes dévastées et sauvages habitées par des tribus de farouches cavaliers nomades, survivant dans les ruines d’antiques forteresses et caravansérails, dont les enchantements repoussent encore les esprits."
+		},
+		{
+			"Name": "Skovlan",
+			"BlurbFlavor": "du protectorat de Skovlan",
+			"Description": "Royaume nordique brimé et ostracisé par l’Impérium depuis sa longue guerre d’indépendance ayant échoué il y a quelques années. Skovla s’étend juste de l’autre côté du bras de mer qui le sépare de Doskvol. De nombreux Skovlandiens ayant perdu leurs foyers et leurs mode de vie se sont réfugiés à Doskvol, non sans tensions avec les locaux."
+		},
+		{
+			"Name": "Tycheros",
+			"BlurbFlavor": "de la lointaine et mystérieuse Tycheros",
+			"Description": "Terre légendaire située loin au-delà de la Mer du Vide. La superstition prétend que ses habitants ont du sang démoniaque. Un personnage tycherosi doit choisir une « marque occulte » (comme des yeux noirs de requin, des plumes en guise de cheveux, etc.), susceptible de faire réagir positivement ou négativement ses interlocuteurs."
+		}
+	],
+	"Vices": [
+		{
+			"Name": "Croyance",
+			"Description": "Vous êtes dévoué à un pouvoir supérieur, un dieu oublié ou émergent, un ancêtre, etc.",
+			"Sources": [
+				"Révérende-Mère Narya, Maison de la Pleureuse, les Six Tours.",
+				"Ilacille, les ruines du Temple des Dieux Oubliés, Crête-Charbon.",
+				"Nelisanne, L’Église de l’Extase de la Chair, Pierre-Claire.",
+				"Lord Penderyn, les Archives des Échos, Charte-Halle."
+			]
+		},
+		{
+			"Name": "Jeu",
+			"Description": "Vous êtes accro aux jeux de hasard, aux paris en tout genre, etc.",
+			"Sources": [
+				"Le Tripot de Spogg, Patte-de-Corbeau.",
+				"Grist, combats de boxe, les Docks.",
+				"Helene, le casino du Cerf d’Argent, Soie-Rivage.",
+				"Maître Vreen, courses de lévriers, Le Marché Nocturne.",
+				"Lady Dusk, Le Club du Manoir Dusk, Blanche-Couronne.",
+				"Le Sergent Velk, les arènes de combat,Gros-Bourbier."
+			]
+		},
+		{
+			"Name": "Lucre",
+			"Description": "Vous vous pavanez dans un étalage ostentatoire de pouvoir, argent et opulence.",
+			"Sources": [
+				"Singer, les bains, Patte-de-Corbeau.",
+				"Harvale Brogan, le Club Centuralia, Pierre-Claire.",
+				"Le Fumoir de Traven, Crête-Charbon.",
+				"Dunridge & Fils tissus raffinés et tailleur, Le Marché Nocturne.",
+				"Chef Roselle, restaurant la Prune Dorée,les Six Tours.",
+				"Maestro Helleren, le Théâtre de Flèchejardin, Blanche-Couronne."
+			]
+		},
+		{
+			"Name": "Plaisir",
+			"Description": "Vous sombrez dans la jouissance des plaisirs de la chair, de la nourriture, de la boisson, des drogues, de l’art, du théâtre, etc.",
+			"Sources": [
+				"Singer, les bains, Patte-de-Corbeau.",
+				"Harvale Brogan, le Club Centuralia, Pierre-Claire.",
+				"Le Fumoir de Traven, Crête-Charbon.",
+				"Dunridge & Fils tissus raffinés et tailleur, Le Marché Nocturne.",
+				"Chef Roselle, restaurant la Prune Dorée,les Six Tours.",
+				"Maestro Helleren, le Théâtre de Flèchejardin, Blanche-Couronne.",
+				"Mardin Gull, la taverne du Seau Troué, Patte-de-Corbeau.",
+				" Pux Bolin, la taverne du Singe Harpiste, Le Marché Nocturne.",
+				" Helene, le casino du Cerf d’Argent, Soie-Rivage.",
+				" Lady Freyla, le bar du Tonneau de l’Empereur, Blanche-Courronne.",
+				" Avrick, vendeur de poudre, Tertre-Fendu.",
+				" Rolan Volaris, club social du Voile, Le Marché Nocturne.",
+				" Madame Tesslyn, bordel de la Lanterne Rouge, Soie-Rivage.",
+				" Le Fumoir de Traven, Crête-Charbon.",
+				" Eldrin Prichard, la barge des plaisirs du Cygne d’Argent, les canaux de Pierre-Claire.",
+				" Jewel, Bird, et Shine, la ruelle des Chatières, les Docks."
+			]
+		},
+		{
+			"Name": "Devoir",
+			"Description": "Vous avez une obligation vis-à-vis de votre famille, d’une cause, d’une organisation , de la justice, d’une œuvre de bienfaisance, etc.",
+			"Sources": [
+				"Parents (origines)",
+				"Anciens collègues (antécédents).",
+				"Hutton, Réfugiés Skovlans / Révolutionnaires, Val-Roussi.",
+				"Le Cercle de Flammes, une société secrète."
+			]
+		},
+		{
+			"Name": "Addiction",
+			"Description": "Vous recherchez l’oubli dans l’abus de drogues, de boissons, de combats clandestins, etc.",
+			"Sources": [
+				"Mardin Gull, la taverne du Seau Troué, Patte-de-Corbeau.",
+				" Pux Bolin, la taverne du Singe Harpiste, Le Marché Nocturne.",
+				" Helene, le casino du Cerf d’Argent, Soie-Rivage.",
+				" Lady Freyla, le bar du Tonneau de l’Empereur, Blanche-Courronne.",
+				" Avrick, vendeur de poudre, Tertre-Fendu.",
+				" Rolan Volaris, club social du Voile, Le Marché Nocturne.",
+				" Madame Tesslyn, bordel de la Lanterne Rouge, Soie-Rivage.",
+				" Le Fumoir de Traven, Crête-Charbon.",
+				" Eldrin Prichard, la barge des plaisirs du Cygne d’Argent, les canaux de Pierre-Claire.",
+				" Jewel, Bird, et Shine, la ruelle des Chatières, les Docks."
+			]
+		},
+		{
+			"Name": "Lubie",
+			"Description": "Vous expérimentez avec d’étranges produits, pactisez avec des esprits sauvages, suivez des rituels bizarres ou des pratiques taboues, etc.",
+			"Sources": [
+				"Le propriétaire encapuchonné de la taverne de la grotte, près des docks. Là où d’étranges passages mènent à des salles plus étranges encore.",
+				"Le Père Yoren, la Maison de la Pleureuse, les Six Tours.",
+				"“Salia,” un esprit des Réconciliés, qui passe d’un corps à l’autre à sa convenance.",
+				"La Soeur Thorn, du gang des charognards des terres mortes, la Station Gaddoc.",
+				"Ojak, un vendeur des toits Tycherosi, Soie-Rivage.",
+				"Aranna la Bénie, cultiste d’un Dieu Oublié, sa barge est amarrée au Marché Nocturne."
+			]
+		}
+	],
+	"Backgrounds": [
+		{
+			"Name": "Académique",
+			"Example": "Un chercheur, un professeur ou un étudiant de l’Académie de Doskvol, un philosophe ou un journaliste, etc.",
+			"BlurbFlavor": "un académique"
+		},
+		{
+			"Name": "Prolétaire",
+			"Example": "Un domestique, un ouvrier, un coche, un docker, un marin, un employé de chemin de fer, etc.",
+			"BlurbFlavor": "un travailleur"
+		},
+		{
+			"Name": "Forces de l’ordre",
+			"Example": "Un avocat, un huissier, un bluecoat, un inspacteur (ou même un gardien spirite), un maton de la prison d’Ironhook, etc.",
+			"BlurbFlavor": "un \"incorruptible\" représentant de la loi"
+		},
+		{
+			"Name": "Commerce",
+			"Example": "Un boutiquier, un marchand, un artisan, un colporteur, etc.",
+			"BlurbFlavor": "a trader"
+		},
+		{
+			"Name": "Militaire",
+			"Example": "Un soldat impérial ou skovlandais, un mercenaire, un agent de renseignement, un sergent instructeur, etc.",
+			"BlurbFlavor": "un conscrit"
+		},
+		{
+			"Name": "Noble",
+			"Example": "Un dilettante, un courtisan, un héritier sans le sou, etc.",
+			"BlurbFlavor": "un noble"
+		},
+		{
+			"Name": "Bas-fonds",
+			"Example": "Un orphelin des rues, un gangster, un jeune voyou, ou autre paria ayant grandi dans le caniveau.",
+			"BlurbFlavor": "un \"citoyen respecteux\""
+		}
+	],
+	"Attributes": [
+		{
+			"Name": "Perception",
+			"Actions": [
+				{
+					"Name": "Chasser",
+					"ShortDescription": "Lorsque vous Chassez, vous pistez ou attaquez prudemment une cible.",
+					"LongDescription": "Vous pourriez la prendre en filature ou découvrir son repaire. Vous pourriez planifier une embuscade. Vous pourriez l’attaquer en effectuant un tir de précision à grande distance. Vous pourriez enfin dégainer vos armes pour plonger dans la mêlée (mais Affronter pourrait être mieux adapté)."
+				},
+				{
+					"Name": "Etudier",
+					"ShortDescription": "Lorsque vous Etudiez, vous analysez les moindres détails et interprétez les indices.",
+					"LongDescription": "Vous pourriez recueillir des informations provenant de documents, de journaux ou de livres. Vous pourriez mener des recherches sur des sujets ésotériques. Vous pourriez analyser en détail le comportement d’une personne, afin d’y déceler des mensonges ou des sentiments cachés. Vous pourriez tenter d’examiner les événements afin de donner un sens à une situation urgente (mais Observer pourrait être mieux adapté)."
+				},
+				{
+					"Name": "Observer",
+					"ShortDescription": "Lorsque vous Observez, vous observez la situation afin d’en anticiper l’issue.",
+					"LongDescription": "Vous pourriez repérer des signes annonciateurs pour agir préventivement. Vous pourriez découvrir des opportunités ou des faiblesses. Vous pourriez détecter les motivations ou les intentions d’une personne. Vous pourriez tenter de trouver le meilleur affût pour une embuscade (mais Chasser pourrait être mieux adapté)."
+				},
+				{
+					"Name": "Bricoler",
+					"ShortDescription": "Lorsque vous Bricolez, vous traficotez des appareils et des mécanismes.",
+					"LongDescription": "Vous pourriez créer un tout nouveau gadget ou modifier un objet existant. Vous pourriez crocheter une serrure ou percer un coffre. Vous pourriez neutraliser une alarme ou un piège. Vous pourriez tirer parti des appareils mécaniques et électroplasmiques que l’on trouve dans toute la ville. Vous pourriez tenter d’appliquer votre expertise technique pour piloter un véhicule (mais Manipuler pourrait être plus adapté)."
+				}
+			]
+		},
+		{
+			"Name": "Adresse",
+			"Actions": [
+				{
+					"Name": "Manipuler",
+					"ShortDescription": "Lorsque vous Manipulez, vous vous livrez à des manoeuvres d’habileté ou à de subtils détournements d’attention.",
+					"LongDescription": "Vous pourriez faire les poches de votre cible. Vous pourriez actionner les commandes d’un véhicule ou guider une monture. Vous pourriez vous battre en duel d’honneur avec un art consommé de l’escrime. Vous pourriez aussi tenter d’utiliser ce même art martial au milieu d’une bagarre chaotique (mais Affronter pourrait être plus adapté). Vous pourriez crocheter une serrure (mais Bricoler pourrait être mieux adapté)."
+				},
+				{
+					"Name": "Infiltrer",
+					"ShortDescription": "Lorsque vous Infiltrez, vous vous déplacez avec agilité et sans émettre le moindre bruit.",
+					"LongDescription": "Vous pourriez vous glisser dans le dos d’un garde ou vous tapir dans les ombres. Vous pourriez vous élancer d’un toit à un autre. Vous pourriez attaquer quelqu’un par surprise en jaillissant de l’ombre pour le poignarder sournoisement dans le dos ou l’assommer à coup de matraque. Vous pourriez tenter d’amener une victime droit dans la gueule du loup (mais Affronter pourrait être mieux adapté)."
+				},
+				{
+					"Name": "Affronter",
+					"ShortDescription": "Lorsque vous Affrontez, vous engagez votre cible au corps à corps afin qu’elle ne puisse pas facilement se dégager.",
+					"LongDescription": "Vous pourriez le rouer de coups ou le ceinturer. Vous pourriez le tailler en pièces. Vous pourriez vous emparer d'une position ou la tenir durant une bataille. Vous pourriez défier quelqu’un dans un duel pour l’honneur (mais Manipuler pourrait être plus adapté)."
+				},
+				{
+					"Name": "Démolir",
+					"ShortDescription": "Lorsque vous Démolissez, vous déchaînez une force brutale.",
+					"LongDescription": "Vous pourriez fracasser une porte ou même un mur à l’aide d’une masse, voire utiliser des explosifs pour obtenir un résultat semblable. Vous pourriez déclencher le chaos ou vous livrer à un sabotage afin de créer une distraction ou vous laisser le temps de surmonter un obstacle. Vous pourriez enfin tenter de dominer un ennemi par la force brute au combat (mais Affronter pourrait être mieux adapté)."
+				}
+			]
+		},
+		{
+			"Name": "Volonté",
+			"Actions": [
+				{
+					"Name": "Invoquer",
+					"ShortDescription": "Lorsque vous Invoquez, vous ouvrez votre esprit au champ ectoplasmique ou à d’autres arcanes.",
+					"LongDescription": "Vous pourriez communiquer avec un fantôme ou compren-dre certains aspects de la spectrologie. Vous pourriez tenter d’ouvrir votre troisième oeil afin de mieux appréhender la situation (mais Observer pourrait être plus adapté)."
+				},
+				{
+					"Name": "Commander",
+					"ShortDescription": "Lorsque vous Commandez, vous vous faites promptement obéir.",
+					"LongDescription": "Vous pourriez intimider ou menacer une cible pour obtenir ce que vous voulez. Vous pourriez mener l’action coordonnée d’un gang. Vous pourriez tenter de donner des ordres à plusieurs personnes, afin de les persuader (mais Conspirer pourrait être mieux adapté)."
+				},
+				{
+					"Name": "Conspirer",
+					"ShortDescription": "Lorsque vous Conspirez, vous avez des interactions sociales avec vos amis et vos contacts.",
+					"LongDescription": "Vous pourriez ainsi avoir accès à des ressources, des informations, des personnes ou des lieux particuliers. Vous pourriez faire bonne impression ou obtenir les bonnes grâces de quelqu’un en usant de votre charme et de votre style. Vous pourriez vous faire de nouveaux amis ou contacts en rapport avec vos origines ou vos antécédents. Vous pourriez tenter de manipuler vos amis en tirant parti de votre rang social (mais Influencer pourrait être mieux adapté)."
+				},
+				{
+					"Name": "Influencer",
+					"ShortDescription": "Lorsque vous Influencez, vous usez de persuasion, de charme ou d’arguments.",
+					"LongDescription": "Vous pourriez mentir de façon convaincante. Vous pourriez persuader quelqu’un de faire ce que vous souhaitez. Vous pourriez développer un argumentaire complet qui ne laisse aucune place à la contradiction. Vous pourriez ruser pour vous valoir affection ou obéissance (mais Conspirer ou Commander pourraient être mieux adaptés)."
+				}
+			]
+		}
+	],
+	"SharedItems": [
+		{
+			"Bulk": 1,
+			"Name": "Une lame ou deux"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Couteaux de lancer"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Pistolet"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Second pistolet"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Arme lourde"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Arme inhabituelle"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Armure"
+		},
+		{
+			"Bulk": 3,
+			"Name": "+Lourde"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Matériel de cambriolage"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Matériel d’escalade"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Accessoires occultes"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Documents"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Matériel de faussaire"
+		},
+		{
+			"Bulk": 2,
+			"Name": "Outils de démolition"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Outils de bricolage"
+		},
+		{
+			"Bulk": 1,
+			"Name": "Lanterne"
+		},
+		{
+			"Bulk": 0,
+			"Name": "Amulette contre les esprits"
+		},
+		{
+			"Bulk": 1,
+			"Name": "1 Coin"
+		},
+		{
+			"Bulk": 2,
+			"Name": "2 Coins"
+		},
+		{
+			"Bulk": 3,
+			"Name": "3 Coins"
+		},
+		{
+			"Bulk": 4,
+			"Name": "4 Coins"
+		}
+	],
+	"Thesaurus": {
+		"Coin": "Coin",
+		"Bulk": "Charge"
+	},
+	"RecoveryClockSize": 4,
+	"ActionPointMaximum": 4,
+	"ExtraDescription": {
+		"GearDescriptions": [
+			{
+				"Name": "Bandoulière",
+				"Description": "Articles de bandoulière: Alkahest, Huile collante, Huile de lévitation, Poudre suffocante, Poudre aveuglante, Huile inflammable, Grenade, Vif-argent (drogue), Brûle-crâne (toxique), Fumigène, Etincelle (drogue), Poison paralysant, Poudre hypnotique"
+			}
+		]
+	}
+}

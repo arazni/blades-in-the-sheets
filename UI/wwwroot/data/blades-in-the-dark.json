@@ -1,5 +1,6 @@
 {
 	"Name": "Blades in the Dark",
+	"Language": "English",
 	"Playbooks": [
 		{
 			"Name": "Cutter",
@@ -81,10 +82,6 @@
 				{
 					"Bulk": 0,
 					"Name": "Rage essence vial"
-				},
-				{
-					"Bulk": 0,
-					"Name": "Spiritbane charm"
 				}
 			],
 			"DefaultActionPoints": [
@@ -174,10 +171,6 @@
 				{
 					"Bulk": 1,
 					"Name": "Spyglass"
-				},
-				{
-					"Bulk": 0,
-					"Name": "Spiritbane charm"
 				}
 			],
 			"DefaultActionPoints": [
@@ -378,10 +371,6 @@
 				{
 					"Bulk": 1,
 					"Name": "Dark-sight goggles"
-				},
-				{
-					"Bulk": 0,
-					"Name": "Spiritbane charm"
 				}
 			],
 			"DefaultActionPoints": [
@@ -476,10 +465,6 @@
 				{
 					"Bulk": 1,
 					"Name": "A cane-sword"
-				},
-				{
-					"Bulk": 0,
-					"Name": "Spiritbane charm"
 				}
 			],
 			"DefaultActionPoints": [
@@ -574,10 +559,6 @@
 				{
 					"Bulk": 0,
 					"Name": "Concealed palm pistol"
-				},
-				{
-					"Bulk": 0,
-					"Name": "Spiritbane charm"
 				}
 			],
 			"DefaultActionPoints": [
@@ -704,32 +685,32 @@
 	"Heritages": [
 		{
 			"Name": "Akoros",
-			"BlurbFlavor": "'round here in Akoros",
+			"BlurbFlavor": "from 'round here in Akoros",
 			"Description": "Akoros is the largest and most industrialized land in the Imperium, and is home to the capitol city as well as Duskwall itself. They’re known as a diverse conglomeration of cultures that have grown together in close proximity for centuries, somewhat like Europe."
 		},
 		{
 			"Name": "The Dagger Isles",
-			"BlurbFlavor": "the Dagger Isles",
+			"BlurbFlavor": "from the Dagger Isles",
 			"Description": "If you want to be a rootless wanderer you could be from the Dagger Isles. People there often grow up on ships and travel a lot before settling down. They’re known as corsairs and merchants who live without lightning barriers—dealing with spirits in other ways."
 		},
 		{
 			"Name": "Iruvia",
-			"BlurbFlavor": "the desert kingdom of Iruvia",
+			"BlurbFlavor": "from the desert kingdom of Iruvia",
 			"Description": "If you want to be from a culture considered “foreign” by the locals, you could be from Iruvia, a rich and powerful desert kingdom far to the south. It’s another diverse land of varying cultures similar to old Persia, Egypt, and India."
 		},
 		{
 			"Name": "Severos",
-			"BlurbFlavor": "the deathlands of Severos",
+			"BlurbFlavor": "from the deathlands of Severos",
 			"Description": "If you want to be from a place considered “wild” by the rest of the empire, you could be from Severos. Outside the few Imperial settlements, most Severosi live in nomadic horse-tribes scattered across the blasted deathlands, surviving within the ruins of ancient arcane fortresses which still repel spirits."
 		},
 		{
 			"Name": "Skovlan",
-			"BlurbFlavor": "the colonized island of Skovlan",
+			"BlurbFlavor": "from the colonized island of Skovlan",
 			"Description": "If you want to be from a marginalized people, you could be from Skovlan, the island kingdom just across the sea from Doskvol. Skovlan was last to be brought under Imperial rule, over the course of the 36-year Unity War (which ended only a few years ago). Many Skovlander refugees who lost their homes and jobs in the destruction of the war have come to Doskvol seeking new opportunities."
 		},
 		{
 			"Name": "Tycheros",
-			"BlurbFlavor": "the weird, distant land of Tycheros",
+			"BlurbFlavor": "from the weird, distant land of Tycheros",
 			"Description": "If you want to be weird, you can be from Tycheros. It’s a semi-mythical place, far away beyond the northern Void Sea. Everyone says that the people there are part-demon. If you choose Tycherosi heritage, also create a demonic telltale (like black shark eyes, feathers instead of hair, etc.) that marks your character."
 		}
 	],
@@ -1005,6 +986,10 @@
 			"Name": "Tinkering Tools"
 		},
 		{
+			"Bulk": 0,
+			"Name": "Spiritbane charm"
+		},
+		{
 			"Bulk": 1,
 			"Name": "Lantern"
 		},
@@ -1030,5 +1015,13 @@
 		"Bulk": "Bulk"
 	},
 	"RecoveryClockSize": 4,
-	"ActionPointMaximum": 4
+	"ActionPointMaximum": 4,
+	"ExtraDescription": {
+		"GearDescriptions": [
+			{
+				"Name": "Bandolier",
+				"Description": "Bandolier items: Alcahest, Binding Oil, Drift Oil, Drown Powder, Eyeblind Poison, Fire Oil, Grenade, Quicksilver, Skullfire Poison, Smoke Bomb, Spark (drug), Standstill Poison, Trance Powder"
+			}
+		]
+	}
 }

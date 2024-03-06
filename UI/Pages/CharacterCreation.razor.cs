@@ -7,10 +7,7 @@ namespace UI.Pages;
 public partial class CharacterCreation
 {
 	[Parameter]
-	public string Id { get; set; } = string.Empty;
-
-	[Parameter]
-	public string GameName { get; set; } = string.Empty;
+	public string GameStem { get; set; } = string.Empty;
 
 	[Parameter]
 	public string PlaybookName { get; set; } = string.Empty;
@@ -25,7 +22,7 @@ public partial class CharacterCreation
 
 	protected override async Task OnParametersSetAsync()
 	{
-		GameSetting = await Loader.LoadSetting(GameName);
+		GameSetting = await Loader.LoadSetting(GameStem);
 		Character = Coordinator.InitializeCharacter(GameSetting, PlaybookName);
 
 		await base.OnParametersSetAsync();

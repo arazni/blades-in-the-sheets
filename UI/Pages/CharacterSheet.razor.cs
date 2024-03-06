@@ -34,7 +34,7 @@ public partial class CharacterSheet
 	protected override async Task OnParametersSetAsync()
 	{
 		Character = await Storage.Load(Id);
-		GameSetting = await Loader.LoadSetting(Character.GameName);
+		GameSetting = await Loader.LoadSetting(Character.GameName, Character.Language);
 
 		await base.OnParametersSetAsync();
 	}
