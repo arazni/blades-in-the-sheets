@@ -369,11 +369,53 @@
 				"AbilitiesByPlaybook",
 				"AbilitiesByHeritage"
 			]
+		},
+		"GearExtraDescriptionSetting": {
+			"type": [
+				"object"
+			],
+			"properties": {
+				"Name": {
+					"type": [
+						"string"
+					]
+				},
+				"Description": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"Name",
+				"Description"
+			]
+		},
+		"ExtraDescriptionSetting": {
+			"type": [
+				"object",
+				"null"
+			],
+			"properties": {
+				"GearDescriptions": {
+					"type": [
+						"array"
+					],
+					"items": {
+						"$ref": "#/definitions/GearExtraDescriptionSetting"
+					}
+				},
+				"additionalProperties": false
+			}
 		}
 	},
 	"type": "object",
 	"properties": {
 		"Name": {
+			"type": [
+				"string"
+			]
+		},
+		"Language": {
 			"type": [
 				"string"
 			]
@@ -453,6 +495,12 @@
 				"object"
 			],
 			"$ref": "#/definitions/StartingAbilitySetting"
+		},
+		"ExtraDescription": {
+			"type": [
+				"object"
+			],
+			"$ref": "#/definitions/ExtraDescriptionSetting"
 		}
 	},
 	"additionalProperties": false,
