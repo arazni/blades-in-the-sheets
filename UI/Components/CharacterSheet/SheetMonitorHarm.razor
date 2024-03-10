@@ -8,7 +8,7 @@
 	<h5>Harm</h5>
 	<FluentTextField @bind-Value="HarmDescription" Placeholder="@HarmPlaceholder" AriaLabel="Describe harm" />
 	<div class="horizontal-stack jsb">
-		<FluentSelect TOption="HarmIntensity" Items="AvailableIntensities" @bind-SelectedOption="Intensity" AriaLabel="Harm intensity" OptionText="@(i => $"Level {(int)i} {i}")" OptionDisabled="i => !Harm.AvailableIntensities.Contains(i)" />
+		<FluentSelect TOption="HarmIntensity" Items="AvailableIntensities" @bind-SelectedOption="Intensity" AriaLabel="Harm intensity" OptionText="@(i => $"Level {(int)i} {i}")" OptionDisabled="i => !Harm.AvailableIntensities.Contains(i)" Disabled="!Harm.AvailableIntensities.Any()" />
 		<FluentButton IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Disabled="!CanAddHarm" OnClick="AddHarm" Class="min-button" Title="Add harm">Harm</FluentButton>
 	</div>
 	<SheetExistingHarm IsFixMode="IsFixMode" Harm="Harm" Intensity="HarmIntensity.Fatal" />

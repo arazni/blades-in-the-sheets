@@ -20,7 +20,7 @@ public sealed partial class SheetMonitorHarm
 
 	protected override void OnInitialized()
 	{
-		SheetJank.HarmChanged += StateHasChanged;
+		SheetJank.HarmChanged += HandleHarmChanged;
 
 		base.OnInitialized();
 	}
@@ -42,7 +42,7 @@ public sealed partial class SheetMonitorHarm
 	};
 
 	bool CanAddHarm =>
-		HarmDescription.HasInk();
+		HarmDescription.HasInk() && Harm.AvailableIntensities.Any();
 
 	void AddHarm()
 	{
@@ -61,6 +61,12 @@ public sealed partial class SheetMonitorHarm
 
 	public void Dispose()
 	{
-		SheetJank.HarmChanged -= StateHasChanged;
+		SheetJank.HarmChanged -= HandleHarmChanged;
+	}
+
+	public void HandleHarmChanged()
+	{
+		Intensity = Harm.AvailableIntensities.First();
+		StateHasChanged();
 	}
 }

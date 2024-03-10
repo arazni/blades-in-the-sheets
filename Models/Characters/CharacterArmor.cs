@@ -5,30 +5,30 @@ namespace Models.Characters;
 
 public partial class Character // Armor
 {
-	private const string Standard = "Armor";
-	private const string Heavy = "+Heavy";
-	private const string Special = "special armor";
+	private static readonly string[] StandardArmors = ["Armor", "Armure"];
+	private static readonly string[] HeavyArmors = ["+Heavy", "+Lourde"];
+	private static readonly string[] SpecialArmors = ["special armor", "armure spéciale"];
 
 	private bool isStandardArmorUsed;
 	private bool isHeavyArmorUsed;
 	private bool isSpecialArmorUsed;
 
 	// Dirty fix since we can't know armor rules for other games.
-	private string HeavyArmorSearchText =>
-		GameName == Constants.Games.BladesInTheDark ? Heavy
-		: Standard;
+	private string[] HeavyArmorSearchText =>
+		GameName == Constants.Games.BladesInTheDark ? HeavyArmors
+		: StandardArmors;
 
 	public bool HasArmor =>
 		Gear.Loadout.Select(item => item.Name)
-			.Has(Standard);
+			.HasAny(StandardArmors);
 
 	public bool HasHeavyArmor =>
 		Gear.Loadout.Select(item => item.Name)
-			.Has(HeavyArmorSearchText);
+			.HasAny(HeavyArmorSearchText);
 
 	public bool HasSpecialArmor =>
 		Playbook.Abilities.Select(ability => ability.Description)
-			.Any(description => description.Embeds(Special));
+			.Any(description => description.EmbedsAny(SpecialArmors));
 
 	public void UseStandardArmor()
 	{
