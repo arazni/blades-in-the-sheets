@@ -41,6 +41,8 @@ public sealed partial class SheetAbilitiesCard
 			.GetAvailableAbilities();
 
 		SelectedAbility = LearnableAbilities.FirstOrDefault();
+
+		base.OnParametersSet();
 	}
 
 	protected override void OnInitialized()
@@ -56,7 +58,8 @@ public sealed partial class SheetAbilitiesCard
 	}
 
 	bool CanAddAbility =>
-		IsFixMode || Playbook.Experience.CanLevelUp;
+		(IsFixMode || Playbook.Experience.CanLevelUp)
+		&& LearnableAbilities.Any();
 
 	bool CannotAddAbility =>
 		!CanAddAbility;

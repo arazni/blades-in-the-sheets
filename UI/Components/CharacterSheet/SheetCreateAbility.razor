@@ -1,0 +1,32 @@
+﻿@using Models.Characters
+@using Models.Settings
+@using UI.Services
+@inject SheetJank SheetJank
+
+@if (IsCreatingAbility)
+{
+	<div class="vertical-stack">
+		<div class="wrap-horizontal-stack jsb">
+			<div>
+				<FluentSelect TOption="string" Items="VeteranSources" SelectedOption="VeteranSource" SelectedOptionChanged="OnVeteranSourceChanged" Label="Veteran Ability Source" />
+			</div>
+			<div>
+				@if (IsCreatingCustom)
+				{
+					<FluentTextField @bind-Value="CustomAbilityName" Label="Custom Ability Name" />
+				}
+			</div>
+		</div>
+		<div>
+			@if (IsCreatingCustom)
+			{
+				<FluentTextArea @bind-Value="CustomAbilityDescription" Label="Custom Ability Description" Class="w100" Rows="5" Resize="TextAreaResize.Vertical" Appearance="FluentInputAppearance.Outline" />
+			}
+			else
+			{
+				<FluentSelect TOption="PlaybookSpecialAbility" Items="AvailableVeteranAbilities" @bind-SelectedOption="VeteranSelectedAbility" OptionText="@(a => ($"{a.Name}: {a.Description}"))" Class="big-select" Label="Veteran Ability" Disabled="!AvailableVeteranAbilities.Any()" />
+			}
+		</div>
+		<FluentButton OnClick="AddAbility" Disabled="!IsAddButtonEnabled" Class="min-button" IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Title="@(IsCreatingCustom ? "Add custom ability" : "Add veteran ability")">Add</FluentButton>
+	</div>
+}

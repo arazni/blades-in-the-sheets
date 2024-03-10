@@ -10,13 +10,12 @@
 <SheetCard @bind-IsFixMode="IsFixMode" Header="@Playbook.Name.ToString()">
 	<BladeRating @bind-Value="Playbook.Experience.Points" MaxValue="Playbook.Experience.MaxPoints" CheckboxAriaLabelSuffix="Playbook experience points" />
 	<div class="horizontal-stack jsb">
-		<FluentSelect TOption="PlaybookSpecialAbility" Items="LearnableAbilities" @bind-SelectedOption="SelectedAbility" OptionValue="a => a.Name" OptionText="@(a => ($"{a.Name}: {a.Description}"))" AriaLabel="Select playbook ability to learn" Class="big-select" />
+		<FluentSelect TOption="PlaybookSpecialAbility" Items="LearnableAbilities" @bind-SelectedOption="SelectedAbility" OptionValue="a => a.Name" OptionText="@(a => ($"{a.Name}: {a.Description}"))" AriaLabel="Select playbook ability to learn" Class="big-select" Disabled="!LearnableAbilities.Any()" />
 		<FluentButton IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Disabled="CannotAddAbility" OnClick="AddAbility" Class="min-button" Title="Learn ability">Ability</FluentButton>
 	</div>
-	<div class="vertical-stack">
-		@foreach (var ability in KnownAbilities)
-		{
-			<SheetAbility Character="Character" Ability="ability" IsFixMode="IsFixMode" />
-		}
-	</div>
+	<SheetCreateAbility Character="Character" GameSetting="GameSetting" IsFixMode="IsFixMode" ParentSelectedAbility="SelectedAbility" />
+	@foreach (var ability in KnownAbilities)
+	{
+		<SheetAbility Character="Character" Ability="ability" IsFixMode="IsFixMode" />
+	}
 </SheetCard>
