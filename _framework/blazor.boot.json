@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "UI",
   "resources": {
-    "hash": "sha256-VEVqs0gN09wyR8QkcVIk8Up0p58ok8chmvPrG80Da8c=",
+    "hash": "sha256-SmEoejABxqxOMmjzvkWO0q1+F6T3o4CC8qin0u0qzJk=",
     "jsModuleNative": {
       "dotnet.native.8.0.2.yvjziv1s2t.js": "sha256-CHqb41GW0VcHspUZMVpiGIjBt5z75A0dqIN8HnDOImE="
     },
@@ -9,7 +9,7 @@
       "dotnet.runtime.8.0.2.xpxg2k6ml2.js": "sha256-54KSaoOArNfygQbV+r4B5y3ys53v2tnvFIyZcZiUmi0="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-slcHSJA44eDjmPnUPrs7EVO25qgZuVpCPS0Xf1f0eDY="
+      "dotnet.native.wasm": "sha256-SwjMrj4FcumP9L1VIMWxF9LMFJ7eeTRD4DwRnL7y8NE="
     },
     "assembly": {
       "Blazored.LocalStorage.wasm": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
@@ -32,10 +32,10 @@
       "Microsoft.FluentUI.AspNetCore.Components.wasm": "sha256-vhZixPzZRJ89FZ4F4XsUQfw9m8j4UDucMKWRc/l1Lag=",
       "Microsoft.JSInterop.wasm": "sha256-CLFahjEZ5CR4dE+Ju5tlWEm6UrCx0Z6G2hfHGDYX+K8=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-2qBJkLnOCr4py2S0peps0cFo0z3Ew9OVwGYodtvAVkk=",
-      "Models.wasm": "sha256-YhqeNp246xoSyOQDKHnEYt93BEHTrBlkzJZ7DSPXJmc=",
+      "Models.wasm": "sha256-6aeM56vGZz6AmF4Vy40MUQZEczAoWJMxe9InuM6Uy6s=",
       "netstandard.wasm": "sha256-L8kkhsdr6G3DrCDvNcD/l2GQknhE77VP2m0gjT7+oVM=",
       "Newtonsoft.Json.wasm": "sha256-GlXMWKvDs45M2pACoR3Y4Qh8mcrOZGljqmvJY+6JZ5s=",
-      "Persistence.wasm": "sha256-taPleMg/gbx6l1QU3z6HioEEdP4OFsLf2KWDz4rgQhA=",
+      "Persistence.wasm": "sha256-XjCXC3nK18fKwxBsDTLc+EL4jYdaKpQcD7daMTAMJuY=",
       "System.Collections.Concurrent.wasm": "sha256-Ujzzj8BJm8OCp090xlUYiroDT7cTITYENboB7BXjWMA=",
       "System.Collections.NonGeneric.wasm": "sha256-idBD4TDdFhrjqZ2z3kLMi2HvDYs4zaumYz10j86Tqyg=",
       "System.Collections.Specialized.wasm": "sha256-lhu6yaO+xCgU6BMt8N5l2a81MegqouVPYLtPiYLRIQg=",
@@ -86,7 +86,7 @@
       "System.Xml.XDocument.wasm": "sha256-jc3m52OtIH28ofMDsvMC8BXf+yMX9JlX//J53CoYX9s=",
       "System.Xml.XmlSerializer.wasm": "sha256-5uMoG1tXZvhMLtz2jgqNRFdl3+KENN88rT44NztgnGk=",
       "Toolbelt.Blazor.HotKeys2.wasm": "sha256-GCJY2V6w2hrZJrkO61gksnrIUo4Ee+dMhCQIEAQVnUE=",
-      "UI.wasm": "sha256-6INrGaDfK15Mo5WYVB1j1AOKaIw6Y37eK3X0qJiZE+E="
+      "UI.wasm": "sha256-RRluKpKiI2HSEZz5MkefTNeR8h2fWpc1D3A7tMyVG0w="
     },
     "libraryInitializers": {
       "_content/Microsoft.FluentUI.AspNetCore.Components/Microsoft.FluentUI.AspNetCore.Components.lib.module.js": "sha256-ofikKGeX0v6SViu0k6v/Ffz7a/gD6UNkM540uIM8zB0=",
