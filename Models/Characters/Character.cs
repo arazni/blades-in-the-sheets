@@ -12,7 +12,7 @@ public partial class Character
 		Talent = Talent.Empty();
 		Monitor = Monitor.Empty();
 		GameName = string.Empty;
-		Language = string.Empty;
+		Language = Constants.Languages.English;
 	}
 
 	public Character(GameSetting game, string playbookName, int version)

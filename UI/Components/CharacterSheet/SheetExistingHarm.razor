@@ -1,5 +1,7 @@
 ﻿@using Models.Characters
 @using Models.Common
+@using UI.Services
+@inject SheetJank SheetJank
 
 @if (!Harm.HasHarmAtIntensity(Intensity))
 	return;

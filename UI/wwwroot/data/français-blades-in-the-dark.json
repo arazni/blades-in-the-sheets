@@ -53,7 +53,7 @@
 				}
 			],
 			"Rolodex": {
-				"Name": "Connexions dangereuses",
+				"Name": "Connaissances dangereuses",
 				"Friends": [
 					"Marlane, une pugiliste",
 					"Chael, une brute vicieuse",
@@ -149,7 +149,7 @@
 				}
 			],
 			"Rolodex": {
-				"Name": "Connexions mortelles",
+				"Name": "Connaissances mortelles",
 				"Friends": [
 					"Steiner, un assassin",
 					"Celene, une sentinelle",
@@ -205,7 +205,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Analyste",
-					"Description": "Pendant un temps mort, vous cochez deux segments à distribu- er dans tout compteur de projet à long terme qui implique une investigation, l’apprentissage d’une nouvelle formule ou la conception d’une nouvelle invention."
+					"Description": "Pendant un temps mort, vous cochez deux segments à distribuer dans tout compteur de projet à long terme qui implique une investigation, l’apprentissage d’une nouvelle formule ou la conception d’une nouvelle invention."
 				},
 				{
 					"TimesTakeable": 1,
@@ -215,7 +215,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Force d’âme",
-					"Description": "Vous pouvez dépenser votre armure spéciale pour résister à une conséquence liée à la fatigue, la faiblesse ou les effets chimiques, ou pour vous dépasser dans un domaine technique ou quand vous manipulez des pro- duits alchimiques."
+					"Description": "Vous pouvez dépenser votre armure spéciale pour résister à une conséquence liée à la fatigue, la faiblesse ou les effets chimiques, ou pour vous dépasser dans un domaine technique ou quand vous manipulez des produits alchimiques."
 				},
 				{
 					"TimesTakeable": 1,
@@ -225,7 +225,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Toubib",
-					"Description": "Vous êtes capable de Bricoler les os fracturés, de transfuser du sang ou d’autres fluides corporels, de recoudre les plaies et de stabiliser les mourants. Vous pouvez Étudier une maladie ou un cadavre. Tous les mem- bres de votre bande (vous inclus) gagnent +1 dé sur les jets de guérison."
+					"Description": "Vous êtes capable de Bricoler les os fracturés, de transfuser du sang ou d’autres fluides corporels, de recoudre les plaies et de stabiliser les mourants. Vous pouvez Étudier une maladie ou un cadavre. Tous les membres de votre bande (vous inclus) gagnent +1 dé sur les jets de guérison."
 				},
 				{
 					"TimesTakeable": 1,
@@ -244,7 +244,7 @@
 				}
 			],
 			"Rolodex": {
-				"Name": "Connexions roublardes",
+				"Name": "Connaissances roublardes",
 				"Friends": [
 					"Stazia, un apothicaire",
 					"Veldren, une psychonaute",
@@ -311,12 +311,12 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Embuscade",
-					"Description": "Quand vous passez à l’attaque depuis une cachette ou dé- clenchez un piège, vous gagnez +1 dé à votre jet."
+					"Description": "Quand vous passez à l’attaque depuis une cachette ou déclenchez un piège, vous gagnez +1 dé à votre jet."
 				},
 				{
 					"TimesTakeable": 1,
 					"Name": "Casse-cou",
-					"Description": "Quand vous êtes en position désespérée, vous gagnez +1 dé à votre jet d’action si vous prenez -1 dé au jet de résistance contre les consé- quences de l’action."
+					"Description": "Quand vous êtes en position désespérée, vous gagnez +1 dé à votre jet d’action si vous prenez -1 dé au jet de résistance contre les conséquences de l’action."
 				},
 				{
 					"TimesTakeable": 1,
@@ -410,7 +410,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Voix spectrale",
-					"Description": "Vous êtes initié aux mystères permettant de converser avec un fantôme ou un démon comme s’il s’agissait d’un être humain ordi- naire, aussi terrifiant ou sauvage qu’il apparaisse. Vous êtes puissant quand vous communiquez avec les entités surnaturelles."
+					"Description": "Vous êtes initié aux mystères permettant de converser avec un fantôme ou un démon comme s’il s’agissait d’un être humain ordinaire, aussi terrifiant ou sauvage qu’il apparaisse. Vous êtes puissant quand vous communiquez avec les entités surnaturelles."
 				},
 				{
 					"TimesTakeable": 1,
@@ -444,7 +444,7 @@
 				}
 			],
 			"Rolodex": {
-				"Name": "Connexions sournoises",
+				"Name": "Connaissances sournoises",
 				"Friends": [
 					"Bryl, un dealer",
 					"Bazso Baz, un chef de gang",
@@ -538,7 +538,7 @@
 				}
 			],
 			"Rolodex": {
-				"Name": "Connexions rusées",
+				"Name": "Connaissances rusées",
 				"Friends": [
 					"Salia, une courtière en informations",
 					"Augus, un maître-architecte",
@@ -608,7 +608,7 @@
 				{
 					"TimesTakeable": 1,
 					"Name": "Rituel",
-					"Description": "Vous connaissez les méthodes arcaniques de la sorcellerie rituelle. Vous pouvez Étudier un rituel occulte (ou en créer un nouveau) pour invo- quer un effet ou un être surnaturel. Vous débutez avec un rituel déjà connu."
+					"Description": "Vous connaissez les méthodes arcaniques de la sorcellerie rituelle. Vous pouvez Étudier un rituel occulte (ou en créer un nouveau) pour invoquer un effet ou un être surnaturel. Vous débutez avec un rituel déjà connu."
 				},
 				{
 					"TimesTakeable": 1,
@@ -693,7 +693,7 @@
 	"Heritages": [
 		{
 			"Name": "Akoros",
-			"BlurbFlavor": "d'ici en Akoros",
+			"BlurbFlavor": "ici en Akoros",
 			"Description": "Akoros est la nation la plus vaste et la plus avancée de tout l’Impérium. Elle abrite la capitale, mais aussi Doskvol elle-même. Akoros est un agrégat de diverses cultures ayant étroitement cohabité depuis plusieurs siècles, à l’image de l’Europe."
 		},
 		{
@@ -912,7 +912,7 @@
 				{
 					"Name": "Invoquer",
 					"ShortDescription": "Lorsque vous Invoquez, vous ouvrez votre esprit au champ ectoplasmique ou à d’autres arcanes.",
-					"LongDescription": "Vous pourriez communiquer avec un fantôme ou compren-dre certains aspects de la spectrologie. Vous pourriez tenter d’ouvrir votre troisième oeil afin de mieux appréhender la situation (mais Observer pourrait être plus adapté)."
+					"LongDescription": "Vous pourriez communiquer avec un fantôme ou comprendre certains aspects de la spectrologie. Vous pourriez tenter d’ouvrir votre troisième oeil afin de mieux appréhender la situation (mais Observer pourrait être plus adapté)."
 				},
 				{
 					"Name": "Commander",

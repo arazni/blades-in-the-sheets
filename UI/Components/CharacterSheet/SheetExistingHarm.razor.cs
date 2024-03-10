@@ -28,6 +28,7 @@ public partial class SheetExistingHarm
 	void RemoveHarm(string description)
 	{
 		Harm.RemoveHarm(description, Intensity);
+		SheetJank.NotifyHarmChanged();
 	}
 
 	static string AriaLabel(string description) =>

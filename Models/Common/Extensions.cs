@@ -10,11 +10,14 @@ public static class Extensions
 	public static bool Embeds(this string source, string smallerString) =>
 		source.Contains(smallerString.Trim(), StringComparison.InvariantCultureIgnoreCase);
 
+	public static bool EmbedsAny(this string source, params string[] smallerStrings) =>
+		smallerStrings.Any(source.Embeds);
+
 	public static bool In(this string source, params string[] list) =>
-		list.Any(item => source.Like(item));
+		list.Any(source.Like);
 
 	public static bool In(this string source, IEnumerable<string> list) =>
-		list.Any(item => source.Like(item));
+		list.Any(source.Like);
 
 	public static bool In<T>(this T source, params T[] list) =>
 		list.Contains(source);
@@ -24,6 +27,9 @@ public static class Extensions
 
 	public static bool Has(this IEnumerable<string> source, string item) =>
 		item.In(source);
+
+	public static bool HasAny(this IEnumerable<string> source, params string[] items) =>
+		items.Any(source.Has);
 
 	public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable) =>
 		enumerable == null || !enumerable.Any();
