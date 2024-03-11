@@ -194,6 +194,7 @@ public class SerializerTests
 		character.Should().NotBeNull();
 		character.Playbook.Name.Should().Be(PlaybookOption.Spider.ToString());
 		character.Talent.AttributesByName[AttributeName.Insight.ToString()].Experience.MaxPoints.Should().BeGreaterThan(0);
+		character.Playbook.AbilitiesByName["Veteran"].TimesTakeable.Should().Be(99);
 	}
 
 	[Fact]

@@ -21,6 +21,22 @@ public class Playbook
 
 	public string Name { get; private set; }
 
+	public bool CanTakeAbility(PlaybookSpecialAbility ability)
+	{
+		if (this.abilitiesByName.TryGetValue(ability.Name, out var knownAbility))
+			return !knownAbility.IsCompletelyLearned;
+
+		return true;
+	}
+
+	public int TimesTaken(PlaybookSpecialAbility ability)
+	{
+		if (this.abilitiesByName.TryGetValue(ability.Name, out var knownAbility))
+			return knownAbility.TimesTaken;
+
+		return 0;
+	}
+
 	public bool TakeAbility(PlaybookSpecialAbility ability)
 	{
 		if (this.abilitiesByName.TryGetValue(ability.Name, out var knownAbility))

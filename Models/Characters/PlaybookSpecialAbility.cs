@@ -54,4 +54,11 @@ public class PlaybookSpecialAbility
 
 	public PlaybookSpecialAbility Copy() =>
 		new(Name, Description, TimesTakeable);
+
+	public PlaybookSpecialAbility Copy(int overrideTimesTaken)
+	{
+		var copy = Copy();
+		copy.TimesTaken = overrideTimesTaken;
+		return copy;
+	}
 }

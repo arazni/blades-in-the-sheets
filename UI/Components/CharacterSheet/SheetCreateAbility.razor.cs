@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Models.Characters;
 using Models.Common;
 using Models.Settings;
+using UI.Conveniences;
 
 namespace UI.Components.CharacterSheet;
 public partial class SheetCreateAbility
@@ -40,9 +41,11 @@ public partial class SheetCreateAbility
 
 	bool IsCreatingCustom => VeteranSource == CustomVeteranSource;
 
-	bool IsAddButtonEnabled =>
-		IsCreatingCustom ? CustomAbilityName.HasInk() && CustomAbilityDescription.HasInk()
-		: VeteranSelectedAbility != null;
+	bool IsAddCustomButtonEnabled =>
+		CustomAbilityName.HasInk() && CustomAbilityDescription.HasInk();
+
+	bool IsAddVeteranButtonEnabled =>
+		VeteranSelectedAbility != null;
 
 	protected override void OnParametersSet()
 	{
@@ -51,7 +54,7 @@ public partial class SheetCreateAbility
 			.LastOrDefault()
 			?.Name ?? string.Empty;
 
-		IsCreatingAbility = IsFixMode || (ParentSelectedAbility?.Name.Like(VeteranAbilityName) ?? false);
+		IsCreatingAbility = IsFixMode || (Playbook.Experience.CanLevelUp && (ParentSelectedAbility?.Name.Like(VeteranAbilityName) ?? false));
 
 		VeteranSources = GameSetting.Playbooks.Select(p => p.Name)
 			.Where(name => !name.Like(Playbook.Name))
@@ -69,11 +72,7 @@ public partial class SheetCreateAbility
 
 	private void ReloadAvailableVeteranAbilities()
 	{
-		AvailableVeteranAbilities = GameSetting.GetPlaybookSetting(VeteranSource)
-			.GetAvailableAbilities()
-			.Where(a => !a.Name.In(Playbook.AbilitiesByName.Keys))
-			.ToArray();
-
+		AvailableVeteranAbilities = GameSetting.GetDisplayableAbilities(Playbook, VeteranSource);
 		VeteranSelectedAbility = AvailableVeteranAbilities.FirstOrDefault();
 	}
 
@@ -85,25 +84,10 @@ public partial class SheetCreateAbility
 			ReloadAvailableVeteranAbilities();
 	}
 
-	public void AddAbility()
+	public void AddVeteranAbility()
 	{
-		if (!IsAddButtonEnabled)
+		if (!IsAddVeteranButtonEnabled)
 			return;
-
-		if (IsCreatingCustom)
-		{
-			if (!Playbook.TakeAbility(new(CustomAbilityName, CustomAbilityDescription, 1)))
-				return;
-
-			CustomAbilityName = string.Empty;
-			CustomAbilityDescription = string.Empty;
-
-			if (!IsFixMode)
-				Playbook.Experience.Points = 0;
-
-			SheetJank.NotifyAbilitiesChanged();
-			return;
-		}
 
 		if (!Playbook.TakeAbility(VeteranSelectedAbility!))
 			return;
@@ -114,5 +98,23 @@ public partial class SheetCreateAbility
 			Playbook.Experience.Points = 0;
 
 		SheetJank.NotifyAbilitiesChanged();
+	}
+
+	public void AddCustomAbility()
+	{
+		if (!IsAddCustomButtonEnabled)
+			return;
+
+		if (!Playbook.TakeAbility(new(CustomAbilityName, CustomAbilityDescription, 1)))
+			return;
+
+		CustomAbilityName = string.Empty;
+		CustomAbilityDescription = string.Empty;
+
+		if (!IsFixMode)
+			Playbook.Experience.Points = 0;
+
+		SheetJank.NotifyAbilitiesChanged();
+		return;
 	}
 }
