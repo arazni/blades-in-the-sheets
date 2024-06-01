@@ -4,18 +4,18 @@
 @using UI.Services;
 @inject SheetJank SheetJank
 
-@if (Ability == null || Playbook == null) { return; }
+@if (Ability == null || Playbook == null || GameSetting == null || Setting == null) { return; }
 <div>
 	@if (IsFixMode)
 	{
 		<h5>
-			<FluentButton Class="min-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="(e => RemoveAbility(Ability))" Title="@RemoveAbilityLabel" BackgroundColor="var(--scare-color)">@Ability.LearnedTimesDisplayName()</FluentButton>
+			<FluentButton Class="min-button" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="(e => RemoveAbility(Ability))" Title="@RemoveAbilityLabel" BackgroundColor="var(--scare-color)">@Ability.LearnedTimesDisplayName(Setting)</FluentButton>
 		</h5>
 		<FluentTextArea Class="w100" @bind-Value:get="@Ability.Description" @bind-Value:set="OverwriteDescription" Rows="5" Appearance="FluentInputAppearance.Outline" AriaLabel="@EditAbilityLabel" Id="@TextFieldId" Resize="TextAreaResize.Vertical" />
 	}
 	else
 	{
-		<h5>@Ability.LearnedTimesDisplayName()</h5>
+		<h5>@Ability.LearnedTimesDisplayName(Setting)</h5>
 		<p>@Ability.Description</p>
 	}
 </div>

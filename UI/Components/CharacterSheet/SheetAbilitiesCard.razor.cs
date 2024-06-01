@@ -20,9 +20,9 @@ public sealed partial class SheetAbilitiesCard
 	IReadOnlyCollection<PlaybookSpecialAbility> KnownAbilities =>
 		Playbook.Abilities;
 
-	PlaybookSpecialAbility[] LearnableAbilities { get; set; } = [];
+	SpecialAbilitySetting[] LearnableAbilities { get; set; } = [];
 
-	PlaybookSpecialAbility? SelectedAbility { get; set; }
+	SpecialAbilitySetting? SelectedAbility { get; set; }
 
 	protected override void OnParametersSet()
 	{

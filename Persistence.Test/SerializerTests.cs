@@ -39,7 +39,7 @@ public class SerializerTests
 	private async Task<(string, string)> LurkCharacter()
 	{
 		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Lurk.ToString());
-		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1));
+		character.Playbook.TakeAbility(new("Ambush", 1, "When you attack from hiding or spring a trap, you get +1d."));
 
 		RolodexCreation creation = new();
 
@@ -194,7 +194,6 @@ public class SerializerTests
 		character.Should().NotBeNull();
 		character.Playbook.Name.Should().Be(PlaybookOption.Spider.ToString());
 		character.Talent.AttributesByName[AttributeName.Insight.ToString()].Experience.MaxPoints.Should().BeGreaterThan(0);
-		character.Playbook.AbilitiesByName["Veteran"].TimesTakeable.Should().Be(99);
 	}
 
 	[Fact]

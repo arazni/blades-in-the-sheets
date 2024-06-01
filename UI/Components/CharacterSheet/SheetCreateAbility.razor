@@ -28,7 +28,7 @@
 		else
 		{
 			<div class="wrap-horizontal-stack jsb">
-				<FluentSelect TOption="PlaybookSpecialAbility" Items="AvailableVeteranAbilities" @bind-SelectedOption="VeteranSelectedAbility" OptionText="a => a.DisplayText(Playbook)" Class="big-select" Disabled="!AvailableVeteranAbilities.Any()" />
+				<FluentSelect TOption="SpecialAbilitySetting" Items="AvailableVeteranAbilities" @bind-SelectedOption="VeteranSelectedAbility" OptionText="a => a.DisplayText(Playbook)" Class="big-select" Disabled="!AvailableVeteranAbilities.Any()" />
 				<FluentButton OnClick="AddVeteranAbility" Disabled="!IsAddVeteranButtonEnabled" Class="min-button" IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Title="Add veteran ability">Veteran</FluentButton>
 			</div>
 		}

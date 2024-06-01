@@ -16,7 +16,7 @@ public partial class SheetCreateAbility
 	public GameSetting GameSetting { get; set; } = EmptyGameSetting.Game();
 
 	[Parameter, EditorRequired]
-	public PlaybookSpecialAbility? ParentSelectedAbility { get; set; }
+	public SpecialAbilitySetting? ParentSelectedAbility { get; set; }
 
 	[Parameter, EditorRequired]
 	public bool IsFixMode { get; set; } = false;
@@ -25,9 +25,9 @@ public partial class SheetCreateAbility
 
 	string VeteranSource { get; set; } = string.Empty;
 
-	PlaybookSpecialAbility[] AvailableVeteranAbilities { get; set; } = [];
+	SpecialAbilitySetting[] AvailableVeteranAbilities { get; set; } = [];
 
-	PlaybookSpecialAbility? VeteranSelectedAbility { get; set; }
+	SpecialAbilitySetting? VeteranSelectedAbility { get; set; }
 
 	Playbook Playbook => Character.Playbook;
 
@@ -105,7 +105,7 @@ public partial class SheetCreateAbility
 		if (!IsAddCustomButtonEnabled)
 			return;
 
-		if (!Playbook.TakeAbility(new(CustomAbilityName, CustomAbilityDescription, 1)))
+		if (!Playbook.TakeAbility(new(CustomAbilityName, 1, CustomAbilityDescription)))
 			return;
 
 		CustomAbilityName = string.Empty;

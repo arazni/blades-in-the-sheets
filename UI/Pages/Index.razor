@@ -43,7 +43,7 @@
 			<div class="vertical-stack card-body">
 				<div>
 					<p>You don't have any scoundrels yet! If this is your first time here, <FluentAnchor Href="@Paths.Help" Appearance="Appearance.Hypertext">please visit the help page</FluentAnchor> for tips and info.</p>
-					<p>You can also visit <FluentAnchor Href="@Paths.Demo" Appearance="Appearance.Hypertext">the demo page</FluentAnchor>to see what a character page is like and mess around.</p>
+					<p>You can also visit <FluentAnchor Href="@Paths.Demo" Appearance="Appearance.Hypertext">the demo page</FluentAnchor> to see what a character page is like and mess around.</p>
 					<p class="screen-reader-only">It looks like you're using a screen reader. Please visit the <FluentAnchor Href="@Paths.Accessibility" Appearance="Appearance.Hypertext">accessibility page</FluentAnchor> for a description of the web page and settings that may make navigation easier.</p>
 				</div>
 			</div>
@@ -57,10 +57,10 @@
 			<div class="card-header-right">
 				@if (Characters.Any())
 				{
-					<FluentButton Title="Enable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownload())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = true" Class="@NotDownloadModeClass" />
-					<FluentButton Title="Disable Download Mode" IconStart="@(new Icons.Filled.Size20.ArrowDownloadOff())" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = false" Class="@DownloadModeClass" />
-					<FluentButton Title="Enable Delete Mode" IconStart="@(new Icons.Filled.Size20.Delete())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = true" Class="@NotDeleteModeClass" BackgroundColor="var(--scare-color)" />
-					<FluentButton Title="Disable Delete Mode" IconStart="@(new Icons.Filled.Size20.DeleteOff())" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = false" Class="@DeleteModeClass" />
+					<FluentButton Title="Enable Download Mode" IconStart="new Icons.Filled.Size20.ArrowDownload()" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = true" Class="@NotDownloadModeClass" />
+					<FluentButton Title="Disable Download Mode" IconStart="new Icons.Filled.Size20.ArrowDownloadOff()" Appearance="Appearance.Accent" OnClick="_ => IsDownloadMode = false" Class="@DownloadModeClass" />
+					<FluentButton Title="Enable Delete Mode" IconStart="new Icons.Filled.Size20.Delete()" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = true" Class="@NotDeleteModeClass" BackgroundColor="var(--scare-color)" />
+					<FluentButton Title="Disable Delete Mode" IconStart="new Icons.Filled.Size20.DeleteOff()" Appearance="Appearance.Accent" OnClick="_ => IsDeleteMode = false" Class="@DeleteModeClass" />
 				}
 			</div>
 		</div>
@@ -73,10 +73,10 @@
 			</div>
 			<FluentAnchor Href="@New()" Appearance="Appearance.Accent" Class="min-button">
 				Create a Character
-				<FluentIcon Value="@(new Icons.Regular.Size20.DocumentAdd())" Slot="start" Color="@Microsoft.FluentUI.AspNetCore.Components.Color.Fill" />
+				<FluentIcon Value="new Icons.Regular.Size20.DocumentAdd()" Slot="start" Color="@Microsoft.FluentUI.AspNetCore.Components.Color.Fill" />
 			</FluentAnchor>
 			<FluentInputFile AnchorId="ImportCharacters" DragDropZoneVisible="false" Mode="InputFileMode.Stream" Multiple="true" Accept=".json" OnFileUploaded="@UploadFiles" OnCompleted="@UploadComplete" />
-			<FluentButton Id="ImportCharacters" Appearance="Appearance.Accent" IconStart="@(new Icons.Regular.Size20.ArrowUpload())" Class="min-button">Import Characters</FluentButton>
+			<FluentButton Id="ImportCharacters" Appearance="Appearance.Accent" IconStart="new Icons.Regular.Size20.ArrowUpload()" Class="min-button">Import Characters</FluentButton>
 		</div>
 	</FluentCard>
 </div>

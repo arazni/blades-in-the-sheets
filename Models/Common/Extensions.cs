@@ -34,7 +34,7 @@ public static class Extensions
 	public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable) =>
 		enumerable == null || !enumerable.Any();
 
-	public static bool HasInk(this string source) =>
+	public static bool HasInk(this string? source) =>
 		!string.IsNullOrWhiteSpace(source);
 
 	public static string Join(this IEnumerable<string> source, string separator) =>

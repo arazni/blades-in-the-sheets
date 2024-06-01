@@ -11,13 +11,13 @@
 	<div class="vertical-stack card-body">
 		<div>
 			<p>If you're unsure which one to pick, the first is considered a good default choice.</p>
-			<FluentSelect Label="Special Ability" TOption="PlaybookSpecialAbility" Items="AvailableAbilities" OptionValue="i => i.Name" OptionText="@(i => $"{DisplayText(i)} - {i.Description}")" SelectedOption="ChosenAbility" SelectedOptionChanged="OnChosenAbilityChanged" Id="select-playbook-ability" Class="big-select" />
+			<FluentSelect Label="Special Ability" TOption="SpecialAbilitySetting" Items="AvailableAbilities" OptionValue="i => i.Name" OptionText="@(i => $"{DisplayText(i)} - {i.Description}")" SelectedOption="ChosenAbility" SelectedOptionChanged="OnChosenAbilityChanged" Id="select-playbook-ability" Class="big-select" />
 		</div>
 		@if (HasStartingAbilities)
 		{
 			<div>
 				<p>@GameSetting.Name also has unique starting abilities.</p>
-				<FluentSelect Label="Starting Ability" TOption="PlaybookSpecialAbility" Items="AvailableStartingAbilities" OptionValue="i => i.Name" OptionText="@(i => $"{DisplayText(i)} - {i.Description}")" SelectedOption="ChosenStartingAbility" SelectedOptionChanged="OnChosenStartingAbilityChanged" Id="select-playbook-starting-ability" Class="big-select" />
+				<FluentSelect Label="Starting Ability" TOption="SpecialAbilitySetting" Items="AvailableStartingAbilities" OptionValue="i => i.Name" OptionText="@(i => $"{DisplayText(i)} - {i.Description}")" SelectedOption="ChosenStartingAbility" SelectedOptionChanged="OnChosenStartingAbilityChanged" Id="select-playbook-starting-ability" Class="big-select" />
 			</div>
 		}
 		@foreach (var ability in Playbook.Abilities)

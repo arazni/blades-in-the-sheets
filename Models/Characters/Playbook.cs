@@ -1,13 +1,10 @@
-﻿namespace Models.Characters;
+﻿using Models.Settings;
 
-public class Playbook
+namespace Models.Characters;
+
+public class Playbook(string name)
 {
-	private Dictionary<string, PlaybookSpecialAbility> abilitiesByName = new();
-
-	public Playbook(string name)
-	{
-		Name = name;
-	}
+	private Dictionary<string, PlaybookSpecialAbility> abilitiesByName = [];
 
 	public IReadOnlyCollection<PlaybookSpecialAbility> Abilities => this.abilitiesByName.Values;
 
@@ -19,33 +16,41 @@ public class Playbook
 
 	public ExperienceTracker Experience { get; private set; } = new(8);
 
-	public string Name { get; private set; }
+	public string Name { get; private set; } = name;
 
-	public bool CanTakeAbility(PlaybookSpecialAbility ability)
+	public bool HasAbility(SpecialAbilitySetting setting) =>
+		this.abilitiesByName.ContainsKey(setting.Name);
+
+	public PlaybookSpecialAbility? GetAbility(SpecialAbilitySetting setting)
 	{
-		if (this.abilitiesByName.TryGetValue(ability.Name, out var knownAbility))
-			return !knownAbility.IsCompletelyLearned;
+		if (this.abilitiesByName.TryGetValue(setting.Name, out var knownAbility))
+			return knownAbility;
+
+		return null;
+	}
+
+	public bool CanTakeAbility(SpecialAbilitySetting setting)
+	{
+		if (this.abilitiesByName.TryGetValue(setting.Name, out var knownAbility))
+			return !knownAbility.IsCompletelyLearned(setting);
 
 		return true;
 	}
 
-	public int TimesTaken(PlaybookSpecialAbility ability)
+	public int TimesTaken(SpecialAbilitySetting setting)
 	{
-		if (this.abilitiesByName.TryGetValue(ability.Name, out var knownAbility))
+		if (this.abilitiesByName.TryGetValue(setting.Name, out var knownAbility))
 			return knownAbility.TimesTaken;
 
 		return 0;
 	}
 
-	public bool TakeAbility(PlaybookSpecialAbility ability)
+	public bool TakeAbility(SpecialAbilitySetting setting)
 	{
-		if (this.abilitiesByName.TryGetValue(ability.Name, out var knownAbility))
-			return knownAbility!.Take();
+		if (this.abilitiesByName.TryGetValue(setting.Name, out var knownAbility))
+			return knownAbility!.Take(setting);
 
-		var copy = ability.Copy();
-		copy.Take();
-
-		this.abilitiesByName.Add(copy.Name, copy);
+		this.abilitiesByName.Add(setting.Name, new(setting));
 		return true;
 	}
 
