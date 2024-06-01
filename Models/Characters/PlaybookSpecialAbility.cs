@@ -36,7 +36,7 @@ public class PlaybookSpecialAbility
 		if (!setting.Name.Like(Name))
 			return false;
 
-		if (setting.TimesTakeable >= TimesTaken)
+		if (setting.TimesTakeable <= TimesTaken)
 			return false;
 
 		TimesTaken++;
