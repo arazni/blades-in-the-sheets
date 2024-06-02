@@ -41,7 +41,6 @@ public partial class Index
 		await LoadCharacters();
 
 		AvailableGameFiles = await Loader.LoadGameFiles();
-		Console.WriteLine("available count: " + AvailableGameFiles.Length);
 
 		AvailableLanguages = AvailableGameFiles.Select(gf => gf.Language)
 			.Distinct()

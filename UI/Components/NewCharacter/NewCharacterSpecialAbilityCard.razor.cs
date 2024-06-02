@@ -14,17 +14,17 @@ public partial class NewCharacterSpecialAbilityCard
 
 	Playbook Playbook => Character.Playbook;
 
-	PlaybookSpecialAbility[] AvailableAbilities { get; set; } = [];
+	SpecialAbilitySetting[] AvailableAbilities { get; set; } = [];
 
-	PlaybookSpecialAbility? ChosenAbility { get; set; }
+	SpecialAbilitySetting? ChosenAbility { get; set; }
 
-	PlaybookSpecialAbility[] AvailableStartingAbilities { get; set; } = [];
+	SpecialAbilitySetting[] AvailableStartingAbilities { get; set; } = [];
 
-	PlaybookSpecialAbility? ChosenStartingAbility { get; set; }
+	SpecialAbilitySetting? ChosenStartingAbility { get; set; }
 
 	bool HasStartingAbilities => AvailableStartingAbilities.Any();
 
-	private void OnChosenAbilityChanged(PlaybookSpecialAbility value)
+	private void OnChosenAbilityChanged(SpecialAbilitySetting value)
 	{
 		Playbook.ClearAbilities();
 
@@ -35,7 +35,7 @@ public partial class NewCharacterSpecialAbilityCard
 		Playbook.TakeAbility(ChosenAbility);
 	}
 
-	private void OnChosenStartingAbilityChanged(PlaybookSpecialAbility value)
+	private void OnChosenStartingAbilityChanged(SpecialAbilitySetting value)
 	{
 		Playbook.ClearAbilities();
 
@@ -73,7 +73,7 @@ public partial class NewCharacterSpecialAbilityCard
 		base.OnParametersSet();
 	}
 
-	private static string DisplayText(PlaybookSpecialAbility ability) =>
+	private static string DisplayText(SpecialAbilitySetting ability) =>
 		ability.TimesTakeable == 1 ? ability.Name
 		: $"{ability.Name} (take once of {ability.TimesTakeable} possible times)";
 

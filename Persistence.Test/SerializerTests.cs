@@ -39,7 +39,7 @@ public class SerializerTests
 	private async Task<(string, string)> LurkCharacter()
 	{
 		var character = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Lurk.ToString());
-		character.Playbook.TakeAbility(new PlaybookSpecialAbility("Ambush", "When you attack from hiding or spring a trap, you get +1d.", 1));
+		character.Playbook.TakeAbility(new("Ambush", 1, "When you attack from hiding or spring a trap, you get +1d."));
 
 		RolodexCreation creation = new();
 
@@ -75,7 +75,7 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public async void Serializer_Serializes_CoordinatorCharacter()
+	public async Task Serializer_Serializes_CoordinatorCharacter()
 	{
 		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
@@ -95,7 +95,7 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public async void Serializer_Serializes_Experience()
+	public async Task Serializer_Serializes_Experience()
 	{
 		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
@@ -119,7 +119,7 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public async void Serializer_Serializes_MonitorHarm()
+	public async Task Serializer_Serializes_MonitorHarm()
 	{
 		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
@@ -143,7 +143,7 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public async void Serializer_Serializes_RolloverClock()
+	public async Task Serializer_Serializes_RolloverClock()
 	{
 		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();

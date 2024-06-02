@@ -21,11 +21,9 @@ public static class GameSettingExtensions
 				.Actions.FirstOrDefault(a => a.Name == actionName)
 			?? throw new ArgumentOutOfRangeException(nameof(actionName), $"{actionName} is not one of the recognized actions in the settings for {gameSetting.Name}: {gameSetting.GetAttributeSetting(attributeName).Actions.Select(a => a.Name).Join(", ")}");
 
-	public static PlaybookSpecialAbility[] GetAvailableAbilities(this PlaybookSetting playbookSetting) =>
+	public static SpecialAbilitySetting[] GetAvailableAbilities(this PlaybookSetting playbookSetting) =>
 		playbookSetting == EmptyGameSetting.Playbook() ? EmptyGameSetting.PlaybookSpecialAbilities()
-		: playbookSetting.SpecialAbilities
-			.Select(data => new PlaybookSpecialAbility(data.Name, data.Description, data.TimesTakeable))
-			.ToArray();
+		: playbookSetting.SpecialAbilities;
 
 	public static HeritageSetting GetHeritage(this GameSetting gameSetting, string heritageName) =>
 		gameSetting == EmptyGameSetting.Game() ? EmptyGameSetting.Heritage()
@@ -48,17 +46,35 @@ public static class GameSettingExtensions
 			?.Points
 			?? 0;
 
-	public static PlaybookSpecialAbility[] GetAvailableStartingAbilities(this GameSetting gameSetting, string heritageName, string playbookName)
+	public static SpecialAbilitySetting[] GetAvailableStartingAbilities(this GameSetting gameSetting, string heritageName, string playbookName)
 	{
 		if (gameSetting == EmptyGameSetting.Game() || gameSetting.StartingAbility == null)
-			return EmptyGameSetting.PlaybookSpecialAbilities();
+			return [];
 
 		var abilities = new StartingSpecialAbilitySetting?[2];
 		gameSetting.StartingAbility.AbilitiesByPlaybook.TryGetValue(playbookName, out abilities[0]);
 		gameSetting.StartingAbility.AbilitiesByHeritage.TryGetValue(heritageName, out abilities[1]);
 
+#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
 		return abilities.Where(setting => setting != null)
-			.Select(setting => new PlaybookSpecialAbility(setting!.Name, setting.Description, 1))
 			.ToArray();
+#pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
+	}
+
+	public static SpecialAbilitySetting? FindAbility(this GameSetting gameSetting, string? expectedPlaybook, PlaybookSpecialAbility? playbookAbility)
+	{
+		if (gameSetting == EmptyGameSetting.Game() || !expectedPlaybook.HasInk() || playbookAbility == null)
+			return null;
+
+		var ability = gameSetting.Playbooks.FirstOrDefault(p => p.Name.Like(expectedPlaybook!))
+			?.SpecialAbilities.FirstOrDefault(a => a.Name.Like(playbookAbility.Name));
+
+		if (ability != null)
+			return ability;
+
+		return gameSetting.Playbooks.Where(p => !p.Name.Like(expectedPlaybook!))
+			.SelectMany(p => p.SpecialAbilities)
+			.FirstOrDefault(a => a.Name.Like(playbookAbility.Name))
+			?? null;
 	}
 }

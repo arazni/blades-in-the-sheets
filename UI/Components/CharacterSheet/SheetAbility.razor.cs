@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Models.Characters;
+using Models.Settings;
 using UI.Services;
 
 namespace UI.Components.CharacterSheet;
@@ -14,7 +15,15 @@ public partial class SheetAbility
 	[Parameter, EditorRequired]
 	public PlaybookSpecialAbility? Ability { get; set; }
 
+	[Parameter, EditorRequired]
+	public GameSetting? GameSetting { get; set; }
+
 	Playbook? Playbook => Character?.Playbook;
+
+	SpecialAbilitySetting? Setting =>
+		Ability != null ? GameSetting?.FindAbility(Playbook?.Name, Ability)
+		?? new(Ability.Name, 1, Ability.Description)
+		: null;
 
 	void OverwriteDescription(string description)
 	{

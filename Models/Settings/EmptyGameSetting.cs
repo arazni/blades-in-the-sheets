@@ -1,6 +1,4 @@
-﻿using Models.Characters;
-
-namespace Models.Settings;
+﻿namespace Models.Settings;
 
 public static class EmptyGameSetting
 {
@@ -10,6 +8,7 @@ public static class EmptyGameSetting
 	private static readonly DefaultActionPointSetting defaultActionPoint = new(string.Empty, 0);
 	private static readonly HeritageSetting heritage = new(string.Empty, string.Empty, string.Empty);
 	private static readonly RolodexSetting rolodex = new(string.Empty, []);
+	private static readonly SpecialAbilitySetting specialAbility = new(string.Empty, 1, string.Empty);
 	private static readonly PlaybookSetting playbook = new
 	(
 		string.Empty,
@@ -51,7 +50,9 @@ public static class EmptyGameSetting
 
 	public static PlaybookSetting[] Playbooks() => [];
 
-	public static PlaybookSpecialAbility[] PlaybookSpecialAbilities() => [];
+	public static SpecialAbilitySetting SpecialAbility => specialAbility;
+
+	public static SpecialAbilitySetting[] PlaybookSpecialAbilities() => [];
 
 	public static ThesaurusSetting Thesaurus() => thesaurus;
 

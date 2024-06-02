@@ -1,25 +1,47 @@
 ﻿using Models.Common;
+using Models.Settings;
+using Newtonsoft.Json;
 
 namespace Models.Characters;
 
 public class PlaybookSpecialAbility
 {
-	private readonly BoundedInteger timesTaken;
 	private readonly Ink name;
 	private readonly Ink description;
 
-	public PlaybookSpecialAbility(string name, string description, int timesTakeable)
+	[JsonConstructor]
+	protected PlaybookSpecialAbility(string name, string description, int timesTaken)
 	{
 		this.name = new(name);
-
 		this.description = new(description);
-
-		this.timesTaken = new(Math.Max(1, timesTakeable));
+		TimesTaken = timesTaken;
 	}
 
-	public bool Take() => TimesTaken != ++TimesTaken;
+	public PlaybookSpecialAbility(string name, string description)
+	{
+		this.name = new(name);
+		this.description = new(description);
+		TimesTaken = 1;
+	}
 
-	public bool Cancel() => TimesTaken != --TimesTaken;
+	public PlaybookSpecialAbility(SpecialAbilitySetting setting)
+	{
+		this.name = new(setting.Name);
+		this.description = new(setting.Description);
+		TimesTaken = 1;
+	}
+
+	public bool Take(SpecialAbilitySetting setting)
+	{
+		if (!setting.Name.Like(Name))
+			return false;
+
+		if (setting.TimesTakeable <= TimesTaken)
+			return false;
+
+		TimesTaken++;
+		return true;
+	}
 
 	public string Name
 	{
@@ -33,11 +55,7 @@ public class PlaybookSpecialAbility
 		private set => this.description.Value = value;
 	}
 
-	public int TimesTaken
-	{
-		get => this.timesTaken.Value;
-		private set => this.timesTaken.Value = value;
-	}
+	public int TimesTaken { get; private set; }
 
 	public bool OverwriteDescription(string description)
 	{
@@ -48,10 +66,11 @@ public class PlaybookSpecialAbility
 		return true;
 	}
 
-	public int TimesTakeable => this.timesTaken.Max;
+	public bool IsCompletelyLearned(SpecialAbilitySetting setting)
+	{
+		if (!setting.Name.Like(Name))
+			throw new ArgumentException("Ensure the setting matches the playbook ability", nameof(setting));
 
-	public bool IsCompletelyLearned => TimesTakeable == TimesTaken;
-
-	public PlaybookSpecialAbility Copy() =>
-		new(Name, Description, TimesTakeable);
+		return setting.TimesTakeable <= TimesTaken;
+	}
 }

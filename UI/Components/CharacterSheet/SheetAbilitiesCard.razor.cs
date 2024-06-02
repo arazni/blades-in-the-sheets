@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Models.Characters;
 using Models.Settings;
+using UI.Conveniences;
 using UI.Services;
 
 namespace UI.Components.CharacterSheet;
@@ -19,44 +20,38 @@ public sealed partial class SheetAbilitiesCard
 	IReadOnlyCollection<PlaybookSpecialAbility> KnownAbilities =>
 		Playbook.Abilities;
 
-	IReadOnlyCollection<PlaybookSpecialAbility> AvailableAbilities = Array.Empty<PlaybookSpecialAbility>();
+	SpecialAbilitySetting[] LearnableAbilities { get; set; } = [];
 
-	IReadOnlyCollection<PlaybookSpecialAbility> LearnableAbilities =>
-		AvailableAbilities.Where
-		(
-			ability =>
-			{
-				if (!Playbook.AbilitiesByName.TryGetValue(ability.Name, out var knownAbility))
-					return true;
-
-				return !knownAbility.IsCompletelyLearned;
-			}
-		).ToArray();
-
-	PlaybookSpecialAbility? SelectedAbility { get; set; }
+	SpecialAbilitySetting? SelectedAbility { get; set; }
 
 	protected override void OnParametersSet()
 	{
-		AvailableAbilities = GameSetting.GetPlaybookSetting(Playbook.Name)
-			.GetAvailableAbilities();
+		ReloadLearnableAbilities();
 
+		base.OnParametersSet();
+	}
+
+	private void ReloadLearnableAbilities()
+	{
+		LearnableAbilities = GameSetting.GetDisplayableAbilities(Playbook, Playbook.Name);
 		SelectedAbility = LearnableAbilities.FirstOrDefault();
 	}
 
 	protected override void OnInitialized()
 	{
-		SheetJank.AbilitiesChanged += StateHasChanged;
+		SheetJank.AbilitiesChanged += HandleAbilitiesChanged;
 
 		base.OnInitialized();
 	}
 
 	public void Dispose()
 	{
-		SheetJank.AbilitiesChanged -= StateHasChanged;
+		SheetJank.AbilitiesChanged -= HandleAbilitiesChanged;
 	}
 
 	bool CanAddAbility =>
-		IsFixMode || Playbook.Experience.CanLevelUp;
+		(IsFixMode || Playbook.Experience.CanLevelUp)
+		&& LearnableAbilities.Any();
 
 	bool CannotAddAbility =>
 		!CanAddAbility;
@@ -74,8 +69,13 @@ public sealed partial class SheetAbilitiesCard
 		if (!IsFixMode)
 			Playbook.Experience.Clear();
 
-		//SelectedAbility = null;
-		SelectedAbility = LearnableAbilities.FirstOrDefault();
+		ReloadLearnableAbilities();
 		SheetJank.NotifyAbilitiesChanged();
+	}
+
+	void HandleAbilitiesChanged()
+	{
+		ReloadLearnableAbilities();
+		StateHasChanged();
 	}
 }

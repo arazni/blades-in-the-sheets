@@ -112,7 +112,7 @@ public record StartingSpecialAbilitySetting
 (
 	string Name,
 	string Description
-);
+) : SpecialAbilitySetting(Name, 1, Description);
 
 public record GearExtraDescriptionSetting
 (
