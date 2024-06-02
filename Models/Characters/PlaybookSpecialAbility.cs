@@ -73,14 +73,4 @@ public class PlaybookSpecialAbility
 
 		return setting.TimesTakeable <= TimesTaken;
 	}
-
-	public PlaybookSpecialAbility Copy() =>
-		new(Name, Description);
-
-	public PlaybookSpecialAbility Copy(int overrideTimesTaken)
-	{
-		var copy = Copy();
-		copy.TimesTaken = overrideTimesTaken;
-		return copy;
-	}
 }
