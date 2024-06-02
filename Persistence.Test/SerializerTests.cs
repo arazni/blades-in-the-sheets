@@ -75,7 +75,7 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public async void Serializer_Serializes_CoordinatorCharacter()
+	public async Task Serializer_Serializes_CoordinatorCharacter()
 	{
 		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
@@ -95,7 +95,7 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public async void Serializer_Serializes_Experience()
+	public async Task Serializer_Serializes_Experience()
 	{
 		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
@@ -119,7 +119,7 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public async void Serializer_Serializes_MonitorHarm()
+	public async Task Serializer_Serializes_MonitorHarm()
 	{
 		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
@@ -143,7 +143,7 @@ public class SerializerTests
 	}
 
 	[Fact]
-	public async void Serializer_Serializes_RolloverClock()
+	public async Task Serializer_Serializes_RolloverClock()
 	{
 		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
 		model.Should().NotBeNull();
