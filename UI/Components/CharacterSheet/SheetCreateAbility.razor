@@ -2,35 +2,40 @@
 @using Models.Settings
 @using UI.Conveniences
 @using UI.Services
+@using Microsoft.FluentUI.AspNetCore.Components
 @inject SheetJank SheetJank
+@inject IToastService Toaster
 
-@if (IsCreatingAbility)
+@if (!IsCreatingAbility)
 {
-	<div class="vertical-stack">
-		<div class="wrap-horizontal-stack jsb">
-			<div>
-				<FluentSelect TOption="string" Items="VeteranSources" SelectedOption="VeteranSource" SelectedOptionChanged="OnVeteranSourceChanged" Label="Veteran Ability Source" />
-			</div>
-			<div>
-				@if (IsCreatingCustom)
-				{
-					<FluentTextField @bind-Value="CustomAbilityName" Label="Custom Ability Name" />
-				}
-			</div>
-		</div>
-		@if (IsCreatingCustom)
-		{
-			<FluentTextArea @bind-Value="CustomAbilityDescription" Label="Custom Ability Description" Class="w100" Rows="5" Resize="TextAreaResize.Vertical" Appearance="FluentInputAppearance.Outline" />
-			<div class="horizontal-stack" style="justify-content: flex-end;">
-				<FluentButton OnClick="AddCustomAbility" Disabled="!IsAddCustomButtonEnabled" Class="min-button" IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Title="Add custom ability">Custom</FluentButton>
-			</div>
-		}
-		else
-		{
-			<div class="wrap-horizontal-stack jsb">
-				<FluentSelect TOption="SpecialAbilitySetting" Items="AvailableVeteranAbilities" @bind-SelectedOption="VeteranSelectedAbility" OptionText="a => a.DisplayText(Playbook)" Class="big-select" Disabled="!AvailableVeteranAbilities.Any()" />
-				<FluentButton OnClick="AddVeteranAbility" Disabled="!IsAddVeteranButtonEnabled" Class="min-button" IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Title="Add veteran ability">Veteran</FluentButton>
-			</div>
-		}
-	</div>
+	return;
 }
+
+<div class="vertical-stack">
+	<div class="wrap-horizontal-stack jsb">
+		<div>
+			<FluentSelect TOption="string" Items="VeteranSources" SelectedOption="VeteranSource" SelectedOptionChanged="OnVeteranSourceChanged" Label="Veteran Ability Source" />
+		</div>
+		<div>
+			@if (IsCreatingCustom)
+			{
+				<FluentTextField @bind-Value="CustomAbilityName" Label="Custom Ability Name" />
+			}
+		</div>
+	</div>
+	@if (IsCreatingCustom)
+	{
+		<FluentTextArea @bind-Value="CustomAbilityDescription" Label="Custom Ability Description" Class="w100" Rows="5" Resize="TextAreaResize.Vertical" Appearance="FluentInputAppearance.Outline" Immediate="true" />
+		<div class="horizontal-stack" style="justify-content: flex-end;">
+			<FluentButton OnClick="AddCustomAbility" Disabled="!IsAddCustomButtonEnabled" Class="min-button" IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Title="Add custom ability">Custom</FluentButton>
+		</div>
+	}
+	else
+	{
+		<div class="wrap-horizontal-stack jsb">
+			<FluentSelect TOption="SpecialAbilitySetting" Items="AvailableVeteranAbilities" @bind-SelectedOption="VeteranSelectedAbility" OptionText="a => a.DisplayText(Playbook)" Class="big-select" Disabled="!AvailableVeteranAbilities.Any()" />
+			<FluentButton OnClick="AddVeteranAbility" Disabled="!IsAddVeteranButtonEnabled" Class="min-button" IconStart="new Icons.Filled.Size20.Add()" Appearance="Appearance.Accent" Title="Add veteran ability">Veteran</FluentButton>
+		</div>
+	}
+</div>
+

@@ -106,7 +106,12 @@ public partial class SheetCreateAbility
 			return;
 
 		if (!Playbook.TakeAbility(new(CustomAbilityName, 1, CustomAbilityDescription)))
+		{
+			if (Playbook.AbilitiesByName.ContainsKey(CustomAbilityName))
+				Toaster.ShowWarning("The name of your custom ability cannot match any playbook ability you already know.");
+
 			return;
+		}
 
 		CustomAbilityName = string.Empty;
 		CustomAbilityDescription = string.Empty;
