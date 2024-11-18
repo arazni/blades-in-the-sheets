@@ -44,7 +44,7 @@ public partial class NewCharacterFriendsCard
 		Rolodex.ReplaceFriends(friends);
 
 		AvailableFriendOptions = Rolodex.Friends
-			.Select(f => new Option<RolodexFriend> { Value = f, Text = f })
+			.Select(f => new Option<RolodexFriend> { Value = f, Text = f.Entry })
 			.Prepend(new Option<RolodexFriend> { Value = null, Text = null, Disabled = true, Selected = true })
 			.ToArray();
 
