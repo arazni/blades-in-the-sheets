@@ -10,20 +10,39 @@
 	<div class="horizontal-stack jsb">
 		<FluentRadioGroup Class="wrap-row jsb" @bind-Value="Gear.Commitment.Commitment">
 			<FluentRadio Value="LoadCommitmentOption.None" Disabled="!RadioCommitmentsEnabled">@LoadCommitmentOption.None</FluentRadio>
-			<FluentRadio Value="LoadCommitmentOption.Light" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Light) @LoadCommitmentOption.Light</FluentRadio>
-			<FluentRadio Value="LoadCommitmentOption.Normal" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Normal) @LoadCommitmentOption.Normal</FluentRadio>
-			<FluentRadio Value="LoadCommitmentOption.Heavy" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Heavy) @LoadCommitmentOption.Heavy</FluentRadio>
-			<FluentRadio Value="LoadCommitmentOption.Encumbered" Disabled="!RadioCommitmentsEnabled">@((int)LoadCommitmentOption.Encumbered) @LoadCommitmentOption.Encumbered</FluentRadio>
+			<FluentRadio Value="LoadCommitmentOption.Light" Disabled="!RadioCommitmentsEnabled">@(Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Light]) @LoadCommitmentOption.Light</FluentRadio>
+			<FluentRadio Value="LoadCommitmentOption.Normal" Disabled="!RadioCommitmentsEnabled">@(Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Normal]) @LoadCommitmentOption.Normal</FluentRadio>
+			<FluentRadio Value="LoadCommitmentOption.Heavy" Disabled="!RadioCommitmentsEnabled">@(Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Heavy]) @LoadCommitmentOption.Heavy</FluentRadio>
+			<FluentRadio Value="LoadCommitmentOption.Encumbered" Disabled="!RadioCommitmentsEnabled">@(Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Encumbered]) @LoadCommitmentOption.Encumbered</FluentRadio>
 		</FluentRadioGroup>
-		@if (CommitmentLocked)
+		@if (Gear.IsCommitmentLocked)
 		{
-			<FluentButton Class="min-button" Appearance="Appearance.Accent" OnClick="() => { ClearCommitments(); CommitmentLocked = false; }">Reset</FluentButton>
+			<FluentButton Class="min-button" Appearance="Appearance.Accent" OnClick="() => { ClearCommitments(); Gear.IsCommitmentLocked = false; }">Reset</FluentButton>
 		}
 		else
 		{
-			<FluentButton Class="min-button" IconStart="new Icons.Filled.Size20.LockClosed()" Appearance="Appearance.Accent" OnClick="() => CommitmentLocked = true">Commit</FluentButton>
+			<FluentButton Class="min-button" IconStart="new Icons.Filled.Size20.LockClosed()" Appearance="Appearance.Accent" OnClick="() => Gear.IsCommitmentLocked = true">Commit</FluentButton>
 		}
 	</div>
+	@if (IsFixMode)
+	{
+		<div class="gear-row">
+			<div class="commitment-edit">
+				<FluentNumberField Class="gear-commitment-edit" Style="width: 70px;" @bind-Value="Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Light]" Label="@($"{LoadCommitmentOption.Light}:")" Min="0" Max="99" />
+			</div>
+			<div class="commitment-edit">
+				<FluentNumberField Class="gear-commitment-edit" Style="width: 70px;" @bind-Value="Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Normal]" Label="@($"{LoadCommitmentOption.Normal}:")" Min="0" Max="99" />
+			</div>
+		</div>
+		<div class="gear-row">
+			<div class="commitment-edit">
+				<FluentNumberField Class="gear-commitment-edit" Style="width: 70px;" @bind-Value="Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Heavy]" Label="@($"{LoadCommitmentOption.Heavy}:")" Min="0" Max="99" />
+			</div>
+			<div class="commitment-edit">
+				<FluentNumberField Class="gear-commitment-edit" Style="width: 70px;" @bind-Value="Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Encumbered]" Label="@($"{LoadCommitmentOption.Encumbered}:")" Min="0" Max="99" />
+			</div>
+		</div>
+	}
 	<h5>Loadout</h5>
 	<div>
 		@if (IsFixMode)
@@ -54,7 +73,7 @@
 		{
 			@if (!IsFixMode)
 			{
-				<FluentButton Class="gear-button" Appearance="Appearance.Outline" IconStart="new Icons.Regular.Size20.AddCircle()" Disabled="!Character.CanCommitGear(item) || !CommitmentLocked" OnClick="() => CommitGear(item)" Title="@($"Commit {@item.Display()}")">@item.Display()</FluentButton>
+				<FluentButton Class="gear-button" Appearance="Appearance.Outline" IconStart="new Icons.Regular.Size20.AddCircle()" Disabled="!Character.CanCommitGear(item) || !Gear.IsCommitmentLocked" OnClick="() => CommitGear(item)" Title="@($"Commit {@item.Display()}")">@item.Display()</FluentButton>
 			}
 			else
 			{
