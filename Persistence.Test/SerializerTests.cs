@@ -187,6 +187,25 @@ public class SerializerTests
 	}
 
 	[Fact]
+	public void Serializer_Deserializes_GearCommitments()
+	{
+		var migratedJson = this.migrationHandler.Migrate(JsonJunk.SpiderJsonV1);
+		var character = this.serializer.Deserialize(migratedJson);
+
+		character.Should().NotBeNull();
+		character.Gear.Commitment.Commitment = LoadCommitmentOption.Light;
+		character.Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Light] = 5;
+		character.Gear.IsCommitmentLocked = true;
+
+		var json = this.serializer.Serialize(character);
+		character = this.serializer.Deserialize(json);
+
+		character.Gear.Commitment.Commitment.Should().Be(LoadCommitmentOption.Light);
+		character.Gear.Commitment.MaxBulkByCommitmentOption[LoadCommitmentOption.Light].Should().Be(5);
+		character.Gear.IsCommitmentLocked.Should().BeTrue();
+	}
+
+	[Fact]
 	public void Serializer_Deserializes_RealCharacter()
 	{
 		var migratedJson = this.migrationHandler.Migrate(JsonJunk.SpiderJsonV1);

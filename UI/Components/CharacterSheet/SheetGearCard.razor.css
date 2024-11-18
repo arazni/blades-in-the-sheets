@@ -17,3 +17,13 @@
 	row-gap: 10px;
 	margin-left: -5px;
 }
+
+.commitment-edit {
+	flex-grow: 1;
+}
+
+::deep .gear-commitment-edit {
+	min-height: 40px;
+	width: 70px;
+	padding-left: 5px;
+}

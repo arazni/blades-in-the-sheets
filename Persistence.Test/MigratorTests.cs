@@ -20,7 +20,15 @@ public class MigratorTests
 	{
 		var output = this.migrator.Migrate(JsonJunk.SpiderJsonV1);
 		output.Should().NotContainAny("\"Source\":", "\"PlaybookDefault\":");
-		output.Should().ContainAll("\"ActionsByName\":", "\"AttributesByName\":", "\"Version\": 2");
+		output.Should().ContainAll
+		(
+			"\"ActionsByName\":",
+			"\"AttributesByName\":",
+			"\"Version\": 3",
+			"\"Language\": \"English\"",
+			"\"MaxBulkByCommitmentOption\"",
+			"\"IsCommitmentLocked\": false"
+		);
 		this.serializer.Deserialize(output);
 	}
 

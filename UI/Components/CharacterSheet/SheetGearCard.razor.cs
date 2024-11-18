@@ -23,9 +23,7 @@ public partial class SheetGearCard
 
 	public bool IsFixMode { get; set; }
 
-	bool CommitmentLocked { get; set; } = false;
-
-	bool RadioCommitmentsEnabled => IsFixMode || !CommitmentLocked;
+	bool RadioCommitmentsEnabled => IsFixMode || !Gear.IsCommitmentLocked;
 
 	public void CommitGear(GearItem item)
 	{
