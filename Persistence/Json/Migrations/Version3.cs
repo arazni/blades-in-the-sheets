@@ -23,6 +23,7 @@ internal static class Version3
 	public static JObject Upgrade(JObject jObject)
 	{
 		AddProperty(jObject, "$.Gear", "IsCommitmentLocked", false);
+		AddProperty(jObject, "$.Monitor.Stress", "MaxStress", 9);
 
 		AddObject(jObject, "$.Gear.Commitment", "MaxBulkByCommitmentOption", new
 		{

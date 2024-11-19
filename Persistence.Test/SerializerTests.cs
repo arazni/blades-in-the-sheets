@@ -143,6 +143,25 @@ public class SerializerTests
 	}
 
 	[Fact]
+	public async Task Serializer_Serializes_MonitorStress()
+	{
+		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
+		model.Should().NotBeNull();
+		model.Monitor.Stress.CurrentStress = 3;
+		model.Monitor.Stress.MaxStress = 10;
+
+		var json = this.serializer.Serialize(model);
+		json.Should().Contain("\"CurrentStress\": 3");
+		json.Should().Contain("\"MaxStress\": 10");
+
+		var character = this.serializer.Deserialize(json);
+
+		character.Should().NotBeNull();
+		model.Monitor.Stress.CurrentStress.Should().Be(3);
+		model.Monitor.Stress.MaxStress.Should().Be(10);
+	}
+
+	[Fact]
 	public async Task Serializer_Serializes_RolloverClock()
 	{
 		var model = await this.characterCoordinator.InitializeCharacter(Constants.Games.BladesInTheDark, Constants.Languages.English, PlaybookOption.Leech.ToString());
