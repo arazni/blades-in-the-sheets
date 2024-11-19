@@ -4,7 +4,7 @@ namespace Models.Characters;
 
 public class MonitorStress
 {
-	private readonly BoundedInteger currentStress = new(0, MaxStress);
+	private readonly BoundedInteger currentStress = new(DefaultMaxStress);
 
 	public int CurrentStress
 	{
@@ -12,5 +12,11 @@ public class MonitorStress
 		set => this.currentStress.Value = value;
 	}
 
-	public static int MaxStress => 9;
+	public int MaxStress
+	{
+		get => this.currentStress.Max;
+		set => this.currentStress.Max = value;
+	}
+
+	public const int DefaultMaxStress = 9;
 }

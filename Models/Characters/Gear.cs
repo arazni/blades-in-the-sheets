@@ -23,6 +23,8 @@ public class Gear
 
 	public int MaxBulk => Commitment.MaxBulk;
 
+	public bool IsCommitmentLocked { get; set; } = false;
+
 	internal int AvailableBulk => Commitment.MaxBulk - Loadout.Sum(i => i.Bulk);
 
 	public bool CanAddAvailableItem(string itemName) => !AvailableGearByName.ContainsKey(itemName);

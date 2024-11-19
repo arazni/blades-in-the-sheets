@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using Models.Characters;
 using Models.Common;
 using UI.Services;
 using Monitor = Models.Characters.Monitor;
@@ -17,7 +16,7 @@ public partial class SheetMonitorTrauma
 	public IReadOnlyCollection<string> TraumaOptions { get; set; } = Array.Empty<string>();
 
 	bool DisableTraumaSelect =>
-		Monitor.Stress.CurrentStress != MonitorStress.MaxStress
+		Monitor.Stress.CurrentStress < Monitor.Stress.MaxStress
 		&& !IsFixMode
 		|| Monitor.Trauma.IsRetired;
 

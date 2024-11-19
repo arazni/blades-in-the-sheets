@@ -4,7 +4,7 @@ namespace Persistence.Json.Migrations;
 
 public interface IMigrationHandler
 {
-	const int MaxVersion = 2;
+	const int MaxVersion = 3;
 
 	string Migrate(string json);
 
