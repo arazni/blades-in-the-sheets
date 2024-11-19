@@ -19,6 +19,7 @@
 		<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.7.2" />
 		<PackageReference Include="PublishSPAforGitHubPages.Build" Version="2.2.0" />
 		<PackageReference Include="Toolbelt.Blazor.HotKeys2" Version="4.1.0.1" />
+		<PackageReference Include="System.Text.Json" Version="8.0.5" />
 	</ItemGroup>
 
 	<ItemGroup>
