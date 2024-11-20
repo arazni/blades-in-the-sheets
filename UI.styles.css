@@ -45,6 +45,16 @@
 	row-gap: 10px;
 	margin-left: -5px;
 }
+
+.commitment-edit[b-9aktt7y38l] {
+	flex-grow: 1;
+}
+
+[b-9aktt7y38l] .gear-commitment-edit {
+	min-height: 40px;
+	width: 70px;
+	padding-left: 5px;
+}
 /* /Components/CharacterSheet/SheetRolodexCard.razor.rz.scp.css */
 [b-hg0xduhl71] .contact-button {
 	width: 40px;
