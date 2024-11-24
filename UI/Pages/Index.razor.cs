@@ -105,7 +105,7 @@ public partial class Index
 	{
 		var buffer = new byte[fileEvent.Size];
 		await using var fs = fileEvent.Stream;
-		await fs!.ReadAsync(buffer);
+		await fs!.ReadExactlyAsync(buffer);
 		var json = Encoding.Unicode.GetString(buffer);
 		await Storage.PutFile(json);
 	}

@@ -60,9 +60,10 @@ public partial class CharacterSheet
 		isSaving = false;
 	}
 
-	public void Dispose()
+	public async ValueTask DisposeAsync()
 	{
-		this.hotKeysContext?.Dispose();
+		if (this.hotKeysContext != null)
+			await this.hotKeysContext.DisposeAsync();
 		GC.SuppressFinalize(this);
 	}
 }
