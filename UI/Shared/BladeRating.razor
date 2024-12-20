@@ -13,8 +13,8 @@
 			}
 		</FluentSlider>
 	}
-	else foreach(var i in Enumerable.Range(0, MaxValue))
+	else
 	{
-		<BladeRatingCheckbox @ref="Buttons[i]" AriaLabel="@CheckboxLabel(i)" Value="ButtonsAreChecked[i]" ValueChanged="_ => CheckboxChanged(i)" Class="@CheckboxClass(i)" ReadOnly="ReadOnly" />
+		<FluentRating Class="blade-rating" Value="Value" ValueChanged="SliderChanged" AllowReset="true" Max="MaxValue" ReadOnly="ReadOnly" IconFilled="new Icons.Filled.Size20.CheckboxChecked()" IconOutline="new Icons.Regular.Size20.CheckboxUnchecked()" AriaLabel="@CheckboxAriaLabelSuffix" IconWidth="28px" />
 	}
 </div>

@@ -4,10 +4,14 @@
 	gap: 5px;
 }
 
-::deep .blade-rating-box {
-	display: inline-grid;
+::deep .blade-rating > svg:nth-child(3n) {
+	margin-right: 10px;
 }
 
-::deep .spacing {
-	margin-right: 10px;
+::deep .blade-rating {
+	display: inline-flex;
+}
+
+::deep .blade-rating > svg {
+	margin-left: -4px;
 }
