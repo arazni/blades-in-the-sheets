@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Models.Common;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Persistence.Json.Migrations;
@@ -53,6 +54,17 @@ internal static class VersionFunctions
 		toReplace.Replace(new JProperty(propertyName, propertyValue));
 	}
 
+	internal static void DefaultPropertyValue(JObject json, string path, string propertyName, string propertyValue)
+	{
+		var pathIncludingProperty = $"{path}.{propertyName}";
+
+		var toGiveDefault = json.SelectToken(pathIncludingProperty)?.Parent as JProperty
+			?? throw Error(pathIncludingProperty);
+
+		if (!toGiveDefault.Value.Value<string>().HasInk())
+			toGiveDefault.Replace(new JProperty(propertyName, propertyValue));
+	}
+
 	internal static JsonException Error(string jPath) =>
-		new($"Cannot migrate to v2. Cannot find JPATH {jPath}");
+		new($"Cannot migrate. Cannot find JPATH {jPath}");
 }

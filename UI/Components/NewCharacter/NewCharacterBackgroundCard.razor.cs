@@ -15,4 +15,12 @@ public partial class NewCharacterBackgroundCard
 	string Example() =>
 		BackgroundSettings.FirstOrDefault(b => b.Name == Background.Name)?.Example
 		?? string.Empty;
+
+	protected override void OnParametersSet()
+	{
+		if (BackgroundSettings.Any())
+			Background.Name = BackgroundSettings.First().Name;
+
+		base.OnParametersSet();
+	}
 }

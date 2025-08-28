@@ -26,7 +26,8 @@ public class MigrationHandler : IMigrationHandler
 
 		// Chain future migrations here
 		var final = jsonVersion.MigrateV2()
-			.MigrateV3();
+			.MigrateV3()
+			.MigrateV4();
 
 		return final.Json.ToString();
 	}
