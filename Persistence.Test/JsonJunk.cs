@@ -310,4 +310,330 @@ public class JsonJunk
 	""Notebook"": """"
 }
 ";
+
+	public const string FrenchMissingBackgroundV3 = """
+{
+  "Id": "546d8104-b3e9-4c2b-8742-3f6a68914290",
+  "GameName": "Blades in the Dark",
+  "Language": "Français",
+  "Version": 3,
+  "Dossier": {
+    "Name": "ti",
+    "CrewId": "",
+    "Alias": "ta",
+    "Look": "spa",
+    "Notes": "",
+    "Background": {
+      "Name": "",
+      "Description": "no"
+    },
+    "Heritage": {
+      "Name": "Skovlan",
+      "Description": "no"
+    },
+    "Vice": {
+      "Name": "Plaisir",
+      "Description": "noo"
+    }
+  },
+  "Monitor": {
+    "Stress": {
+      "CurrentStress": 8,
+      "MaxStress": 9
+    },
+    "Trauma": {
+      "TraumaSet": []
+    },
+    "Harm": {
+      "BoundedLesserHarms": {
+        "Items": [
+          null,
+          null
+        ]
+      },
+      "BoundedModerateHarms": {
+        "Items": [
+          null,
+          null
+        ]
+      },
+      "BoundedSevereHarms": {
+        "Items": [
+          null
+        ]
+      },
+      "BoundedFatalHarms": {
+        "Items": [
+          null
+        ]
+      },
+      "HealingClock": {
+        "Time": 0,
+        "Rollover": 0,
+        "Size": 4
+      }
+    }
+  },
+  "Talent": {
+    "AttributesByName": {
+      "Perception": {
+        "ActionsByName": {
+          "Chasser": {
+            "MaxRating": 4,
+            "Rating": 2
+          },
+          "Etudier": {
+            "MaxRating": 4,
+            "Rating": 2
+          },
+          "Observer": {
+            "MaxRating": 4,
+            "Rating": 1
+          },
+          "Bricoler": {
+            "MaxRating": 4,
+            "Rating": 0
+          }
+        },
+        "Experience": {
+          "Points": 0,
+          "MaxPoints": 6
+        }
+      },
+      "Adresse": {
+        "ActionsByName": {
+          "Manipuler": {
+            "MaxRating": 4,
+            "Rating": 0
+          },
+          "Infiltrer": {
+            "MaxRating": 4,
+            "Rating": 0
+          },
+          "Affronter": {
+            "MaxRating": 4,
+            "Rating": 1
+          },
+          "Démolir": {
+            "MaxRating": 4,
+            "Rating": 0
+          }
+        },
+        "Experience": {
+          "Points": 0,
+          "MaxPoints": 6
+        }
+      },
+      "Volonté": {
+        "ActionsByName": {
+          "Invoquer": {
+            "MaxRating": 4,
+            "Rating": 0
+          },
+          "Commander": {
+            "MaxRating": 4,
+            "Rating": 1
+          },
+          "Conspirer": {
+            "MaxRating": 4,
+            "Rating": 0
+          },
+          "Influencer": {
+            "MaxRating": 4,
+            "Rating": 0
+          }
+        },
+        "Experience": {
+          "Points": 0,
+          "MaxPoints": 6
+        }
+      }
+    }
+  },
+  "Playbook": {
+    "AbilitiesByName": {
+      "Survivant": {
+        "Name": "Survivant",
+        "Description": "Que ce soit grâce à l’expérience chèrement acquise ou à un rituel occulte, vous êtes immunisé contre les miasmes empoisonnés des terres mortes, ce qui vous permet de survivre en vous nourrissant de l’étrange faune et flore qu’on peut y trouver. Vous gagnez en outre +1 case de stress.",
+        "TimesTaken": 1
+      },
+      "Chasseur spectral": {
+        "Name": "Chasseur spectral",
+        "Description": "Votre animal de compagnie est imprégné d’énergie spirituelle. Cela le rend puissant lorsqu’il piste ou combat des entités surnaturelles, et lui confère une capacité occulte au choix : forme spectrale, lien mental ou rapide comme l’éclair. Choisissez cette capacité plusieurs fois pour conférer une capacité occulte supplémentaire à votre animal.",
+        "TimesTaken": 1
+      }
+    },
+    "Experience": {
+      "Points": 8,
+      "MaxPoints": 8
+    },
+    "Name": "Traqueur (Hound)"
+  },
+  "Gear": {
+    "LoadoutByName": {},
+    "AvailableGearByName": {
+      "Paire de pistolets de qualité": {
+        "Bulk": 1,
+        "Name": "Paire de pistolets de qualité"
+      },
+      "Fusil long de qualité": {
+        "Bulk": 2,
+        "Name": "Fusil long de qualité"
+      },
+      "Cartouches électroplasmiques": {
+        "Bulk": 1,
+        "Name": "Cartouches électroplasmiques"
+      },
+      "Animal dressé pour la chasse": {
+        "Bulk": 0,
+        "Name": "Animal dressé pour la chasse"
+      },
+      "Longue-vue": {
+        "Bulk": 1,
+        "Name": "Longue-vue"
+      },
+      "Une lame ou deux": {
+        "Bulk": 1,
+        "Name": "Une lame ou deux"
+      },
+      "Couteaux de lancer": {
+        "Bulk": 1,
+        "Name": "Couteaux de lancer"
+      },
+      "Pistolet": {
+        "Bulk": 1,
+        "Name": "Pistolet"
+      },
+      "Second pistolet": {
+        "Bulk": 1,
+        "Name": "Second pistolet"
+      },
+      "Arme lourde": {
+        "Bulk": 2,
+        "Name": "Arme lourde"
+      },
+      "Arme inhabituelle": {
+        "Bulk": 1,
+        "Name": "Arme inhabituelle"
+      },
+      "Armure": {
+        "Bulk": 2,
+        "Name": "Armure"
+      },
+      "+Lourde": {
+        "Bulk": 3,
+        "Name": "+Lourde"
+      },
+      "Matériel de cambriolage": {
+        "Bulk": 1,
+        "Name": "Matériel de cambriolage"
+      },
+      "Matériel d’escalade": {
+        "Bulk": 2,
+        "Name": "Matériel d’escalade"
+      },
+      "Accessoires occultes": {
+        "Bulk": 1,
+        "Name": "Accessoires occultes"
+      },
+      "Documents": {
+        "Bulk": 1,
+        "Name": "Documents"
+      },
+      "Matériel de faussaire": {
+        "Bulk": 1,
+        "Name": "Matériel de faussaire"
+      },
+      "Outils de démolition": {
+        "Bulk": 2,
+        "Name": "Outils de démolition"
+      },
+      "Outils de bricolage": {
+        "Bulk": 1,
+        "Name": "Outils de bricolage"
+      },
+      "Lanterne": {
+        "Bulk": 1,
+        "Name": "Lanterne"
+      },
+      "Amulette contre les esprits": {
+        "Bulk": 0,
+        "Name": "Amulette contre les esprits"
+      },
+      "1 Coin": {
+        "Bulk": 1,
+        "Name": "1 Coin"
+      },
+      "2 Coins": {
+        "Bulk": 2,
+        "Name": "2 Coins"
+      },
+      "3 Coins": {
+        "Bulk": 3,
+        "Name": "3 Coins"
+      },
+      "4 Coins": {
+        "Bulk": 4,
+        "Name": "4 Coins"
+      }
+    },
+    "Commitment": {
+      "MaxBulkByCommitmentOption": {
+        "None": 0,
+        "Light": 3,
+        "Normal": 5,
+        "Heavy": 6,
+        "Encumbered": 9
+      },
+      "Commitment": 0
+    },
+    "IsCommitmentLocked": false
+  },
+  "Fund": {
+    "Satchel": {
+      "Coins": 0
+    },
+    "Stash": {
+      "Stash": 0
+    }
+  },
+  "Rolodex": {
+    "Friends": [
+      {
+        "Entry": "Steiner, un assassin",
+        "Closeness": 0
+      },
+      {
+        "Entry": "Celene, une sentinelle",
+        "Closeness": 2
+      },
+      {
+        "Entry": "Melvir, un médecin",
+        "Closeness": 0
+      },
+      {
+        "Entry": "Veleris, un espion",
+        "Closeness": 1
+      },
+      {
+        "Entry": "Casta, une chasseuse de prime",
+        "Closeness": 0
+      }
+    ]
+  },
+  "Session": {
+    "PlaybookExpressions": 0,
+    "CharacterExpressions": 0,
+    "StruggleExpressions": 0
+  },
+  "Notebook": ""
+}
+""";
+
+	public static string FrenchAlternateBackgroundV3(string value) =>
+		FrenchMissingBackgroundV3.Replace("\"Name\": \"\"", $"\"Name\": \"{value}\"");
+
+	public static string LazyEnglishAlternateBackgroundV3(string value) =>
+		FrenchMissingBackgroundV3.Replace("\"Language\": \"Français\"", "\"Language\": \"English\"")
+			.Replace("\"Name\": \"\"", $"\"Name\": \"{value}\"");
 }

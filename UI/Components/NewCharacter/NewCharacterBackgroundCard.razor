@@ -8,7 +8,7 @@
 	</div>
 	<div class="vertical-stack card-body">
 		<div>
-			<FluentSelect TOption="BackgroundSetting" Items="BackgroundSettings" @bind-Value="Background.Name" OptionValue="i => i.Name" OptionText="@(i => $"{i.Name} - {i.Example}")" OptionSelected="i => i == BackgroundSettings.First()" Label="Background" Id="select-background" Class="big-select" />
+			<FluentSelect TOption="BackgroundSetting" Items="BackgroundSettings" @bind-Value="Background.Name" OptionValue="i => i.Name" OptionText="@(i => $"{i.Name} - {i.Example}")" Label="Background" Id="select-background" Class="big-select" />
 		</div>
 		<p>@Example()</p>
 		<div>

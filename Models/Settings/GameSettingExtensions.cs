@@ -33,7 +33,7 @@ public static class GameSettingExtensions
 	public static BackgroundSetting GetBackground(this GameSetting gameSetting, string backgroundName) =>
 		gameSetting == EmptyGameSetting.Game() ? EmptyGameSetting.Background()
 		: gameSetting.Backgrounds.FirstOrDefault(h => h.Name == backgroundName)
-			?? throw new ArgumentOutOfRangeException(nameof(backgroundName), $"{backgroundName} is not one of the recognized heritages in the settings for {gameSetting.Name}: {gameSetting.Backgrounds.Join(", ")}");
+			?? throw new ArgumentOutOfRangeException(nameof(backgroundName), $"{backgroundName} is not one of the recognized backgrounds in the settings for {gameSetting.Name}: {gameSetting.Backgrounds.Join(", ")}");
 
 	public static int DefaultActionPoints(this GameSetting gameSetting, string playbookName, string actionName) =>
 		gameSetting.GetPlaybookSetting(playbookName)

@@ -1,6 +1,5 @@
 ﻿using Models.Common;
 using Models.Settings;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using static Models.Legacy.RetiredOptions;
 using static Persistence.Json.Migrations.IMigrationHandler;
@@ -107,8 +106,10 @@ internal static class Version2
 
 	private static void ReplaceTraumaOption(JObject json)
 	{
-		var optionProperty = json.SelectToken("$.Monitor.Trauma.TraumaSet") as JArray
-			?? throw new JsonException("Cannot migrate to v2. Cannot find JPATH $.Monitor.Trauma.TraumaSet");
+		const string path = "$.Monitor.Trauma.TraumaSet";
+
+		var optionProperty = json.SelectToken(path) as JArray
+			?? throw Error(path);
 
 		var children = optionProperty.Children()
 			.Select(c => ((TraumaOption)c.Value<int>()).ToString())
