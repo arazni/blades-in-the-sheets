@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Models.Characters;
+using Models.Common;
 using Models.Settings;
 
 namespace UI.Components.NewCharacter;
@@ -10,6 +11,14 @@ public partial class NewCharacterViceCard
 
 	[Parameter, EditorRequired]
 	public ViceSetting[] ViceSettings { get; set; } = EmptyGameSetting.Vices();
+
+	protected override void OnParametersSet()
+	{
+		if (ViceSettings.Any() && !Vice.Name.HasInk())
+			Vice.Name = ViceSettings.First().Name;
+
+		base.OnParametersSet();
+	}
 
 	bool HasExamples => Examples().Any();
 

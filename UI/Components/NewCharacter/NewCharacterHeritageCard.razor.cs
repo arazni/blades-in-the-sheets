@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Models.Characters;
+using Models.Common;
 using Models.Settings;
 
 namespace UI.Components.NewCharacter;
@@ -16,7 +17,7 @@ public partial class NewCharacterHeritageCard
 
 	protected override void OnParametersSet()
 	{
-		if (HeritageSettings.Any())
+		if (HeritageSettings.Any() && !Heritage.Name.HasInk())
 			Heritage.Name = HeritageSettings.First().Name;
 
 		base.OnParametersSet();
