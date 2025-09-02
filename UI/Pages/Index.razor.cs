@@ -133,10 +133,6 @@ public partial class Index
 		return vCharacter.Blurb(gameNameMatches.First());
 	}
 
-	string DownloadModeLabel =>
-		IsDownloadMode ? "Disable download mode"
-		: "Enable download mode";
-
 	static string DownloadCharacterLabel(string characterName) =>
 		$"Export {characterName}";
 
