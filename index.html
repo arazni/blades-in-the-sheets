@@ -19,22 +19,35 @@
 
 <body>
 	<div id="app">
-		<p>Version 18: Fix a bug where the default of Academic/Académique would not always save correctly, corrupting new characters.</p>
+		<p>Version 19: Button to copy error details and send me an email when encountering unhandled errors.</p>
 		<p>Loading Blades in the Sheets.</p>
 		<p>A Blades in the Dark character sheet app for managing your scoundrels...</p>
 		<p>Recent changes:</p>
+		<p>Version 18: Fix a bug where the default of Academic/Académique would not always save correctly, corrupting new characters.</p>
 		<p>Version 17: Upgrade the application's framework.</p>
 		<p>Version 16: When in Fix Mode, you can edit the max bulk per loadout option.</p>
 		<p>Version 15: When selecting a Veteran ability, list options from other playbooks and support custom abilities.</p>
 	</div>
 
-	<div id="blazor-error-ui">
-		An unhandled error has occurred.
+	<div id="blazor-error-ui" data-error="">
+		<p>An unhandled error has occurred. Please click the button below to copy the error details, then email me at <a href="mailto:arazni+blades@proton.me?subject=Blades in the Sheets Error&body=Copy the error details here">arazni+blades@proton.me</a>.</p>
+		<button onclick="copyErrorDetails()">Copy Error Details</button>
 		<a href="" class="reload">Reload</a>
 		<a class="dismiss">🗙</a>
 	</div>
 	<script src="_framework/blazor.webassembly.js" autostart="false"></script>
 	<script>navigator.serviceWorker.register('service-worker.js');</script>
+	<script>
+		window.bladesStackTrace = (utf8bytes) => {
+			const utf8 = new TextDecoder();
+			const trace = utf8.decode(utf8bytes);
+			document.getElementById("blazor-error-ui").dataset.error = trace;
+		}
+
+		function copyErrorDetails() {
+			navigator.clipboard.writeText(document.getElementById("blazor-error-ui").dataset.error);
+		}
+	</script>
     <script src="brotliloader.min.js" type="module"></script>
 </body>
 
