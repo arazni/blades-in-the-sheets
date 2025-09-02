@@ -2,8 +2,10 @@ using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.FluentUI.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Persistence.Json;
 using Persistence.Json.Migrations;
+using System.Text;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 using UI;
 using UI.Services;
@@ -29,8 +31,22 @@ builder.Services.AddScoped<IAccessibilitySettingService, AccessibilitySettingSer
 builder.Services.AddSingleton<SheetJank>();
 builder.Services.AddSingleton<CreationJank>();
 
+var jankyErrorProvider = new InterceptErrorProvider();
+builder.Logging.AddProvider(jankyErrorProvider);
+
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddHotKeys2();
 
-await builder.Build().RunAsync();
+var host = builder.Build();
+
+// https://ben-5.azurewebsites.net/2024/4/17/display-unhandled-client-exceptions-with-blazor/
+jankyErrorProvider.Intercept += async exception =>
+{
+	var jSRuntime = host.Services.GetRequiredService<IJSRuntime>();
+
+	await jSRuntime.InvokeVoidAsync("bladesStackTrace", Encoding.UTF8.GetBytes($"{exception.Message}: {exception.StackTrace!}"));
+};
+
+await host.RunAsync();
+
