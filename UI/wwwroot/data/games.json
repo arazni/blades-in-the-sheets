@@ -13,5 +13,10 @@
 		"Name": "Blades in the Dark",
 		"Stem": "français-blades-in-the-dark",
 		"Language": "Français"
+	},
+	{
+		"Name": "Клинки во тьме",
+		"Stem": "rus-blades-in-the-dark",
+		"Language": "Русский"
 	}
 ]
