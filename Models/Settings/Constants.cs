@@ -13,6 +13,7 @@ public static class Constants
 	{
 		public const string English = "English";
 		public const string French = "Français";
+		public const string Russian = "Русский";
 	}
 
 	public static class DefaultNames
