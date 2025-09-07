@@ -6,6 +6,8 @@ I made a character sheet web app for Blades in the Dark. It now also supports Sc
 
 I'm not a UI designer by any stretch, just a full stack dev, so it isn't exactly the prettiest site, but it works. I designed it with the intention of my friends at the table using their phones to access the app, but it is responsive to non-mobile screens as well.
 
+Want to contribute? Check out [CONTRIBUTE.md](/blob/main/CONTRIBUTE.md).
+
 | ![home-page.png](https://user-images.githubusercontent.com/130337624/230923924-135ab590-0c84-4148-be60-f2a27cac7923.png) | 
 |:--:| 
 | The home page |
