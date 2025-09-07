@@ -14,7 +14,6 @@
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.10.4" />
 		<PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.10.4" />
 		<PackageReference Include="PublishSPAforGitHubPages.Build" Version="3.0.0" />
