@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "UI",
   "resources": {
-    "hash": "sha256-xN3CPkaUeSmscKjDWYbiSIeg0C8pr4+cKihktai4PzY=",
+    "hash": "sha256-xAQkOcSOuEPnThlCZBJARI3BctBZLMuipxkA+dRMtE4=",
     "fingerprinting": {
       "Blazored.LocalStorage.aspas9o5sr.wasm": "Blazored.LocalStorage.wasm",
       "FluentAssertions.sjthra2ptd.wasm": "FluentAssertions.wasm",
@@ -23,10 +23,10 @@
       "Microsoft.FluentUI.AspNetCore.Components.o00w2q998x.wasm": "Microsoft.FluentUI.AspNetCore.Components.wasm",
       "Microsoft.JSInterop.ykf6i1s2y1.wasm": "Microsoft.JSInterop.wasm",
       "Microsoft.JSInterop.WebAssembly.heoad7mujs.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
-      "Models.ts0a62rloe.wasm": "Models.wasm",
+      "Models.7eadtxfqnx.wasm": "Models.wasm",
       "netstandard.m8qrslndeu.wasm": "netstandard.wasm",
       "Newtonsoft.Json.q76kvjkd82.wasm": "Newtonsoft.Json.wasm",
-      "Persistence.g29f6j092u.wasm": "Persistence.wasm",
+      "Persistence.43pdimtj32.wasm": "Persistence.wasm",
       "System.Collections.Concurrent.i8lk21h5xn.wasm": "System.Collections.Concurrent.wasm",
       "System.Collections.Immutable.ur8y23ndnh.wasm": "System.Collections.Immutable.wasm",
       "System.Collections.NonGeneric.asvq50y63e.wasm": "System.Collections.NonGeneric.wasm",
@@ -79,9 +79,9 @@
       "System.Xml.XDocument.iol40e38de.wasm": "System.Xml.XDocument.wasm",
       "System.Xml.XmlSerializer.ci9p20i03d.wasm": "System.Xml.XmlSerializer.wasm",
       "Toolbelt.Blazor.HotKeys2.yubrgxeypw.wasm": "Toolbelt.Blazor.HotKeys2.wasm",
-      "UI.np6pd00b2u.wasm": "UI.wasm",
+      "UI.9wu7svrt94.wasm": "UI.wasm",
       "dotnet.native.qum1p1g1mk.js": "dotnet.native.js",
-      "dotnet.native.5swv8yszp7.wasm": "dotnet.native.wasm",
+      "dotnet.native.g2xqppl9n7.wasm": "dotnet.native.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.runtime.ew19f13umk.js": "dotnet.runtime.js"
     },
@@ -92,7 +92,7 @@
       "dotnet.runtime.ew19f13umk.js": "sha256-Isv/63htfX73xgn3/2cZMtk4S8xBcbmlXRgJMDv4mhI="
     },
     "wasmNative": {
-      "dotnet.native.5swv8yszp7.wasm": "sha256-S/jU1fOhqUTyTsjqPeayH3aK5VOBZlyg2lYyHTsDMYs="
+      "dotnet.native.g2xqppl9n7.wasm": "sha256-GIlCEtISXzbsx7MiLvfuLvXYYUrRo7QpfH3dHF8iICk="
     },
     "coreAssembly": {
       "Blazored.LocalStorage.aspas9o5sr.wasm": "sha256-9j4iJEwca5bjLN0jWGV0/0hXXIig9zItgbG2WbVWRE0=",
@@ -115,10 +115,10 @@
       "Microsoft.FluentUI.AspNetCore.Components.o00w2q998x.wasm": "sha256-GIKSgfHrWBUnQtBj+XbYOq8EbZlufiZHy41i7USi9wM=",
       "Microsoft.JSInterop.ykf6i1s2y1.wasm": "sha256-njULh9eeKEWmYORJaFSJTS5lZpWQ2l4OAOw+d8h7XFg=",
       "Microsoft.JSInterop.WebAssembly.heoad7mujs.wasm": "sha256-99wG3VH14sWkwPaF5rX6YAcJvtAhDuqonwihvj2m5HA=",
-      "Models.ts0a62rloe.wasm": "sha256-c9/3xSia9z+9z/dKN1IGBusLVl4oxC8Jpy/b+Sn9zRg=",
+      "Models.7eadtxfqnx.wasm": "sha256-IbmwySkivXeNFNwRBnGBNta/UC+syNMmRqrxkCgTBOY=",
       "netstandard.m8qrslndeu.wasm": "sha256-aoJlb3GgiZXuVDIwfod16qWjzpVJ/Y6Z29Z4HLQlFpk=",
       "Newtonsoft.Json.q76kvjkd82.wasm": "sha256-dofphMubV0l1oNih+xiZv2dhrTu61+bcw3RIclbVhD0=",
-      "Persistence.g29f6j092u.wasm": "sha256-WPJ2i9QS0bOIMCZ8x7H+zZi/ZTiIwuiOPoHTboj32iQ=",
+      "Persistence.43pdimtj32.wasm": "sha256-QLoPyK4Hy/MiiAflkCYdNOuIQEJAUe5IicigNyXzuJw=",
       "System.Collections.Concurrent.i8lk21h5xn.wasm": "sha256-fiH/yRziKMrAgxFlsrmuAhLLAFpqwgT7NlZE/W1InN4=",
       "System.Collections.Immutable.ur8y23ndnh.wasm": "sha256-6j4KrbeDX2UWMD7tk3EUkKhiezpWYx0sCOv/NB5keiY=",
       "System.Collections.NonGeneric.asvq50y63e.wasm": "sha256-aujzVF6FD9FDkpUkENrGcU/wfYZqSNm1k7MnuxkwMhQ=",
@@ -171,7 +171,7 @@
       "System.Xml.XDocument.iol40e38de.wasm": "sha256-wm78cmVWNkRxaGYF5J2yg5jbuR1qk/2XVrpGxxsjdHA=",
       "System.Xml.XmlSerializer.ci9p20i03d.wasm": "sha256-ZF5bzJ/oImlGUicP20kBlaliqXtpwj+9Mg8b9k69a60=",
       "Toolbelt.Blazor.HotKeys2.yubrgxeypw.wasm": "sha256-NvfSCDkdamHapL2jeOgKVWlJOYFLNoDzRA8/D9JmvVU=",
-      "UI.np6pd00b2u.wasm": "sha256-O9vVfKBsAIIeW+r5/xP981mkKEBryJv4pH4Vw6tuL3k="
+      "UI.9wu7svrt94.wasm": "sha256-KQD6lGx3ExonH8TCvWLry3vIHMtS6nCPMWGv0vpiEqg="
     },
     "assembly": {},
     "libraryInitializers": {

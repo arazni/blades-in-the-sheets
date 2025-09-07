@@ -241,16 +241,16 @@
       "url": "_framework\/Microsoft.JSInterop.ykf6i1s2y1.wasm.br"
     },
     {
-      "hash": "sha256-9TJwFDcf4Ircu3EyhpAv+x2415WvMo4WxKwDm0\/TWVo=",
-      "url": "_framework\/Models.ts0a62rloe.wasm.br"
+      "hash": "sha256-nM88z5YyRnPQfYMW9LMZ06RWiZpQQOGQ8tnYUQ+LZAg=",
+      "url": "_framework\/Models.7eadtxfqnx.wasm.br"
     },
     {
       "hash": "sha256-ZguA0\/PkncTbMyZarC\/eRhJr06Gss4Uw9SBZVK0CWWw=",
       "url": "_framework\/Newtonsoft.Json.q76kvjkd82.wasm.br"
     },
     {
-      "hash": "sha256-9ca8ZC6IyI5pR3QWXnWw3F+sscF4TdFXuhYwRLS210s=",
-      "url": "_framework\/Persistence.g29f6j092u.wasm.br"
+      "hash": "sha256-sQ2Id93FJDlVgt4Ix\/uhzxLo4\/MZ467eEF5q\/VfOERU=",
+      "url": "_framework\/Persistence.43pdimtj32.wasm.br"
     },
     {
       "hash": "sha256-d1ijUTaypb7\/TwkBHmegL3S\/V\/EGfN97rwjhWMANu0c=",
@@ -461,11 +461,11 @@
       "url": "_framework\/Toolbelt.Blazor.HotKeys2.yubrgxeypw.wasm.br"
     },
     {
-      "hash": "sha256-\/X0\/T3cAo+P+dujzp6ADju7x6vHwCkxBkV7RPV1WBUc=",
-      "url": "_framework\/UI.np6pd00b2u.wasm.br"
+      "hash": "sha256-B0V3Mr9yz\/0OK+KJWUvFq24xNNN+xOVkEuZvi8r5xD4=",
+      "url": "_framework\/UI.9wu7svrt94.wasm.br"
     },
     {
-      "hash": "sha256-U1\/mKsWc+L3vDyxuJmAt50nC2y7F1owisnlTPBZkMuU=",
+      "hash": "sha256-xx0lP8qo67dWHIV\/FYFpOX3iP1QfSHVEXTQlMx9MJUo=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -477,8 +477,8 @@
       "url": "_framework\/dotnet.js"
     },
     {
-      "hash": "sha256-p7ez+b4FSeEgdBxZUrylXCXFiKcQ2cbUpmJN5m09ZY0=",
-      "url": "_framework\/dotnet.native.5swv8yszp7.wasm.br"
+      "hash": "sha256-YexnxkKGD9cujupYTchl+3OntjIhip+Yn5E6KoiZyI0=",
+      "url": "_framework\/dotnet.native.g2xqppl9n7.wasm.br"
     },
     {
       "hash": "sha256-8sYhmLwY\/Ns7mzp9uP6nX56olzyHkmpAL+Sf+n9gFpM=",
@@ -549,8 +549,12 @@
       "url": "data\/game-settings-schema.json.br"
     },
     {
-      "hash": "sha256-Lz0daOTavx5zTFnApOwB0xo4yQjwX5++eVXcrYmYNik=",
+      "hash": "sha256-sBtjrdQrlYBc046MFQfLQlThyuIB73ubI9rzJ40U1yc=",
       "url": "data\/games.json.br"
+    },
+    {
+      "hash": "sha256-Z+ndcz3syu2DHzjdBo3VnZhYVs3b8k3BK0aMg4yhTf8=",
+      "url": "data\/rus-blades-in-the-dark.json.br"
     },
     {
       "hash": "sha256-iEVLpHUEgWCFL+RgUOkN8ZPfncn8b5wQENe8CDQ+zTE=",
@@ -569,11 +573,11 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-pqUGsr5uHGmBw8pbYcavQdvInQGLW4eNGnva1DAM3Ic=",
+      "hash": "sha256-dRdGyI+HsUQMfgUBc0ZqIcIxzFDdb\/QaLFOSjRcc+2I=",
       "url": "index.html"
     },
     {
-      "hash": "sha256-TFO\/Z1NLpRwLxs5IGGhRb3eUlVMlil6+nDNU8vzf76k=",
+      "hash": "sha256-2S3dFY+iL163VXbl8qakn\/1YdpQGd\/OtxD5mKhroeN4=",
       "url": "manifest.webmanifest.br"
     },
     {
@@ -585,5 +589,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "ruuEByCj"
+  "version": "ky6Ozjse"
 };
