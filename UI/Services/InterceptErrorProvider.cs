@@ -1,4 +1,7 @@
-﻿namespace UI.Services;
+﻿using Microsoft.JSInterop;
+using System.Text;
+
+namespace UI.Services;
 
 public sealed class InterceptErrorProvider() : ILoggerProvider
 {
@@ -18,6 +21,23 @@ public sealed class InterceptErrorProvider() : ILoggerProvider
 
 			errorProvider.Intercept?.Invoke(exception);
 		}
+	}
+
+	public static async Task SetErrorMessage(IJSRuntime jSRuntime, Exception exception)
+	{
+		StringBuilder message = new(exception.Message);
+		message.AppendLine(exception.StackTrace);
+		var inner = exception.InnerException;
+
+		while (inner != null)
+		{
+			message.AppendLine("INNER: ");
+			message.AppendLine(inner.Message);
+			message.AppendLine(inner.StackTrace);
+			inner = inner.InnerException;
+		}
+
+		await jSRuntime.InvokeVoidAsync("bladesStackTrace", Encoding.UTF8.GetBytes(message.ToString()));
 	}
 }
 
