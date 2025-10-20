@@ -5,9 +5,9 @@ namespace Models.Characters;
 
 public partial class Character // Armor
 {
-	private static readonly string[] StandardArmors = ["Armor", "Armure"];
-	private static readonly string[] HeavyArmors = ["+Heavy", "+Lourde"];
-	private static readonly string[] SpecialArmors = ["special armor", "armure spéciale"];
+	private static readonly string[] StandardArmors = ["Armor", "Armure", "Доспех"];
+	private static readonly string[] HeavyArmors = ["+Heavy", "+Lourde", "+Тяжёлый"];
+	private static readonly string[] SpecialArmors = ["special armor", "armure spéciale", "особая защита", "особую защиту"];
 
 	private bool isStandardArmorUsed;
 	private bool isHeavyArmorUsed;

@@ -5,7 +5,6 @@ using Microsoft.FluentUI.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Persistence.Json;
 using Persistence.Json.Migrations;
-using System.Text;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 using UI;
 using UI.Services;
@@ -45,7 +44,7 @@ jankyErrorProvider.Intercept += async exception =>
 {
 	var jSRuntime = host.Services.GetRequiredService<IJSRuntime>();
 
-	await jSRuntime.InvokeVoidAsync("bladesStackTrace", Encoding.UTF8.GetBytes($"{exception.Message}: {exception.StackTrace!}"));
+	await InterceptErrorProvider.SetErrorMessage(jSRuntime, exception);
 };
 
 await host.RunAsync();

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using static Persistence.Json.Migrations.IMigrationHandler;
 
 namespace Persistence.Json.Migrations;
@@ -25,10 +26,17 @@ public class MigrationHandler : IMigrationHandler
 		);
 
 		// Chain future migrations here
-		var final = jsonVersion.MigrateV2()
+		try
+		{
+			var final = jsonVersion.MigrateV2()
 			.MigrateV3()
 			.MigrateV4();
 
-		return final.Json.ToString();
+			return final.Json.ToString();
+		}
+		catch (JsonException ex)
+		{
+			throw new JsonException($"{ex.Message}{Environment.NewLine}{json}", ex);
+		}
 	}
 }
