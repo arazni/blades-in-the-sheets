@@ -1,7 +1,7 @@
 {
 	"name": "Blades in the Sheets",
 	"short_name": "BitD Sheets",
-	"version": "20.1",
+	"version": "21",
 	"start_url": "./",
 	"display": "standalone",
 	"theme_color": "#776be7ff",

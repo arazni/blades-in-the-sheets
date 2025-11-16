@@ -49,6 +49,27 @@
 			</div>
 		</FluentCard>
 	}
+	@foreach (var error in CharacterErrors)
+	{
+		<FluentCard Class="common-card-style">
+			<div class="card-header">
+				<div class="card-header-left">
+					<h4>Corrupted Character @error.CharacterKey</h4>
+				</div>
+				<div class="card-header-right">
+					<FluentButton Appearance="Appearance.Accent" OnClick="_ => Download(error.CharacterJson, error.CharacterKey)" Class="@DownloadModeClass" aria-label="@DownloadCorruptLabel(error.CharacterKey)">Export</FluentButton>
+					<FluentButton Appearance="Appearance.Accent" OnClick="_ => Delete(error.CharacterKey)" Class="@DeleteModeClass" aria-label="@DeleteCorruptLabel(error.CharacterKey)" BackgroundColor="var(--scare-color)">Delete</FluentButton>
+				</div>
+			</div>
+			<div class="vertical-stack card-body">
+				<p>@error.UserMessage</p>
+				<p>Please click the button below to copy the error details, then email me at <a href="mailto:arazni+blades@proton.me?subject=Blades in the Sheets Error&body=Copy the error details here">arazni+blades@proton.me</a>.</p>
+				<p>After emailing me the copied details, feel free to enable Download Mode and download the corrupted character file for your own purposes, then enable Delete Mode and delete this corrupted character.</p>
+				<p>If you've previously exported this character, you can try importing the character's file again. Changes made between now and when the file was made will be lost, but it's something.</p>
+				<FluentButton Appearance="Appearance.Accent" OnClick="async _ => await CopyError(error)">Copy Error</FluentButton>
+			</div>
+		</FluentCard>
+	}
 	<FluentCard Class="common-card-style">
 		<div class="card-header">
 			<div class="card-header-left">

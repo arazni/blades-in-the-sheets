@@ -26,17 +26,10 @@ public class MigrationHandler : IMigrationHandler
 		);
 
 		// Chain future migrations here
-		try
-		{
-			var final = jsonVersion.MigrateV2()
+		var final = jsonVersion.MigrateV2()
 			.MigrateV3()
 			.MigrateV4();
 
-			return final.Json.ToString();
-		}
-		catch (JsonException ex)
-		{
-			throw new JsonException($"{ex.Message}{Environment.NewLine}{json}", ex);
-		}
+		return final.Json.ToString();
 	}
 }
