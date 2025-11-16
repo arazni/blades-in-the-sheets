@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
 using Models.Characters;
 using Models.Settings;
+using Icons = Microsoft.FluentUI.AspNetCore.Components.Icons;
 
 namespace UI.Components.CharacterSheet;
 public partial class SheetRolodexCard
