@@ -8,14 +8,10 @@ export function raiseFluentInputFile(fileInputId) {
 export function attachClickHandler(buttonId, fileInputId) {
     var button = document.getElementById(buttonId);
     var fileInput = document.getElementById(fileInputId);
-
-    if (button && fileInput && !button.fluentuiBlazorFileInputHandlerAttached) {
-
+    if (button && fileInput) {
         button.addEventListener("click", function (e) {
             fileInput.click();
         });
-
-        button.fluentuiBlazorFileInputHandlerAttached = true;
     }
 }
 
@@ -57,20 +53,20 @@ export function initializeFileDropZone(containerElement, inputFile) {
     //}
 
     // Register all events
-    containerElement?.addEventListener("dragenter", onDragHover);
-    containerElement?.addEventListener("dragover", onDragHover);
-    containerElement?.addEventListener("dragleave", onDragLeave);
-    containerElement?.addEventListener("drop", onDrop);
-    //containerElement?.addEventListener('paste', onPaste);
+    containerElement.addEventListener("dragenter", onDragHover);
+    containerElement.addEventListener("dragover", onDragHover);
+    containerElement.addEventListener("dragleave", onDragLeave);
+    containerElement.addEventListener("drop", onDrop);
+    //containerElement.addEventListener('paste', onPaste);
 
     // The returned object allows to unregister the events when the Blazor component is destroyed
     return {
         dispose: () => {
-            containerElement?.removeEventListener('dragenter', onDragHover);
-            containerElement?.removeEventListener('dragover', onDragHover);
-            containerElement?.removeEventListener('dragleave', onDragLeave);
-            containerElement?.removeEventListener("drop", onDrop);
-            //containerElement?.removeEventListener('paste', onPaste);
+            containerElement.removeEventListener('dragenter', onDragHover);
+            containerElement.removeEventListener('dragover', onDragHover);
+            containerElement.removeEventListener('dragleave', onDragLeave);
+            containerElement.removeEventListener("drop", onDrop);
+            //containerElement.removeEventListener('paste', onPaste);
         }
     }
 }
