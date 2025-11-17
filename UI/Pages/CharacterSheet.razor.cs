@@ -3,6 +3,7 @@ using Microsoft.FluentUI.AspNetCore.Components;
 using Models.Characters;
 using Models.Settings;
 using Toolbelt.Blazor.HotKeys2;
+using Icons = Microsoft.FluentUI.AspNetCore.Components.Icons;
 
 namespace UI.Pages;
 public partial class CharacterSheet

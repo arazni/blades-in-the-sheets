@@ -11,7 +11,7 @@ jobs:
     - name: setup-sdk
       uses: actions/setup-dotnet@v3.0.3
       with: 
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
         
     - name: install-tools
       run: dotnet workload install wasm-tools-net9

@@ -16,6 +16,8 @@ public partial class Index
 
 	IReadOnlyCollection<VIndexCharacter> Characters { get; set; } = Array.Empty<VIndexCharacter>();
 
+	LoadError[] CharacterErrors { get; set; } = [];
+
 	GameFile[] AvailableGameFiles { get; set; } = [];
 
 	GameFile[] SelectableGameFiles { get; set; } = [];
@@ -57,16 +59,23 @@ public partial class Index
 
 	async Task LoadCharacters()
 	{
-		var characters = await Storage.LoadAll();
+		var characters = await Storage.LoadAllAsResults().ToListAsync();
 
-		if (!characters.Any())
+		if (characters.IsNullOrEmpty())
 		{
 			Characters = [];
+			CharacterErrors = [];
 			return;
 		}
 
-		Characters = characters.Select(character => new VIndexCharacter(character))
+		Characters = characters.Where(c => c.IsValue)
+			.Select(c => c.Value!)
+			.Select(character => new VIndexCharacter(character))
 			.OrderBy(c => (c.GameName, c.Alias))
+			.ToArray();
+
+		CharacterErrors = characters.Where(c => c.IsError)
+			.Select(c => c.Error!)
 			.ToArray();
 	}
 
@@ -101,6 +110,16 @@ public partial class Index
 		await module!.InvokeVoidAsync("downloadFileFromStream", $"{character.Name} BitS.json", streamRef);
 	}
 
+	async Task Download(string corruptedJson, string key)
+	{
+		var bytes = Encoding.Unicode.GetBytes(corruptedJson);
+		var memory = new MemoryStream(bytes);
+		using var streamRef = new DotNetStreamReference(memory);
+
+		await module!.InvokeVoidAsync("downloadFileFromStream", $"Corrupted Character Error {key} BitS.json", streamRef);
+	}
+
+	// Unfortunately, errors while uploading files seem to be completely ignored when trying to do manual handling or error interception.
 	async Task UploadFiles(FluentInputFileEventArgs fileEvent)
 	{
 		var buffer = new byte[fileEvent.Size];
@@ -110,10 +129,11 @@ public partial class Index
 		await Storage.PutFile(json);
 	}
 
-	async Task UploadComplete()
-	{
+	async Task UploadComplete() =>
 		await LoadCharacters();
-	}
+
+	async Task CopyError(LoadError e) =>
+		await JS!.InvokeVoidAsync("navigator.clipboard.writeText", e.DevMessage + Environment.NewLine + e.CharacterJson);
 
 	string New() => SelectedGameFile == null ? ""
 		: Paths.NewCharacter(SelectedGameFile.Stem);
@@ -138,6 +158,12 @@ public partial class Index
 
 	static string DeleteCharacterLabel(string characterName) =>
 		$"Delete {characterName}";
+
+	static string DownloadCorruptLabel(string key) =>
+		$"Download Corrupted Character {key}";
+
+	static string DeleteCorruptLabel(string key) =>
+		$"Delete Corrupted Character {key}";
 
 	void OnSelectedLanguageChanged(string language)
 	{

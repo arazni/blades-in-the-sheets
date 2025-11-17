@@ -1,4 +1,5 @@
 ﻿using Microsoft.JSInterop;
+using Models.Common;
 using System.Text;
 
 namespace UI.Services;
@@ -23,21 +24,7 @@ public sealed class InterceptErrorProvider() : ILoggerProvider
 		}
 	}
 
-	public static async Task SetErrorMessage(IJSRuntime jSRuntime, Exception exception)
-	{
-		StringBuilder message = new(exception.Message);
-		message.AppendLine(exception.StackTrace);
-		var inner = exception.InnerException;
-
-		while (inner != null)
-		{
-			message.AppendLine("INNER: ");
-			message.AppendLine(inner.Message);
-			message.AppendLine(inner.StackTrace);
-			inner = inner.InnerException;
-		}
-
-		await jSRuntime.InvokeVoidAsync("bladesStackTrace", Encoding.UTF8.GetBytes(message.ToString()));
-	}
+	public static async Task SetErrorMessage(IJSRuntime jSRuntime, Exception exception) =>
+		await jSRuntime.InvokeVoidAsync("bladesStackTrace", Encoding.UTF8.GetBytes(exception.ExceptionDetails()));
 }
 

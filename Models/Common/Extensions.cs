@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text;
 
 namespace Models.Common;
 
@@ -54,5 +55,22 @@ public static class Extensions
 			return description.First().Description;
 
 		return option.ToString();
+	}
+
+	public static string ExceptionDetails(this Exception exception)
+	{
+		StringBuilder message = new(exception.Message);
+		message.AppendLine(exception.StackTrace);
+		var inner = exception.InnerException;
+
+		while (inner != null)
+		{
+			message.AppendLine("INNER: ");
+			message.AppendLine(inner.Message);
+			message.AppendLine(inner.StackTrace);
+			inner = inner.InnerException;
+		}
+
+		return message.ToString();
 	}
 }

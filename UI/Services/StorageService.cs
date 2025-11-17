@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Models.Characters;
+using Models.Common;
 using Persistence.Json;
 using Persistence.Json.Migrations;
 
@@ -41,21 +42,57 @@ public class StorageService : IStorageService
 		return this.serializer.Deserialize(json);
 	}
 
-	public async Task<IReadOnlyCollection<Character>> LoadAll()
+	private record JsonKey(string Json, string Key);
+	public async IAsyncEnumerable<ErrorResult<Character, LoadError>> LoadAllAsResults()
 	{
-		var all = (await this.storageService.KeysAsync())
+		var results = (await this.storageService.KeysAsync())
 			.Where(key => key.StartsWith(CharacterPrefix + KeyDelimiter))
-			.ToArray();
+			// get
+			.Select(async key => (key[(CharacterPrefix.Length + KeyDelimiter.Length)..], character: await this.storageService.GetItemAsStringAsync(key)))
+			// migrate
+			.Select(async keyCharacter =>
+			{
+				var (key, characterJson) = await keyCharacter;
 
-		var characterJsons = new List<string>(all.Length);
+				if (!characterJson.HasInk())
+				{
+					var error = new LoadError($"Failed to find any data for a character with key {key}. This should never happen and I'm not sure I can do anything about it if it does. Please do your best to remember and communicate what happened to this character before this error.", "I'm sorry, I've got no details.", characterJson, key);
+					return new ErrorResult<JsonKey, LoadError>(error);
+				}
 
-		foreach (var key in all)
-			characterJsons.Add((await this.storageService.GetItemAsStringAsync(key))!);
+				try
+				{
+					var migratedJson = this.migrator.Migrate(characterJson);
+					return new ErrorResult<JsonKey, LoadError>(new JsonKey(migratedJson, key));
+				}
+				catch (Exception e)
+				{
+					var error = new LoadError($"Failed to migrate character with key {key}.", e.ExceptionDetails(), characterJson, key);
+					return new ErrorResult<JsonKey, LoadError>(error);
+				}
+			})
+			// deserialize
+			.Select(async migratedResult => (await migratedResult).Switch
+			(
+				jsonKey =>
+				{
+					try
+					{
+						var character = this.serializer.Deserialize(jsonKey.Json);
+						return new ErrorResult<Character, LoadError>(character);
+					}
+					catch (Exception e)
+					{
+						var error = new LoadError($"Failed to deserialize character with key {jsonKey.Key}.", e.ExceptionDetails(), jsonKey.Json, jsonKey.Key);
+						return new ErrorResult<Character, LoadError>(error);
+					}
+				},
+				error => new ErrorResult<Character, LoadError>(error)
+			));
 
-		return characterJsons
-			.Select(this.migrator.Migrate)
-			.Select(this.serializer.Deserialize)
-			.ToArray();
+		// don't understand why i have to do this instead of .ToAsyncEnumerable()
+		foreach (var result in results)
+			yield return await result;
 	}
 
 	public async Task Delete(string id) =>
